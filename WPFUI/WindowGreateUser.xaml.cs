@@ -21,7 +21,7 @@ namespace WPFUI
     {
         public WindowGreateUser()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
     }
 }
