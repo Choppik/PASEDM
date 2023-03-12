@@ -6,14 +6,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFUI"
         mc:Ignorable="d"
-        Title="Авторизация" Height="500" Width="400" WindowStartupLocation="CenterScreen">
+        Title="PASEDM" Height="500" Width="400" WindowStartupLocation="CenterScreen">
     <Grid Background="White" Margin="15,15,15,15">
-        <Button HorizontalAlignment="Left" Content="Войти" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{StaticResource MaterialDesignFlatButton}" Foreground="#FF20900B" IsEnabled="False"/>
-        <Button HorizontalAlignment="Right" Content="Создать учетную запись" VerticalAlignment="Top" Background="#FF20900B" BorderBrush="#FF20900B"></Button>
+        <Button HorizontalAlignment="Left" Content="Вход" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{StaticResource MaterialDesignFlatButton}" Foreground="#FF20900B" IsEnabled="False"/>
+        <Button x:Name="ButtonCreatAnAccount" HorizontalAlignment="Right" Content="Создать учетную запись" VerticalAlignment="Top" Background="#FF20900B" BorderBrush="#FF20900B" Click="ButtonCreatAnAccount_Click"></Button>
 
         <StackPanel VerticalAlignment="Center" Margin="20,0,20,0">
-            <TextBox materialDesign:HintAssist.Hint="Введите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0,0,0,20"></TextBox>
-            <PasswordBox materialDesign:HintAssist.Hint="Введите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center" Margin="0,0,0,20"></PasswordBox>
+            <TextBox x:Name="TextBoxLogEntry" materialDesign:HintAssist.Hint="Введите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="#FF291253"></TextBox>
+            <PasswordBox x:Name="PasswordBoxEntry" materialDesign:HintAssist.Hint="Введите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="#FF291253"></PasswordBox>
         </StackPanel>
+        <Button x:Name="ButtonEntryAccount" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,50" Height="30" Width="100" Background="#FF20900B" BorderBrush="#FF20900B" Content="Войти"></Button>
     </Grid>
 </Window>

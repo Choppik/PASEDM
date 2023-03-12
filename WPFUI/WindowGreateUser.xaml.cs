@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Engine.ViewModels;
 
 namespace WPFUI
 {
@@ -19,9 +20,20 @@ namespace WPFUI
     /// </summary>
     public partial class WindowGreateUser : Window
     {
+        private UserSession _userSession;
         public WindowGreateUser()
         {
-            //InitializeComponent();
+            InitializeComponent();
+
+            _userSession = new UserSession();
+        }
+
+        private void ButtonEntryAnAccount_Click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.ShowDialog();
+            Close();
         }
     }
 }

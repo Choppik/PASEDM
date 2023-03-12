@@ -28,5 +28,13 @@ namespace WPFUI
 
             _userSession = new UserSession();
         }
+
+        private void ButtonCreatAnAccount_Click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+            WindowGreateUser windowGreateUser = new WindowGreateUser();
+            windowGreateUser.ShowDialog();
+            Close();
+        }
     }
 }
