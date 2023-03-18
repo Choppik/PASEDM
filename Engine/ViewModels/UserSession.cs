@@ -9,13 +9,37 @@ namespace Engine.ViewModels
 {
     public class UserSession
     {
-        User CurrentUser { get; set; }
-        public UserSession()
+        private List<User> _users { get; set; }
+        private User CurrentUser { get; set; }
+        public UserSession() { }
+        public UserSession(string login, string password)
         {
-            CurrentUser = new User();
-            CurrentUser.IdUser = 1;
-            CurrentUser.Login = "User1";
-            CurrentUser.Password = "1234567890";
+            CurrentUser = new User(1, login, password);
+            //_users.Add(CurrentUser);
+        }
+        public string Check ()
+        {
+            string log = CurrentUser?.Login;
+            if (log is not null)
+            {
+                return log;
+            }
+            else 
+            {
+                return null;
+            }
+        }
+        public string Check2 ()
+        {
+            string pas = CurrentUser?.Password;
+            if (pas is not null)
+            {
+                return pas;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

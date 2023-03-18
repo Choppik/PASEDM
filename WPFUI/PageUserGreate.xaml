@@ -11,10 +11,9 @@
 
     <Grid>
         <StackPanel>
-            <TextBox x:Name="TextBoxLogNew" materialDesign:HintAssist.Hint="Введите логин" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="Black" SelectionBrush="#FF20900B"></TextBox>
-            <PasswordBox x:Name="PasswordBoxNew" materialDesign:HintAssist.Hint="Введите пароль" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="Black" SelectionBrush="#FF20900B"></PasswordBox>
-            <PasswordBox x:Name="PasswordBoxRepeat" materialDesign:HintAssist.Hint="Повторите пароль" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="Black" SelectionBrush="#FF20900B"></PasswordBox>
-            <Button x:Name="ButtonCreateAccount" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,50" Height="30" Width="100" Background="#FF20900B" BorderBrush="#FF20900B" Content="Создать"></Button>
+            <TextBox x:Name="TextBoxLogNew" materialDesign:HintAssist.Hint="Введите логин" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="Black" SelectionBrush="#FF20900B" LostFocus="TextBoxLogNew_LostFocus"></TextBox>
+            <PasswordBox x:Name="PasswordBoxNew" materialDesign:HintAssist.Hint="Введите пароль" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="Black" SelectionBrush="#FF20900B"/>
+            <PasswordBox x:Name="PasswordBoxRepeat" materialDesign:HintAssist.Hint="Повторите пароль" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="Black" SelectionBrush="#FF20900B" LostFocus="PasswordBoxRepeat_LostFocus"></PasswordBox>
         </StackPanel>
     </Grid>
 </Page>

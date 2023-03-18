@@ -11,5 +11,13 @@ namespace Engine.Models
         public int IdUser { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+
+        public User() { }
+        public User(int idUser, string login, string password) 
+        {
+            IdUser = idUser;
+            Login = login;
+            Password = password;
+        }
     }
 }

@@ -8,17 +8,19 @@
         mc:Ignorable="d"
         Title="PASEDM" Height="700" Width="1000" WindowStartupLocation="CenterScreen">
     <Grid Background="#ffdadada">
-        <Border MinWidth="400" MaxWidth="500" MaxHeight="700" Margin="15" VerticalAlignment="Center" Padding="30" CornerRadius="20" Background="White">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="40" Color="#FF20900B" ShadowDepth="0"></DropShadowEffect>
-            </Border.Effect>
-            <StackPanel>
-                <TextBlock x:Name="TextTitle" Text="Авторизация" FontSize="30" FontWeight="Bold" Margin="0,0,0,20"></TextBlock>
-                <Grid Margin="0,0,0,20" VerticalAlignment="Top">
-                    <Button x:Name="ButtonEntryAnAccount" HorizontalAlignment="Left" Content="Вход" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF20900B" BorderBrush="#FF20900B" Click="ButtonEntryAnAccount_Click"/>
-                    <Button x:Name="ButtonCreatAnAccount" HorizontalAlignment="Right" Content="Создать учетную запись" VerticalAlignment="Top" Background="#FF20900B" BorderBrush="#FF20900B" Click="ButtonCreatAnAccount_Click"></Button>
-                </Grid>
-                <Frame x:Name="MyFrame" NavigationUIVisibility="Hidden"></Frame>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"></Frame>
+        <Border x:Name="BorderMain" MinWidth="400" MaxWidth="500" MaxHeight="700" Margin="15" VerticalAlignment="Center" Padding="30" CornerRadius="20" Background="White">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="40" Color="#FF20900B" ShadowDepth="0"></DropShadowEffect>
+                </Border.Effect>
+                <StackPanel>
+                    <TextBlock x:Name="TextTitle" Text="Авторизация" FontSize="30" FontWeight="Bold" Margin="0,0,0,20"></TextBlock>
+                    <Grid Margin="0,0,0,20" VerticalAlignment="Top">
+                        <Button x:Name="ButtonEntryAnAccount" HorizontalAlignment="Left" Content="Вход" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF20900B" BorderBrush="#FF20900B" Click="ButtonEntryAnAccount_Click"/>
+                        <Button x:Name="ButtonCreatAnAccount" HorizontalAlignment="Right" Content="Создать учетную запись" VerticalAlignment="Top" Background="#FF20900B" BorderBrush="#FF20900B" Click="ButtonCreatAnAccount_Click"></Button>
+                    </Grid>
+                    <Frame x:Name="MyFrame" NavigationUIVisibility="Hidden"></Frame>
+                <Button x:Name="ButtonEntryOrGreateAccount" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="30" Width="100" Background="#FF20900B" BorderBrush="#FF20900B" Content="Войти" Click="ButtonEntryOrGreateAccount_Click"/>
             </StackPanel>
         </Border>
     </Grid>

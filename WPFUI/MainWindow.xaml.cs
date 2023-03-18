@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Engine.Models;
 using Engine.ViewModels;
 
 namespace WPFUI
@@ -26,26 +27,50 @@ namespace WPFUI
         {
             InitializeComponent();
 
-            MyFrame.Content = new PageUserEntry();
-            ButtonEntryAnAccount.IsEnabled = false;
+            TransitionPage(new PageUserEntry(), "Авторизация", "Войти", false);
 
-            _userSession = new UserSession();
+            _userSession = new UserSession("User1", "1");
         }
 
         private void ButtonCreatAnAccount_Click(object sender, RoutedEventArgs e)
         {
-            MyFrame.Content = new PageUserGreate();
-            ButtonEntryAnAccount.IsEnabled = true;
-            ButtonCreatAnAccount.IsEnabled = false;
-            TextTitle.Text = "Регистрация";
+            TransitionPage(new PageUserGreate(), "Регистрация", "Создать", true);
         }
-
         private void ButtonEntryAnAccount_Click(object sender, RoutedEventArgs e)
         {
-            MyFrame.Content = new PageUserEntry();
-            ButtonEntryAnAccount.IsEnabled = false;
-            ButtonCreatAnAccount.IsEnabled = true;
-            TextTitle.Text = "Авторизация";
+            TransitionPage(new PageUserEntry(), "Авторизация", "Войти", false);
+        }
+        private void TransitionPage(object page, string text, string nameButton, bool activ)
+        {
+            MyFrame.Content = page;
+            ButtonEntryAnAccount.IsEnabled = activ;
+            ButtonCreatAnAccount.IsEnabled = !activ;
+            ButtonEntryOrGreateAccount.Content = nameButton;
+            TextTitle.Text = text;
+
+        }
+
+        private void ButtonEntryOrGreateAccount_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (_userSession.Check() == (string)App.Current.Resources["TextLogin"]
+                && _userSession.Check2() == (string)App.Current.Resources["TextPassword"]
+                && (bool)App.Current.Resources["PageReg"])
+            {
+                MainFrame.Content = new PageMainMenu();
+                BorderMain.Visibility = Visibility.Collapsed;
+            }
+            else if (_userSession.Check() == (string)App.Current.Resources["TextLogin"]
+                && _userSession.Check2() == (string)App.Current.Resources["TextPassword"]
+                && !(bool)App.Current.Resources["PageReg"])
+            {
+                _userSession = new UserSession((string)App.Current.Resources["TextLogin"], (string)App.Current.Resources["TextPassword"]);
+                MessageBox.Show("Пользователь создан. Попробуйте зайти в аккаунт через некоторое время.");
+            } 
+            else
+            {
+                MessageBox.Show("Неверное имя пользователя или пароль. Проверьте правильность введенных данных.");
+            }
         }
     }
 }

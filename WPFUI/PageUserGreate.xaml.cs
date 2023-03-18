@@ -25,5 +25,19 @@ namespace WPFUI
             InitializeComponent();
         }
 
+        private void TextBoxLogNew_LostFocus(object sender, RoutedEventArgs e)
+        {
+            App.Current.Resources["TextLogin"] = TextBoxLogNew.Text;
+            App.Current.Resources["PageReg"] = false;
+        }
+
+        private void PasswordBoxRepeat_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (PasswordBoxNew.Password == PasswordBoxRepeat.Password)
+            {
+                App.Current.Resources["TextPassword"] = PasswordBoxRepeat.Password;
+                App.Current.Resources["PageReg"] = false;
+            }
+        }
     }
 }
