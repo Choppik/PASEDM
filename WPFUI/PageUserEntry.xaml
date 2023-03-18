@@ -1,0 +1,19 @@
+﻿<Page x:Class="WPFUI.PageUserEntry"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageUserEntry">
+
+    <Grid>
+        <StackPanel>
+            <TextBox x:Name="TextBoxLogEntry" materialDesign:HintAssist.Hint="Введите логин" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,20" VerticalAlignment="Center" CaretBrush="Black" SelectionBrush="#FF20900B"/>
+            <PasswordBox x:Name="PasswordBoxEntry" materialDesign:HintAssist.Hint="Введите пароль" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="Black" SelectionBrush="#FF20900B"></PasswordBox>
+            <Button x:Name="ButtonEntryAccount" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="30" Width="100" Background="#FF20900B" BorderBrush="#FF20900B" Content="Войти"></Button>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -26,15 +26,26 @@ namespace WPFUI
         {
             InitializeComponent();
 
+            MyFrame.Content = new PageUserEntry();
+            ButtonEntryAnAccount.IsEnabled = false;
+
             _userSession = new UserSession();
         }
 
         private void ButtonCreatAnAccount_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
-            WindowGreateUser windowGreateUser = new WindowGreateUser();
-            windowGreateUser.ShowDialog();
-            Close();
+            MyFrame.Content = new PageUserGreate();
+            ButtonEntryAnAccount.IsEnabled = true;
+            ButtonCreatAnAccount.IsEnabled = false;
+            TextTitle.Text = "Регистрация";
+        }
+
+        private void ButtonEntryAnAccount_Click(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Content = new PageUserEntry();
+            ButtonEntryAnAccount.IsEnabled = false;
+            ButtonCreatAnAccount.IsEnabled = true;
+            TextTitle.Text = "Авторизация";
         }
     }
 }

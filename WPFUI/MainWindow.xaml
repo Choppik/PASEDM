@@ -6,15 +6,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFUI"
         mc:Ignorable="d"
-        Title="PASEDM" Height="500" Width="400" WindowStartupLocation="CenterScreen">
-    <Grid Background="White" Margin="15,15,15,15">
-        <Button HorizontalAlignment="Left" Content="Вход" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{StaticResource MaterialDesignFlatButton}" Foreground="#FF20900B" IsEnabled="False"/>
-        <Button x:Name="ButtonCreatAnAccount" HorizontalAlignment="Right" Content="Создать учетную запись" VerticalAlignment="Top" Background="#FF20900B" BorderBrush="#FF20900B" Click="ButtonCreatAnAccount_Click"></Button>
-
-        <StackPanel VerticalAlignment="Center" Margin="20,0,20,0">
-            <TextBox x:Name="TextBoxLogEntry" materialDesign:HintAssist.Hint="Введите логин" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="#FF291253"></TextBox>
-            <PasswordBox x:Name="PasswordBoxEntry" materialDesign:HintAssist.Hint="Введите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="#FF291253"></PasswordBox>
-        </StackPanel>
-        <Button x:Name="ButtonEntryAccount" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,50" Height="30" Width="100" Background="#FF20900B" BorderBrush="#FF20900B" Content="Войти"></Button>
+        Title="PASEDM" Height="700" Width="1000" WindowStartupLocation="CenterScreen">
+    <Grid Background="#ffdadada">
+        <Border MinWidth="400" MaxWidth="500" MaxHeight="700" Margin="15" VerticalAlignment="Center" Padding="30" CornerRadius="20" Background="White">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="40" Color="#FF20900B" ShadowDepth="0"></DropShadowEffect>
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock x:Name="TextTitle" Text="Авторизация" FontSize="30" FontWeight="Bold" Margin="0,0,0,20"></TextBlock>
+                <Grid Margin="0,0,0,20" VerticalAlignment="Top">
+                    <Button x:Name="ButtonEntryAnAccount" HorizontalAlignment="Left" Content="Вход" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF20900B" BorderBrush="#FF20900B" Click="ButtonEntryAnAccount_Click"/>
+                    <Button x:Name="ButtonCreatAnAccount" HorizontalAlignment="Right" Content="Создать учетную запись" VerticalAlignment="Top" Background="#FF20900B" BorderBrush="#FF20900B" Click="ButtonCreatAnAccount_Click"></Button>
+                </Grid>
+                <Frame x:Name="MyFrame" NavigationUIVisibility="Hidden"></Frame>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
