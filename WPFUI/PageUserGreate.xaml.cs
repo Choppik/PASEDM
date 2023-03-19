@@ -39,5 +39,15 @@ namespace WPFUI
                 App.Current.Resources["PageReg"] = false;
             }
         }
+
+        private void ButtonEntryAnAccount_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new Uri("/PageUserEntry.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void ButtonGreateAccount_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new Uri("/PageMainMenu.xaml", UriKind.RelativeOrAbsolute));
+        }
     }
 }

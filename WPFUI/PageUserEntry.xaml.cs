@@ -36,5 +36,15 @@ namespace WPFUI
             App.Current.Resources["TextPassword"] = PasswordBoxEntry.Password;
             App.Current.Resources["PageReg"] = true;
         }
+
+        private void ButtonCreatAnAccount_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new Uri("/PageUserGreate.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void ButtonEntryAccount_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GetNavigationService(this).Navigate(new Uri("/PageMainMenu.xaml", UriKind.RelativeOrAbsolute));
+        }
     }
 }

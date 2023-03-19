@@ -28,8 +28,7 @@ namespace WPFUI
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            NavigationService.GetNavigationService(this).Navigate(new Uri("/PageUserEntry.xaml", UriKind.RelativeOrAbsolute));
         }
     }
 }
