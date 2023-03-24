@@ -27,12 +27,17 @@ namespace WPFUI
         {
             InitializeComponent();
 
-            PageUserEntry pageUserEntry = new PageUserEntry();
-            MainFrame.Navigate(pageUserEntry);
-            //NavigationService.GetNavigationService(this).Navigate(new Uri("/PageUserEntry.xaml", UriKind.RelativeOrAbsolute));
-            //TransitionPage(new PageUserEntry(), "Авторизация", "Войти", false);
+            using (var db = new PASEDMContext())
+            {
+                var dsds = db.Users;
+                _userSession = new UserSession("User1", "1");
+                dsds.Add(_userSession.CurrentUser);
+                db.SaveChanges();
+            }
 
-            _userSession = new UserSession("User1", "1");
+            PageUserEntry pageUserEntry = new();
+            MainFrame.Navigate(pageUserEntry);
+
         }
     }
 }

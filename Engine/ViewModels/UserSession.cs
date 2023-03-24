@@ -10,11 +10,11 @@ namespace Engine.ViewModels
     public class UserSession
     {
         private List<User> _users { get; set; }
-        private User CurrentUser { get; set; }
+        public User CurrentUser { get; set; }
         public UserSession() { }
         public UserSession(string login, string password)
         {
-            CurrentUser = new User(1, login, password);
+            CurrentUser = new User(login, password);
             //_users.Add(CurrentUser);
         }
         public string Check ()

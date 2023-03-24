@@ -28,13 +28,11 @@ namespace WPFUI
         private void TextBoxLogEntry_LostFocus(object sender, RoutedEventArgs e)
         {
             App.Current.Resources["TextLogin"] = TextBoxLogEntry.Text;
-            App.Current.Resources["PageReg"] = true;
         }
 
         private void PasswordBoxEntry_LostFocus(object sender, RoutedEventArgs e)
         {
             App.Current.Resources["TextPassword"] = PasswordBoxEntry.Password;
-            App.Current.Resources["PageReg"] = true;
         }
 
         private void ButtonCreatAnAccount_Click(object sender, RoutedEventArgs e)
