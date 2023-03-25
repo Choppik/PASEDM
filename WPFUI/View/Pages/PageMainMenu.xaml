@@ -9,10 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PageMainMenu">
 
-    <Grid Background="Orange">
-        <StackPanel>
-            <Button x:Name="ButtonExit" Content="Выход" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,50,0,0" Click="ButtonExit_Click"/>
-
-        </StackPanel>
+    <Grid Background="#ffdadada">
+        
     </Grid>
 </Page>

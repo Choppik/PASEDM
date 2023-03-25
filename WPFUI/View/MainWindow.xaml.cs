@@ -1,6 +1,4 @@
 ﻿using System.Windows;
-using Engine.ViewModels;
-using Engine.ViewModels.Data;
 
 namespace WPFUI
 {

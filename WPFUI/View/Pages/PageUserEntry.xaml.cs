@@ -1,5 +1,4 @@
 ﻿using Engine.Models;
-using Engine.ViewModels;
 using Engine.ViewModels.Data;
 using System;
 using System.Collections.Generic;
@@ -24,7 +23,7 @@ namespace WPFUI
 
         private void ButtonCreatAnAccount_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GetNavigationService(this).Navigate(new Uri("/PageUserGreate.xaml", UriKind.RelativeOrAbsolute));
+            NavigationService.GetNavigationService(this).Navigate(new Uri("/View/Pages/PageUserGreate.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void ButtonEntryAccount_Click(object sender, RoutedEventArgs e)
@@ -58,7 +57,7 @@ namespace WPFUI
                     }
                     else
                     {
-                        NavigationService.GetNavigationService(this).Navigate(new Uri("/PageMainMenu.xaml", UriKind.RelativeOrAbsolute));
+                        NavigationService.GetNavigationService(this).Navigate(new Uri("/View/Pages/PageMainMenu.xaml", UriKind.RelativeOrAbsolute));
                     }
                 }
                 else

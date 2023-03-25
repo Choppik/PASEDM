@@ -29,7 +29,7 @@ namespace WPFUI
         }
         private void ButtonEntryAnAccount_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GetNavigationService(this).Navigate(new Uri("/PageUserEntry.xaml", UriKind.RelativeOrAbsolute));
+            NavigationService.GetNavigationService(this).Navigate(new Uri("/View/Pages/PageUserEntry.xaml", UriKind.RelativeOrAbsolute));
         }
         private void ButtonGreateAccount_Click(object sender, RoutedEventArgs e)
         {
