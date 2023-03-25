@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Engine.Models
 {
     public class User
     {
+        private int _idUser;
+        private string _login, _password;
+
         [Key]
-        public int IdUser { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public int IdUser { get { return _idUser; } set { _idUser = value; } }
+        public string Login { get { return _login; } set { _login = value; } }
+        public string Password { get { return _password; } set { _password = value; } }
 
         public User() { }
         public User(string login, string password) 
         {
-            Login = login;
-            Password = password;
+            _login = login;
+            _password = password;
         }
     }
 }
