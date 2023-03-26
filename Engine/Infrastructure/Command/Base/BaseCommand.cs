@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace Engine.Infrastructure.Command.Base
+namespace PASEDM.Infrastructure.Command.Base
 {
     internal abstract class BaseCommand : ICommand
     {

@@ -1,8 +1,8 @@
-﻿using Engine.Models;
+﻿using PASEDM.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Engine.ViewModels.Data.Configuration
+namespace PASEDM.Data.Configuration
 {
     internal class UserConfiguration : IEntityTypeConfiguration<User>
     {

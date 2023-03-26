@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WPFUI
+namespace PASEDM
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

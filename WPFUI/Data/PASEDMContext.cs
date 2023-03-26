@@ -1,9 +1,9 @@
-﻿using Engine.Models;
-using Engine.ViewModels.Data.Configuration;
+﻿using PASEDM.Models;
+using PASEDM.Data.Configuration;
 using EntityFramework.Exceptions.SqlServer;
 using Microsoft.EntityFrameworkCore;
 
-namespace Engine.ViewModels.Data
+namespace PASEDM.Data
 {
     public class PASEDMContext : DbContext
     {

@@ -1,5 +1,5 @@
-﻿using Engine.ViewModels.Data;
-using Engine.ViewModels;
+﻿using PASEDM.Data;
+using PASEDM.ViewModels;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,9 +7,9 @@ using System.Windows.Navigation;
 using System.Text.RegularExpressions;
 using System.Linq;
 using System.Collections.Generic;
-using Engine.Models;
+using PASEDM.Models;
 
-namespace WPFUI
+namespace PASEDM
 {
     /// <summary>
     /// Логика взаимодействия для PageUserGreate.xaml

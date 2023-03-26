@@ -1,5 +1,5 @@
-﻿using Engine.Models;
-using Engine.ViewModels.Data;
+﻿using PASEDM.Models;
+using PASEDM.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
-namespace WPFUI
+namespace PASEDM
 {
     /// <summary>
     /// Логика взаимодействия для PageUserEntry.xaml

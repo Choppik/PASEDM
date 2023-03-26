@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Engine.Models
+namespace PASEDM.Models
 {
     public class User
     {

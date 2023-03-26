@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
-namespace WPFUI
+namespace PASEDM
 {
     /// <summary>
     /// Логика взаимодействия для PageMainMenu.xaml

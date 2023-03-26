@@ -1,6 +1,6 @@
-﻿using Engine.ViewModels.Base;
+﻿using PASEDM.ViewModels.Base;
 
-namespace Engine.ViewModels
+namespace PASEDM.ViewModels
 {
     public class MainWindowViewModel : BaseViewModels
     {
