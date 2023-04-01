@@ -7,11 +7,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
-namespace PASEDM
+namespace PASEDM.View.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для PageUserEntry.xaml
-    /// </summary>
     public partial class PageUserEntry : Page
     {
         private string _login;
@@ -21,10 +18,10 @@ namespace PASEDM
             InitializeComponent();
         }
 
-        private void ButtonCreatAnAccount_Click(object sender, RoutedEventArgs e)
+        /*private void ButtonCreatAnAccount_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GetNavigationService(this).Navigate(new Uri("/View/Pages/PageUserGreate.xaml", UriKind.RelativeOrAbsolute));
-        }
+        }*/
 
         private void ButtonEntryAccount_Click(object sender, RoutedEventArgs e)
         {

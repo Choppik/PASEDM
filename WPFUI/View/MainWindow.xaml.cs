@@ -1,18 +1,15 @@
 ﻿using System.Windows;
 
-namespace PASEDM
+namespace PASEDM.View
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
 
-            PageUserEntry pageUserEntry = new();
-            MainFrame.Navigate(pageUserEntry);
+            /*PageUserEntry pageUserEntry = new();
+            MainFrame.Navigate(pageUserEntry);*/
         }
     }
 }

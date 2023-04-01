@@ -1,14 +1,12 @@
-﻿<Page x:Class="PASEDM.View.Pages.PageUserGreate"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PASEDM"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageUserGreate">
-
+﻿<UserControl x:Class="PASEDM.View.UserControlAll.UserCreatControle"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PASEDM.View.UserControlAll"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#ffdadada">
         <Border MinWidth="400" MaxWidth="500" MaxHeight="700" Margin="15" VerticalAlignment="Center" Padding="30" CornerRadius="20" Background="White">
             <Border.Effect>
@@ -17,8 +15,11 @@
             <StackPanel>
                 <TextBlock Text="Регистрация" FontSize="30" FontWeight="Bold" Margin="0,0,0,20"></TextBlock>
                 <Grid Margin="0,0,0,20" VerticalAlignment="Top">
-                    <Button x:Name="ButtonEntryAnAccount" HorizontalAlignment="Left" Content="Вход" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF20900B" BorderBrush="#FF20900B" Click="ButtonEntryAnAccount_Click"/>
-                    <Button HorizontalAlignment="Right" Content="Создать учетную запись" VerticalAlignment="Top" Background="#FF20900B" BorderBrush="#FF20900B" IsEnabled="False"/>
+                    <Button x:Name="ButtonEntryAnAccount" HorizontalAlignment="Left" 
+                            Content="Вход" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                            Background="#FF20900B" BorderBrush="#FF20900B" />
+                    <Button HorizontalAlignment="Right" Content="Создать учетную запись" VerticalAlignment="Top" 
+                            Background="#FF20900B" BorderBrush="#FF20900B" IsEnabled="False"/>
                 </Grid>
                 <TextBox x:Name="TextBoxLogNew" materialDesign:HintAssist.Hint="Введите логин" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="Black" SelectionBrush="#FF20900B"/>
                 <PasswordBox x:Name="PasswordBoxNew" materialDesign:HintAssist.Hint="Введите пароль" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="Black" SelectionBrush="#FF20900B"/>
@@ -29,4 +30,4 @@
             </StackPanel>
         </Border>
     </Grid>
-</Page>
+</UserControl>

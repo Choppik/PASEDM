@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace PASEDM.Infrastructure.Command.Base
 {
-    internal abstract class BaseCommand : ICommand
+    public abstract class BaseCommand : ICommand
     {
         public event EventHandler CanExecuteChanged
         {
@@ -14,5 +14,9 @@ namespace PASEDM.Infrastructure.Command.Base
         public abstract bool CanExecute(object? parameter);
 
         public abstract void Execute(object? parameter);
+        /*protected void OnCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, new EventArgs());
+        }*/
     }
 }

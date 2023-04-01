@@ -9,7 +9,7 @@ using System.Linq;
 using System.Collections.Generic;
 using PASEDM.Models;
 
-namespace PASEDM
+namespace PASEDM.View.Pages
 {
     /// <summary>
     /// Логика взаимодействия для PageUserGreate.xaml

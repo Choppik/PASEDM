@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
-namespace PASEDM
+namespace PASEDM.View.Pages
 {
     /// <summary>
     /// Логика взаимодействия для PageMainMenu.xaml
