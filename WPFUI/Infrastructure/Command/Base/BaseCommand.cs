@@ -11,7 +11,7 @@ namespace PASEDM.Infrastructure.Command.Base
             remove => CommandManager.RequerySuggested -= value;
         }
 
-        public abstract bool CanExecute(object? parameter);
+        public virtual bool CanExecute(object? parameter) => true;
 
         public abstract void Execute(object? parameter);
         /*protected void OnCanExecuteChanged()

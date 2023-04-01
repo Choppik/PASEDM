@@ -4,7 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PASEDM.View.UserControlAll"
+             xmlns:local="clr-namespace:PASEDM.View.UserControlAll" 
+             xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:UserEntryViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#ffdadada">
@@ -17,7 +18,7 @@
                 <Grid Margin="0,0,0,20" VerticalAlignment="Top">
                     <Button x:Name="ButtonEntryAnAccount" HorizontalAlignment="Left" 
                             Content="Вход" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                            Background="#FF20900B" BorderBrush="#FF20900B" />
+                            Background="#FF20900B" BorderBrush="#FF20900B" Command="{Binding NavigateEntryUserCommand}"/>
                     <Button HorizontalAlignment="Right" Content="Создать учетную запись" VerticalAlignment="Top" 
                             Background="#FF20900B" BorderBrush="#FF20900B" IsEnabled="False"/>
                 </Grid>

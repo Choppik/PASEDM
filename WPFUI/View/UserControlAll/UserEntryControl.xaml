@@ -4,9 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PASEDM.View.UserControlAll"
-             xmlns:com="clr-namespace:PASEDM.Infrastructure.Command"
-             
+             xmlns:local="clr-namespace:PASEDM.View.UserControlAll" 
+             xmlns:viewmodels="clr-namespace:PASEDM.ViewModels"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#ffdadada">
         <Border x:Name="BorderMain" MinWidth="400" MaxWidth="500" MaxHeight="700" Margin="15" VerticalAlignment="Center" Padding="30" CornerRadius="20" Background="White">
@@ -21,7 +20,7 @@
                             HorizontalAlignment="Right" 
                             Content="Создать учетную запись" VerticalAlignment="Top" 
                             Background="#FF20900B" BorderBrush="#FF20900B" 
-                            Command="{Binding NavigateCommand}"></Button>
+                            Command="{Binding NavigateGreatUserCommand}"></Button>
                 </Grid>
                 <TextBox x:Name="TextBoxLogEntry" materialDesign:HintAssist.Hint="Введите логин" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,20" VerticalAlignment="Center" CaretBrush="Black" SelectionBrush="#FF20900B"/>
                 <PasswordBox x:Name="PasswordBoxEntry" materialDesign:HintAssist.Hint="Введите пароль" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="Black" SelectionBrush="#FF20900B"/>
@@ -31,7 +30,7 @@
                         Height="30" Width="100" 
                         Background="#FF20900B" BorderBrush="#FF20900B" 
                         Content="Войти" Cursor="Hand"
-                        />
+                        Command="{Binding NavigateMainMenuCommand}"/>
             </StackPanel>
         </Border>
     </Grid>

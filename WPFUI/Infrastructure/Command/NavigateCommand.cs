@@ -1,6 +1,5 @@
 ﻿using PASEDM.Infrastructure.Command.Base;
 using PASEDM.Store;
-using PASEDM.ViewModels;
 using PASEDM.ViewModels.Base;
 using System;
 
@@ -17,11 +16,6 @@ namespace PASEDM.Infrastructure.Command
             _navigationStore = navigationStore;
             _createViewModel = createViewModel;
         }
-        public override bool CanExecute(object? parameter)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void Execute(object? parameter)
         {
             _navigationStore.CurrentViewModel = _createViewModel();

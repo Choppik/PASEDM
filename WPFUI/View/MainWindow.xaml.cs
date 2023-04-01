@@ -7,9 +7,6 @@ namespace PASEDM.View
         public MainWindow()
         {
             InitializeComponent();
-
-            /*PageUserEntry pageUserEntry = new();
-            MainFrame.Navigate(pageUserEntry);*/
         }
     }
 }

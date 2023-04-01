@@ -7,7 +7,6 @@ namespace PASEDM.ViewModels
 {
     public class UserGreatViewModel : BaseViewModels
     {
-        public string Name => "321";
         public ICommand NavigateEntryUserCommand { get; }
         public UserGreatViewModel (NavigationStore navigationStore)
         {
