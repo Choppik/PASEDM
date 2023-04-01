@@ -1,40 +1,47 @@
-﻿using PASEDM.Models;
-using PASEDM.Data;
+﻿using PASEDM.Data;
+using PASEDM.Infrastructure.Command.Base;
+using PASEDM.Models;
+using PASEDM.Store;
+using PASEDM.View.UserControlAll;
+using PASEDM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
+using PASEDM.Services;
 
-namespace PASEDM.View.Pages
+namespace PASEDM.Infrastructure.Command
 {
-    public partial class PageUserEntry : Page
+    public class LoginCommand : BaseCommand
     {
         private string _login;
         private string _password;
-        public PageUserEntry()
+
+        private readonly MenuViewModel _menuViewModel;
+        private readonly NavigationService<MenuViewModel> _navigationService;
+
+        public LoginCommand(MenuViewModel menuViewModel, NavigationService<MenuViewModel> navigationService)
         {
-            InitializeComponent();
+            _menuViewModel = menuViewModel;
+            _navigationService = navigationService;
         }
 
-        /*private void ButtonCreatAnAccount_Click(object sender, RoutedEventArgs e)
+        public override void Execute(object? parameter)
         {
-            NavigationService.GetNavigationService(this).Navigate(new Uri("/View/Pages/PageUserGreate.xaml", UriKind.RelativeOrAbsolute));
-        }*/
-
-        private void ButtonEntryAccount_Click(object sender, RoutedEventArgs e)
-        {
-            if (TextBoxLogEntry.Text != null && PasswordBoxEntry.Password != null)
+            if (/*TextBoxLogEntry.Text != null && PasswordBoxEntry.Password != null*/1==1)
             {
-                _login = TextBoxLogEntry.Text;
-                _password = PasswordBoxEntry.Password;
+                /*_login = TextBoxLogEntry.Text;
+                _password = PasswordBoxEntry.Password;*/
+                _login = "1";
+                _password = "1";
 
                 using var db = new PASEDMContext();
                 var dbTable = db.Users;
                 bool unic = true;
                 List<User> users = dbTable.ToList();
-                if(users.Count != 0)
+                if (users.Count != 0)
                 {
                     foreach (var user in users)
                     {
@@ -54,7 +61,7 @@ namespace PASEDM.View.Pages
                     }
                     else
                     {
-                        NavigationService.GetNavigationService(this).Navigate(new Uri("/View/Pages/PageMainMenu.xaml", UriKind.RelativeOrAbsolute));
+                        _navigationService.Navigate();
                     }
                 }
                 else

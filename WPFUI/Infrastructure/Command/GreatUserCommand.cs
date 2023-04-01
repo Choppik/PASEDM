@@ -1,20 +1,18 @@
 ﻿using PASEDM.Data;
+using PASEDM.Infrastructure.Command.Base;
+using PASEDM.Models;
 using PASEDM.ViewModels;
 using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
-using System.Text.RegularExpressions;
-using System.Linq;
 using System.Collections.Generic;
-using PASEDM.Models;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows;
 
-namespace PASEDM.View.Pages
+namespace PASEDM.Infrastructure.Command
 {
-    /// <summary>
-    /// Логика взаимодействия для PageUserGreate.xaml
-    /// </summary>
-    public partial class PageUserGreate : Page
+    public class GreatUserCommand : BaseCommand
     {
         private UserSession _session;
 
@@ -22,25 +20,18 @@ namespace PASEDM.View.Pages
 
         private string _login;
         private string _password;
-        public PageUserGreate()
+        public override void Execute(object? parameter)
         {
-            InitializeComponent();
-
-        }
-        private void ButtonEntryAnAccount_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GetNavigationService(this).Navigate(new Uri("/View/Pages/PageUserEntry.xaml", UriKind.RelativeOrAbsolute));
-        }
-        private void ButtonGreateAccount_Click(object sender, RoutedEventArgs e)
-        {
-            if (TextBoxLogNew.Text != "" && TextBoxLogNew.Text.Length <= 50 &&
+            if (/*TextBoxLogNew.Text != "" && TextBoxLogNew.Text.Length <= 50 &&
                 PasswordBoxNew.Password != "" && PasswordBoxNew.Password == PasswordBoxRepeat.Password &&
-                PasswordBoxRepeat.Password.Length <= 100 &&
+            PasswordBoxRepeat.Password.Length <= 100 &&
                 TextBoxLogNew.Text != PasswordBoxRepeat.Password && regex.IsMatch(PasswordBoxRepeat.Password) &&
-                !TextBoxLogNew.Text.Contains(" ") && !PasswordBoxRepeat.Password.Contains(" "))
+                !TextBoxLogNew.Text.Contains(" ") && !PasswordBoxRepeat.Password.Contains(" ")*/1==1)
             {
-                _login = TextBoxLogNew.Text;
-                _password = PasswordBoxRepeat.Password;
+                /*_login = TextBoxLogNew.Text;
+                _password = PasswordBoxRepeat.Password;*/
+                _login = "1";
+                _password = "1";
 
                 using var db = new PASEDMContext();
                 var dbTable = db.Users;

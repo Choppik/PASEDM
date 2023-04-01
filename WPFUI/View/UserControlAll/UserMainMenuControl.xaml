@@ -8,6 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#ffdadada">
-
+        <TextBlock Text="Ура" FontSize="30" FontWeight="Bold" Margin="0,0,0,20"></TextBlock>
     </Grid>
 </UserControl>

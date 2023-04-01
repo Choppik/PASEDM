@@ -2,6 +2,7 @@
 using PASEDM.Store;
 using PASEDM.ViewModels.Base;
 using System.Windows.Input;
+using PASEDM.Services;
 
 namespace PASEDM.ViewModels
 {
@@ -10,7 +11,7 @@ namespace PASEDM.ViewModels
         public ICommand NavigateMainMenuCommand { get; }
         public MenuViewModel(NavigationStore navigationStore)
         {
-            NavigateMainMenuCommand = new NavigateCommand<MenuViewModel>(navigationStore, () => new MenuViewModel(navigationStore));
+            NavigateMainMenuCommand = new NavigateCommand<UserEntryViewModel>(new NavigationService<UserEntryViewModel>(navigationStore, () => new UserEntryViewModel(navigationStore)));
         }
     }
 }

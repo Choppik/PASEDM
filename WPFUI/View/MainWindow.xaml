@@ -16,6 +16,9 @@
                 <DataTemplate DataType="{x:Type vm:UserGreatViewModel}">
                     <v:UserCreatControle/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:MenuViewModel}">
+                    <v:UserMainMenuControl/>
+                </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
     </Grid>
