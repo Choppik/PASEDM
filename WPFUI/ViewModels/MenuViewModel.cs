@@ -11,13 +11,16 @@ namespace PASEDM.ViewModels
     {
         private readonly UserStore _user;
         public string Name => _user.CurrentUser?.Login;
-        public ICommand NavigateMainMenuCommand { get; }
-        public MenuViewModel(UserStore userStore, NavigationStore navigationStore)
+        public NavigationBarViewModel NavigationBarViewModel { get; }
+        public ICommand NavigateHomeCommand { get; }
+        public MenuViewModel(NavigationBarViewModel navigationBarViewModel, UserStore userStore, NavigationStore navigationStore)
         {
+            NavigationBarViewModel = navigationBarViewModel;
+
             _user = userStore;
 
-            NavigateMainMenuCommand = new NavigateCommand<UserEntryViewModel>(new NavigationService<UserEntryViewModel>(navigationStore, 
-                () => new UserEntryViewModel(userStore, navigationStore)));
+            NavigateHomeCommand = new NavigateCommand<UserEntryViewModel>(new NavigationService<UserEntryViewModel>(navigationStore, 
+                () => new UserEntryViewModel(navigationBarViewModel, userStore, navigationStore)));
         }
     }
 }

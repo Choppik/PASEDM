@@ -12,6 +12,7 @@ namespace PASEDM.ViewModels
     {
         private string _login;
         private string _password;
+        public NavigationBarViewModel NavigationBarViewModel { get; }
         public string Login
         {
             get
@@ -38,12 +39,15 @@ namespace PASEDM.ViewModels
         }
         public ICommand NavigateGreatUserCommand { get; }
         public ICommand LoginMainMenuCommand { get; }
-        public UserEntryViewModel (UserStore userStore, NavigationStore navigationStore)
+        public UserEntryViewModel (NavigationBarViewModel navigationBarViewModel, UserStore userStore, NavigationStore navigationStore)
         {
-            NavigateGreatUserCommand = new NavigateCommand<UserGreatViewModel>(new NavigationService<UserGreatViewModel>(navigationStore, () => new UserGreatViewModel(userStore, navigationStore)));
+            NavigationBarViewModel = navigationBarViewModel;
+
+            NavigateGreatUserCommand = new NavigateCommand<UserGreatViewModel>(new NavigationService<UserGreatViewModel>
+                (navigationStore, () => new UserGreatViewModel(navigationBarViewModel, userStore, navigationStore)));
             
             NavigationService<MenuViewModel> navigationService = new NavigationService<MenuViewModel> (
-                navigationStore, () => new MenuViewModel(userStore, navigationStore));
+                navigationStore, () => new MenuViewModel(navigationBarViewModel, userStore, navigationStore));
 
             LoginMainMenuCommand = new LoginCommand(this, userStore, navigationService);
         }
