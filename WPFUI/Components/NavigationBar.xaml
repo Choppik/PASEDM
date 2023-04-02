@@ -17,6 +17,6 @@
 
         <TextBlock Grid.Column="0" Text="Navigation Demo" />
 
-        <Button Grid.Column="2" Command="{Binding NavigateExitOfAccount}" Content="Выход"/>
+        <Button Grid.Column="2" Command="{Binding NavigateEntryUser}" Content="Выход"/>
     </Grid>
 </UserControl>

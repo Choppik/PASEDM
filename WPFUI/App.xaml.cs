@@ -17,13 +17,14 @@ namespace PASEDM
         {
             _navigationStore = new NavigationStore();
             _userStore = new UserStore();
-            _navigationBarViewModel = new NavigationBarViewModel(GreateHomeNavigationService());
+            _navigationBarViewModel = new NavigationBarViewModel(GreateMainMenuNavigationService(),
+                GreateUserNewNavigationService(), GreateEntryUserNavigationService());
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
 
-            NavigationService<UserEntryViewModel> navigationService = GreateHomeNavigationService();
+            NavigationService<UserEntryViewModel> navigationService = GreateEntryUserNavigationService();
             navigationService.Navigate();
 
             MainWindow = new MainWindow()
@@ -36,10 +37,21 @@ namespace PASEDM
             base.OnStartup(e);
         }
 
-        private NavigationService<UserEntryViewModel> GreateHomeNavigationService()
+        private NavigationService<MenuViewModel> GreateMainMenuNavigationService()
         {
-            return new NavigationService<UserEntryViewModel>(_navigationStore, () => 
-            new UserEntryViewModel(_navigationBarViewModel, _userStore, _navigationStore));
+            return new NavigationService<MenuViewModel>(_navigationStore, () => 
+            new MenuViewModel(_navigationBarViewModel, _userStore, GreateEntryUserNavigationService()));
+        }
+        private NavigationService<UserGreatViewModel> GreateUserNewNavigationService()
+        {
+            return new NavigationService<UserGreatViewModel>(_navigationStore, () =>
+            new UserGreatViewModel(GreateEntryUserNavigationService()));
+        }
+
+        private NavigationService<UserEntryViewModel> GreateEntryUserNavigationService()
+        {
+            return new NavigationService<UserEntryViewModel>(_navigationStore, () =>
+            new UserEntryViewModel(_userStore, GreateMainMenuNavigationService(), GreateUserNewNavigationService()));
         }
     }
 }

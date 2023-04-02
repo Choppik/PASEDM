@@ -9,12 +9,9 @@ namespace PASEDM.ViewModels
     public class UserGreatViewModel : BaseViewModels
     {
         public ICommand NavigateEntryUserCommand { get; }
-        //public ICommand NavigateMainMenuCommand { get; }
-        public UserGreatViewModel (NavigationBarViewModel navigationBarViewModel, UserStore userStore, NavigationStore navigationStore)
+        public UserGreatViewModel (NavigationService<UserEntryViewModel> entryInAccountNavigationService)
         {
-            NavigateEntryUserCommand = new NavigateCommand<UserEntryViewModel>(new NavigationService<UserEntryViewModel>
-                (navigationStore, () => new UserEntryViewModel(navigationBarViewModel, userStore, navigationStore)));
-            //NavigateMainMenuCommand = new NavigateCommand<MenuViewModel>(navigationStore, () => new MenuViewModel(navigationStore));
+            NavigateEntryUserCommand = new NavigateCommand<UserEntryViewModel>(entryInAccountNavigationService);
         }
     }
 }
