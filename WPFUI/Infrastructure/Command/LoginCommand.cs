@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using PASEDM.Services;
+using System.Windows.Controls;
 
 namespace PASEDM.Infrastructure.Command
 {
@@ -19,23 +20,31 @@ namespace PASEDM.Infrastructure.Command
         private string _login;
         private string _password;
 
-        private readonly MenuViewModel _menuViewModel;
+        private readonly UserEntryViewModel _userEntryViewModel;
+        private readonly UserStore _userStore;
         private readonly NavigationService<MenuViewModel> _navigationService;
 
-        public LoginCommand(MenuViewModel menuViewModel, NavigationService<MenuViewModel> navigationService)
+
+        public LoginCommand(UserEntryViewModel userEntryViewModel, UserStore userStore, NavigationService<MenuViewModel> navigationService)
         {
-            _menuViewModel = menuViewModel;
+            _userEntryViewModel = userEntryViewModel;
             _navigationService = navigationService;
+            _userStore = userStore;
         }
 
         public override void Execute(object? parameter)
         {
-            if (/*TextBoxLogEntry.Text != null && PasswordBoxEntry.Password != null*/1==1)
+            var passwordBox = (PasswordBox) parameter;
+
+            if (_userEntryViewModel.Login != null && passwordBox.Password != null)
             {
-                /*_login = TextBoxLogEntry.Text;
-                _password = PasswordBoxEntry.Password;*/
-                _login = "1";
-                _password = "1";
+                _login = _userEntryViewModel.Login;
+                _password = passwordBox.Password;
+                User userCurrent = new()
+                {
+                    Login = _login,
+                    Password = _password
+                };
 
                 using var db = new PASEDMContext();
                 var dbTable = db.Users;
@@ -61,14 +70,15 @@ namespace PASEDM.Infrastructure.Command
                     }
                     else
                     {
+                        _userStore.CurrentUser = userCurrent;
                         _navigationService.Navigate();
                     }
                 }
+            }
                 else
                 {
                     MessageBox.Show("Неверно введено имя пользователя или пароль.");
                 }
-            }
         }
     }
 }

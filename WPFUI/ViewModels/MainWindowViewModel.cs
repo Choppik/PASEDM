@@ -15,8 +15,6 @@ namespace PASEDM.ViewModels
         private readonly NavigationStore _navigationStore;
         public BaseViewModels CurrentViewModel => _navigationStore.CurrentViewModel;
 
-        private UserSession _session;
-
         private Regex regex = new Regex(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!$%^&*-]).{8,}$");
 
         private string _login;

@@ -14,7 +14,7 @@ namespace PASEDM.Infrastructure.Command
 {
     public class GreatUserCommand : BaseCommand
     {
-        private UserSession _session;
+        private User _user;
 
         private Regex regex = new Regex(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!$%^&*-]).{8,}$");
 
@@ -52,8 +52,8 @@ namespace PASEDM.Infrastructure.Command
                 }
                 if (unic == true)
                 {
-                    _session = new UserSession(_login, _password);
-                    dbTable.Add(_session.CurrentUser);
+                    _user = new User(_login, _password);
+                    dbTable.Add(_user);
 
                     db.SaveChanges();
 

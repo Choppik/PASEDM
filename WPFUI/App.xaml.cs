@@ -10,8 +10,9 @@ namespace PASEDM
         protected override void OnStartup(StartupEventArgs e)
         {
             NavigationStore navigationStore = new();
+            UserStore userStore = new UserStore();
 
-            navigationStore.CurrentViewModel = new UserEntryViewModel(navigationStore);
+            navigationStore.CurrentViewModel = new UserEntryViewModel(userStore, navigationStore);
 
             MainWindow = new MainWindow()
             {

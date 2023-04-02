@@ -9,14 +9,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#ffdadada">
-        <Border x:Name="BorderMain" MinWidth="400" MaxWidth="500" MaxHeight="700" Margin="15" VerticalAlignment="Center" Padding="30" CornerRadius="20" Background="White">
+        <Border x:Name="BorderMain" MinWidth="400" MaxWidth="500" MaxHeight="700" Margin="15" 
+                VerticalAlignment="Center" Padding="30" CornerRadius="20" Background="White">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="40" Color="#FF20900B" ShadowDepth="0"></DropShadowEffect>
             </Border.Effect>
             <StackPanel>
                 <TextBlock x:Name="TextTitle" Text="Авторизация" FontSize="30" FontWeight="Bold" Margin="0,0,0,20"></TextBlock>
                 <Grid Margin="0,0,0,20" VerticalAlignment="Top">
-                    <Button HorizontalAlignment="Left" Content="Вход" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF20900B" BorderBrush="#FF20900B" IsEnabled="False"/>
+                    <Button HorizontalAlignment="Left" Content="Вход" HorizontalContentAlignment="Center" 
+                            VerticalContentAlignment="Center" Background="#FF20900B" BorderBrush="#FF20900B" IsEnabled="False"/>
                     <Button 
                             x:Name="ButtonCreatAnAccount" 
                             HorizontalAlignment="Right" 
@@ -24,15 +26,22 @@
                             Background="#FF20900B" BorderBrush="#FF20900B" 
                             Command="{Binding NavigateGreatUserCommand}"></Button>
                 </Grid>
-                <TextBox x:Name="TextBoxLogEntry" materialDesign:HintAssist.Hint="Введите логин" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,20" VerticalAlignment="Center" CaretBrush="Black" SelectionBrush="#FF20900B"/>
-                <PasswordBox x:Name="PasswordBoxEntry" materialDesign:HintAssist.Hint="Введите пароль" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="Black" SelectionBrush="#FF20900B"/>
+                <TextBox x:Name="loginEnt" materialDesign:HintAssist.Hint="Введите логин" Text="{Binding Login}"
+                         materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,20" VerticalAlignment="Center" 
+                         CaretBrush="Black" SelectionBrush="#FF20900B"/>
+                <PasswordBox x:Name="passwordEnt" materialDesign:HintAssist.Hint="Введите пароль"
+                             materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
+                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center" 
+                             Margin="0,0,0,20" CaretBrush="Black" SelectionBrush="#FF20900B"/>
                 <Button x:Name="ButtonEntryAccount" 
                         VerticalAlignment="Bottom" 
                         HorizontalAlignment="Center" 
                         Height="30" Width="100" 
                         Background="#FF20900B" BorderBrush="#FF20900B" 
                         Content="Войти" Cursor="Hand"
-                        Command="{Binding NavigateMainMenuCommand}"/>
+                        Command="{Binding LoginMainMenuCommand}"
+                        CommandParameter="{Binding ElementName=passwordEnt}"/>
             </StackPanel>
         </Border>
     </Grid>
