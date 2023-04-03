@@ -22,10 +22,10 @@ namespace PASEDM.Infrastructure.Command
 
         private readonly UserEntryViewModel _userEntryViewModel;
         private readonly UserStore _userStore;
-        private readonly NavigationService<MenuViewModel> _navigationService;
+        private readonly INavigationService<MenuViewModel> _navigationService;
 
 
-        public LoginCommand(UserEntryViewModel userEntryViewModel, UserStore userStore, NavigationService<MenuViewModel> navigationService)
+        public LoginCommand(UserEntryViewModel userEntryViewModel, UserStore userStore, INavigationService<MenuViewModel> navigationService)
         {
             _userEntryViewModel = userEntryViewModel;
             _navigationService = navigationService;

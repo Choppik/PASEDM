@@ -15,9 +15,9 @@ namespace PASEDM.ViewModels
         public ICommand NavigateExitOfAccount { get; }
         public ICommand NavigateGreateUser { get; }
         public ICommand NavigateEntryUser { get; }
-        public NavigationBarViewModel(NavigationService<MenuViewModel> navigationServiceMenu, 
-            NavigationService<UserGreatViewModel> navigationServiceNewUser, 
-            NavigationService<UserEntryViewModel> navigationServiceEntryUser) 
+        public NavigationBarViewModel(INavigationService<MenuViewModel> navigationServiceMenu,
+            INavigationService<UserGreatViewModel> navigationServiceNewUser,
+            INavigationService<UserEntryViewModel> navigationServiceEntryUser) 
         {
             NavigateExitOfAccount = new NavigateCommand<MenuViewModel>(navigationServiceMenu);
             NavigateGreateUser = new NavigateCommand<UserGreatViewModel>(navigationServiceNewUser);

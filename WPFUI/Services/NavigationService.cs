@@ -4,8 +4,7 @@ using System;
 
 namespace PASEDM.Services
 {
-    public class NavigationService<TViewModel>
-        where TViewModel : BaseViewModels
+    public class NavigationService<TViewModel> : INavigationService<TViewModel> where TViewModel : BaseViewModels
     {
         private readonly NavigationStore _navigationStore;
         private readonly Func<TViewModel> _createViewModel;
@@ -16,7 +15,7 @@ namespace PASEDM.Services
             _createViewModel = createViewModel;
         }
 
-        public void Navigate() 
+        public void Navigate()
         {
             _navigationStore.CurrentViewModel = _createViewModel();
         }

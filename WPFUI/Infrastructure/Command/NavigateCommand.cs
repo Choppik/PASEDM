@@ -7,9 +7,9 @@ namespace PASEDM.Infrastructure.Command
     public class NavigateCommand<TViewModel> : BaseCommand
         where TViewModel : BaseViewModels
     {
-        private readonly NavigationService<TViewModel> _navigationStore;
+        private readonly INavigationService<TViewModel> _navigationStore;
 
-        public NavigateCommand(NavigationService<TViewModel> navigationStore)
+        public NavigateCommand(INavigationService<TViewModel> navigationStore)
         {
             _navigationStore = navigationStore;
         }

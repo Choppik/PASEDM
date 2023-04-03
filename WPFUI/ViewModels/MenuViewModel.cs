@@ -11,13 +11,9 @@ namespace PASEDM.ViewModels
     {
         private readonly UserStore _user;
         public string Name => _user.CurrentUser?.Login;
-        public NavigationBarViewModel NavigationBarViewModel { get; }
         public ICommand NavigateHomeCommand { get; }
-        public MenuViewModel(NavigationBarViewModel navigationBarViewModel, UserStore userStore, 
-            NavigationService<UserEntryViewModel> homeNavigationService)
+        public MenuViewModel(UserStore userStore, INavigationService<UserEntryViewModel> homeNavigationService)
         {
-            NavigationBarViewModel = navigationBarViewModel;
-
             _user = userStore;
 
             NavigateHomeCommand = new NavigateCommand<UserEntryViewModel>(homeNavigationService);

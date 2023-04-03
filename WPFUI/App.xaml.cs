@@ -11,20 +11,18 @@ namespace PASEDM
     {
         private NavigationStore _navigationStore;
         private UserStore _userStore;
-        private readonly NavigationBarViewModel _navigationBarViewModel;
 
         public App()
         {
             _navigationStore = new NavigationStore();
             _userStore = new UserStore();
-            _navigationBarViewModel = new NavigationBarViewModel(GreateMainMenuNavigationService(),
-                GreateUserNewNavigationService(), GreateEntryUserNavigationService());
         }
+
 
         protected override void OnStartup(StartupEventArgs e)
         {
 
-            NavigationService<UserEntryViewModel> navigationService = GreateEntryUserNavigationService();
+            INavigationService<UserEntryViewModel> navigationService = GreateEntryUserNavigationService();
             navigationService.Navigate();
 
             MainWindow = new MainWindow()
@@ -37,21 +35,28 @@ namespace PASEDM
             base.OnStartup(e);
         }
 
-        private NavigationService<MenuViewModel> GreateMainMenuNavigationService()
+        private INavigationService<MenuViewModel> GreateMainMenuNavigationService()
         {
-            return new NavigationService<MenuViewModel>(_navigationStore, () => 
-            new MenuViewModel(_navigationBarViewModel, _userStore, GreateEntryUserNavigationService()));
+            return new LayoutNavigationService<MenuViewModel>(_navigationStore, () => 
+            new MenuViewModel(_userStore, GreateEntryUserNavigationService()), CreateNavigationViewModel);
         }
-        private NavigationService<UserGreatViewModel> GreateUserNewNavigationService()
+        private INavigationService<UserGreatViewModel> GreateUserNewNavigationService()
         {
             return new NavigationService<UserGreatViewModel>(_navigationStore, () =>
             new UserGreatViewModel(GreateEntryUserNavigationService()));
         }
 
-        private NavigationService<UserEntryViewModel> GreateEntryUserNavigationService()
+        private INavigationService<UserEntryViewModel> GreateEntryUserNavigationService()
         {
             return new NavigationService<UserEntryViewModel>(_navigationStore, () =>
             new UserEntryViewModel(_userStore, GreateMainMenuNavigationService(), GreateUserNewNavigationService()));
+        }
+        private NavigationBarViewModel CreateNavigationViewModel()
+        {
+            return new NavigationBarViewModel(
+                            GreateMainMenuNavigationService(),
+                            GreateUserNewNavigationService(), 
+                            GreateEntryUserNavigationService());
         }
     }
 }

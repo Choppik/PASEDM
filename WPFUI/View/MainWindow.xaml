@@ -5,7 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:PASEDM.ViewModels"
-        xmlns:v="clr-namespace:PASEDM.View.UserControlAll"
+        xmlns:v="clr-namespace:PASEDM.View.UserControlAll" 
+        xmlns:component="clr-namespace:PASEDM.Components"
         Title="{Binding Path=Title}" Height="700" Width="1000" WindowStartupLocation="CenterScreen">
     <Grid Background="#ffdadada">
         <ContentControl Content="{Binding CurrentViewModel}">
@@ -18,6 +19,9 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:MenuViewModel}">
                     <v:UserMainMenuControl/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:LayoutViewModel}">
+                    <component:Layout/>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
