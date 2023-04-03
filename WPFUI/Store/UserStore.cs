@@ -11,6 +11,16 @@ namespace PASEDM.Store
     {
         private User _currentUser;
 
-        public User CurrentUser { get => _currentUser; set { _currentUser = value; } }
+        public User CurrentUser { get => _currentUser; set 
+            { 
+                _currentUser = value;
+                CurrentUserChanged?.Invoke();
+            } }
+        public event Action CurrentUserChanged;
+
+        public void Logout()
+        {
+            CurrentUser = null;
+        }
     }
 }

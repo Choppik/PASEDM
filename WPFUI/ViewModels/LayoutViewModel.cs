@@ -17,5 +17,11 @@ namespace PASEDM.ViewModels
 
         public NavigationBarViewModel NavigationBarViewModel { get; }
         public BaseViewModels ContentViewModels { get; }
+        public override void Dispose()
+        {
+            NavigationBarViewModel.Dispose();
+            ContentViewModels.Dispose();
+            base.Dispose();
+        }
     }
 }

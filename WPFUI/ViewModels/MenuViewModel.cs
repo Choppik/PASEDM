@@ -17,6 +17,18 @@ namespace PASEDM.ViewModels
             _user = userStore;
 
             NavigateHomeCommand = new NavigateCommand<UserEntryViewModel>(homeNavigationService);
+
+            _user.CurrentUserChanged += OnCurrentUserChanged;
+        }
+
+        private void OnCurrentUserChanged()
+        {
+            OnPropertyChanged(nameof(Name));
+        }
+        public override void Dispose() 
+        {
+            _user.CurrentUserChanged -= OnCurrentUserChanged;
+            base.Dispose();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace PASEDM.ViewModels.Base
@@ -17,5 +18,7 @@ namespace PASEDM.ViewModels.Base
             OnPropertyChanged(PropertyName);
             return true;
         }
+
+        public virtual void Dispose() { }
     }
 }

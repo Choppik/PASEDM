@@ -26,7 +26,7 @@
                 <TextBox x:Name="TextBoxLogNew" materialDesign:HintAssist.Hint="Введите логин" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="Black" SelectionBrush="#FF20900B"/>
                 <PasswordBox x:Name="PasswordBoxNew" materialDesign:HintAssist.Hint="Введите пароль" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="Black" SelectionBrush="#FF20900B"/>
                 <PasswordBox x:Name="PasswordBoxRepeat" materialDesign:HintAssist.Hint="Повторите пароль" materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center" Margin="0,0,0,20" CaretBrush="Black" SelectionBrush="#FF20900B"/>
-                <Button x:Name="ButtonGreateAccount" VerticalAlignment="Bottom" 
+                <Button x:Name="ButtonCreateAccount" VerticalAlignment="Bottom" 
                         HorizontalAlignment="Center" Height="30" Width="100" 
                         Background="#FF20900B" BorderBrush="#FF20900B" Content="Создать"
                         />
