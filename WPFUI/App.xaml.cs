@@ -22,7 +22,7 @@ namespace PASEDM
         protected override void OnStartup(StartupEventArgs e)
         {
 
-            INavigationService<UserEntryViewModel> navigationService = CreateEntryUserNavigationService();
+            INavigationService navigationService = CreateEntryUserNavigationService();
             navigationService.Navigate();
 
             MainWindow = new MainWindow()
@@ -35,18 +35,18 @@ namespace PASEDM
             base.OnStartup(e);
         }
 
-        private INavigationService<MenuViewModel> CreateMainMenuNavigationService()
+        private INavigationService CreateMainMenuNavigationService()
         {
             return new LayoutNavigationService<MenuViewModel>(_navigationStore, () => 
             new MenuViewModel(_userStore, CreateEntryUserNavigationService()), CreateNavigationBarViewModel);
         }
-        private INavigationService<UserGreatViewModel> CreateUserNewNavigationService()
+        private INavigationService CreateUserNewNavigationService()
         {
             return new NavigationService<UserGreatViewModel>(_navigationStore, () =>
             new UserGreatViewModel(CreateEntryUserNavigationService()));
         }
 
-        private INavigationService<UserEntryViewModel> CreateEntryUserNavigationService()
+        private INavigationService CreateEntryUserNavigationService()
         {
             return new NavigationService<UserEntryViewModel>(_navigationStore, () =>
             new UserEntryViewModel(_userStore, CreateMainMenuNavigationService(), CreateUserNewNavigationService()));

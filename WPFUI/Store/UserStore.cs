@@ -1,9 +1,5 @@
 ﻿using PASEDM.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PASEDM.Store
 {
@@ -17,6 +13,7 @@ namespace PASEDM.Store
                 CurrentUserChanged?.Invoke();
             } }
         public event Action CurrentUserChanged;
+        public bool IsLoggedIn => CurrentUser != null;
 
         public void Logout()
         {

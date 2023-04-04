@@ -2,8 +2,7 @@
 
 namespace PASEDM.Services
 {
-    public interface INavigationService<TViewModel>
-        where TViewModel : BaseViewModels
+    public interface INavigationService
     {
         void Navigate();
     }

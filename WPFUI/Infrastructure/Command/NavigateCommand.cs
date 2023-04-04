@@ -4,12 +4,11 @@ using PASEDM.Services;
 
 namespace PASEDM.Infrastructure.Command
 {
-    public class NavigateCommand<TViewModel> : BaseCommand
-        where TViewModel : BaseViewModels
+    public class NavigateCommand : BaseCommand
     {
-        private readonly INavigationService<TViewModel> _navigationStore;
+        private readonly INavigationService _navigationStore;
 
-        public NavigateCommand(INavigationService<TViewModel> navigationStore)
+        public NavigateCommand(INavigationService navigationStore)
         {
             _navigationStore = navigationStore;
         }

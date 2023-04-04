@@ -9,18 +9,19 @@ namespace PASEDM.ViewModels
     public class NavigationBarViewModel : BaseViewModels
     {
         private UserStore _userStore;
+        public bool IsLoggedId => _userStore.IsLoggedIn;
         public ICommand NavigateExitOfAccount { get; }
         public ICommand NavigateCreateUser { get; }
         public ICommand NavigateEntryUser { get; }
         public ICommand LogoutCommand { get; }
-        public NavigationBarViewModel(UserStore userStore, INavigationService<MenuViewModel> navigationServiceMenu,
-            INavigationService<UserGreatViewModel> navigationServiceNewUser,
-            INavigationService<UserEntryViewModel> navigationServiceEntryUser) 
+        public NavigationBarViewModel(UserStore userStore, INavigationService navigationServiceMenu,
+            INavigationService navigationServiceNewUser,
+            INavigationService navigationServiceEntryUser) 
         {
             _userStore = userStore;
-            NavigateExitOfAccount = new NavigateCommand<MenuViewModel>(navigationServiceMenu);
-            NavigateCreateUser = new NavigateCommand<UserGreatViewModel>(navigationServiceNewUser);
-            NavigateEntryUser = new NavigateCommand<UserEntryViewModel>(navigationServiceEntryUser);
+            NavigateExitOfAccount = new NavigateCommand(navigationServiceMenu);
+            NavigateCreateUser = new NavigateCommand(navigationServiceNewUser);
+            NavigateEntryUser = new NavigateCommand(navigationServiceEntryUser);
             LogoutCommand = new LogoutCommand(userStore);
 
             _userStore.CurrentUserChanged += OnCurrentUserChanged;
@@ -28,7 +29,7 @@ namespace PASEDM.ViewModels
 
         private void OnCurrentUserChanged()
         {
-            OnPropertyChanged(nameof(float.MinValue));
+            OnPropertyChanged(nameof(IsLoggedId));
         }
         public override void Dispose()
         {

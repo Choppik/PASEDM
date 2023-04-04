@@ -39,9 +39,9 @@ namespace PASEDM.ViewModels
         public ICommand NavigateGreatUserCommand { get; }
         public ICommand LoginMainMenuCommand { get; }
         public UserEntryViewModel (UserStore userStore,
-            INavigationService<MenuViewModel> accountNavigationService, INavigationService<UserGreatViewModel> homeNavigationService)
+            INavigationService accountNavigationService, INavigationService homeNavigationService)
         {
-            NavigateGreatUserCommand = new NavigateCommand<UserGreatViewModel>(homeNavigationService);
+            NavigateGreatUserCommand = new NavigateCommand(homeNavigationService);
             
             LoginMainMenuCommand = new LoginCommand(this, userStore, accountNavigationService);
         }

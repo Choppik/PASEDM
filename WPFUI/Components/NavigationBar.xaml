@@ -22,12 +22,21 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Foreground="White" Grid.Column="0" Text="Button" VerticalAlignment="Center" />
-        <TextBlock Foreground="White" Grid.Column="1" Text="Navigation Demo" VerticalAlignment="Center" />
+        <TextBlock Foreground="White" Grid.Column="0" Text="Button" VerticalAlignment="Center"/>
+        <TextBlock Foreground="White" Grid.Column="1" Text="Navigation Demo" VerticalAlignment="Center" 
+                   Visibility="{Binding IsLoggedId, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
         <ComboBox Grid.Column="2">
             <ComboBoxItem>
-                <Button Command="{Binding NavigateEntryUser}" Content="Выход"/>
+                <Button Command="{Binding NavigateEntryUser}">
+                    <TextBlock Text="Выход"/>
+                </Button>
+            </ComboBoxItem>
+            <ComboBoxItem>
+                <Button Command="{Binding LogoutCommand}">
+                    <TextBlock Text="Убрать"/>
+                </Button>
+                
             </ComboBoxItem>
         </ComboBox>
     </Grid>

@@ -1,4 +1,4 @@
-﻿using PASEDM.Store;
+﻿ using PASEDM.Store;
 using PASEDM.ViewModels;
 using PASEDM.ViewModels.Base;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PASEDM.Services
 {
-    public class LayoutNavigationService<TViewModel> : INavigationService<TViewModel> where TViewModel : BaseViewModels
+    public class LayoutNavigationService<TViewModel> : INavigationService where TViewModel : BaseViewModels
     {
         private readonly NavigationStore _navigationStore;
         private readonly Func<TViewModel> _createViewModel;
