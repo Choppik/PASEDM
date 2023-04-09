@@ -10,7 +10,7 @@ namespace PASEDM.ViewModels
     public class MenuViewModel : BaseViewModels
     {
         private readonly UserStore _user;
-        public string Name => _user.CurrentUser?.Login;
+        public string Name => _user.CurrentUser?.UserName;
         public ICommand NavigateHomeCommand { get; }
         public MenuViewModel(UserStore userStore, INavigationService homeNavigationService)
         {

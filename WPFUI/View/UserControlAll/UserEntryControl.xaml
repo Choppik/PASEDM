@@ -4,8 +4,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:PASEDM.View.UserControlAll" 
-             xmlns:v="clr-namespace:PASEDM.ViewModels" d:DataContext="{d:DesignInstance Type=v:UserEntryViewModel}"
+             xmlns:v="clr-namespace:PASEDM.ViewModels" 
+             xmlns:behav="clr-namespace:PASEDM.Components.PasswordBehavior"
+             d:DataContext="{d:DesignInstance Type=v:UserEntryViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#ffdadada">
@@ -17,31 +20,46 @@
             <StackPanel>
                 <TextBlock x:Name="TextTitle" Text="Авторизация" FontSize="30" FontWeight="Bold" Margin="0,0,0,20"></TextBlock>
                 <Grid Margin="0,0,0,20" VerticalAlignment="Top">
-                    <Button HorizontalAlignment="Left" Content="Вход" HorizontalContentAlignment="Center" 
-                            VerticalContentAlignment="Center" Background="#FF20900B" BorderBrush="#FF20900B" IsEnabled="False"/>
-                    <Button 
-                            x:Name="ButtonCreatAnAccount" 
-                            HorizontalAlignment="Right" 
-                            Content="Создать учетную запись" VerticalAlignment="Top" 
-                            Background="#FF20900B" BorderBrush="#FF20900B" 
+                    <Button HorizontalAlignment="Left" 
+                            Content="Вход" 
+                            HorizontalContentAlignment="Center" 
+                            VerticalContentAlignment="Center" 
+                            Background="#FF20900B" 
+                            BorderBrush="#FF20900B" 
+                            IsEnabled="False"/>
+                    <Button HorizontalAlignment="Right" 
+                            Content="Создать учетную запись" 
+                            VerticalAlignment="Top" 
+                            Background="#FF20900B" 
+                            BorderBrush="#FF20900B" 
                             Command="{Binding NavigateGreatUserCommand}"></Button>
                 </Grid>
-                <TextBox x:Name="loginEnt" materialDesign:HintAssist.Hint="Введите логин" Text="{Binding Login}"
-                         materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,20" VerticalAlignment="Center" 
-                         CaretBrush="Black" SelectionBrush="#FF20900B"/>
-                <PasswordBox x:Name="passwordEnt" materialDesign:HintAssist.Hint="Введите пароль"
-                             materialDesign:HintAssist.Foreground="#FF20900B" materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
-                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" VerticalAlignment="Center" 
-                             Margin="0,0,0,20" CaretBrush="Black" SelectionBrush="#FF20900B"/>
-                <Button x:Name="ButtonEntryAccount" 
-                        VerticalAlignment="Bottom" 
+                <TextBox materialDesign:HintAssist.Hint="Введите логин" 
+                         Text="{Binding UserName}"
+                         materialDesign:HintAssist.Foreground="#FF20900B" 
+                         materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         Margin="0,0,0,20" 
+                         VerticalAlignment="Center" 
+                         CaretBrush="Black" 
+                         SelectionBrush="#FF20900B"/>
+                <TextBox materialDesign:HintAssist.Hint="Введите пароль" 
+                         Text="{Binding Password}"
+                         materialDesign:HintAssist.Foreground="#FF20900B" 
+                         materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         Margin="0,0,0,20" 
+                         VerticalAlignment="Center" 
+                         CaretBrush="Black" 
+                         SelectionBrush="#FF20900B"/>
+
+                <Button VerticalAlignment="Bottom" 
                         HorizontalAlignment="Center" 
                         Height="30" Width="100" 
-                        Background="#FF20900B" BorderBrush="#FF20900B" 
+                        Background="#FF20900B" 
+                        BorderBrush="#FF20900B" 
                         Content="Войти" Cursor="Hand"
-                        Command="{Binding LoginMainMenuCommand}"
-                        CommandParameter="{Binding ElementName=passwordEnt}"/>
+                        Command="{Binding LoginMainMenuCommand}"/>
             </StackPanel>
         </Border>
     </Grid>

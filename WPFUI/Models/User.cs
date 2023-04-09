@@ -1,22 +1,54 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PASEDM.Components.PasswordBehavior;
+using PASEDM.Exceptions;
+using PASEDM.Services.PASEDMConflictValidator;
+using PASEDM.Services.PASEDMCreator;
+using PASEDM.Services.PASEDMProviders;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PASEDM.Models
 {
     public class User
     {
-        private int _idUser;
-        private string _login, _password;
+        private readonly  IUserCreator _userCreator;
+        private readonly  IUserProvider _userProviders;
+        private readonly  IUserConflictValidator _userConflictValidator;
 
-        [Key]
-        public int IdUser { get { return _idUser; } set { _idUser = value; } }
-        public string Login { get { return _login; } set { _login = value; } }
-        public string Password { get { return _password; } set { _password = value; } }
+        public string UserName { get; }
+        public string Password { get; }
 
-        public User() { }
-        public User(string login, string password) 
+        public User(string userName, string password) 
         {
-            _login = login;
-            _password = password;
+            UserName = userName;
+            Password = password;
+        }
+
+        public User(IUserCreator userCreator, IUserProvider userProviders, IUserConflictValidator userConflictValidator)
+        {
+            _userCreator = userCreator;
+            _userProviders = userProviders;
+            _userConflictValidator = userConflictValidator;
+        }
+
+        public async Task AddUser(User user)
+        {
+            if (user.UserName == "123")
+            {
+                throw new UserConflictException(user, user);
+            }
+
+            User conflictingReservation = await _userConflictValidator.GetConflictingUser(user);
+
+            if (conflictingReservation != null)
+            {
+                throw new UserConflictException(conflictingReservation, user);
+            }
+
+            await _userCreator.CreateUser(user);
+        }
+        public async Task<IEnumerable<User>> GetAllUsers()
+        {
+            return await _userProviders.GetAllUser();
         }
     }
 }

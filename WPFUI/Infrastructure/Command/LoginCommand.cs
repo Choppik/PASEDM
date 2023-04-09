@@ -2,59 +2,64 @@
 using PASEDM.Infrastructure.Command.Base;
 using PASEDM.Models;
 using PASEDM.Store;
-using PASEDM.View.UserControlAll;
 using PASEDM.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using PASEDM.Services;
-using System.Windows.Controls;
+using PASEDM.Services.PASEDMCreator;
+using PASEDM.Services.PASEDMProviders;
+using PASEDM.Services.PASEDMConflictValidator;
 
 namespace PASEDM.Infrastructure.Command
 {
-    public class LoginCommand : BaseCommand
+    public class LoginCommand : AsyncBaseCommand
     {
-        private string _login;
+        private string _userName;
         private string _password;
 
         private readonly UserEntryViewModel _userEntryViewModel;
         private readonly UserStore _userStore;
         private readonly INavigationService _navigationService;
+        private readonly PASEDMDbContextFactory _deferredContextFactory;
+
+        private IUserCreator _userCreator;
+        private IUserProvider _userProvider;
+        private IUserConflictValidator _userConflictValidator;
 
 
-        public LoginCommand(UserEntryViewModel userEntryViewModel, UserStore userStore, INavigationService navigationService)
+        public LoginCommand(
+            UserEntryViewModel userEntryViewModel, 
+            UserStore userStore, 
+            INavigationService navigationService, 
+            PASEDMDbContextFactory deferredContextFactory)
         {
             _userEntryViewModel = userEntryViewModel;
             _navigationService = navigationService;
             _userStore = userStore;
+            _deferredContextFactory = deferredContextFactory;
         }
 
-        public override void Execute(object? parameter)
+        public override async Task ExecuteAsync(object? parameter)
         {
-            var passwordBox = (PasswordBox) parameter;
+            _userCreator = new DatabaseUserCreator(_deferredContextFactory);
+            _userProvider = new DatabaseUserProvider(_deferredContextFactory);
+            _userConflictValidator = new DatabaseUserConflictValidator(_deferredContextFactory);
 
-            if (_userEntryViewModel.Login != null && passwordBox.Password != null)
+
+            if (_userEntryViewModel.UserName != null && _userEntryViewModel.Password != null)
             {
-                _login = _userEntryViewModel.Login;
-                _password = passwordBox.Password;
-                User userCurrent = new()
-                {
-                    Login = _login,
-                    Password = _password
-                };
+                _userName = _userEntryViewModel.UserName;
+                _password = _userEntryViewModel.Password;
+                User user1 = new(_userCreator, _userProvider, _userConflictValidator);
+                User userCurrent = new(_userName, _password);
 
-                using var db = new PASEDMContext();
-                var dbTable = db.Users;
                 bool unic = true;
-                List<User> users = dbTable.ToList();
-                if (users.Count != 0)
+
+                if (user1.GetAllUsers() != null)
                 {
-                    foreach (var user in users)
+                    foreach (var user in await user1.GetAllUsers())
                     {
-                        if (user.Login == _login && user.Password == _password)
+                        if (user.UserName == _userName && user.Password == _password)
                         {
                             unic = true;
                             break;
@@ -75,10 +80,10 @@ namespace PASEDM.Infrastructure.Command
                     }
                 }
             }
-                else
-                {
-                    MessageBox.Show("Неверно введено имя пользователя или пароль.");
-                }
+            else
+            {
+                MessageBox.Show("Неверно введено имя пользователя или пароль.");
+            }
         }
     }
 }

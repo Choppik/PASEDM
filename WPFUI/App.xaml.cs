@@ -5,15 +5,21 @@ using PASEDM.View;
 using PASEDM.Services;
 using System;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using PASEDM.Data;
 
 namespace PASEDM
 {
     public partial class App : Application
     {
+        private const string CONNECTION_STRING = "Server=localhost;Database=AppPASEDM;User Id=user1;Password=sa;TrustServerCertificate=True";
         private readonly IServiceProvider _serviceProvider;
+        private readonly PASEDMDbContextFactory _deferredContextFactory;
 
         public App()
         {
+            _deferredContextFactory = new PASEDMDbContextFactory(CONNECTION_STRING);
+
             IServiceCollection services = new ServiceCollection();
 
             services.AddSingleton<NavigationStore>();
@@ -24,9 +30,11 @@ namespace PASEDM
             services.AddTransient<UserEntryViewModel>(s => new UserEntryViewModel(
                 s.GetRequiredService<UserStore>(),
                 CreateMainMenuNavigationService(s),
-                CreateUserNewNavigationService(s)));
+                CreateUserNewNavigationService(s),
+                _deferredContextFactory));
             services.AddTransient<UserGreatViewModel>(s => new UserGreatViewModel(
-                CreateEntryUserNavigationService(s)));
+                CreateEntryUserNavigationService(s),
+                _deferredContextFactory));
             services.AddTransient<MenuViewModel>(s => new MenuViewModel(
                 s.GetRequiredService<UserStore>(), 
                 CreateEntryUserNavigationService(s)));
@@ -42,9 +50,13 @@ namespace PASEDM
 
         }
 
-
         protected override void OnStartup(StartupEventArgs e)
         {
+            DbContextOptions options = new DbContextOptionsBuilder().UseSqlServer(CONNECTION_STRING).Options;
+            using (PASEDMContext dbContext = new PASEDMContext(options))
+            {
+                dbContext.Database.Migrate();
+            }
 
             INavigationService initialNavigationService = _serviceProvider.GetRequiredService<INavigationService>();
             initialNavigationService.Navigate();
@@ -67,7 +79,6 @@ namespace PASEDM
             return new NavigationService<UserGreatViewModel>(navigationStore, () =>
             serviceProvider.GetRequiredService<UserGreatViewModel>());
         }
-
         private INavigationService CreateEntryUserNavigationService(IServiceProvider serviceProvider)
         {
             return new NavigationService<UserEntryViewModel>

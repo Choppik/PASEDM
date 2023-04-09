@@ -1,27 +1,27 @@
-﻿using PASEDM.Infrastructure.Command;
-using PASEDM.Models;
+﻿using PASEDM.Components.PasswordBehavior;
+using PASEDM.Data;
+using PASEDM.Infrastructure.Command;
 using PASEDM.Services;
 using PASEDM.Store;
 using PASEDM.ViewModels.Base;
 using System.Windows.Input;
-using System.Windows.Navigation;
 
 namespace PASEDM.ViewModels
 {
     public class UserEntryViewModel : BaseViewModels
     {
-        private string _login;
+        private string _userName;
         private string _password;
-        public string Login
+        public string UserName
         {
             get
             {
-                return _login;
+                return _userName;
             }
             set
             {
-                _login = value;
-                OnPropertyChanged(nameof(Login));
+                _userName = value;
+                OnPropertyChanged(nameof(UserName));
             }
         }
         public string Password
@@ -39,11 +39,13 @@ namespace PASEDM.ViewModels
         public ICommand NavigateGreatUserCommand { get; }
         public ICommand LoginMainMenuCommand { get; }
         public UserEntryViewModel (UserStore userStore,
-            INavigationService accountNavigationService, INavigationService homeNavigationService)
+            INavigationService accountNavigationService, 
+            INavigationService homeNavigationService,
+            PASEDMDbContextFactory deferredContextFactory)
         {
             NavigateGreatUserCommand = new NavigateCommand(homeNavigationService);
             
-            LoginMainMenuCommand = new LoginCommand(this, userStore, accountNavigationService);
+            LoginMainMenuCommand = new LoginCommand(this, userStore, accountNavigationService, deferredContextFactory);
         }
     }
 }

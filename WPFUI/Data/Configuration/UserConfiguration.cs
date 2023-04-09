@@ -1,15 +1,15 @@
-﻿using PASEDM.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using PASEDM.Data.DTOs;
 
 namespace PASEDM.Data.Configuration
 {
-    internal class UserConfiguration : IEntityTypeConfiguration<User>
+    internal class UserConfiguration : IEntityTypeConfiguration<UserDTO>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<UserDTO> builder)
         {
-            builder.Property(x => x.IdUser).ValueGeneratedOnAdd();
-            builder.Property(x => x.Login).HasMaxLength(50);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.UserName).HasMaxLength(50);
             builder.Property(x => x.Password).HasMaxLength(100);
         }
     }
