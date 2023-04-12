@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PASEDM.View.UserControlAll" 
-             xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:UserGreatViewModel}"
+             xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" xmlns:components="clr-namespace:PASEDM.Components" d:DataContext="{d:DesignInstance Type=viewmodels:UserGreatViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#ffdadada">
@@ -36,20 +36,20 @@
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                          VerticalAlignment="Center" Margin="0,0,0,20" 
                          CaretBrush="Black" SelectionBrush="#FF20900B"/>
-                <TextBox Text="{Binding Password}"
-                         materialDesign:HintAssist.Hint="Введите пароль" 
-                         materialDesign:HintAssist.Foreground="#FF20900B" 
-                         materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                         VerticalAlignment="Center" Margin="0,0,0,20" 
-                         CaretBrush="Black" SelectionBrush="#FF20900B"/>
-                <TextBox Text="{Binding ReplayPassword}"
-                         materialDesign:HintAssist.Hint="Повторите пароль" 
-                         materialDesign:HintAssist.Foreground="#FF20900B" 
-                         materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                         VerticalAlignment="Center" Margin="0,0,0,20" 
-                         CaretBrush="Black" SelectionBrush="#FF20900B"/>
+                <components:BindablePasswordBox Password="{Binding Password}"
+                             materialDesign:HintAssist.Hint="Введите пароль"
+                             materialDesign:HintAssist.Foreground="#FF20900B" 
+                             materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
+                             VerticalAlignment="Center" 
+                             Margin="0,0,0,20" >
+                </components:BindablePasswordBox>
+                <components:BindablePasswordBox Password="{Binding ReplayPassword}"
+                             materialDesign:HintAssist.Hint="Повторите пароль"
+                             materialDesign:HintAssist.Foreground="#FF20900B" 
+                             materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
+                             VerticalAlignment="Center" 
+                             Margin="0,0,0,20" >
+                </components:BindablePasswordBox>
                 
                 <Button x:Name="ButtonCreateAccount" VerticalAlignment="Bottom" 
                         HorizontalAlignment="Center" Height="30" Width="100" 

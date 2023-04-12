@@ -7,6 +7,7 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using PASEDM.Data;
+using PASEDM.Infrastructure.Command;
 
 namespace PASEDM
 {
@@ -18,12 +19,14 @@ namespace PASEDM
 
         public App()
         {
-            _deferredContextFactory = new PASEDMDbContextFactory(CONNECTION_STRING);
+            //_deferredContextFactory = new PASEDMDbContextFactory(CONNECTION_STRING);
 
             IServiceCollection services = new ServiceCollection();
 
             services.AddSingleton<NavigationStore>();
             services.AddSingleton<UserStore>();
+
+            services.AddSingleton<PASEDMDbContextFactory>(s => new PASEDMDbContextFactory(CONNECTION_STRING));
 
             services.AddSingleton<INavigationService>(s => CreateEntryUserNavigationService(s));
 
@@ -31,10 +34,10 @@ namespace PASEDM
                 s.GetRequiredService<UserStore>(),
                 CreateMainMenuNavigationService(s),
                 CreateUserNewNavigationService(s),
-                _deferredContextFactory));
+                s.GetRequiredService<PASEDMDbContextFactory>()));
             services.AddTransient<UserGreatViewModel>(s => new UserGreatViewModel(
                 CreateEntryUserNavigationService(s),
-                _deferredContextFactory));
+                s.GetRequiredService<PASEDMDbContextFactory>()));
             services.AddTransient<MenuViewModel>(s => new MenuViewModel(
                 s.GetRequiredService<UserStore>(), 
                 CreateEntryUserNavigationService(s)));

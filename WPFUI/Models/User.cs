@@ -17,6 +17,11 @@ namespace PASEDM.Models
         public string UserName { get; }
         public string Password { get; }
 
+        public User (string userName)
+        {
+            UserName = userName;
+        }
+
         public User(string userName, string password) 
         {
             UserName = userName;

@@ -4,10 +4,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:PASEDM.View.UserControlAll" 
              xmlns:v="clr-namespace:PASEDM.ViewModels" 
-             xmlns:behav="clr-namespace:PASEDM.Components.PasswordBehavior"
+             xmlns:components="clr-namespace:PASEDM.Components"
              d:DataContext="{d:DesignInstance Type=v:UserEntryViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -43,15 +42,13 @@
                          VerticalAlignment="Center" 
                          CaretBrush="Black" 
                          SelectionBrush="#FF20900B"/>
-                <TextBox materialDesign:HintAssist.Hint="Введите пароль" 
-                         Text="{Binding Password}"
-                         materialDesign:HintAssist.Foreground="#FF20900B" 
-                         materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                         Margin="0,0,0,20" 
-                         VerticalAlignment="Center" 
-                         CaretBrush="Black" 
-                         SelectionBrush="#FF20900B"/>
+                <components:BindablePasswordBox Password="{Binding Password}"
+                             materialDesign:HintAssist.Hint="Введите пароль"
+                             materialDesign:HintAssist.Foreground="#FF20900B" 
+                             materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
+                             VerticalAlignment="Center" 
+                             Margin="0,0,0,20" >
+                </components:BindablePasswordBox>
 
                 <Button VerticalAlignment="Bottom" 
                         HorizontalAlignment="Center" 

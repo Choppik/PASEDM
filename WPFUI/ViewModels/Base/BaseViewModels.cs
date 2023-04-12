@@ -1,9 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace PASEDM.ViewModels.Base
 {
-    public abstract class BaseViewModels : INotifyPropertyChanged
+    public abstract class BaseViewModels : INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

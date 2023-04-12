@@ -9,6 +9,7 @@ using PASEDM.Services;
 using PASEDM.Services.PASEDMCreator;
 using PASEDM.Services.PASEDMProviders;
 using PASEDM.Services.PASEDMConflictValidator;
+using System;
 
 namespace PASEDM.Infrastructure.Command
 {
@@ -51,11 +52,12 @@ namespace PASEDM.Infrastructure.Command
                 _userName = _userEntryViewModel.UserName;
                 _password = _userEntryViewModel.Password;
                 User user1 = new(_userCreator, _userProvider, _userConflictValidator);
-                User userCurrent = new(_userName, _password);
+                //User userCurrent = new(_userName, _password);
+                User userCurrentStore = new(_userName);
 
                 bool unic = true;
 
-                if (user1.GetAllUsers() != null)
+                if (await user1.GetAllUsers() != null)
                 {
                     foreach (var user in await user1.GetAllUsers())
                     {
@@ -75,7 +77,7 @@ namespace PASEDM.Infrastructure.Command
                     }
                     else
                     {
-                        _userStore.CurrentUser = userCurrent;
+                        _userStore.CurrentUser = userCurrentStore;
                         _navigationService.Navigate();
                     }
                 }
