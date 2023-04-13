@@ -15,10 +15,10 @@ namespace PASEDM.Store
             {
                 _currentViewModel?.Dispose();
                 _currentViewModel = value;
-                OnCurrentViewModelChange();
+                OnCurrentViewModelChanged();
             }
         }
-        private void OnCurrentViewModelChange()
+        private void OnCurrentViewModelChanged()
         {
             CurrentViewModelChange?.Invoke();
         }

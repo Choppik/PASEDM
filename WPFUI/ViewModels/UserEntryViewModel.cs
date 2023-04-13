@@ -1,5 +1,4 @@
-﻿using PASEDM.Components.PasswordBehavior;
-using PASEDM.Data;
+﻿using PASEDM.Data;
 using PASEDM.Infrastructure.Command;
 using PASEDM.Services;
 using PASEDM.Store;

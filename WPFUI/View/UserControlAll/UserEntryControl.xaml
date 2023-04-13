@@ -43,11 +43,7 @@
                          CaretBrush="Black" 
                          SelectionBrush="#FF20900B"/>
                 <components:BindablePasswordBox Password="{Binding Password}"
-                             materialDesign:HintAssist.Hint="Введите пароль"
-                             materialDesign:HintAssist.Foreground="#FF20900B" 
-                             materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
-                             VerticalAlignment="Center" 
-                             Margin="0,0,0,20" >
+                                                materialDesign:HintAssist.Hint="Введите пароль">
                 </components:BindablePasswordBox>
 
                 <Button VerticalAlignment="Bottom" 

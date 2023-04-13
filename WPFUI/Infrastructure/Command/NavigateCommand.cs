@@ -1,5 +1,4 @@
 ﻿using PASEDM.Infrastructure.Command.Base;
-using PASEDM.ViewModels.Base;
 using PASEDM.Services;
 
 namespace PASEDM.Infrastructure.Command

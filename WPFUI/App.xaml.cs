@@ -7,7 +7,6 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using PASEDM.Data;
-using PASEDM.Infrastructure.Command;
 
 namespace PASEDM
 {
@@ -15,11 +14,9 @@ namespace PASEDM
     {
         private const string CONNECTION_STRING = "Server=localhost;Database=AppPASEDM;User Id=user1;Password=sa;TrustServerCertificate=True";
         private readonly IServiceProvider _serviceProvider;
-        private readonly PASEDMDbContextFactory _deferredContextFactory;
 
         public App()
         {
-            //_deferredContextFactory = new PASEDMDbContextFactory(CONNECTION_STRING);
 
             IServiceCollection services = new ServiceCollection();
 

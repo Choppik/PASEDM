@@ -1,5 +1,4 @@
-﻿using PASEDM.Components.PasswordBehavior;
-using PASEDM.Exceptions;
+﻿using PASEDM.Exceptions;
 using PASEDM.Services.PASEDMConflictValidator;
 using PASEDM.Services.PASEDMCreator;
 using PASEDM.Services.PASEDMProviders;

@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:PASEDM.ViewModels"
         xmlns:v="clr-namespace:PASEDM.View.UserControlAll" 
-        xmlns:component="clr-namespace:PASEDM.Components"
+        xmlns:component="clr-namespace:PASEDM.Components" d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel}"
         Title="{Binding Path=Title}" Height="700" Width="1000" WindowStartupLocation="CenterScreen">
     <Grid Background="#ffdadada">
         <ContentControl Content="{Binding CurrentViewModel}">

@@ -3,7 +3,6 @@ using PASEDM.Store;
 using PASEDM.ViewModels.Base;
 using System.Windows.Input;
 using PASEDM.Services;
-using PASEDM.Models;
 
 namespace PASEDM.ViewModels
 {
