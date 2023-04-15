@@ -17,8 +17,6 @@ namespace PASEDM.Components
 {
     public partial class HamburgerMenu : UserControl
     {
-        private bool _isPasswordChanging;
-
         public static readonly DependencyProperty IsOpenProperty =
             DependencyProperty.Register("IsOpen", typeof(bool), typeof(HamburgerMenu),
                 new PropertyMetadata(false));
@@ -40,7 +38,8 @@ namespace PASEDM.Components
         }
         public HamburgerMenu()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(HamburgerMenu), new FrameworkPropertyMetadata(typeof(HamburgerMenu)));
+            //DefaultStyleKeyProperty.OverrideMetadata(typeof(HamburgerMenu), new FrameworkPropertyMetadata(typeof(HamburgerMenu)));
+            InitializeComponent();
         }
     }
 }

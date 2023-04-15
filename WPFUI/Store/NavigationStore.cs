@@ -8,7 +8,7 @@ namespace PASEDM.Store
         public event Action CurrentViewModelChanged;
 
         private BaseViewModels? _currentViewModel;
-        public BaseViewModels CurrentViewModel
+        public BaseViewModels? CurrentViewModel
         { 
             get => _currentViewModel; 
             set

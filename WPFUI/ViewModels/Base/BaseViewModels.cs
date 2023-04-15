@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace PASEDM.ViewModels.Base
 {
-    public abstract class BaseViewModels : INotifyPropertyChanged, IDisposable
+    public abstract class BaseViewModels : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

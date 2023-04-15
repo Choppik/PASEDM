@@ -9,7 +9,6 @@ using PASEDM.Services;
 using PASEDM.Services.PASEDMCreator;
 using PASEDM.Services.PASEDMProviders;
 using PASEDM.Services.PASEDMConflictValidator;
-using System;
 
 namespace PASEDM.Infrastructure.Command
 {
@@ -35,8 +34,8 @@ namespace PASEDM.Infrastructure.Command
             PASEDMDbContextFactory deferredContextFactory)
         {
             _userEntryViewModel = userEntryViewModel;
-            _navigationService = navigationService;
             _userStore = userStore;
+            _navigationService = navigationService;
             _deferredContextFactory = deferredContextFactory;
         }
 
@@ -51,15 +50,14 @@ namespace PASEDM.Infrastructure.Command
             {
                 _userName = _userEntryViewModel.UserName;
                 _password = _userEntryViewModel.Password;
-                User user1 = new(_userCreator, _userProvider, _userConflictValidator);
-                //User userCurrent = new(_userName, _password);
-                User userCurrentStore = new(_userName);
+
+                User currentUser = new(_userCreator, _userProvider, _userConflictValidator);
 
                 bool unic = true;
 
-                if (await user1.GetAllUsers() != null)
+                if (await currentUser.GetAllUsers() != null)
                 {
-                    foreach (var user in await user1.GetAllUsers())
+                    foreach (var user in await currentUser.GetAllUsers())
                     {
                         if (user.UserName == _userName && user.Password == _password)
                         {
@@ -77,7 +75,7 @@ namespace PASEDM.Infrastructure.Command
                     }
                     else
                     {
-                        _userStore.CurrentUser = userCurrentStore;
+                        _userStore.CurrentUser = new(_userName);
                         _navigationService.Navigate();
                     }
                 }

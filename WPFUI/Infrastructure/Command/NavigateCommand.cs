@@ -5,16 +5,16 @@ namespace PASEDM.Infrastructure.Command
 {
     public class NavigateCommand : BaseCommand
     {
-        private readonly INavigationService _navigationStore;
+        private readonly INavigationService _navigationService;
 
-        public NavigateCommand(INavigationService navigationStore)
+        public NavigateCommand(INavigationService navigationService)
         {
-            _navigationStore = navigationStore;
+            _navigationService = navigationService;
         }
 
         public override void Execute(object? parameter)
         {
-            _navigationStore.Navigate();
+            _navigationService.Navigate();
         }
     }
 }

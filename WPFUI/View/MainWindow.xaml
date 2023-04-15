@@ -23,7 +23,7 @@
                     <v:UserCreatControle/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:MenuViewModel}">
-                    <v:UserMainMenuControl/>
+                    <v:StartPageNotificationsControl/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:LayoutViewModel}">
                     <component:Layout/>

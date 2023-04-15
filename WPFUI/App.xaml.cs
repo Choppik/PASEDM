@@ -7,6 +7,7 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using PASEDM.Data;
+using PASEDM.Components;
 
 namespace PASEDM
 {
@@ -23,25 +24,26 @@ namespace PASEDM
             services.AddSingleton<NavigationStore>();
             services.AddSingleton<UserStore>();
 
-            services.AddSingleton<PASEDMDbContextFactory>(s => new PASEDMDbContextFactory(CONNECTION_STRING));
+            services.AddSingleton(s => new PASEDMDbContextFactory(CONNECTION_STRING));
 
-            services.AddSingleton<INavigationService>(s => CreateEntryUserNavigationService(s));
+            services.AddSingleton(s => CreateEntryUserNavigationService(s));
 
-            services.AddTransient<UserEntryViewModel>(s => new UserEntryViewModel(
+            services.AddTransient(s => new UserEntryViewModel(
                 s.GetRequiredService<UserStore>(),
                 CreateMainMenuNavigationService(s),
                 CreateUserNewNavigationService(s),
                 s.GetRequiredService<PASEDMDbContextFactory>()));
-            services.AddTransient<UserGreatViewModel>(s => new UserGreatViewModel(
+            services.AddTransient(s => new UserGreatViewModel(
                 CreateEntryUserNavigationService(s),
                 s.GetRequiredService<PASEDMDbContextFactory>()));
-            services.AddTransient<MenuViewModel>(s => new MenuViewModel(
-                s.GetRequiredService<UserStore>(), 
+            services.AddTransient(s => new MenuViewModel(
+                s.GetRequiredService<UserStore>(),
                 CreateEntryUserNavigationService(s)));
-            services.AddTransient<NavigationBarViewModel>(CreateNavigationBarViewModel);
+            services.AddTransient(CreateNavigationBarViewModel);
+            services.AddTransient(CreateHamburgerMenu);
             services.AddSingleton<MainWindowViewModel>();
 
-            services.AddSingleton<MainWindow>(s => new MainWindow()
+            services.AddSingleton(s => new MainWindow()
             {
                 DataContext = s.GetRequiredService<MainWindowViewModel>()
             });
@@ -69,28 +71,35 @@ namespace PASEDM
 
         private INavigationService CreateMainMenuNavigationService(IServiceProvider serviceProvider)
         {
-            return new LayoutNavigationService<MenuViewModel>(serviceProvider.GetRequiredService<NavigationStore>(), () => 
-            serviceProvider.GetRequiredService<MenuViewModel>(), () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+            return new LayoutNavigationService<MenuViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<MenuViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>(),
+                () => serviceProvider.GetRequiredService<HamburgerMenu>());
         }
         private INavigationService CreateUserNewNavigationService(IServiceProvider serviceProvider)
         {
-            NavigationStore navigationStore = serviceProvider.GetRequiredService<NavigationStore>();
-
-            return new NavigationService<UserGreatViewModel>(navigationStore, () =>
-            serviceProvider.GetRequiredService<UserGreatViewModel>());
+            return new NavigationService<UserGreatViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<UserGreatViewModel>());
         }
         private INavigationService CreateEntryUserNavigationService(IServiceProvider serviceProvider)
         {
-            return new NavigationService<UserEntryViewModel>
-                (serviceProvider.GetRequiredService<NavigationStore>(), 
+            return new NavigationService<UserEntryViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<UserEntryViewModel>());
         }
         private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)
         {
-            return new NavigationBarViewModel(serviceProvider.GetRequiredService<UserStore>(),
-                            CreateMainMenuNavigationService(serviceProvider),
-                            CreateUserNewNavigationService(serviceProvider), 
-                            CreateEntryUserNavigationService(serviceProvider));
+            return new NavigationBarViewModel(
+                serviceProvider.GetRequiredService<UserStore>(),
+                CreateMainMenuNavigationService(serviceProvider),
+                CreateUserNewNavigationService(serviceProvider),
+                CreateEntryUserNavigationService(serviceProvider));
+        }
+        private HamburgerMenu CreateHamburgerMenu(IServiceProvider serviceProvider) 
+        {
+            return new HamburgerMenu();
         }
     }
 }

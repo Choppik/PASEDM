@@ -6,6 +6,10 @@ using PASEDM.Services;
 
 namespace PASEDM.ViewModels
 {
+
+    /// <summary>
+    /// Пока не используется полноценно
+    /// </summary>
     public class MenuViewModel : BaseViewModels
     {
         private readonly UserStore _user;

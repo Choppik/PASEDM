@@ -14,11 +14,17 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
 
-        <local:NavigationBar Grid.Row="0" 
+        <local:NavigationBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                              DataContext="{Binding NavigationBarViewModel}"/>
 
-        <ContentControl Grid.Row="1" 
+        
+
+        <ContentControl Grid.Row="1" Grid.Column="1"
                         MaxHeight="1000" 
                         Margin="20" 
                         Content="{Binding ContentViewModels}"/>

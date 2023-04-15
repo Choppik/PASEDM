@@ -16,8 +16,12 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <CheckBox x:Name="cbToggleMenu" Grid.Column="0">
+        <CheckBox x:Name="cbToggleMenu" Grid.Column="0" Grid.Row="0">
             <CheckBox.Template>
                 <ControlTemplate TargetType="CheckBox">
                     <Grid Background="Transparent">
@@ -31,10 +35,11 @@
                 </ControlTemplate>
             </CheckBox.Template>
         </CheckBox>
-        <TextBlock Foreground="White" Grid.Column="1" Text="Navigation Demo" VerticalAlignment="Center" 
+        
+        <TextBlock Foreground="White" Grid.Column="1" Grid.Row="0" Text="{Binding Name}" VerticalAlignment="Center" 
                    Visibility="{Binding IsLoggedId, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
-        <ComboBox Grid.Column="2">
+        <ComboBox Grid.Column="2" Grid.Row="0">
             <ComboBoxItem>
                 <Button Command="{Binding NavigateEntryUser}">
                     <TextBlock Text="Выход"/>
@@ -47,5 +52,12 @@
                 
             </ComboBoxItem>
         </ComboBox>
+        <local:HamburgerMenu Grid.Column="0" 
+                             Grid.Row="1"
+                             Background="#f2f2f2"
+                             BorderBrush="#dbdbdb"
+                             BorderThickness="0 0 1 0"
+                             IsOpen="{Binding IsChecked, ElementName=cbToggleMenu}">
+        </local:HamburgerMenu>
     </Grid>
 </UserControl>

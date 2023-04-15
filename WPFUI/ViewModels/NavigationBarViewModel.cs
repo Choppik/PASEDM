@@ -8,8 +8,10 @@ namespace PASEDM.ViewModels
 {
     public class NavigationBarViewModel : BaseViewModels
     {
-        private UserStore _userStore;
+        private readonly UserStore _userStore;
+
         public bool IsLoggedId => _userStore.IsLoggedIn;
+        public string Name => _userStore.CurrentUser?.UserName;
         public ICommand NavigateExitOfAccount { get; }
         public ICommand NavigateCreateUser { get; }
         public ICommand NavigateEntryUser { get; }
@@ -29,6 +31,7 @@ namespace PASEDM.ViewModels
 
         private void OnCurrentUserChanged()
         {
+            OnPropertyChanged(nameof(Name));
             OnPropertyChanged(nameof(IsLoggedId));
         }
         public override void Dispose()
