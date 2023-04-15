@@ -17,7 +17,7 @@ namespace PASEDM.ViewModels
         public MainWindowViewModel(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
-            _navigationStore.CurrentViewModelChange += OnCurrentViewModelChange;
+            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChange;
         }
 
         private void OnCurrentViewModelChange()

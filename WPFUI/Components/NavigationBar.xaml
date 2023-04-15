@@ -4,16 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PASEDM.Components" 
-             xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:NavigationBarViewModel}"
+             xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:NavigationBarViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="#FF20900B">
-    <UserControl.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-        </Style>
-    </UserControl.Resources>
 
     <Grid MaxWidth="1000" Margin="20 10">
         <Grid.ColumnDefinitions>
@@ -22,7 +17,20 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Foreground="White" Grid.Column="0" Text="Button" VerticalAlignment="Center"/>
+        <CheckBox x:Name="cbToggleMenu" Grid.Column="0">
+            <CheckBox.Template>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid Background="Transparent">
+                        <Viewbox Width="25" Height="25">
+                            <Path
+                                  Data="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+                                  Fill="White"
+                                  Stretch="Fill" />
+                        </Viewbox>
+                    </Grid>
+                </ControlTemplate>
+            </CheckBox.Template>
+        </CheckBox>
         <TextBlock Foreground="White" Grid.Column="1" Text="Navigation Demo" VerticalAlignment="Center" 
                    Visibility="{Binding IsLoggedId, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 

@@ -16,6 +16,7 @@ namespace PASEDM.Store
                 CurrentUserChanged?.Invoke();
             } 
         }
+
         public event Action CurrentUserChanged;
         public bool IsLoggedIn => CurrentUser != null;
 

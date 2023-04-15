@@ -5,7 +5,7 @@ namespace PASEDM.Store
 {
     public class NavigationStore
     {
-        public event Action CurrentViewModelChange;
+        public event Action CurrentViewModelChanged;
 
         private BaseViewModels? _currentViewModel;
         public BaseViewModels CurrentViewModel
@@ -20,7 +20,7 @@ namespace PASEDM.Store
         }
         private void OnCurrentViewModelChanged()
         {
-            CurrentViewModelChange?.Invoke();
+            CurrentViewModelChanged?.Invoke();
         }
     }
 }

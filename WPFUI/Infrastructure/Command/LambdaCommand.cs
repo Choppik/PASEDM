@@ -3,6 +3,9 @@ using System;
 
 namespace PASEDM.Infrastructure.Command
 {
+    /// <summary>
+    /// Пока не используется
+    /// </summary>
     internal class LambdaCommand : BaseCommand
     {
         private readonly Action<object> _execute;
