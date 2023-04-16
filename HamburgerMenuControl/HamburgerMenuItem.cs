@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace PASEDM.Components.HamburgerMenu
+namespace HamburgerMenuControl
 {
     public class HamburgerMenuItem : RadioButton
     {

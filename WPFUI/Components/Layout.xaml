@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PASEDM.Components" 
              xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" 
-             xmlns:hamburgermenu="clr-namespace:PASEDM.Components.HamburgerMenu"
+             xmlns:hamburgermenu="clr-namespace:HamburgerMenuControl;assembly=HamburgerMenuControl"
              d:DataContext="{d:DesignInstance Type=viewmodels:LayoutViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" 
@@ -40,24 +40,25 @@
             </Grid.ColumnDefinitions>
 
             <hamburgermenu:HamburgerMenu Grid.Column="0"
-                                     IsOpen="{Binding IsChecked, ElementName=cbToggleMenu}"
-                                     Background="#f2f2f2"
-                                     BorderBrush="#FF20900B"
-                                     OpenCloseDuration="0:0:0.25"
-                                     FallbackOpenWidth="300"
-                                     BorderThickness="0 0 1 0">
+                                    Background="#f2f2f2"
+                                    BorderBrush="#FF20900B"
+                                    BorderThickness="0 0 1 0"
+                                    FallbackOpenWidth="300"
+                                    IsOpen="{Binding IsChecked, ElementName=cbToggleMenu}"
+                                    OpenCloseDuration="0:0:0.25">
+                
                 <hamburgermenu:HamburgerMenu.Resources>
                     <Style TargetType="hamburgermenu:HamburgerMenuItem">
                         <Setter Property="Padding" Value="20 10"/>
                         <Setter Property="FontSize" Value="16"/>
-                        <Setter Property="Foreground" Value="Black"/>
-                        <Setter Property="Background" Value="Red"/>
+                        <Setter Property="Foreground" Value="#444"/>
+                        <Setter Property="Background" Value="Transparent"/>
                         <Style.Triggers>
                             <EventTrigger RoutedEvent="MouseEnter">
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                    To="Green"
+                                                    To="#dbdbdb"
                                                     Duration="0:0:0.1">
                                         </ColorAnimation>
                                     </Storyboard>
@@ -66,8 +67,8 @@
                             <EventTrigger RoutedEvent="MouseLeave">
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                    To="Blue"
+                                        <ColorAnimation Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                                                    To="Transparent"
                                                     Duration="0:0:0.1">
                                         </ColorAnimation>
                                     </Storyboard>
@@ -84,9 +85,9 @@
                 </hamburgermenu:HamburgerMenu.Resources>
 
                 <hamburgermenu:HamburgerMenu.Content>
-                    <StackPanel Margin="0 10">
+                    <StackPanel>
                         <hamburgermenu:HamburgerMenuItem>
-                            <TextBlock Text="Introduction" />
+                            <TextBlock Text="Introduction"/>
                         </hamburgermenu:HamburgerMenuItem>
                         <hamburgermenu:HamburgerMenuItem>
                             <TextBlock Text="Getting Started" />
@@ -103,6 +104,7 @@
                     </StackPanel>
                 </hamburgermenu:HamburgerMenu.Content>
             </hamburgermenu:HamburgerMenu>
+            
             <ContentControl Grid.Column="1"
                         Content="{Binding ContentViewModels}"/>
         </Grid>
