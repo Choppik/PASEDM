@@ -4,13 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PASEDM.Components" 
-             xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" 
+             xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" xmlns:hamburgermenu="clr-namespace:PASEDM.Components.HamburgerMenu"
              d:DataContext="{d:DesignInstance Type=viewmodels:NavigationBarViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             Background="#FF20900B">
+             d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid MaxWidth="1000" Margin="20 10">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
@@ -21,43 +20,26 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <CheckBox x:Name="cbToggleMenu" Grid.Column="0" Grid.Row="0">
-            <CheckBox.Template>
-                <ControlTemplate TargetType="CheckBox">
-                    <Grid Background="Transparent">
-                        <Viewbox Width="25" Height="25">
-                            <Path
-                                  Data="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
-                                  Fill="White"
-                                  Stretch="Fill" />
-                        </Viewbox>
-                    </Grid>
-                </ControlTemplate>
-            </CheckBox.Template>
-        </CheckBox>
-        
-        <TextBlock Foreground="White" Grid.Column="1" Grid.Row="0" Text="{Binding Name}" VerticalAlignment="Center" 
-                   Visibility="{Binding IsLoggedId, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF20900B">
+            
 
-        <ComboBox Grid.Column="2" Grid.Row="0">
-            <ComboBoxItem>
-                <Button Command="{Binding NavigateEntryUser}">
-                    <TextBlock Text="Выход"/>
-                </Button>
-            </ComboBoxItem>
-            <ComboBoxItem>
-                <Button Command="{Binding LogoutCommand}">
-                    <TextBlock Text="Убрать"/>
-                </Button>
-                
-            </ComboBoxItem>
-        </ComboBox>
-        <local:HamburgerMenu Grid.Column="0" 
-                             Grid.Row="1"
-                             Background="#f2f2f2"
-                             BorderBrush="#dbdbdb"
-                             BorderThickness="0 0 1 0"
-                             IsOpen="{Binding IsChecked, ElementName=cbToggleMenu}">
-        </local:HamburgerMenu>
+            <TextBlock Foreground="White" Grid.Column="1" Grid.Row="0" Text="{Binding Name}" VerticalAlignment="Center" 
+                   Visibility="{Binding IsLoggedId, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Center"/>
+
+            <ComboBox Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right">
+                <ComboBoxItem>
+                    <Button Command="{Binding NavigateEntryUser}">
+                        <TextBlock Text="Выход"/>
+                    </Button>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <Button Command="{Binding LogoutCommand}">
+                        <TextBlock Text="Убрать"/>
+                    </Button>
+
+                </ComboBoxItem>
+            </ComboBox>
+        </Grid>
+        
     </Grid>
 </UserControl>

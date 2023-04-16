@@ -40,7 +40,6 @@ namespace PASEDM
                 s.GetRequiredService<UserStore>(),
                 CreateEntryUserNavigationService(s)));
             services.AddTransient(CreateNavigationBarViewModel);
-            services.AddTransient(CreateHamburgerMenu);
             services.AddSingleton<MainWindowViewModel>();
 
             services.AddSingleton(s => new MainWindow()
@@ -74,8 +73,7 @@ namespace PASEDM
             return new LayoutNavigationService<MenuViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<MenuViewModel>(),
-                () => serviceProvider.GetRequiredService<NavigationBarViewModel>(),
-                () => serviceProvider.GetRequiredService<HamburgerMenu>());
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
         }
         private INavigationService CreateUserNewNavigationService(IServiceProvider serviceProvider)
         {
@@ -96,10 +94,6 @@ namespace PASEDM
                 CreateMainMenuNavigationService(serviceProvider),
                 CreateUserNewNavigationService(serviceProvider),
                 CreateEntryUserNavigationService(serviceProvider));
-        }
-        private HamburgerMenu CreateHamburgerMenu(IServiceProvider serviceProvider) 
-        {
-            return new HamburgerMenu();
         }
     }
 }
