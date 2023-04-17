@@ -12,6 +12,7 @@ namespace PASEDM.Data
         {
         }
         public DbSet<UserDTO> Users { get; set; }
+        public DbSet<EmployeeDTO> Staff { get; set; }
         /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.LogTo(Console.WriteLine);
@@ -21,6 +22,7 @@ namespace PASEDM.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new StaffConfiguration());
         }
     }
 }

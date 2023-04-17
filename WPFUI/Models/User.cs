@@ -34,6 +34,12 @@ namespace PASEDM.Models
             _userConflictValidator = userConflictValidator;
         }
 
+        /// <summary>
+        /// Не забыть условие поменять
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        /// <exception cref="UserConflictException"></exception>
         public async Task AddUser(User user)
         {
             if (user.UserName == "123")

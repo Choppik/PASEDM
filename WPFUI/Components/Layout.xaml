@@ -87,19 +87,19 @@
                 <hamburgermenu:HamburgerMenu.Content>
                     <StackPanel>
                         <hamburgermenu:HamburgerMenuItem>
-                            <TextBlock Text="Introduction"/>
+                            <TextBlock Text="Входящие документы"/>
                         </hamburgermenu:HamburgerMenuItem>
                         <hamburgermenu:HamburgerMenuItem>
-                            <TextBlock Text="Getting Started" />
+                            <TextBlock Text="Исходящие документы" />
                         </hamburgermenu:HamburgerMenuItem>
                         <hamburgermenu:HamburgerMenuItem>
-                            <TextBlock Text="Developer Guides" />
+                            <TextBlock Text="Уведомления" />
                         </hamburgermenu:HamburgerMenuItem>
                         <hamburgermenu:HamburgerMenuItem>
-                            <TextBlock Text="Tutorials" />
+                            <TextBlock Text="Настройки" />
                         </hamburgermenu:HamburgerMenuItem>
                         <hamburgermenu:HamburgerMenuItem>
-                            <TextBlock Text="Reference" />
+                            <TextBlock Text="Справочная информация" />
                         </hamburgermenu:HamburgerMenuItem>
                     </StackPanel>
                 </hamburgermenu:HamburgerMenu.Content>
