@@ -56,6 +56,9 @@
                             BorderBrush="#FF20900B" 
                             IsEnabled="False"/>
                 </Grid>
+                <ListBox>
+                    
+                </ListBox>
                 
                 <TextBox Text="{Binding UserName}" 
                          materialDesign:HintAssist.Hint="Введите логин" 
