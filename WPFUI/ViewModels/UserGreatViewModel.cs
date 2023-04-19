@@ -11,6 +11,7 @@ namespace PASEDM.ViewModels
         private string _userName;
         private string _password;
         private string _replayPassword;
+        private string _employeeName;
         public string UserName
         {
             get
@@ -47,6 +48,18 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(ReplayPassword));
             }
         }
+        public string EmployeeName
+        {
+            get
+            {
+                return _employeeName;
+            }
+            set
+            {
+                _employeeName = value;
+                OnPropertyChanged(nameof(EmployeeName));
+            }
+        }
 
         public ICommand NavigateEntryUserCommand { get; }
         public ICommand CreateUserCommand { get; }
@@ -55,7 +68,7 @@ namespace PASEDM.ViewModels
         {
             NavigateEntryUserCommand = new NavigateCommand(entryInAccountNavigationService);
 
-            CreateUserCommand = new GreatUserCommand(this, deferredContextFactory);
+            CreateUserCommand = new CreateUserCommand(this, deferredContextFactory);
         }
     }
 }

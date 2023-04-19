@@ -51,9 +51,9 @@ namespace PASEDM.Infrastructure.Command
                 _userName = _userEntryViewModel.UserName;
                 _password = _userEntryViewModel.Password;
 
-                User currentUser = new(_userCreator, _userProvider, _userConflictValidator);
+                MoveUser currentUser = new(_userCreator, _userProvider, _userConflictValidator);
 
-                bool unic = true;
+                bool unic = false;
 
                 if (await currentUser.GetAllUsers() != null)
                 {

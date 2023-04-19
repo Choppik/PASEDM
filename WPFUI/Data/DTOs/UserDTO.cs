@@ -11,6 +11,6 @@ namespace PASEDM.Data.DTOs
         public string UserName { get; set; }
         public string Password { get; set; }
         public int? EmployeeID { get; set; }
-        public virtual EmployeeDTO Employee { get; set; }
+        public EmployeeDTO Employee { get; set; }
     }
 }

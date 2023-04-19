@@ -31,6 +31,7 @@ namespace PASEDM.Services.PASEDMCreator
             {
                 UserName = user.UserName,
                 Password = user.Password,
+                EmployeeID = user.Employee
             };
         }
     }

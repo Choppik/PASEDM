@@ -56,17 +56,21 @@
                             BorderBrush="#FF20900B" 
                             IsEnabled="False"/>
                 </Grid>
-                <ListBox Background="Red">
-                    
-                </ListBox>
+                <ComboBox materialDesign:HintAssist.Hint="Выберите кто вы" 
+                          Margin="0,0,0,15"
+                          materialDesign:HintAssist.Foreground="#FF20900B"
+                          materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
+                          Style="{StaticResource MaterialDesignComboBox}"
+                          DisplayMemberPath="{Binding EmployeeName}"
+                          >
+                </ComboBox>
                 
                 <TextBox Text="{Binding UserName}" 
                          materialDesign:HintAssist.Hint="Введите логин" 
                          materialDesign:HintAssist.Foreground="#FF20900B" 
                          materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                         VerticalAlignment="Center" 
-                         Margin="0,0,0,20" 
+                         Margin="0,0,0,15" 
                          CaretBrush="Black" 
                          SelectionBrush="#FF20900B"/>
                 
@@ -81,7 +85,7 @@
                 <Button x:Name="ButtonCreateAccount" 
                         Background="#FF20900B"
                         BorderBrush="#FF20900B"
-                        Margin="0,0,0,20"
+                        Margin="0,0,0,15"
                         Height="30" 
                         Width="100" 
                         Content="Создать"

@@ -7,6 +7,25 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Уведомления"/>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Уведомления" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20" FontSize="22" FontFamily="Elephant"/>
+        <ListView Grid.Row="1" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn>
+                        <TextBlock Text="Колонка 1"/>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <TextBlock Text="Колонка 2"/>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <TextBlock Text="Колонка 3"/>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>

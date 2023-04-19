@@ -11,12 +11,13 @@ using System.Windows;
 
 namespace PASEDM.Infrastructure.Command
 {
-    public class GreatUserCommand : AsyncBaseCommand
+    public class CreateUserCommand : AsyncBaseCommand
     {
         private Regex regex = new Regex(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!$%^&*-]).{8,}$");
 
         private string _userName;
         private string _password;
+        private string _employeeName;
 
         private readonly UserGreatViewModel _userGreatViewModel;
         private readonly PASEDMDbContextFactory _deferredContextFactory;
@@ -25,7 +26,7 @@ namespace PASEDM.Infrastructure.Command
         private IUserProvider _userProvider;
         private IUserConflictValidator _userConflictValidator;
 
-        public GreatUserCommand(
+        public CreateUserCommand(
             UserGreatViewModel userGreatViewModel, 
             PASEDMDbContextFactory deferredContextFactory)
         {
@@ -52,12 +53,13 @@ namespace PASEDM.Infrastructure.Command
             {
                 _userName = _userGreatViewModel.UserName;
                 _password = _userGreatViewModel.ReplayPassword;
-                User user1 = new(_userCreator, _userProvider, _userConflictValidator);
-                User userCurrent = new(_userName, _password);
+                //_employeeName = _userGreatViewModel.EmployeeName;
+
+                MoveUser currentUser = new(_userCreator, _userProvider, _userConflictValidator);
 
                 bool unic = true;
 
-                foreach (var user in await user1.GetAllUsers())
+                foreach (var user in await currentUser.GetAllNameUsers())
                 {
                     if (user.UserName == _userName)
                     {
@@ -71,7 +73,7 @@ namespace PASEDM.Infrastructure.Command
                 }
                 if (unic == true)
                 {
-                    await user1.AddUser(userCurrent);
+                    await currentUser.AddUser(new User(_userName, _password, 1));
                     MessageBox.Show("Пользователь создан. Пробуйте войти в аккаунт.");
                 }
                 else
