@@ -56,7 +56,7 @@
                             BorderBrush="#FF20900B" 
                             IsEnabled="False"/>
                 </Grid>
-                <ListBox>
+                <ListBox Background="Red">
                     
                 </ListBox>
                 
