@@ -7,7 +7,6 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using PASEDM.Data;
-using PASEDM.Components;
 
 namespace PASEDM
 {

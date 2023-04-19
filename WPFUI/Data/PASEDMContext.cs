@@ -1,6 +1,4 @@
-﻿using PASEDM.Models;
-using PASEDM.Data.Configuration;
-using EntityFramework.Exceptions.SqlServer;
+﻿using PASEDM.Data.Configuration;
 using Microsoft.EntityFrameworkCore;
 using PASEDM.Data.DTOs;
 
@@ -13,16 +11,13 @@ namespace PASEDM.Data
         }
         public DbSet<UserDTO> Users { get; set; }
         public DbSet<EmployeeDTO> Staff { get; set; }
-        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //optionsBuilder.LogTo(Console.WriteLine);
-            optionsBuilder.UseSqlServer(connectionString);
-            optionsBuilder.UseExceptionProcessor();
-        }*/
+        public DbSet<DivisionDTO> Divisions { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new StaffConfiguration());
+            modelBuilder.ApplyConfiguration(new DivisionConfiguration());
         }
     }
 }

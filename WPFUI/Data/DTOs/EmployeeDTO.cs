@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PASEDM.Data.DTOs
 {
@@ -12,6 +8,8 @@ namespace PASEDM.Data.DTOs
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+        public int? DivisionId { get; set; }
+        public virtual DivisionDTO Division { get; set; }
         public ICollection<UserDTO> Users { get; set; }
     }
 }

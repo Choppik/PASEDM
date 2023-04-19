@@ -19,7 +19,7 @@
         <local:NavigationBar Grid.Row="0"
                              DataContext="{Binding NavigationBarViewModel}">
         </local:NavigationBar>
-        <CheckBox x:Name="cbToggleMenu" Grid.Row="0" HorizontalAlignment="Left">
+        <CheckBox x:Name="cbToggleMenu" Grid.Row="0" HorizontalAlignment="Left" Margin="20,0,0,0">
             <CheckBox.Template>
                 <ControlTemplate TargetType="CheckBox">
                     <Grid Background="Transparent">
