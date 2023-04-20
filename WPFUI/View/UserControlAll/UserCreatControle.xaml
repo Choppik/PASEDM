@@ -7,11 +7,11 @@
              xmlns:local="clr-namespace:PASEDM.View.UserControlAll" 
              xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" 
              xmlns:components="clr-namespace:PASEDM.Components" 
-             d:DataContext="{d:DesignInstance Type=viewmodels:UserGreatViewModel}"
+             d:DataContext="{d:DesignInstance Type=viewmodels:UserCreateViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" 
              d:DesignWidth="800">
-    
+
     <Grid Background="#ffdadada">
         <Border MinWidth="400" 
                 MaxWidth="500" 
@@ -21,7 +21,7 @@
                 Padding="30" 
                 CornerRadius="20" 
                 Background="White">
-            
+
             <Border.Effect>
                 <DropShadowEffect BlurRadius="40" 
                                   Color="#FF20900B" 
@@ -35,11 +35,11 @@
                            FontWeight="Bold" 
                            Margin="0,0,0,20">
                 </TextBlock>
-                
+
                 <Grid Margin="0,0,0,20" 
                       VerticalAlignment="Top">
-                    
-                    <Button d:DataContext="{d:DesignInstance Type=viewmodels:UserGreatViewModel}" 
+
+                    <Button d:DataContext="{d:DesignInstance Type=viewmodels:UserCreateViewModel}" 
                             x:Name="ButtonEntryAnAccount" 
                             HorizontalAlignment="Left" 
                             Content="Вход" 
@@ -48,7 +48,7 @@
                             Background="#FF20900B" 
                             BorderBrush="#FF20900B" 
                             Command="{Binding NavigateEntryUserCommand}"/>
-                    
+
                     <Button HorizontalAlignment="Right" 
                             Content="Создать учетную запись" 
                             VerticalAlignment="Top" 
@@ -56,15 +56,21 @@
                             BorderBrush="#FF20900B" 
                             IsEnabled="False"/>
                 </Grid>
+
                 <ComboBox materialDesign:HintAssist.Hint="Выберите кто вы" 
                           Margin="0,0,0,15"
                           materialDesign:HintAssist.Foreground="#FF20900B"
                           materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
                           Style="{StaticResource MaterialDesignComboBox}"
-                          DisplayMemberPath="{Binding EmployeeName}"
-                          >
+                          ItemsSource="{Binding Staff}"
+                          SelectedItem="{Binding Employee}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
-                
+
                 <TextBox Text="{Binding UserName}" 
                          materialDesign:HintAssist.Hint="Введите логин" 
                          materialDesign:HintAssist.Foreground="#FF20900B" 
@@ -73,15 +79,15 @@
                          Margin="0,0,0,15" 
                          CaretBrush="Black" 
                          SelectionBrush="#FF20900B"/>
-                
+
                 <components:BindablePasswordBox Password="{Binding Password}"
                                                 materialDesign:HintAssist.Hint="Введите пароль">
                 </components:BindablePasswordBox>
-                
+
                 <components:BindablePasswordBox Password="{Binding ReplayPassword}" 
                                                 materialDesign:HintAssist.Hint="Повторите пароль">
                 </components:BindablePasswordBox>
-                
+
                 <Button x:Name="ButtonCreateAccount" 
                         Background="#FF20900B"
                         BorderBrush="#FF20900B"

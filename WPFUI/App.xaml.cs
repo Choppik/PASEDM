@@ -32,7 +32,7 @@ namespace PASEDM
                 CreateMainMenuNavigationService(s),
                 CreateUserNewNavigationService(s),
                 s.GetRequiredService<PASEDMDbContextFactory>()));
-            services.AddTransient(s => new UserGreatViewModel(
+            services.AddTransient(s => new UserCreateViewModel(
                 CreateEntryUserNavigationService(s),
                 s.GetRequiredService<PASEDMDbContextFactory>()));
             services.AddTransient(s => new MenuViewModel(
@@ -76,9 +76,9 @@ namespace PASEDM
         }
         private INavigationService CreateUserNewNavigationService(IServiceProvider serviceProvider)
         {
-            return new NavigationService<UserGreatViewModel>(
+            return new NavigationService<UserCreateViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<UserGreatViewModel>());
+                () => serviceProvider.GetRequiredService<UserCreateViewModel>());
         }
         private INavigationService CreateEntryUserNavigationService(IServiceProvider serviceProvider)
         {

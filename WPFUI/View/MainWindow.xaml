@@ -19,7 +19,7 @@
                 <DataTemplate DataType="{x:Type vm:UserEntryViewModel}">
                     <v:UserEntryControl/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:UserGreatViewModel}">
+                <DataTemplate DataType="{x:Type vm:UserCreateViewModel}">
                     <v:UserCreatControle/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:MenuViewModel}">

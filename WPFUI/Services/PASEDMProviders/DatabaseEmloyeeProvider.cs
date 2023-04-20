@@ -16,11 +16,11 @@ namespace PASEDM.Services.PASEDMProviders
         {
             _dbContextFactory = dbContextFactory;
         }
-        public async Task<IEnumerable<Employee>> GetAllEmployee()
+        public IEnumerable<Employee> GetAllEmployee()
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
-                IEnumerable<EmployeeDTO> employeeDTOs = await context.Staff.ToListAsync();
+                IEnumerable<EmployeeDTO> employeeDTOs = context.Staff.ToList();
 
                 return employeeDTOs.Select(u => ToEmployee(u));
             }
@@ -28,7 +28,7 @@ namespace PASEDM.Services.PASEDMProviders
 
         private static Employee ToEmployee(EmployeeDTO dto)
         {
-            return new Employee(dto.Name);
+            return new Employee(dto.Id, dto.Name);
         }
     }
 }

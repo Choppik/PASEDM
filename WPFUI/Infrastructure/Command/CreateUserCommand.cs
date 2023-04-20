@@ -17,20 +17,22 @@ namespace PASEDM.Infrastructure.Command
 
         private string _userName;
         private string _password;
-        private string _employeeName;
+        private int _empoyee;
 
-        private readonly UserGreatViewModel _userGreatViewModel;
+        private readonly UserCreateViewModel _userCreateViewModel;
         private readonly PASEDMDbContextFactory _deferredContextFactory;
 
         private IUserCreator _userCreator;
         private IUserProvider _userProvider;
         private IUserConflictValidator _userConflictValidator;
 
+        private IEmployeeProvider _employeeProvider;
+
         public CreateUserCommand(
-            UserGreatViewModel userGreatViewModel, 
+            UserCreateViewModel userGreatViewModel, 
             PASEDMDbContextFactory deferredContextFactory)
         {
-            _userGreatViewModel = userGreatViewModel;
+            _userCreateViewModel = userGreatViewModel;
             _deferredContextFactory = deferredContextFactory;
         }
 
@@ -40,29 +42,34 @@ namespace PASEDM.Infrastructure.Command
             _userProvider = new DatabaseUserProvider(_deferredContextFactory);
             _userConflictValidator = new DatabaseUserConflictValidator(_deferredContextFactory);
 
-            if (_userGreatViewModel.UserName != null && 
-                _userGreatViewModel.UserName.Length <= 50 &&
-                _userGreatViewModel.Password != null && 
-                _userGreatViewModel.ReplayPassword != null && 
-                _userGreatViewModel.Password == _userGreatViewModel.ReplayPassword &&
-                _userGreatViewModel.ReplayPassword.Length <= 100 &&
-                _userGreatViewModel.UserName != _userGreatViewModel.ReplayPassword && 
-                regex.IsMatch(_userGreatViewModel.ReplayPassword) &&
-                !_userGreatViewModel.UserName.Contains(" ") && 
-                !_userGreatViewModel.ReplayPassword.Contains(" "))
+            _employeeProvider = new DatabaseEmloyeeProvider(_deferredContextFactory);
+
+            if (_userCreateViewModel.UserName != null && 
+                _userCreateViewModel.UserName.Length <= 50 &&
+                _userCreateViewModel.Password != null && 
+                _userCreateViewModel.ReplayPassword != null && 
+                _userCreateViewModel.Password == _userCreateViewModel.ReplayPassword &&
+                _userCreateViewModel.ReplayPassword.Length <= 100 &&
+                _userCreateViewModel.UserName != _userCreateViewModel.ReplayPassword && 
+                regex.IsMatch(_userCreateViewModel.ReplayPassword) &&
+                !_userCreateViewModel.UserName.Contains(" ") && 
+                !_userCreateViewModel.ReplayPassword.Contains(" ") &&
+                _userCreateViewModel.Employee != null)
             {
-                _userName = _userGreatViewModel.UserName;
-                _password = _userGreatViewModel.ReplayPassword;
-                //_employeeName = _userGreatViewModel.EmployeeName;
+                _userName = _userCreateViewModel.UserName;
+                _password = _userCreateViewModel.ReplayPassword;
 
                 MoveUser currentUser = new(_userCreator, _userProvider, _userConflictValidator);
 
-                bool unic = true;
+                Employee employee = new(_employeeProvider);
+
+                bool unic = false;
 
                 foreach (var user in await currentUser.GetAllNameUsers())
                 {
                     if (user.UserName == _userName)
                     {
+                        MessageBox.Show("Данное имя не уникально.");
                         unic = false;
                         break;
                     }
@@ -73,12 +80,17 @@ namespace PASEDM.Infrastructure.Command
                 }
                 if (unic == true)
                 {
-                    await currentUser.AddUser(new User(_userName, _password, 1));
+                    foreach (var item  in employee.GetAllEmployee())
+                    {
+                        if (item.Name == _userCreateViewModel.Employee.Name)
+                        {
+                            _empoyee = item.Id;
+                            break;
+                        }
+                    }
+
+                    await currentUser.AddUser(new User(_userName, _password, _empoyee));
                     MessageBox.Show("Пользователь создан. Пробуйте войти в аккаунт.");
-                }
-                else
-                {
-                    MessageBox.Show("Данное имя не уникально.");
                 }
             }
             else

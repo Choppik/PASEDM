@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace PASEDM.Services.PASEDMProviders
 {
-    internal interface IEmployeeProvider
+    public interface IEmployeeProvider
     {
-        Task<IEnumerable<Employee>> GetAllEmployee();
+        IEnumerable<Employee> GetAllEmployee();
     }
 }
