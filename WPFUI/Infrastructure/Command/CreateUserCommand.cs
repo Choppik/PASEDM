@@ -13,7 +13,7 @@ namespace PASEDM.Infrastructure.Command
 {
     public class CreateUserCommand : AsyncBaseCommand
     {
-        private Regex regex = new Regex(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!$%^&*-]).{8,}$");
+        private readonly Regex regex = new(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!$%^&*-]).{8,}$");
 
         private string _userName;
         private string _password;
@@ -52,8 +52,8 @@ namespace PASEDM.Infrastructure.Command
                 _userCreateViewModel.ReplayPassword.Length <= 100 &&
                 _userCreateViewModel.UserName != _userCreateViewModel.ReplayPassword && 
                 regex.IsMatch(_userCreateViewModel.ReplayPassword) &&
-                !_userCreateViewModel.UserName.Contains(" ") && 
-                !_userCreateViewModel.ReplayPassword.Contains(" ") &&
+                !_userCreateViewModel.UserName.Contains(' ') && 
+                !_userCreateViewModel.ReplayPassword.Contains(' ') &&
                 _userCreateViewModel.Employee != null)
             {
                 _userName = _userCreateViewModel.UserName;

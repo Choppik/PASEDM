@@ -80,7 +80,7 @@ namespace HamburgerMenuControl
         {
             double contentWidth = GetDesiredContentWidth();
 
-            DoubleAnimation openingAnimation = new DoubleAnimation(contentWidth, OpenCloseDuration);
+            DoubleAnimation openingAnimation = new(contentWidth, OpenCloseDuration);
             BeginAnimation(WidthProperty, openingAnimation);
         }
 
@@ -98,7 +98,7 @@ namespace HamburgerMenuControl
 
         private void CloseMenuAnimated()
         {
-            DoubleAnimation closingAnimation = new DoubleAnimation(0, OpenCloseDuration);
+            DoubleAnimation closingAnimation = new(0, OpenCloseDuration);
             BeginAnimation(WidthProperty, closingAnimation);
         }
     }

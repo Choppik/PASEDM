@@ -4,8 +4,10 @@ using PASEDM.Models;
 using PASEDM.Services;
 using PASEDM.Services.PASEDMProviders;
 using PASEDM.ViewModels.Base;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PASEDM.ViewModels
@@ -97,14 +99,24 @@ namespace PASEDM.ViewModels
         }
         private async void GetStaff()
         {
-            _employeeProvider = new DatabaseEmployeeProvider(_contextFactory);
-            _staff = new ObservableCollection<Employee>();
+            IsLoading = true;
 
-            foreach (var item in await _employeeProvider.GetAllEmployee())
+            try
             {
-                _staff.Add(item);
+                _employeeProvider = new DatabaseEmployeeProvider(_contextFactory);
+                _staff = new ObservableCollection<Employee>();
+
+                foreach (var item in await _employeeProvider.GetAllEmployee())
+                {
+                    _staff.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Что-то не так", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
+            IsLoading = false;
         }
     }
 }

@@ -21,7 +21,6 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="#FF20900B">
-            
 
             <TextBlock Foreground="White" Grid.Column="1" Grid.Row="0" Text="{Binding Name}" VerticalAlignment="Center" 
                    Visibility="{Binding IsLoggedId, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Center"/>

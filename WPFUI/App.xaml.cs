@@ -74,26 +74,26 @@ namespace PASEDM
             base.OnStartup(e);
         }
 
-        private INavigationService CreateUserNewNavigationService(IServiceProvider serviceProvider)
+        private static INavigationService CreateUserNewNavigationService(IServiceProvider serviceProvider)
         {
             return new NavigationService<UserCreateViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<UserCreateViewModel>());
         }
-        private INavigationService CreateEntryUserNavigationService(IServiceProvider serviceProvider)
+        private static INavigationService CreateEntryUserNavigationService(IServiceProvider serviceProvider)
         {
             return new NavigationService<UserEntryViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<UserEntryViewModel>());
         }
-        private INavigationService CreateNotificationsNavigationService(IServiceProvider serviceProvider)
+        private static INavigationService CreateNotificationsNavigationService(IServiceProvider serviceProvider)
         {
             return new LayoutNavigationService<NotificationsViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<NotificationsViewModel>(),
                 () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
         }
-        private INavigationService CreateIncomingNavigationService(IServiceProvider serviceProvider)
+        private static INavigationService CreateIncomingNavigationService(IServiceProvider serviceProvider)
         {
             return new LayoutNavigationService<IncomingViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
