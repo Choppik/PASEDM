@@ -12,12 +12,14 @@ namespace PASEDM.Data
         public DbSet<UserDTO> Users { get; set; }
         public DbSet<EmployeeDTO> Staff { get; set; }
         public DbSet<DivisionDTO> Divisions { get; set; }
+        public DbSet<RecipientDTO> Recipients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new StaffConfiguration());
             modelBuilder.ApplyConfiguration(new DivisionConfiguration());
+            modelBuilder.ApplyConfiguration(new RecipientConfiguration());
         }
     }
 }

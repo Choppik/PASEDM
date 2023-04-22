@@ -23,10 +23,13 @@
                     <v:UserCreatControle/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:NotificationsViewModel}">
-                    <v:StartPageNotificationsControl/>
+                    <v:PageNotificationsControl/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:IncomingViewModel}">
                     <v:PageIncomingDocumentsControl/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:OutgoingViewModel}">
+                    <v:PageOutgoingDocumentsControl/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:LayoutViewModel}">
                     <component:Layout/>

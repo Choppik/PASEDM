@@ -45,6 +45,10 @@ namespace PASEDM
                 s.GetRequiredService<UserStore>(),
                 CreateEntryUserNavigationService(s)));
 
+            services.AddTransient(s => new OutgoingViewModel(
+                s.GetRequiredService<UserStore>(),
+                CreateEntryUserNavigationService(s)));
+
             services.AddTransient(CreateNavigationBarViewModel);
             services.AddSingleton<MainWindowViewModel>();
 
@@ -100,11 +104,20 @@ namespace PASEDM
                 () => serviceProvider.GetRequiredService<IncomingViewModel>(),
                 () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
         }
+        private static INavigationService CreateOutgoingNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<OutgoingViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<OutgoingViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
         private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)
         {
             return new NavigationBarViewModel(
                 serviceProvider.GetRequiredService<UserStore>(),
                 CreateIncomingNavigationService(serviceProvider),
+                CreateOutgoingNavigationService(serviceProvider),
+                CreateNotificationsNavigationService(serviceProvider),
                 CreateEntryUserNavigationService(serviceProvider));
         }
     }

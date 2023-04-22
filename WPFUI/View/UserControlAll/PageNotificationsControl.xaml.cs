@@ -2,9 +2,9 @@
 
 namespace PASEDM.View.UserControlAll
 {
-    public partial class StartPageNotificationsControl : UserControl
+    public partial class PageNotificationsControl : UserControl
     {
-        public StartPageNotificationsControl()
+        public PageNotificationsControl()
         {
             InitializeComponent();
         }

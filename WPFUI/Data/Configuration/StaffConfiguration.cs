@@ -9,6 +9,7 @@ namespace PASEDM.Data.Configuration
         public void Configure(EntityTypeBuilder<EmployeeDTO> builder)
         {
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.NumberEmployee).HasMaxLength(10);
             builder.Property(x => x.Name).HasMaxLength(50);
         }
     }

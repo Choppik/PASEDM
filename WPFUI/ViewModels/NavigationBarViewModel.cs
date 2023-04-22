@@ -12,19 +12,25 @@ namespace PASEDM.ViewModels
         private readonly UserStore _userStore;
 
         public bool IsLoggedId => _userStore.IsLoggedIn;
-        public string Name => _userStore.CurrentUser?.UserName;
+        public string? Name => _userStore.CurrentUser.UserName;
         public ICommand NavigateEntryUser { get; }
         public ICommand LogoutCommand { get; }
         public ICommand NavigateIncomingCommand { get; }
+        public ICommand NavigateOutgoingCommand { get; }
+        public ICommand NavigateNotificationCommand { get; }
         public NavigationBarViewModel(
             UserStore userStore, 
             INavigationService navigationServiceIncoming,
+            INavigationService navigationServiceOutgoing,
+            INavigationService navigationServiceNotification,
             INavigationService navigationServiceEntryUser) 
         {
             _userStore = userStore;
             NavigateIncomingCommand = new NavigateCommand(navigationServiceIncoming);
+            NavigateOutgoingCommand = new NavigateCommand(navigationServiceOutgoing);
+            NavigateNotificationCommand = new NavigateCommand(navigationServiceNotification);
             NavigateEntryUser = new NavigateCommand(navigationServiceEntryUser);
-            LogoutCommand = new LogoutCommand(userStore);
+            //LogoutCommand = new LogoutCommand(userStore);
 
             _userStore.CurrentUserChanged += OnCurrentUserChanged;
         }

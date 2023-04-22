@@ -90,10 +90,10 @@
                         <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateIncomingCommand}">
                             <TextBlock Text="Входящие документы"/>
                         </hamburgermenu:HamburgerMenuItem>
-                        <hamburgermenu:HamburgerMenuItem>
+                        <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateOutgoingCommand}">
                             <TextBlock Text="Исходящие документы" />
                         </hamburgermenu:HamburgerMenuItem>
-                        <hamburgermenu:HamburgerMenuItem>
+                        <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateNotificationCommand}">
                             <TextBlock Text="Уведомления" />
                         </hamburgermenu:HamburgerMenuItem>
                         <hamburgermenu:HamburgerMenuItem>

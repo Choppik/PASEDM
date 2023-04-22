@@ -7,6 +7,7 @@ namespace PASEDM.Data.DTOs
     {
         [Key]
         public int Id {  get; set; }
+        public int NumberDivision {  get; set; }
         public string Division { get; set; }
         public ICollection<EmployeeDTO> Employee { get; set; }
     }

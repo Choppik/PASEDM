@@ -6,6 +6,8 @@ namespace PASEDM.ViewModels
     public class LayoutViewModel : BaseViewModels
     {
         public ICommand NavigateIncomingCommand { get; }
+        public ICommand NavigateOutgoingCommand { get; }
+        public ICommand NavigateNotificationCommand { get; }
         public LayoutViewModel(
             NavigationBarViewModel navigationBarViewModel, 
             BaseViewModels contentViewModels)
@@ -14,6 +16,8 @@ namespace PASEDM.ViewModels
             ContentViewModels = contentViewModels;
 
             NavigateIncomingCommand = navigationBarViewModel.NavigateIncomingCommand;
+            NavigateOutgoingCommand = navigationBarViewModel.NavigateOutgoingCommand;
+            NavigateNotificationCommand = navigationBarViewModel.NavigateNotificationCommand;
         }
 
         public NavigationBarViewModel NavigationBarViewModel { get; }
