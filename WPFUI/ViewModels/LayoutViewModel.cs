@@ -1,13 +1,19 @@
 ﻿using PASEDM.ViewModels.Base;
+using System.Windows.Input;
 
 namespace PASEDM.ViewModels
 {
     public class LayoutViewModel : BaseViewModels
     {
-        public LayoutViewModel(NavigationBarViewModel navigationBarViewModel, BaseViewModels contentViewModels)
+        public ICommand NavigateIncomingCommand { get; }
+        public LayoutViewModel(
+            NavigationBarViewModel navigationBarViewModel, 
+            BaseViewModels contentViewModels)
         {
             NavigationBarViewModel = navigationBarViewModel;
             ContentViewModels = contentViewModels;
+
+            NavigateIncomingCommand = navigationBarViewModel.NavigateIncomingCommand;
         }
 
         public NavigationBarViewModel NavigationBarViewModel { get; }

@@ -86,7 +86,7 @@
 
                 <hamburgermenu:HamburgerMenu.Content>
                     <StackPanel>
-                        <hamburgermenu:HamburgerMenuItem>
+                        <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateIncomingCommand}">
                             <TextBlock Text="Входящие документы"/>
                         </hamburgermenu:HamburgerMenuItem>
                         <hamburgermenu:HamburgerMenuItem>

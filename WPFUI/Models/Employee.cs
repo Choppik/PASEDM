@@ -21,7 +21,7 @@ namespace PASEDM.Models
             Name = name;
         }
 
-        public IEnumerable<Employee> GetAllEmployee()
+        public Task<IEnumerable<Employee>> GetAllEmployee()
         {
             return _employeeProviders.GetAllEmployee();
         }

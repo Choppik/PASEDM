@@ -17,7 +17,7 @@ namespace PASEDM.Infrastructure.Command
 
         private string _userName;
         private string _password;
-        private int _empoyee;
+        private int _employee;
 
         private readonly UserCreateViewModel _userCreateViewModel;
         private readonly PASEDMDbContextFactory _deferredContextFactory;
@@ -42,7 +42,7 @@ namespace PASEDM.Infrastructure.Command
             _userProvider = new DatabaseUserProvider(_deferredContextFactory);
             _userConflictValidator = new DatabaseUserConflictValidator(_deferredContextFactory);
 
-            _employeeProvider = new DatabaseEmloyeeProvider(_deferredContextFactory);
+            _employeeProvider = new DatabaseEmployeeProvider(_deferredContextFactory);
 
             if (_userCreateViewModel.UserName != null && 
                 _userCreateViewModel.UserName.Length <= 50 &&
@@ -80,16 +80,16 @@ namespace PASEDM.Infrastructure.Command
                 }
                 if (unic == true)
                 {
-                    foreach (var item  in employee.GetAllEmployee())
+                    foreach (var item  in await employee.GetAllEmployee())
                     {
                         if (item.Name == _userCreateViewModel.Employee.Name)
                         {
-                            _empoyee = item.Id;
+                            _employee = item.Id;
                             break;
                         }
                     }
 
-                    await currentUser.AddUser(new User(_userName, _password, _empoyee));
+                    await currentUser.AddUser(new User(_userName, _password, _employee));
                     MessageBox.Show("Пользователь создан. Пробуйте войти в аккаунт.");
                 }
             }

@@ -11,6 +11,10 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Входящие документы" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20" FontSize="22" FontFamily="Elephant"/>
+        <TextBlock Grid.Row="0" Text="Входящие документы" 
+                   VerticalAlignment="Top" 
+                   HorizontalAlignment="Left" 
+                   Margin="20" FontSize="22" 
+                   FontFamily="Elephant"/>
     </Grid>
 </UserControl>

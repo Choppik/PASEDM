@@ -22,8 +22,11 @@
                 <DataTemplate DataType="{x:Type vm:UserCreateViewModel}">
                     <v:UserCreatControle/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:MenuViewModel}">
+                <DataTemplate DataType="{x:Type vm:NotificationsViewModel}">
                     <v:StartPageNotificationsControl/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:IncomingViewModel}">
+                    <v:PageIncomingDocumentsControl/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:LayoutViewModel}">
                     <component:Layout/>

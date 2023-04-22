@@ -29,15 +29,22 @@ namespace PASEDM
 
             services.AddTransient(s => new UserEntryViewModel(
                 s.GetRequiredService<UserStore>(),
-                CreateMainMenuNavigationService(s),
+                CreateNotificationsNavigationService(s),
                 CreateUserNewNavigationService(s),
                 s.GetRequiredService<PASEDMDbContextFactory>()));
+
             services.AddTransient(s => new UserCreateViewModel(
                 CreateEntryUserNavigationService(s),
                 s.GetRequiredService<PASEDMDbContextFactory>()));
-            services.AddTransient(s => new MenuViewModel(
+
+            services.AddTransient(s => new NotificationsViewModel(
                 s.GetRequiredService<UserStore>(),
                 CreateEntryUserNavigationService(s)));
+
+            services.AddTransient(s => new IncomingViewModel(
+                s.GetRequiredService<UserStore>(),
+                CreateEntryUserNavigationService(s)));
+
             services.AddTransient(CreateNavigationBarViewModel);
             services.AddSingleton<MainWindowViewModel>();
 
@@ -53,7 +60,7 @@ namespace PASEDM
         protected override void OnStartup(StartupEventArgs e)
         {
             DbContextOptions options = new DbContextOptionsBuilder().UseSqlServer(CONNECTION_STRING).Options;
-            using (PASEDMContext dbContext = new PASEDMContext(options))
+            using (PASEDMContext dbContext = new(options))
             {
                 dbContext.Database.Migrate();
             }
@@ -67,13 +74,6 @@ namespace PASEDM
             base.OnStartup(e);
         }
 
-        private INavigationService CreateMainMenuNavigationService(IServiceProvider serviceProvider)
-        {
-            return new LayoutNavigationService<MenuViewModel>(
-                serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<MenuViewModel>(),
-                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
-        }
         private INavigationService CreateUserNewNavigationService(IServiceProvider serviceProvider)
         {
             return new NavigationService<UserCreateViewModel>(
@@ -86,12 +86,25 @@ namespace PASEDM
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<UserEntryViewModel>());
         }
+        private INavigationService CreateNotificationsNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<NotificationsViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<NotificationsViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+        private INavigationService CreateIncomingNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<IncomingViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<IncomingViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
         private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)
         {
             return new NavigationBarViewModel(
                 serviceProvider.GetRequiredService<UserStore>(),
-                CreateMainMenuNavigationService(serviceProvider),
-                CreateUserNewNavigationService(serviceProvider),
+                CreateIncomingNavigationService(serviceProvider),
                 CreateEntryUserNavigationService(serviceProvider));
         }
     }

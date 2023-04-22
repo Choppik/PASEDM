@@ -18,6 +18,20 @@ namespace PASEDM.ViewModels
         private ObservableCollection<Employee> _staff;
         private Employee _employee;
         private IEmployeeProvider _employeeProvider;
+        private PASEDMDbContextFactory _contextFactory;
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get
+            {
+                return _isLoading;
+            }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+            }
+        }
         public string UserName
         {
             get
@@ -36,7 +50,7 @@ namespace PASEDM.ViewModels
             {
                 return _password;
             }
-            set
+            set //=> Set(ref _password, value);
             {
                 _password = value;
                 OnPropertyChanged(nameof(Password));
@@ -73,17 +87,24 @@ namespace PASEDM.ViewModels
 
         public UserCreateViewModel (INavigationService entryInAccountNavigationService, PASEDMDbContextFactory deferredContextFactory)
         {
-            _employeeProvider = new DatabaseEmloyeeProvider(deferredContextFactory);
-            _staff = new ObservableCollection<Employee>();
+            _contextFactory = deferredContextFactory;
 
-            foreach (var item in _employeeProvider.GetAllEmployee())
-            {
-                _staff.Add(item);
-            }
+            GetStaff();
 
             NavigateEntryUserCommand = new NavigateCommand(entryInAccountNavigationService);
 
             CreateUserCommand = new CreateUserCommand(this, deferredContextFactory);
+        }
+        private async void GetStaff()
+        {
+            _employeeProvider = new DatabaseEmployeeProvider(_contextFactory);
+            _staff = new ObservableCollection<Employee>();
+
+            foreach (var item in await _employeeProvider.GetAllEmployee())
+            {
+                _staff.Add(item);
+            }
+
         }
     }
 }

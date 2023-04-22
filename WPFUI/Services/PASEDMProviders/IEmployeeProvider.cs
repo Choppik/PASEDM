@@ -6,6 +6,6 @@ namespace PASEDM.Services.PASEDMProviders
 {
     public interface IEmployeeProvider
     {
-        IEnumerable<Employee> GetAllEmployee();
+        Task<IEnumerable<Employee>> GetAllEmployee();
     }
 }
