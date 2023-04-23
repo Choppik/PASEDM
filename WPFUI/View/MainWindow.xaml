@@ -2,6 +2,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:custom="clr-namespace:ModalControl;assembly=ModalControl"
         mc:Ignorable="d"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -14,8 +15,7 @@
         Width="1000" 
         WindowStartupLocation="CenterScreen">
     <Grid Background="#ffdadada">
-        <ContentControl Content="{Binding CurrentViewModel}">
-            <ContentControl.Resources>
+        <Grid.Resources>
                 <DataTemplate DataType="{x:Type vm:UserEntryViewModel}">
                     <v:UserEntryControl/>
                 </DataTemplate>
@@ -31,10 +31,16 @@
                 <DataTemplate DataType="{x:Type vm:OutgoingViewModel}">
                     <v:PageOutgoingDocumentsControl/>
                 </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:CreateCardViewModel}">
+                    <v:CreateCardControl/>
+                </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:LayoutViewModel}">
                     <component:Layout/>
                 </DataTemplate>
-            </ContentControl.Resources>
-        </ContentControl>
+        </Grid.Resources>
+        <custom:Modal Panel.ZIndex="100" IsOpen="{Binding IsOpen}">
+            <ContentControl Content="{Binding CurrentModalViewModel}"/>
+        </custom:Modal>
+        <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

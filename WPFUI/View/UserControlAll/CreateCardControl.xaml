@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="PASEDM.View.UserControlAll.CreateCardControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PASEDM.View.UserControlAll" 
+             xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:CreateCardViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="Red"
+        MaxWidth="1000"
+        Margin="20"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            FontSize="28"
+            Text="Login" />
+
+        <StackPanel Grid.Row="1" Margin="0 20 0 0">
+            <StackPanel>
+                <TextBlock Text="Username" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Margin="0 10 0 0">
+                <TextBlock Text="Password" />
+            </StackPanel>
+        </StackPanel>
+
+        <Button
+            Grid.Row="2"
+            Margin="0 20 0 0"
+            Padding="5 2"
+            HorizontalAlignment="Left"
+            Command="{Binding NavigateRefundCommand}"
+            Content="Login" />
+    </Grid>
+</UserControl>

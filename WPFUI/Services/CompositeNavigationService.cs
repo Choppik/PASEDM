@@ -2,10 +2,6 @@
 
 namespace PASEDM.Services
 {
-
-    /// <summary>
-    /// Класс может пригодиться, когда потребуется модальное окно.
-    /// </summary>
     public class CompositeNavigationService : INavigationService
     {
         private readonly IEnumerable<INavigationService> _navigationService;

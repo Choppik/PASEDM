@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PASEDM.View.UserControlAll"
+             xmlns:local="clr-namespace:PASEDM.View.UserControlAll" 
+             xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:OutgoingViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -21,10 +22,38 @@
         
         <TextBox Grid.Row="1" Text="Поиск"/>
         
-        <ListBox Grid.Row="2"></ListBox>
+        <ListBox Grid.Row="2">
+            <ListBoxItem Content="Текст"></ListBoxItem>
+        </ListBox>
 
-        <Button Grid.Row="3">
-            <TextBlock Text="Добавить"/>
-        </Button>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" 
+                    Content="Добавить" 
+                    Background="#FF20900B" 
+                    BorderBrush="#FF20900B" 
+                    HorizontalAlignment="Right" 
+                    Command="{Binding NavigateCreateCardCommand}"
+                    VerticalAlignment="Center"
+                    Margin="10"/>
+            <Button Grid.Column="1" 
+                    Content="Редактировать" 
+                    Background="#FF20900B" 
+                    BorderBrush="#FF20900B" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    Margin="10"/>
+            <Button Grid.Column="2" 
+                    Content="Удалить" 
+                    Background="#FF20900B" 
+                    BorderBrush="#FF20900B" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center"
+                    Margin="10"/>
+        </Grid>
     </Grid>
 </UserControl>

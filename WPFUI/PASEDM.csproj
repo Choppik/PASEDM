@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HamburgerMenuControl\HamburgerMenuControl.csproj" />
+    <ProjectReference Include="..\ModalControl\ModalControl.csproj" />
   </ItemGroup>
 
 </Project>

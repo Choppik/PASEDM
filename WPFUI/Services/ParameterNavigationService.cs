@@ -4,6 +4,12 @@ using System;
 
 namespace PASEDM.Services
 {
+
+    /// <summary>
+    /// Не используется, но может пригодиться
+    /// </summary>
+    /// <typeparam name="TParameter"></typeparam>
+    /// <typeparam name="TViewModel"></typeparam>
     public class ParameterNavigationService<TParameter, TViewModel>
         where TViewModel : BaseViewModels
     {

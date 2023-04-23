@@ -2,7 +2,6 @@
 using PASEDM.Services;
 using PASEDM.Store;
 using PASEDM.ViewModels.Base;
-using System;
 using System.Windows.Input;
 
 namespace PASEDM.ViewModels

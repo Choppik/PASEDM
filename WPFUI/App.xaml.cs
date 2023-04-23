@@ -21,7 +21,10 @@ namespace PASEDM
             IServiceCollection services = new ServiceCollection();
 
             services.AddSingleton<NavigationStore>();
+            services.AddSingleton<ModalNavigationStore>();
             services.AddSingleton<UserStore>();
+
+            services.AddSingleton<CloseModalNavigationService>();
 
             services.AddSingleton(s => new PASEDMDbContextFactory(CONNECTION_STRING));
 
@@ -46,8 +49,9 @@ namespace PASEDM
                 CreateEntryUserNavigationService(s)));
 
             services.AddTransient(s => new OutgoingViewModel(
-                s.GetRequiredService<UserStore>(),
-                CreateEntryUserNavigationService(s)));
+                CreateCardNavigationService(s)));
+
+            services.AddTransient(CreateCardViewModel);
 
             services.AddTransient(CreateNavigationBarViewModel);
             services.AddSingleton<MainWindowViewModel>();
@@ -110,6 +114,20 @@ namespace PASEDM
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<OutgoingViewModel>(),
                 () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+        private static INavigationService CreateCardNavigationService(IServiceProvider serviceProvider)
+        {
+            return new ModalNavigationService<CreateCardViewModel>(
+                serviceProvider.GetRequiredService<ModalNavigationStore>(),
+                () => serviceProvider.GetRequiredService<CreateCardViewModel>());
+        }
+        private CreateCardViewModel CreateCardViewModel(IServiceProvider serviceProvider)
+        {
+            CompositeNavigationService navigationService = new(
+                serviceProvider.GetRequiredService<CloseModalNavigationService>(),
+                CreateOutgoingNavigationService(serviceProvider));
+
+            return new CreateCardViewModel(navigationService);
         }
         private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)
         {
