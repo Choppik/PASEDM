@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PASEDM.Data;
 
@@ -11,9 +12,11 @@ using PASEDM.Data;
 namespace PASEDM.Migrations
 {
     [DbContext(typeof(PASEDMContext))]
-    partial class PASEDMContextModelSnapshot : ModelSnapshot
+    [Migration("20230423173732_AddAllTable")]
+    partial class AddAllTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +49,10 @@ namespace PASEDM.Migrations
                     b.Property<DateTime>("DateOfFormation")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DocumentID")
+                    b.Property<int>("DocumentID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DocumentsID")
                         .HasColumnType("int");
 
                     b.Property<int?>("EmployeeID")
@@ -151,7 +157,7 @@ namespace PASEDM.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("int");
 
-                    b.Property<string>("TypeDocument")
+                    b.Property<string>("View")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -257,7 +263,9 @@ namespace PASEDM.Migrations
 
                     b.HasOne("PASEDM.Data.DTOs.DocumentDTO", "Document")
                         .WithMany("Cards")
-                        .HasForeignKey("DocumentID");
+                        .HasForeignKey("DocumentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("PASEDM.Data.DTOs.EmployeeDTO", "Employee")
                         .WithMany("Cards")

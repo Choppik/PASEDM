@@ -8,7 +8,7 @@ namespace PASEDM.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<UserDTO> builder)
         {
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.ID).ValueGeneratedOnAdd();
             builder.Property(x => x.UserName).HasMaxLength(50);
             builder.Property(x => x.Password).HasMaxLength(100);
         }

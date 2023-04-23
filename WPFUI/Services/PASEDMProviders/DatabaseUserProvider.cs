@@ -29,7 +29,7 @@ namespace PASEDM.Services.PASEDMProviders
 
         private static User ToUser(UserDTO dto)
         {
-            return new User(dto.UserName, dto.Password, dto.EmployeeID);
+            return new User(dto.UserName, dto.Password, dto.DateOfCreation, dto.EmployeeID);
         }
         public async Task<IEnumerable<User>> GetUser()
         {

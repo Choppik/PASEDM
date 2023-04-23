@@ -28,7 +28,7 @@ namespace PASEDM.Services.PASEDMProviders
 
         private static Employee ToEmployee(EmployeeDTO dto)
         {
-            return new Employee(dto.Id, dto.Name);
+            return new Employee(dto.ID, dto.NumberEmployee ,dto.Name);
         }
     }
 }

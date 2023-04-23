@@ -105,8 +105,9 @@ namespace PASEDM.ViewModels
             {
                 _employeeProvider = new DatabaseEmployeeProvider(_contextFactory);
                 _staff = new ObservableCollection<Employee>();
+                _employee = new Employee(_employeeProvider);
 
-                foreach (var item in await _employeeProvider.GetAllEmployee())
+                foreach (var item in await _employee.GetAllEmployee())
                 {
                     _staff.Add(item);
                 }

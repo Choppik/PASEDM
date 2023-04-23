@@ -1,9 +1,12 @@
-﻿namespace PASEDM.Models
+﻿using System;
+
+namespace PASEDM.Models
 {
     public class User
     {
         public string UserName { get; }
         public string Password { get; }
+        public DateTime DateOfCreation { get; }
         public int? Employee { get; }
 
         public User (string userName)
@@ -15,8 +18,10 @@
         {
             Password = password;
         }
-        public User(string userName, string password, int? employee) : this(userName, password)
+
+        public User(string userName, string password, DateTime dateOfCreation, int? employee) : this(userName, password)
         {
+            DateOfCreation = dateOfCreation;
             Employee = employee;
         }
     }

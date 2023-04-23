@@ -5,6 +5,8 @@ using PASEDM.Services.PASEDMConflictValidator;
 using PASEDM.Services.PASEDMCreator;
 using PASEDM.Services.PASEDMProviders;
 using PASEDM.ViewModels;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -60,10 +62,10 @@ namespace PASEDM.Infrastructure.Command
                 _password = _userCreateViewModel.ReplayPassword;
 
                 MoveUser currentUser = new(_userCreator, _userProvider, _userConflictValidator);
-
                 Employee employee = new(_employeeProvider);
 
                 bool unic = false;
+                DateTime dateTime = DateTime.Now;
 
                 foreach (var user in await currentUser.GetAllNameUsers())
                 {
@@ -84,12 +86,12 @@ namespace PASEDM.Infrastructure.Command
                     {
                         if (item.Name == _userCreateViewModel.Employee.Name)
                         {
-                            _employee = item.Id;
+                            _employee = item.ID;
                             break;
                         }
                     }
 
-                    await currentUser.AddUser(new User(_userName, _password, _employee));
+                    await currentUser.AddUser(new User(_userName, _password, dateTime, _employee));
                     MessageBox.Show("Пользователь создан. Пробуйте войти в аккаунт.");
                 }
             }

@@ -18,19 +18,25 @@ namespace PASEDM.Services.PASEDMCreator
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
-                UserDTO userDTO = ToUserDTO(user);
-
-                context.Users.Add(userDTO);
-                await context.SaveChangesAsync();
+                try
+                {
+                    UserDTO userDTO = ToUserDTO(user);
+                    context.Users.Add(userDTO);
+                }
+                finally
+                { 
+                    await context.SaveChangesAsync();
+                }
             }
         }
 
-        private UserDTO ToUserDTO(User user)
+        private static UserDTO ToUserDTO(User user)
         {
             return new UserDTO()
             {
                 UserName = user.UserName,
                 Password = user.Password,
+                DateOfCreation = user.DateOfCreation,
                 EmployeeID = user.Employee
             };
         }
