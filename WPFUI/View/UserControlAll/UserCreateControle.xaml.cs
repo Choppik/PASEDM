@@ -2,9 +2,9 @@
 
 namespace PASEDM.View.UserControlAll
 {
-    public partial class UserCreatControle : UserControl
+    public partial class UserCreateControle : UserControl
     {
-        public UserCreatControle()
+        public UserCreateControle()
         {
             InitializeComponent();
         }

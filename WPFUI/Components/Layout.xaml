@@ -33,7 +33,7 @@
                 </ControlTemplate>
             </CheckBox.Template>
         </CheckBox>
-        
+
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -47,7 +47,7 @@
                                     FallbackOpenWidth="300"
                                     IsOpen="{Binding IsChecked, ElementName=cbToggleMenu}"
                                     OpenCloseDuration="0:0:0.25">
-                
+
                 <hamburgermenu:HamburgerMenu.Resources>
                     <Style TargetType="hamburgermenu:HamburgerMenuItem">
                         <Setter Property="Padding" Value="20 10"/>
@@ -105,8 +105,8 @@
                     </StackPanel>
                 </hamburgermenu:HamburgerMenu.Content>
             </hamburgermenu:HamburgerMenu>
-            
-            <ContentControl Grid.Column="1"
+
+            <ContentControl Grid.Column="1" Margin="20"
                         Content="{Binding ContentViewModels}"/>
         </Grid>
     </Grid>

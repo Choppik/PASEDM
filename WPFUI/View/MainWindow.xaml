@@ -20,7 +20,7 @@
                     <v:UserEntryControl/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:UserCreateViewModel}">
-                    <v:UserCreatControle/>
+                    <v:UserCreateControle/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:NotificationsViewModel}">
                     <v:PageNotificationsControl/>
