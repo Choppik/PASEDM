@@ -11,6 +11,7 @@
                     </ControlTemplate.Resources>
                     <Grid Background="{TemplateBinding Background}" Visibility="{TemplateBinding IsOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Border
+                            Margin="30"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             BorderBrush="{TemplateBinding BorderBrush}"
@@ -28,7 +29,7 @@
                             </Grid>
                             <Border.Effect>
                                 <DropShadowEffect
-                                    BlurRadius="40"
+                                    BlurRadius="10"
                                     ShadowDepth="0"
                                     Color="#FF20900B" />
                             </Border.Effect>

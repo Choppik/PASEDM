@@ -6,7 +6,6 @@ using PASEDM.Services.PASEDMCreator;
 using PASEDM.Services.PASEDMProviders;
 using PASEDM.ViewModels;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;

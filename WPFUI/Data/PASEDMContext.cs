@@ -14,7 +14,8 @@ namespace PASEDM.Data
         public DbSet<DivisionDTO> Divisions { get; set; }
         public DbSet<RecipientDTO> Recipients { get; set; }
         public DbSet<CaseDTO> Cases { get; set; }
-        public DbSet<DocumentDTO> Documents { get; set; }
+        public DbSet<DocumentTypesDTO> DocumentTypes { get; set; }
+        public DbSet<TaskDTO> Tasks { get; set; }
         public DbSet<CardDTO> Cards { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -24,7 +25,8 @@ namespace PASEDM.Data
             modelBuilder.ApplyConfiguration(new DivisionConfiguration());
             modelBuilder.ApplyConfiguration(new RecipientConfiguration());
             modelBuilder.ApplyConfiguration(new CaseConfiguration());
-            modelBuilder.ApplyConfiguration(new DocumentConfiguration());
+            modelBuilder.ApplyConfiguration(new DocumentTypesConfiguration());
+            modelBuilder.ApplyConfiguration(new TaskConfiguration());
             modelBuilder.ApplyConfiguration(new CardConfiguration());
         }
     }

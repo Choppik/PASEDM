@@ -4,14 +4,12 @@ using PASEDM.Data.DTOs;
 
 namespace PASEDM.Data.Configuration
 {
-    internal class DocumentConfiguration : IEntityTypeConfiguration<DocumentDTO>
+    internal class DocumentTypesConfiguration : IEntityTypeConfiguration<DocumentTypesDTO>
     {
-        public void Configure(EntityTypeBuilder<DocumentDTO> builder)
+        public void Configure(EntityTypeBuilder<DocumentTypesDTO> builder)
         {
             builder.Property(x => x.ID).ValueGeneratedOnAdd();
-            builder.Property(x => x.RegistrationNumber).HasMaxLength(10);
             builder.Property(x => x.Name).HasMaxLength(100);
-            builder.Property(x => x.TypeDocument).HasMaxLength(50);
         }
     }
 }

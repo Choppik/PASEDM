@@ -10,7 +10,6 @@ namespace PASEDM.Data.Configuration
         {
             builder.Property(x => x.ID).ValueGeneratedOnAdd();
             builder.Property(x => x.NumberRecipient).HasMaxLength(10);
-            builder.Property(x => x.GenericTask).HasMaxLength(100);
         }
     }
 }

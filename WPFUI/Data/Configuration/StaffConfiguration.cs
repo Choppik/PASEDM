@@ -11,6 +11,7 @@ namespace PASEDM.Data.Configuration
             builder.Property(x => x.ID).ValueGeneratedOnAdd();
             builder.Property(x => x.NumberEmployee).HasMaxLength(10);
             builder.Property(x => x.Name).HasMaxLength(50);
+            builder.Property(x => x.Mail).HasMaxLength(100);
         }
     }
 }

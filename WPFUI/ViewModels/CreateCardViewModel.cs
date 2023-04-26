@@ -1,37 +1,53 @@
 ﻿using PASEDM.Infrastructure.Command;
 using PASEDM.Services;
 using PASEDM.ViewModels.Base;
+using System;
 using System.Windows.Input;
 
 namespace PASEDM.ViewModels
 {
     public class CreateCardViewModel : BaseViewModels
     {
-        private string _username;
-        public string Username
+        private string _nameCard;
+        private string _numberCard;
+        private DateTime _dateOfFormation;
+        private string _secrecyStamp;
+        private string _summary;
+        private string _condition;
+        public string NameCard
         {
             get
             {
-                return _username;
+                return _nameCard;
             }
             set
             {
-                _username = value;
-                OnPropertyChanged(nameof(Username));
+                _nameCard = value;
+                OnPropertyChanged(nameof(NameCard));
             }
         }
-
-        private string _password;
-        public string Password
+        public string NumberCard
         {
             get
             {
-                return _password;
+                return _numberCard;
             }
             set
             {
-                _password = value;
-                OnPropertyChanged(nameof(Password));
+                _numberCard = value;
+                OnPropertyChanged(nameof(NumberCard));
+            }
+        }
+        public DateTime DateOfFormation
+        {
+            get
+            {
+                return _dateOfFormation;
+            }
+            set
+            {
+                _dateOfFormation = value;
+                OnPropertyChanged(nameof(DateOfFormation));
             }
         }
 

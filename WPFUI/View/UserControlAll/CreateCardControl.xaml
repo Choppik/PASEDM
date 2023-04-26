@@ -14,40 +14,64 @@
         <Style TargetType="TextBox" BasedOn="{StaticResource TextBox_Style}"></Style>
         <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockDefault_Style}"></Style>
     </UserControl.Resources>
-    <Grid
-        MaxWidth="1000"
-        Margin="20"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-        </Grid.ColumnDefinitions>
+    <ScrollViewer>
 
+        <StackPanel
+        Margin="20">
         <TextBlock Style="{StaticResource TextBlockTitle_Style}"
-                   Grid.Row="0"
                    Text="Регистрация карты" 
                    HorizontalAlignment="Left" />
 
-        <StackPanel Grid.Row="1">
-            <StackPanel>
-                <TextBlock Text="Username" />
-                <TextBox materialDesign:HintAssist.Hint="Введите логин" 
+            <TextBlock Text="Название регистрационной карты" />
+                <TextBox materialDesign:HintAssist.Hint="Введите название" 
                          Text="rtj"/>
-                <TextBlock Text="Password" />
-                <TextBox materialDesign:HintAssist.Hint="Введите ethethteн" 
+            <TextBlock Text="Номер регистрационной карты" />
+            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
                          Text="ryjyj"/>
-            </StackPanel>
+            <TextBlock Text="Номер регистрационной карты" />
+            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
+                         Text="ryjyj"/>
+            <TextBlock Text="Номер регистрационной карты" />
+            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
+                         Text="ryjyj"/>
+            <TextBlock Text="Номер регистрационной карты" />
+            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
+                         Text="ryjyj"/>
+            <TextBlock Text="Номер регистрационной карты" />
+            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
+                         Text="ryjyj"/>
+            <TextBlock Text="Номер регистрационной карты" />
+            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
+                         Text="ryjyj"/>
+            <TextBlock Text="Номер регистрационной карты" />
+            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
+                         Text="ryjyj"/>
+            <TextBlock Text="Номер регистрационной карты" />
+            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
+                         Text="ryjyj"/>
+            <TextBlock Text="Номер регистрационной карты" />
+            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
+                         Text="ryjyj"/>
+            <TextBlock Text="Номер регистрационной карты" />
+            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
+                         Text="ryjyj"/>
+            <TextBlock Text="Номер регистрационной карты" />
+            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
+                         Text="ryjyj"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                       HorizontalAlignment="Center"
+                       Command="{Binding NavigateRefundCommand}"
+                       Content="Отправить" />
+                <Button Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       Command="{Binding NavigateRefundCommand}"
+                       Content="Отмена" />
+            </Grid>
         </StackPanel>
-
-        <Button
-            Grid.Row="2"
-            HorizontalAlignment="Center"
-            Command="{Binding NavigateRefundCommand}"
-            Content="Отмена" />
-    </Grid>
+    </ScrollViewer>
 </UserControl>
