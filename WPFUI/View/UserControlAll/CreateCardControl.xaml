@@ -16,48 +16,67 @@
     </UserControl.Resources>
     <ScrollViewer>
 
-        <StackPanel
-        Margin="20">
+        <StackPanel Margin="20">
         <TextBlock Style="{StaticResource TextBlockTitle_Style}"
                    Text="Регистрация карты" 
                    HorizontalAlignment="Left" />
 
             <TextBlock Text="Название регистрационной карты" />
                 <TextBox materialDesign:HintAssist.Hint="Введите название" 
-                         Text="rtj"/>
+                         Text="{Binding NameCard}"/>
             <TextBlock Text="Номер регистрационной карты" />
             <TextBox materialDesign:HintAssist.Hint="Введите номер" 
-                         Text="ryjyj"/>
-            <TextBlock Text="Номер регистрационной карты" />
+                         Text="{Binding NumberCard}"/>
+            <TextBlock Text="Дата создания регистрационной карты" />
             <TextBox materialDesign:HintAssist.Hint="Введите номер" 
+                         Text="{Binding DateOfFormation}"/>
+            <TextBlock Text="Документ" />
+            <TextBox materialDesign:HintAssist.Hint="Добавьте документ" 
+                         Text="документ"/>
+            <TextBlock Text="Регистрационный номер документа" />
+            <TextBox materialDesign:HintAssist.Hint="Введите номер доумента" 
+                         Text="документ"/>
+            <TextBlock Text="Дата создания документа" />
+            <DatePicker IsDropDownOpen="True" SelectedDateFormat="Short" />
+            <TextBlock Text="Вид документа" />
+            <TextBox materialDesign:HintAssist.Hint="Выберите вид документа" 
+                         Text="документ"/>
+            <TextBlock Text="Краткое содержание документа" />
+            <TextBox materialDesign:HintAssist.Hint="Кратко опишите документ" 
                          Text="ryjyj"/>
-            <TextBlock Text="Номер регистрационной карты" />
-            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
+            <TextBlock Text="Гриф секретности" />
+            <ComboBox materialDesign:HintAssist.Hint="Выберите кто вы" 
+                          Margin="0,10,0,0"
+                          materialDesign:HintAssist.Foreground="#FF20900B"
+                          materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
+                          Style="{StaticResource MaterialDesignComboBox}"
+                          ItemsSource="{Binding ListSecrecyStamp}"
+                          SelectedItem="{Binding SecrecyStamp}">
+            </ComboBox>
+            <TextBlock Text="Задача" />
+            <TextBox materialDesign:HintAssist.Hint="Выберите или создайте задачу" 
+                         Text=""/>
+            <TextBlock Text="Исполнитель задачи" />
+            <TextBox materialDesign:HintAssist.Hint="Выберите исполнителя" 
                          Text="ryjyj"/>
-            <TextBlock Text="Номер регистрационной карты" />
-            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
+            <TextBlock Text="Состояние исполнения" />
+            <TextBox materialDesign:HintAssist.Hint="В каком состоянии документ" 
                          Text="ryjyj"/>
-            <TextBlock Text="Номер регистрационной карты" />
-            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
+            <TextBlock Text="Дело N" />
+            <TextBox materialDesign:HintAssist.Hint="Выберите связанное дело" 
                          Text="ryjyj"/>
-            <TextBlock Text="Номер регистрационной карты" />
-            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
+            <TextBlock Text="Получатель" />
+            <TextBox materialDesign:HintAssist.Hint="Выберите кому отослать" 
                          Text="ryjyj"/>
-            <TextBlock Text="Номер регистрационной карты" />
-            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
-                         Text="ryjyj"/>
-            <TextBlock Text="Номер регистрационной карты" />
-            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
-                         Text="ryjyj"/>
-            <TextBlock Text="Номер регистрационной карты" />
-            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
-                         Text="ryjyj"/>
-            <TextBlock Text="Номер регистрационной карты" />
-            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
-                         Text="ryjyj"/>
-            <TextBlock Text="Номер регистрационной карты" />
-            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
-                         Text="ryjyj"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Карту сформировал:" />
+                <TextBlock Grid.Column="1" Text="{Binding UserCreateCard}" />
+            </Grid>
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>

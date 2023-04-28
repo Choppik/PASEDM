@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PASEDM.Data.DTOs
@@ -9,7 +8,7 @@ namespace PASEDM.Data.DTOs
         [Key]
         public int ID {  get; set; }
         public string Name { get; set; }
-        public DateTime ExecutionDate { get; set; }
+        public string ExecutionPeriod { get; set; }
         public ICollection<CardDTO> Cards { get; set; }
     }
 }

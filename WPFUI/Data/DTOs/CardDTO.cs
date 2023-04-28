@@ -7,25 +7,25 @@ namespace PASEDM.Data.DTOs
     {
         [Key]
         public int ID {  get; set; }
-        public int NumberCard { get; set; } //Заполняю номер
-        public int NameCard { get; set; } //Заполняю название
-        public DateTime DateOfFormation { get; set; } //Формируется дата создания карты
-        public string SecrecyStamp { get; set; } //Выбор секретности
-        public string Summary { get; set; } //Краткое содержание документа
-        public string Condition { get; set; } //Выбор состояния исполнения задачи
+        public int NumberCard { get; set; } //Заполняю номер!
+        public int NameCard { get; set; } //Заполняю название!
+        public DateTime DateOfFormation { get; set; } //Формируется дата создания карты!
+        public string SecrecyStamp { get; set; } //Выбор секретности!
+        public string Summary { get; set; } //Краткое содержание документа!
+        public string Condition { get; set; } //Выбор состояния исполнения задачи!
         public string Comment { get; set; } //Комментарий
-        public string FilePath { get; set; } //Путь к файлу
-        public string DocumentRegistrationNumber { get; set; } //Номер добавляемого документа
-        public DateTime DateOfFormationDocument { get; set; } //Дата создания добавляемого документа
-        public int? DocumentTypesID { get; set; } //Вид документа
+        public string FilePath { get; set; } //Путь к файлу!
+        public string DocumentRegistrationNumber { get; set; } //Номер добавляемого документа!
+        public DateTime DateOfFormationDocument { get; set; } //Дата создания добавляемого документа!
+        public int? DocumentTypesID { get; set; } //Вид документа!
         public DocumentTypesDTO TypeDocument { get; set; }
-        public int? TaskID { get; set; } //Выбор задачи
+        public int? TaskID { get; set; } //Выбор задачи!
         public TaskDTO Task { get; set; }
-        public int? CaseID { get; set; } //Выбор дела
+        public int? CaseID { get; set; } //Выбор дела!
         public CaseDTO Case { get; set; }
         public int? UserID { get; set; }//Кто формирует карту
         public UserDTO User { get; set; }
-        public int? EmployeeID { get; set; } //Выбор кто исполняет задачу
+        public int? EmployeeID { get; set; } //Выбор кто исполняет задачу!
         public EmployeeDTO Employee { get; set; }
         public int? RecipientID { get; set; } //Получатель, другой пользователь
         public RecipientDTO Recipient { get; set; }
