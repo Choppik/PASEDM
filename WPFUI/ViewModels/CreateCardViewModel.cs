@@ -1,17 +1,38 @@
 ﻿using PASEDM.Infrastructure.Command;
-using PASEDM.Models;
 using PASEDM.Services;
 using PASEDM.ViewModels.Base;
 using System;
 using System.Collections.Generic;
-using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace PASEDM.ViewModels
 {
     public class CreateCardViewModel : BaseViewModels
     {
-        private readonly List<string> _listSecrecyStamp = new() { "Секретно", "Чрезвычайно секретно", "Не секретно" };
+        private readonly List<string> _listSecrecyStamp = new() 
+        { 
+            "Не секретно",
+            "Секретно", 
+            "Совершенно секретно",
+            "Особая важность"
+        };
+        private readonly List<string> _listTaskStages = new () 
+        { 
+            "Стадия анализа задачи", 
+            "Стадия поиска решения задачи", 
+            "Стадия выполнения задачи", 
+            "Стадия проверки выполненной задачи",
+            "Задача выполнена"
+        };
+        private readonly List<string> _listDocStages = new()
+        {
+            "Поставлен на контроль",
+            "Проверка своевременности доведения до исполнителей",
+            "Проверка и регулирование хода исполнения",
+            "Учет и обобщение результатов контроля исполнения",
+            "Снят с контроля",
+            "Не нуждается в контроле исполнения"
+        };
 
         private string _nameCard;
         private string _numberCard;

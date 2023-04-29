@@ -11,6 +11,7 @@ namespace PASEDM.Data.Configuration
             builder.Property(x => x.ID).ValueGeneratedOnAdd();
             builder.Property(x => x.NameTask).HasMaxLength(50);
             builder.Property(x => x.Contents).HasMaxLength(150);
+            builder.Property(x => x.ConditionTask).HasMaxLength(150);
         }
     }
 }

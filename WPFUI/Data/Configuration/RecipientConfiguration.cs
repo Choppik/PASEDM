@@ -9,7 +9,6 @@ namespace PASEDM.Data.Configuration
         public void Configure(EntityTypeBuilder<RecipientDTO> builder)
         {
             builder.Property(x => x.ID).ValueGeneratedOnAdd();
-            builder.Property(x => x.NumberRecipient).HasMaxLength(10);
         }
     }
 }

@@ -13,10 +13,7 @@ namespace PASEDM.Data.Configuration
             builder.Property(x => x.NameCard).HasMaxLength(50);
             builder.Property(x => x.SecrecyStamp).HasMaxLength(50);
             builder.Property(x => x.Summary).HasMaxLength(50);
-            builder.Property(x => x.Condition).HasMaxLength(50);
             builder.Property(x => x.Comment).HasMaxLength(200);
-            builder.Property(x => x.FilePath).HasMaxLength(200);
-            builder.Property(x => x.DocumentRegistrationNumber).HasMaxLength(15);
         }
     }
 }

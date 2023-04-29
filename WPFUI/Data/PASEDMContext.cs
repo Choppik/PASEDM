@@ -15,6 +15,7 @@ namespace PASEDM.Data
         public DbSet<RecipientDTO> Recipients { get; set; }
         public DbSet<CaseDTO> Cases { get; set; }
         public DbSet<DocumentTypesDTO> DocumentTypes { get; set; }
+        public DbSet<DocumentDTO> Documents { get; set; }
         public DbSet<TaskDTO> Tasks { get; set; }
         public DbSet<CardDTO> Cards { get; set; }
 
@@ -26,6 +27,7 @@ namespace PASEDM.Data
             modelBuilder.ApplyConfiguration(new RecipientConfiguration());
             modelBuilder.ApplyConfiguration(new CaseConfiguration());
             modelBuilder.ApplyConfiguration(new DocumentTypesConfiguration());
+            modelBuilder.ApplyConfiguration(new DocumentConfiguration());
             modelBuilder.ApplyConfiguration(new TaskConfiguration());
             modelBuilder.ApplyConfiguration(new CardConfiguration());
         }

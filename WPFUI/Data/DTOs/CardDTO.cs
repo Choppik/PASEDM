@@ -12,11 +12,9 @@ namespace PASEDM.Data.DTOs
         public DateTime DateOfFormation { get; set; } //Формируется дата создания карты!
         public string SecrecyStamp { get; set; } //Выбор секретности!
         public string Summary { get; set; } //Краткое содержание документа!
-        public string Condition { get; set; } //Выбор состояния исполнения задачи!
         public string Comment { get; set; } //Комментарий
-        public string FilePath { get; set; } //Путь к файлу!
-        public string DocumentRegistrationNumber { get; set; } //Номер добавляемого документа!
-        public DateTime DateOfFormationDocument { get; set; } //Дата создания добавляемого документа!
+        public int? DocumentID { get; set; } //Документ
+        public DocumentDTO Document { get; set; }
         public int? DocumentTypesID { get; set; } //Вид документа!
         public DocumentTypesDTO TypeDocument { get; set; }
         public int? TaskID { get; set; } //Выбор задачи!
