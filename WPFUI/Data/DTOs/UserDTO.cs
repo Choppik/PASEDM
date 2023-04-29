@@ -11,7 +11,7 @@ namespace PASEDM.Data.DTOs
         public string UserName { get; set; }
         public string Password { get; set; }
         public DateTime DateOfCreation { get; set; }
-        public string Admin { get; set; }
+        public string Role { get; set; }
         public int? EmployeeID { get; set; }
         public EmployeeDTO Employee { get; set; }
         public ICollection<RecipientDTO> Recipients { get; set; }

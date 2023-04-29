@@ -1,8 +1,10 @@
 ﻿using PASEDM.Infrastructure.Command;
+using PASEDM.Models;
 using PASEDM.Services;
 using PASEDM.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace PASEDM.ViewModels
@@ -38,13 +40,23 @@ namespace PASEDM.ViewModels
         private string _numberCard;
         private DateTime _dateOfFormation;
         private string _secrecyStamp;
+        private Tasks _currentTask;
+        private Case _currentCase;
         private string _summary;
-        private string _condition;
+        private string _conditionDoc;
+        private string _conditionTask;
         private string _сomment;
+        private ObservableCollection<Tasks> _tasks;
+        private ObservableCollection<Case> _cases;
         private string _filePath;
-        private string _documentRegistrationNumber;
-        private DateTime _FateOfFormationDocument;
+        private string _docName;
+        private string _docRegistrationNumber;
+        private DateTime _dateOfFormationDocument = DateTime.Now;
         public IEnumerable<string> ListSecrecyStamp => _listSecrecyStamp;
+        public IEnumerable<string> ListDocStages => _listDocStages;
+        public IEnumerable<string> ListTaskStages => _listTaskStages;
+        public IEnumerable<Tasks> Tasks => _tasks;
+        public IEnumerable<Case> Case => _cases;
         public string NameCard
         {
             get
@@ -69,18 +81,7 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(NumberCard));
             }
         }
-        public DateTime DateOfFormation
-        {
-            get
-            {
-                return _dateOfFormation;
-            }
-            set
-            {
-                _dateOfFormation = value;
-                OnPropertyChanged(nameof(DateOfFormation));
-            }
-        }
+        public DateTime DateOfFormation => DateTime.Now;
         public string SecrecyStamp
         {
             get
@@ -93,7 +94,114 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(SecrecyStamp));
             }
         }
-
+        public string Comment
+        {
+            get
+            {
+                return _сomment;
+            }
+            set
+            {
+                _сomment = value;
+                OnPropertyChanged(nameof(Comment));
+            }
+        }
+        public string Document
+        {
+            get
+            {
+                return _docName;
+            }
+            set
+            {
+                _docName = value;
+                OnPropertyChanged(nameof(Document));
+            }
+        }
+        public string RegistrationNumber
+        {
+            get
+            {
+                return _docRegistrationNumber;
+            }
+            set
+            {
+                _docRegistrationNumber = value;
+                OnPropertyChanged(nameof(RegistrationNumber));
+            }
+        }
+        public DateTime DateOfFormationDocument
+        {
+            get
+            {
+                return _dateOfFormationDocument;
+            }
+            set
+            {
+                _dateOfFormationDocument = value;
+                OnPropertyChanged(nameof(DateOfFormationDocument));
+            }
+        }
+        public string ConditionDoc
+        {
+            get
+            {
+                return _conditionDoc;
+            }
+            set
+            {
+                _conditionDoc = value;
+                OnPropertyChanged(nameof(ConditionDoc));
+            }
+        }
+        public string ConditionTask
+        {
+            get
+            {
+                return _conditionTask;
+            }
+            set
+            {
+                _conditionTask = value;
+                OnPropertyChanged(nameof(ConditionTask));
+            }
+        }
+        public string Summary
+        {
+            get
+            {
+                return _summary;
+            }
+            set
+            {
+                _summary = value;
+                OnPropertyChanged(nameof(Summary));
+            }
+        }
+        public Tasks CurrentTask
+        {
+            get
+            {
+                return _currentTask;
+            }
+            set
+            {
+                _currentTask = value;
+                OnPropertyChanged(nameof(CurrentTask));
+            }
+        }
+        public Case CurrentCase
+        {
+            get
+            {
+                return _currentCase;
+            }
+            set
+            {
+                _currentCase = value;
+                OnPropertyChanged(nameof(CurrentCase));
+            }
+        }
         public ICommand NavigateRefundCommand { get; }
 
         public CreateCardViewModel(INavigationService navigationService)

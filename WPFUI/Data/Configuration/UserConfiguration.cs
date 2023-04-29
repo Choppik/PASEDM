@@ -11,7 +11,7 @@ namespace PASEDM.Data.Configuration
             builder.Property(x => x.ID).ValueGeneratedOnAdd();
             builder.Property(x => x.UserName).HasMaxLength(50);
             builder.Property(x => x.Password).HasMaxLength(100);
-            builder.Property(x => x.Admin).HasMaxLength(3);
+            builder.Property(x => x.Role).HasMaxLength(20);
         }
     }
 }

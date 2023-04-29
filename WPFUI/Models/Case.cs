@@ -2,7 +2,7 @@
 {
     public class Case
     {
-        public int NumberCase { get; }
+        public string NumberCase { get; }
         public string Desription { get; }
     }
 }

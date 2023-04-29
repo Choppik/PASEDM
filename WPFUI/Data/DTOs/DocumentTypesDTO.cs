@@ -8,7 +8,6 @@ namespace PASEDM.Data.DTOs
         [Key]
         public int ID {  get; set; }
         public string Name { get; set; }
-        public string ExecutionPeriod { get; set; }
         public ICollection<CardDTO> Cards { get; set; }
     }
 }

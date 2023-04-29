@@ -10,13 +10,11 @@ namespace PASEDM.Data.DTOs
         public int NumberCard { get; set; } //Заполняю номер!
         public int NameCard { get; set; } //Заполняю название!
         public DateTime DateOfFormation { get; set; } //Формируется дата создания карты!
-        public string SecrecyStamp { get; set; } //Выбор секретности!
-        public string Summary { get; set; } //Краткое содержание документа!
         public string Comment { get; set; } //Комментарий
         public int? DocumentID { get; set; } //Документ
         public DocumentDTO Document { get; set; }
         public int? DocumentTypesID { get; set; } //Вид документа!
-        public DocumentTypesDTO TypeDocument { get; set; }
+        public DocumentTypesDTO DocumentTypes { get; set; }
         public int? TaskID { get; set; } //Выбор задачи!
         public TaskDTO Task { get; set; }
         public int? CaseID { get; set; } //Выбор дела!

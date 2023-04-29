@@ -9,7 +9,7 @@ namespace PASEDM.Data.Configuration
         public void Configure(EntityTypeBuilder<CaseDTO> builder)
         {
             builder.Property(x => x.ID).ValueGeneratedOnAdd();
-            builder.Property(x => x.NumberCase).HasMaxLength(10);
+            builder.Property(x => x.NumberCase).HasMaxLength(50);
             builder.Property(x => x.Desription).HasMaxLength(100);
         }
     }

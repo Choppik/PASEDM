@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PASEDM.Data.DTOs
 {
-    public class CaseDTO
+    public class TermDTO
     {
         [Key]
         public int ID { get; set; }
-        public string NumberCase { get; set; }
-        public string Desription { get; set; }
-        public ICollection<CardDTO> Cards { get; set; }
+        public string NameTerm { get; set; }
+        public string Term { get; set; }
+        public ICollection<DocumentDTO> Documents { get; set; }
     }
 }

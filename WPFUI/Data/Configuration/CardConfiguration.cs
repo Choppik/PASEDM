@@ -11,8 +11,6 @@ namespace PASEDM.Data.Configuration
             builder.Property(x => x.ID).ValueGeneratedOnAdd();
             builder.Property(x => x.NumberCard).HasMaxLength(10);
             builder.Property(x => x.NameCard).HasMaxLength(50);
-            builder.Property(x => x.SecrecyStamp).HasMaxLength(50);
-            builder.Property(x => x.Summary).HasMaxLength(50);
             builder.Property(x => x.Comment).HasMaxLength(200);
         }
     }

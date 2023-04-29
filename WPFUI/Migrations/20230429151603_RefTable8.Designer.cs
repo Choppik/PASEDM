@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PASEDM.Data;
 
@@ -11,9 +12,11 @@ using PASEDM.Data;
 namespace PASEDM.Migrations
 {
     [DbContext(typeof(PASEDMContext))]
-    partial class PASEDMContextModelSnapshot : ModelSnapshot
+    [Migration("20230429151603_RefTable8")]
+    partial class RefTable8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,6 +64,11 @@ namespace PASEDM.Migrations
                     b.Property<int?>("RecipientID")
                         .HasColumnType("int");
 
+                    b.Property<string>("SecrecyStamp")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<int?>("TaskID")
                         .HasColumnType("int");
 
@@ -99,10 +107,9 @@ namespace PASEDM.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("NumberCase")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("NumberCase")
+                        .HasMaxLength(10)
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -160,11 +167,6 @@ namespace PASEDM.Migrations
                     b.Property<int>("RegistrationNumber")
                         .HasMaxLength(20)
                         .HasColumnType("int");
-
-                    b.Property<string>("SecrecyStamp")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Summary")
                         .IsRequired()

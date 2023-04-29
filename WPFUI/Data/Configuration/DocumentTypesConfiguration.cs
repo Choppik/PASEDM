@@ -10,7 +10,6 @@ namespace PASEDM.Data.Configuration
         {
             builder.Property(x => x.ID).ValueGeneratedOnAdd();
             builder.Property(x => x.Name).HasMaxLength(100);
-            builder.Property(x => x.ExecutionPeriod).HasMaxLength(50);
         }
     }
 }

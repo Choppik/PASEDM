@@ -17,35 +17,40 @@
     <ScrollViewer>
 
         <StackPanel Margin="20">
-        <TextBlock Style="{StaticResource TextBlockTitle_Style}"
+            <TextBlock Style="{StaticResource TextBlockTitle_Style}"
                    Text="Регистрация карты" 
                    HorizontalAlignment="Left" />
 
             <TextBlock Text="Название регистрационной карты" />
-                <TextBox materialDesign:HintAssist.Hint="Введите название" 
+            <TextBox materialDesign:HintAssist.Hint="Введите название" 
                          Text="{Binding NameCard}"/>
             <TextBlock Text="Номер регистрационной карты" />
             <TextBox materialDesign:HintAssist.Hint="Введите номер" 
                          Text="{Binding NumberCard}"/>
-            <TextBlock Text="Дата создания регистрационной карты" />
-            <TextBox materialDesign:HintAssist.Hint="Введите номер" 
-                         Text="{Binding DateOfFormation}"/>
             <TextBlock Text="Документ" />
-            <TextBox materialDesign:HintAssist.Hint="Добавьте документ" 
-                         Text="документ"/>
+            <TextBox materialDesign:HintAssist.Hint="Добавьте документ" />
             <TextBlock Text="Регистрационный номер документа" />
             <TextBox materialDesign:HintAssist.Hint="Введите номер доумента" 
-                         Text="документ"/>
+                         Text="{Binding RegistrationNumber}"/>
             <TextBlock Text="Дата создания документа" />
-            <DatePicker IsDropDownOpen="True" SelectedDateFormat="Short" />
+            <DatePicker IsTodayHighlighted="True" SelectedDate="{Binding DateOfFormationDocument}"/>
+            <TextBlock Text="Состояние исполнения документа" />
+            <ComboBox materialDesign:HintAssist.Hint="Состояние исполнения" 
+                          Margin="0,10,0,0"
+                          materialDesign:HintAssist.Foreground="#FF20900B"
+                          materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
+                          Style="{StaticResource MaterialDesignComboBox}"
+                          ItemsSource="{Binding ListDocStages}"
+                          SelectedItem="{Binding ConditionDoc}">
+            </ComboBox>
             <TextBlock Text="Вид документа" />
             <TextBox materialDesign:HintAssist.Hint="Выберите вид документа" 
                          Text="документ"/>
             <TextBlock Text="Краткое содержание документа" />
             <TextBox materialDesign:HintAssist.Hint="Кратко опишите документ" 
-                         Text="ryjyj"/>
+                         Text="{Binding Summary}"/>
             <TextBlock Text="Гриф секретности" />
-            <ComboBox materialDesign:HintAssist.Hint="Выберите кто вы" 
+            <ComboBox materialDesign:HintAssist.Hint="Гриф" 
                           Margin="0,10,0,0"
                           materialDesign:HintAssist.Foreground="#FF20900B"
                           materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
@@ -54,27 +59,63 @@
                           SelectedItem="{Binding SecrecyStamp}">
             </ComboBox>
             <TextBlock Text="Задача" />
-            <TextBox materialDesign:HintAssist.Hint="Выберите или создайте задачу" 
-                         Text=""/>
+            <ComboBox materialDesign:HintAssist.Hint="Выберите или создайте задачу" 
+                          Margin="0,10,0,0"
+                          materialDesign:HintAssist.Foreground="#FF20900B"
+                          materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
+                          Style="{StaticResource MaterialDesignComboBox}"
+                          ItemsSource="{Binding Tasks}"
+                          SelectedItem="{Binding CurrentTask}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding NameTask}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox materialDesign:HintAssist.Hint="Состояние исполнения задачи" 
+                          Margin="0,10,0,0"
+                          materialDesign:HintAssist.Foreground="#FF20900B"
+                          materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
+                          Style="{StaticResource MaterialDesignComboBox}"
+                          ItemsSource="{Binding ListTaskStages}"
+                          SelectedItem="{Binding ConditionTask}">
+            </ComboBox>
             <TextBlock Text="Исполнитель задачи" />
             <TextBox materialDesign:HintAssist.Hint="Выберите исполнителя" 
                          Text="ryjyj"/>
-            <TextBlock Text="Состояние исполнения" />
-            <TextBox materialDesign:HintAssist.Hint="В каком состоянии документ" 
-                         Text="ryjyj"/>
             <TextBlock Text="Дело N" />
-            <TextBox materialDesign:HintAssist.Hint="Выберите связанное дело" 
-                         Text="ryjyj"/>
+            <ComboBox materialDesign:HintAssist.Hint="Выберите связанное дело" 
+                          Margin="0,10,0,0"
+                          materialDesign:HintAssist.Foreground="#FF20900B"
+                          materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
+                          Style="{StaticResource MaterialDesignComboBox}"
+                          ItemsSource="{Binding Case}"
+                          SelectedItem="{Binding CurrentCase}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding NumberCase}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <TextBlock Text="Получатель" />
             <TextBox materialDesign:HintAssist.Hint="Выберите кому отослать" 
                          Text="ryjyj"/>
+            <TextBlock Text="Комментарий" />
+            <TextBox materialDesign:HintAssist.Hint="..." 
+                         Text="{Binding Comment}"/>
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Карту сформировал:" />
-                <TextBlock Grid.Column="1" Text="{Binding UserCreateCard}" />
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Карту сформировал:" />
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding UserCreateCard}" />
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Создана:" />
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding DateOfFormation, Mode=OneWay}"/>
             </Grid>
 
             <Grid>
