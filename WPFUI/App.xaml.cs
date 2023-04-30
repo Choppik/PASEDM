@@ -127,7 +127,10 @@ namespace PASEDM
                 serviceProvider.GetRequiredService<CloseModalNavigationService>(),
                 CreateOutgoingNavigationService(serviceProvider));
 
-            return new CreateCardViewModel(navigationService);
+            return new CreateCardViewModel(
+                navigationService, 
+                serviceProvider.GetRequiredService<UserStore>(),
+                serviceProvider.GetRequiredService<PASEDMDbContextFactory>());
         }
         private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)
         {

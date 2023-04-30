@@ -6,7 +6,6 @@ namespace PASEDM.Models
     {
         public int RegistrationNumber { get; }
         public string Name { get; }
-        public string TypeDocument { get; }
         public DateTime DateOfFormation { get; }
     }
 }

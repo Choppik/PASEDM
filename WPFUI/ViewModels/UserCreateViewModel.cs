@@ -14,13 +14,17 @@ namespace PASEDM.ViewModels
 {
     public class UserCreateViewModel : BaseViewModels
     {
+        private IEmployeeProvider _employeeProvider;
+
+        private PASEDMDbContextFactory _contextFactory;
+
+        private ObservableCollection<Employee> _staff;
+
+        private Employee _employee;
+
         private string _userName;
         private string _password;
         private string _replayPassword;
-        private ObservableCollection<Employee> _staff;
-        private Employee _employee;
-        private IEmployeeProvider _employeeProvider;
-        private PASEDMDbContextFactory _contextFactory;
         private bool _isLoading;
         public bool IsLoading
         {
@@ -99,8 +103,6 @@ namespace PASEDM.ViewModels
         }
         private async void GetStaff()
         {
-            IsLoading = true;
-
             try
             {
                 _employeeProvider = new DatabaseEmployeeProvider(_contextFactory);
@@ -116,8 +118,6 @@ namespace PASEDM.ViewModels
             {
                 MessageBox.Show("Что-то не так", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            IsLoading = false;
         }
     }
 }
