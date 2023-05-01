@@ -70,6 +70,8 @@ namespace PASEDM
             DbContextOptions options = new DbContextOptionsBuilder().UseSqlServer(CONNECTION_STRING).Options;
             using (PASEDMContext dbContext = new(options))
             {
+                //dbContext.Database.EnsureDeleted();
+                //dbContext.Database.EnsureCreated();
                 dbContext.Database.Migrate();
             }
 

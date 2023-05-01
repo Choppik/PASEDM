@@ -9,27 +9,26 @@ using System.Threading.Tasks;
 
 namespace PASEDM.Services.PASEDMProviders
 {
-    public class DatabaseEmployeeProvider : IEmployeeProvider
+    public class DatabaseDeadlinesProvider : IDeadlinesProvider
     {
         private readonly PASEDMDbContextFactory _dbContextFactory;
 
-        public DatabaseEmployeeProvider(PASEDMDbContextFactory dbContextFactory)
+        public DatabaseDeadlinesProvider(PASEDMDbContextFactory dbContextFactory)
         {
             _dbContextFactory = dbContextFactory;
         }
-        public async Task<IEnumerable<Employee>> GetAllEmployee()
+        public async Task<IEnumerable<Deadlines>> GetAllDeadlines()
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
-                IEnumerable<EmployeeDTO> employeeDTOs = await context.Staff.Include(u => u.Division).ToListAsync();
+                IEnumerable<TermDTO> termDTOs = await context.Deadlines.ToListAsync();
 
-                return employeeDTOs.Select(u => ToEmployee(u));
+                return termDTOs.Select(u => ToDeadlines(u));
             }
         }
-
-        private static Employee ToEmployee(EmployeeDTO dto)
+        private static Deadlines ToDeadlines(TermDTO dto)
         {
-            return new Employee(dto.ID, dto.NumberEmployee, dto.FullName, dto.Mail, dto.Admittance, dto.Division.Division);
+            return new Deadlines(dto.ID, dto.NameTerm, dto.Term);
         }
     }
 }

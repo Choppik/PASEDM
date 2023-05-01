@@ -12,8 +12,8 @@ using PASEDM.Data;
 namespace PASEDM.Migrations
 {
     [DbContext(typeof(PASEDMContext))]
-    [Migration("20230423173732_AddAllTable")]
-    partial class AddAllTable
+    [Migration("20230501134902_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,21 +41,20 @@ namespace PASEDM.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("Condition")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<DateTime>("DateOfFormation")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DocumentID")
+                    b.Property<int?>("DocumentID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DocumentsID")
+                    b.Property<int?>("DocumentTypesID")
                         .HasColumnType("int");
 
                     b.Property<int?>("EmployeeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NameCard")
+                        .HasMaxLength(50)
                         .HasColumnType("int");
 
                     b.Property<int>("NumberCard")
@@ -65,15 +64,8 @@ namespace PASEDM.Migrations
                     b.Property<int?>("RecipientID")
                         .HasColumnType("int");
 
-                    b.Property<string>("SecrecyStamp")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Summary")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int?>("TaskID")
+                        .HasColumnType("int");
 
                     b.Property<int?>("UserID")
                         .HasColumnType("int");
@@ -84,9 +76,13 @@ namespace PASEDM.Migrations
 
                     b.HasIndex("DocumentID");
 
+                    b.HasIndex("DocumentTypesID");
+
                     b.HasIndex("EmployeeID");
 
                     b.HasIndex("RecipientID");
+
+                    b.HasIndex("TaskID");
 
                     b.HasIndex("UserID");
 
@@ -106,9 +102,10 @@ namespace PASEDM.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("NumberCase")
-                        .HasMaxLength(10)
-                        .HasColumnType("int");
+                    b.Property<string>("NumberCase")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("ID");
 
@@ -145,26 +142,64 @@ namespace PASEDM.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<DateTime>("DateOfFormation")
+                    b.Property<string>("ConditionDoc")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("DateCreateDoc")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("NameDoc")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("RegistrationNumber")
+                        .HasMaxLength(20)
+                        .HasColumnType("int");
+
+                    b.Property<string>("SecrecyStamp")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Summary")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int?>("TermID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("TermID");
+
+                    b.ToTable("Documents");
+                });
+
+            modelBuilder.Entity("PASEDM.Data.DTOs.DocumentTypesDTO", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("RegistrationNumber")
-                        .HasMaxLength(10)
-                        .HasColumnType("int");
-
-                    b.Property<string>("View")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.HasKey("ID");
 
-                    b.ToTable("Documents");
+                    b.ToTable("DocumentTypes");
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.EmployeeDTO", b =>
@@ -175,13 +210,23 @@ namespace PASEDM.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int?>("DivisionID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("Admittance")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("DivisionID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Mail")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("NumberEmployee")
                         .HasMaxLength(10)
@@ -202,26 +247,70 @@ namespace PASEDM.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<string>("GenericTask")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("NumberRecipient")
-                        .HasMaxLength(10)
+                    b.Property<int?>("TaskID")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("TermOfExecution")
-                        .HasColumnType("datetime2");
 
                     b.Property<int?>("UserID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
+                    b.HasIndex("TaskID");
+
                     b.HasIndex("UserID");
 
                     b.ToTable("Recipients");
+                });
+
+            modelBuilder.Entity("PASEDM.Data.DTOs.TaskDTO", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("ConditionTask")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Contents")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("NameTask")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Tasks");
+                });
+
+            modelBuilder.Entity("PASEDM.Data.DTOs.TermDTO", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("NameTerm")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Term")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Deadlines");
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.UserDTO", b =>
@@ -243,6 +332,11 @@ namespace PASEDM.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -263,9 +357,11 @@ namespace PASEDM.Migrations
 
                     b.HasOne("PASEDM.Data.DTOs.DocumentDTO", "Document")
                         .WithMany("Cards")
-                        .HasForeignKey("DocumentID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DocumentID");
+
+                    b.HasOne("PASEDM.Data.DTOs.DocumentTypesDTO", "DocumentTypes")
+                        .WithMany("Cards")
+                        .HasForeignKey("DocumentTypesID");
 
                     b.HasOne("PASEDM.Data.DTOs.EmployeeDTO", "Employee")
                         .WithMany("Cards")
@@ -275,6 +371,10 @@ namespace PASEDM.Migrations
                         .WithMany("Cards")
                         .HasForeignKey("RecipientID");
 
+                    b.HasOne("PASEDM.Data.DTOs.TaskDTO", "Task")
+                        .WithMany("Cards")
+                        .HasForeignKey("TaskID");
+
                     b.HasOne("PASEDM.Data.DTOs.UserDTO", "User")
                         .WithMany("Cards")
                         .HasForeignKey("UserID");
@@ -283,11 +383,24 @@ namespace PASEDM.Migrations
 
                     b.Navigation("Document");
 
+                    b.Navigation("DocumentTypes");
+
                     b.Navigation("Employee");
 
                     b.Navigation("Recipient");
 
+                    b.Navigation("Task");
+
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PASEDM.Data.DTOs.DocumentDTO", b =>
+                {
+                    b.HasOne("PASEDM.Data.DTOs.TermDTO", "Term")
+                        .WithMany("Documents")
+                        .HasForeignKey("TermID");
+
+                    b.Navigation("Term");
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.EmployeeDTO", b =>
@@ -301,9 +414,15 @@ namespace PASEDM.Migrations
 
             modelBuilder.Entity("PASEDM.Data.DTOs.RecipientDTO", b =>
                 {
+                    b.HasOne("PASEDM.Data.DTOs.TaskDTO", "Task")
+                        .WithMany("Recipients")
+                        .HasForeignKey("TaskID");
+
                     b.HasOne("PASEDM.Data.DTOs.UserDTO", "User")
                         .WithMany("Recipients")
                         .HasForeignKey("UserID");
+
+                    b.Navigation("Task");
 
                     b.Navigation("User");
                 });
@@ -332,6 +451,11 @@ namespace PASEDM.Migrations
                     b.Navigation("Cards");
                 });
 
+            modelBuilder.Entity("PASEDM.Data.DTOs.DocumentTypesDTO", b =>
+                {
+                    b.Navigation("Cards");
+                });
+
             modelBuilder.Entity("PASEDM.Data.DTOs.EmployeeDTO", b =>
                 {
                     b.Navigation("Cards");
@@ -342,6 +466,18 @@ namespace PASEDM.Migrations
             modelBuilder.Entity("PASEDM.Data.DTOs.RecipientDTO", b =>
                 {
                     b.Navigation("Cards");
+                });
+
+            modelBuilder.Entity("PASEDM.Data.DTOs.TaskDTO", b =>
+                {
+                    b.Navigation("Cards");
+
+                    b.Navigation("Recipients");
+                });
+
+            modelBuilder.Entity("PASEDM.Data.DTOs.TermDTO", b =>
+                {
+                    b.Navigation("Documents");
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.UserDTO", b =>

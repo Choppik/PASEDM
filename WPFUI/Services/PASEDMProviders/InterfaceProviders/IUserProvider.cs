@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PASEDM.Services.PASEDMProviders
+namespace PASEDM.Services.PASEDMProviders.InterfaceProviders
 {
     public interface IUserProvider
     {

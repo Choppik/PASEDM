@@ -1,4 +1,4 @@
-﻿using PASEDM.Services.PASEDMProviders;
+﻿using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

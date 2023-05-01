@@ -9,27 +9,26 @@ using System.Threading.Tasks;
 
 namespace PASEDM.Services.PASEDMProviders
 {
-    public class DatabaseEmployeeProvider : IEmployeeProvider
+    public class DatabaseDocTypProvider : IDocTypProvider
     {
         private readonly PASEDMDbContextFactory _dbContextFactory;
 
-        public DatabaseEmployeeProvider(PASEDMDbContextFactory dbContextFactory)
+        public DatabaseDocTypProvider(PASEDMDbContextFactory dbContextFactory)
         {
             _dbContextFactory = dbContextFactory;
         }
-        public async Task<IEnumerable<Employee>> GetAllEmployee()
+        public async Task<IEnumerable<DocumentTypes>> GetAllDocTyp()
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
-                IEnumerable<EmployeeDTO> employeeDTOs = await context.Staff.Include(u => u.Division).ToListAsync();
+                IEnumerable<DocumentTypesDTO> docTypDTOs = await context.DocumentTypes.ToListAsync();
 
-                return employeeDTOs.Select(u => ToEmployee(u));
+                return docTypDTOs.Select(u => ToDocTyp(u));
             }
         }
-
-        private static Employee ToEmployee(EmployeeDTO dto)
+        private static DocumentTypes ToDocTyp(DocumentTypesDTO dto)
         {
-            return new Employee(dto.ID, dto.NumberEmployee, dto.FullName, dto.Mail, dto.Admittance, dto.Division.Division);
+            return new DocumentTypes(dto.ID, dto.Name);
         }
     }
 }

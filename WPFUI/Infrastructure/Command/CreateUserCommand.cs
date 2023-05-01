@@ -4,6 +4,7 @@ using PASEDM.Models;
 using PASEDM.Services.PASEDMConflictValidator;
 using PASEDM.Services.PASEDMCreator;
 using PASEDM.Services.PASEDMProviders;
+using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using PASEDM.ViewModels;
 using System;
 using System.Text.RegularExpressions;
@@ -60,7 +61,7 @@ namespace PASEDM.Infrastructure.Command
                 _userName = _userCreateViewModel.UserName;
                 _password = _userCreateViewModel.ReplayPassword;
 
-                MoveUser currentUser = new(_userCreator, _userProvider, _userConflictValidator);
+                User currentUser = new(_userCreator, _userProvider, _userConflictValidator);
                 Employee employee = new(_employeeProvider);
 
                 bool unic = false;
@@ -83,14 +84,14 @@ namespace PASEDM.Infrastructure.Command
                 {
                     foreach (var item  in await employee.GetAllEmployee())
                     {
-                        if (item.Name == _userCreateViewModel.Employee.Name)
+                        if (item.FullName == _userCreateViewModel.Employee.FullName)
                         {
                             _employee = item.ID;
                             break;
                         }
                     }
 
-                    await currentUser.AddUser(new User(_userName, _password, dateTime, _employee));
+                    await currentUser.AddUser(new User(_userName, _password, dateTime, "user", _employee));
                     MessageBox.Show("Пользователь создан. Пробуйте войти в аккаунт.");
                 }
             }

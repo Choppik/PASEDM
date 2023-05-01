@@ -3,6 +3,7 @@ using PASEDM.Infrastructure.Command;
 using PASEDM.Models;
 using PASEDM.Services;
 using PASEDM.Services.PASEDMProviders;
+using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using PASEDM.Store;
 using PASEDM.ViewModels.Base;
 using System;
@@ -17,6 +18,10 @@ namespace PASEDM.ViewModels
     {
         private IEmployeeProvider _employeeProvider;
         private ITasksProvider _tasksProvider;
+        private ICasesProvider _casesProvider;
+        private IDocTypProvider _docTypProvider;
+        private IUserProvider _userProvider;
+        private IDeadlinesProvider _deadlinesProvider;
 
         private readonly UserStore _userStore;
 
@@ -57,7 +62,7 @@ namespace PASEDM.ViewModels
         private Tasks _currentTask;
         private Case _currentCase;
         private DocumentTypes _currentDocTypes;
-        private Recipient _currentRecipient;
+        private User _currentRecipient;
         private Employee _currentExecutor;
         private Deadlines _currentTerm;
         //private User _userCreateCard;
@@ -71,7 +76,7 @@ namespace PASEDM.ViewModels
         private string _summary;
         private string _conditionDoc;
         private string _conditionTask;
-        private string _сomment;
+        private string _comment;
         //private string _filePath;
         private string _docName;
         private string _docRegistrationNumber;
@@ -79,11 +84,11 @@ namespace PASEDM.ViewModels
         public IEnumerable<string> ListDocStages => _listDocStages;
         public IEnumerable<string> ListTaskStages => _listTaskStages;
         public IEnumerable<Tasks> Tasks => _tasks; //2
-        public IEnumerable<Case> Case => _cases;
-        public IEnumerable<DocumentTypes> DocTypes => _docTypes;
-        public IEnumerable<User> Recipients => _recipients;
+        public IEnumerable<Case> Case => _cases; //3
+        public IEnumerable<DocumentTypes> DocTypes => _docTypes; //4
+        public IEnumerable<User> Recipients => _recipients; //5
         public IEnumerable<Employee> Executors => _executors; //1
-        public IEnumerable<Deadlines> Deadlines => _deadlines;
+        public IEnumerable<Deadlines> Deadlines => _deadlines; //6
 
         public Tasks CurrentTask
         {
@@ -121,7 +126,7 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(CurrentCase));
             }
         }
-        public Recipient CurrentRecipient
+        public User CurrentRecipient
         {
             get
             {
@@ -213,11 +218,11 @@ namespace PASEDM.ViewModels
         {
             get
             {
-                return _сomment;
+                return _comment;
             }
             set
             {
-                _сomment = value;
+                _comment = value;
                 OnPropertyChanged(nameof(Comment));
             }
         }
@@ -292,6 +297,10 @@ namespace PASEDM.ViewModels
 
             GetExecutors();
             GetTasks();
+            GetCases();
+            GetDocTyp();
+            GetRecipient();
+            GetDeadlines();
 
             NavigateRefundCommand = new NavigateCommand(navigationService);
         }
@@ -324,6 +333,78 @@ namespace PASEDM.ViewModels
                 foreach (var item in await _currentTask.GetAllTasks())
                 {
                     _tasks.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private async void GetCases()
+        {
+            try
+            {
+                _casesProvider = new DatabaseCaseProvider(_contextFactory);
+                _cases = new ObservableCollection<Case>();
+                _currentCase = new Case(_casesProvider);
+
+                foreach (var item in await _currentCase.GetAllCase())
+                {
+                    _cases.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private async void GetDocTyp()
+        {
+            try
+            {
+                _docTypProvider = new DatabaseDocTypProvider(_contextFactory);
+                _docTypes = new ObservableCollection<DocumentTypes>();
+                _currentDocTypes = new DocumentTypes(_docTypProvider);
+
+                foreach (var item in await _currentDocTypes.GetAllDocTyp())
+                {
+                    _docTypes.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private async void GetRecipient()
+        {
+            try
+            {
+                _userProvider = new DatabaseUserProvider(_contextFactory);
+                _recipients = new ObservableCollection<User>();
+                _currentRecipient = new User(_userProvider);
+
+                foreach (var item in await _currentRecipient.GetAllNameUsers())
+                {
+                    _recipients.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private async void GetDeadlines()
+        {
+            try
+            {
+                _deadlinesProvider = new DatabaseDeadlinesProvider(_contextFactory);
+                _deadlines = new ObservableCollection<Deadlines>();
+                _currentTerm = new Deadlines(_deadlinesProvider);
+
+                foreach (var item in await _currentTerm.GetAllDeadlines())
+                {
+                    _deadlines.Add(item);
                 }
             }
             catch (Exception)

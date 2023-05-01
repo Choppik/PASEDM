@@ -3,6 +3,7 @@ using PASEDM.Infrastructure.Command;
 using PASEDM.Models;
 using PASEDM.Services;
 using PASEDM.Services.PASEDMProviders;
+using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using PASEDM.ViewModels.Base;
 using System;
 using System.Collections.Generic;

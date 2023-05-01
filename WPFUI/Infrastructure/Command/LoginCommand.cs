@@ -9,6 +9,7 @@ using PASEDM.Services;
 using PASEDM.Services.PASEDMCreator;
 using PASEDM.Services.PASEDMProviders;
 using PASEDM.Services.PASEDMConflictValidator;
+using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 
 namespace PASEDM.Infrastructure.Command
 {
@@ -51,7 +52,7 @@ namespace PASEDM.Infrastructure.Command
                 _userName = _userEntryViewModel.UserName;
                 _password = _userEntryViewModel.Password;
 
-                MoveUser currentUser = new(_userCreator, _userProvider, _userConflictValidator);
+                User currentUser = new(_userCreator, _userProvider, _userConflictValidator);
 
                 bool unic = false;
 

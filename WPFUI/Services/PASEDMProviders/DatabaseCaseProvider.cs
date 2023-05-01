@@ -9,27 +9,26 @@ using System.Threading.Tasks;
 
 namespace PASEDM.Services.PASEDMProviders
 {
-    public class DatabaseEmployeeProvider : IEmployeeProvider
+    public class DatabaseCaseProvider : ICasesProvider
     {
         private readonly PASEDMDbContextFactory _dbContextFactory;
 
-        public DatabaseEmployeeProvider(PASEDMDbContextFactory dbContextFactory)
+        public DatabaseCaseProvider(PASEDMDbContextFactory dbContextFactory)
         {
             _dbContextFactory = dbContextFactory;
         }
-        public async Task<IEnumerable<Employee>> GetAllEmployee()
+        public async Task<IEnumerable<Case>> GetAllCase()
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
-                IEnumerable<EmployeeDTO> employeeDTOs = await context.Staff.Include(u => u.Division).ToListAsync();
+                IEnumerable<CaseDTO> caseDTOs = await context.Cases.ToListAsync();
 
-                return employeeDTOs.Select(u => ToEmployee(u));
+                return caseDTOs.Select(u => ToCase(u));
             }
         }
-
-        private static Employee ToEmployee(EmployeeDTO dto)
+        private static Case ToCase(CaseDTO dto)
         {
-            return new Employee(dto.ID, dto.NumberEmployee, dto.FullName, dto.Mail, dto.Admittance, dto.Division.Division);
+            return new Case(dto.ID, dto.NumberCase, dto.Desription);
         }
     }
 }
