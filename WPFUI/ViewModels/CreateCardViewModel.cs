@@ -79,7 +79,7 @@ namespace PASEDM.ViewModels
         private string _comment;
         //private string _filePath;
         private string _docName;
-        private string _docRegistrationNumber;
+        private int _docRegistrationNumber;
         public IEnumerable<string> ListSecrecyStamp => _listSecrecyStamp;
         public IEnumerable<string> ListDocStages => _listDocStages;
         public IEnumerable<string> ListTaskStages => _listTaskStages;
@@ -177,7 +177,9 @@ namespace PASEDM.ViewModels
             }
         }
 
-        public string UserCreateCard => _userStore.CurrentUser.UserName;
+        public User CurrentUser => _userStore.CurrentUser;
+
+        public string UserCreateCard => CurrentUser.UserName;
         public string NameCard
         {
             get
@@ -238,7 +240,7 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(Document));
             }
         }
-        public string RegistrationNumber
+        public int RegistrationNumber
         {
             get
             {
@@ -386,7 +388,7 @@ namespace PASEDM.ViewModels
                 _recipients = new ObservableCollection<User>();
                 _currentRecipient = new User(_userProvider);
 
-                foreach (var item in await _currentRecipient.GetAllNameUsers())
+                foreach (var item in await _currentRecipient.GetNameUsers())
                 {
                     _recipients.Add(item);
                 }

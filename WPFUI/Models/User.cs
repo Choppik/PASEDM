@@ -1,5 +1,4 @@
 ﻿using PASEDM.Services.PASEDMConflictValidator;
-using PASEDM.Services.PASEDMCreator;
 using PASEDM.Services.PASEDMCreator.InterfaceCreator;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using System;
@@ -13,7 +12,7 @@ namespace PASEDM.Models
         private readonly IUserCreator _userCreator;
         private readonly IUserProvider _userProviders;
         private readonly IUserConflictValidator _userConflictValidator;
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public DateTime DateOfCreation { get; set; }
@@ -21,18 +20,24 @@ namespace PASEDM.Models
         public int? EmployeeID { get; set; }
 
         public User() { }
-        public User (string userName)
+        public User(string userName)
         {
             UserName = userName;
         }
+        public User (int id, string userName) : this(userName)
+        {
+            Id = id;
+        }
 
-        public User(string userName, string password) : this(userName)
+        public User(int id, string userName, string password) : this(id, userName)
         {
             Password = password;
         }
 
-        public User(string userName, string password, DateTime dateOfCreation, string role, int? employeeID) : this(userName, password)
+        public User(string userName, string password, DateTime dateOfCreation, string role, int? employeeID)
         {
+            UserName = userName;
+            Password = password;
             DateOfCreation = dateOfCreation;
             Role = role;
             EmployeeID = employeeID;
@@ -48,6 +53,11 @@ namespace PASEDM.Models
         public User(IUserProvider userProviders)
         {
             _userProviders = userProviders;
+        }
+
+        public User(IUserCreator userCreator)
+        {
+            _userCreator = userCreator;
         }
 
         /// <summary>
@@ -76,7 +86,7 @@ namespace PASEDM.Models
         {
             return await _userProviders.GetAllUser();
         }
-        public async Task<IEnumerable<User>> GetAllNameUsers()
+        public async Task<IEnumerable<User>> GetNameUsers()
         {
             return await _userProviders.GetUser();
         }

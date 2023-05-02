@@ -68,7 +68,7 @@ namespace PASEDM.Infrastructure.Command
                 bool unic = false;
                 DateTime dateTime = DateTime.Now;
 
-                foreach (var user in await currentUser.GetAllNameUsers())
+                foreach (var user in await currentUser.GetNameUsers())
                 {
                     if (user.UserName == _userName)
                     {

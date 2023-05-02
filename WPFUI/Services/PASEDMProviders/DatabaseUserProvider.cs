@@ -41,9 +41,9 @@ namespace PASEDM.Services.PASEDMProviders
                 return userDTOs.Select(u => ToNameUser(u));
             }
         }
-        private static User ToNameUser(UserDTO dTO)
+        private static User ToNameUser(UserDTO dto)
         {
-            return new User(dTO.UserName);
+            return new User(dto.ID, dto.UserName);
         }
     }
 }
