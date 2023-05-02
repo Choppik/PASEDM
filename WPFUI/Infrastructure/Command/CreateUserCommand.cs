@@ -3,6 +3,7 @@ using PASEDM.Infrastructure.Command.Base;
 using PASEDM.Models;
 using PASEDM.Services.PASEDMConflictValidator;
 using PASEDM.Services.PASEDMCreator;
+using PASEDM.Services.PASEDMCreator.InterfaceCreator;
 using PASEDM.Services.PASEDMProviders;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using PASEDM.ViewModels;
@@ -92,6 +93,7 @@ namespace PASEDM.Infrastructure.Command
                     }
 
                     await currentUser.AddUser(new User(_userName, _password, dateTime, "user", _employee));
+                    //await currentUser.AddUser(new User { UserName = _userName, Password = _password, DateOfCreation = dateTime, Role = "user", EmployeeID = _employee });
                     MessageBox.Show("Пользователь создан. Пробуйте войти в аккаунт.");
                 }
             }

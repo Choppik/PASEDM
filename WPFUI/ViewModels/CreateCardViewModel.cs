@@ -83,12 +83,12 @@ namespace PASEDM.ViewModels
         public IEnumerable<string> ListSecrecyStamp => _listSecrecyStamp;
         public IEnumerable<string> ListDocStages => _listDocStages;
         public IEnumerable<string> ListTaskStages => _listTaskStages;
-        public IEnumerable<Tasks> Tasks => _tasks; //2
-        public IEnumerable<Case> Case => _cases; //3
-        public IEnumerable<DocumentTypes> DocTypes => _docTypes; //4
-        public IEnumerable<User> Recipients => _recipients; //5
-        public IEnumerable<Employee> Executors => _executors; //1
-        public IEnumerable<Deadlines> Deadlines => _deadlines; //6
+        public IEnumerable<Tasks> Tasks => _tasks;
+        public IEnumerable<Case> Case => _cases;
+        public IEnumerable<DocumentTypes> DocTypes => _docTypes;
+        public IEnumerable<User> Recipients => _recipients;
+        public IEnumerable<Employee> Executors => _executors;
+        public IEnumerable<Deadlines> Deadlines => _deadlines;
 
         public Tasks CurrentTask
         {
@@ -288,6 +288,7 @@ namespace PASEDM.ViewModels
         }
 
         public ICommand NavigateRefundCommand { get; }
+        public ICommand CreateCardCommand { get; }
 
         public CreateCardViewModel(INavigationService navigationService, UserStore userStore, PASEDMDbContextFactory deferredContextFactory)
         {
@@ -303,6 +304,7 @@ namespace PASEDM.ViewModels
             GetDeadlines();
 
             NavigateRefundCommand = new NavigateCommand(navigationService);
+            CreateCardCommand = new CreateCardCommand(this, deferredContextFactory);
         }
         private async void GetExecutors()
         {

@@ -1,5 +1,6 @@
 ﻿using PASEDM.Services.PASEDMConflictValidator;
 using PASEDM.Services.PASEDMCreator;
+using PASEDM.Services.PASEDMCreator.InterfaceCreator;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,14 @@ namespace PASEDM.Models
         private readonly IUserCreator _userCreator;
         private readonly IUserProvider _userProviders;
         private readonly IUserConflictValidator _userConflictValidator;
-        public int ID { get; }
-        public string UserName { get; }
-        public string Password { get; }
-        public DateTime DateOfCreation { get; }
-        public string Role { get; }
-        public int? EmployeeID { get; }
+        public int ID { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public DateTime DateOfCreation { get; set; }
+        public string Role { get; set; }
+        public int? EmployeeID { get; set; }
 
+        public User() { }
         public User (string userName)
         {
             UserName = userName;

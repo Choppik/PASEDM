@@ -4,15 +4,16 @@ namespace PASEDM.Models
 {
     public class Card
     {
-        public int NumberCard { get; } //Заполняю номер
-        public int NameCard { get; } //Заполняю название
-        public DateTime DateOfFormation { get; } //Формируется дата создания карты
-        public string SecrecyStamp { get; } //Выбор секретности
-        public string Summary { get; } //Краткое содержание документа
-        public string Condition { get; } //Выбор состояния исполнения задачи
-        public string Comment { get; } //Комментарий
-        public string FilePath { get; } //Путь к файлу
-        public string DocumentRegistrationNumber { get; } //Номер добавляемого документа
-        public DateTime DateOfFormationDocument { get; } //Дата создания добавляемого документа
+        public int Id { get; }
+        public int NumberCard { get; }
+        public int NameCard { get; }
+        public DateTime DateOfFormation { get; }
+        public string Comment { get; }
+        public int? DocumentID { get; }
+        public int? DocumentTypesID { get; }
+        public int? CaseID { get; }
+        public int? UserID { get; }
+        public int? EmployeeID { get; }
+        public int? RecipientID { get; }
     }
 }

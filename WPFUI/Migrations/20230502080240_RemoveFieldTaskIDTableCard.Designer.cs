@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PASEDM.Data;
 
@@ -11,9 +12,11 @@ using PASEDM.Data;
 namespace PASEDM.Migrations
 {
     [DbContext(typeof(PASEDMContext))]
-    partial class PASEDMContextModelSnapshot : ModelSnapshot
+    [Migration("20230502080240_RemoveFieldTaskIDTableCard")]
+    partial class RemoveFieldTaskIDTableCard
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

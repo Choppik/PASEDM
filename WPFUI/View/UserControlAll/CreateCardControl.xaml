@@ -173,7 +173,7 @@
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"
                        HorizontalAlignment="Center"
-                       Command="{Binding NavigateRefundCommand}"
+                       Command="{Binding CreateCardCommand}"
                        Content="Отправить" />
                 <Button Grid.Column="1"
                        HorizontalAlignment="Center"

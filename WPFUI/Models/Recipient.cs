@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace PASEDM.Models
+﻿namespace PASEDM.Models
 {
     public class Recipient
     {
-        public int NumberRecipient { get; }
-        public string GenericTask { get; }
-        public DateTime TermOfExecution { get; }
+        public int Id { get; }
+        public int? TaskID { get; }
+        public int? UserID { get; }
     }
 }
