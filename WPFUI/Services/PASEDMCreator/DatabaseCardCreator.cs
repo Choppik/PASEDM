@@ -35,7 +35,6 @@ namespace PASEDM.Services.PASEDMCreator
         {
             return new CardDTO()
             {
-                ID = card.Id,
                 NumberCard = card.NumberCard,
                 NameCard = card.NameCard,
                 DateOfFormation = card.DateOfFormation,

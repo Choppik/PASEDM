@@ -29,8 +29,6 @@ namespace PASEDM.Infrastructure.Command
         private IUserProvider _userProvider;
         private IUserConflictValidator _userConflictValidator;
 
-        private IEmployeeProvider _employeeProvider;
-
         public CreateUserCommand(
             UserCreateViewModel userGreatViewModel, 
             PASEDMDbContextFactory deferredContextFactory)
@@ -44,8 +42,6 @@ namespace PASEDM.Infrastructure.Command
             _userCreator = new DatabaseUserCreator(_deferredContextFactory);
             _userProvider = new DatabaseUserProvider(_deferredContextFactory);
             _userConflictValidator = new DatabaseUserConflictValidator(_deferredContextFactory);
-
-            _employeeProvider = new DatabaseEmployeeProvider(_deferredContextFactory);
 
             if (_userCreateViewModel.UserName != null && 
                 _userCreateViewModel.UserName.Length <= 50 &&
@@ -63,38 +59,21 @@ namespace PASEDM.Infrastructure.Command
                 _password = _userCreateViewModel.ReplayPassword;
 
                 User currentUser = new(_userCreator, _userProvider, _userConflictValidator);
-                Employee employee = new(_employeeProvider);
 
-                bool unic = false;
                 DateTime dateTime = DateTime.Now;
 
-                foreach (var user in await currentUser.GetNameUsers())
+                var userDB = await currentUser.GetUser(new(_userName));
+
+                if(userDB)
                 {
-                    if (user.UserName == _userName)
-                    {
-                        MessageBox.Show("Данное имя не уникально.");
-                        unic = false;
-                        break;
-                    }
-                    else
-                    {
-                        unic = true;
-                    }
-                }
-                if (unic == true)
-                {
-                    foreach (var item  in await employee.GetAllEmployee())
-                    {
-                        if (item.FullName == _userCreateViewModel.Employee.FullName)
-                        {
-                            _employee = item.ID;
-                            break;
-                        }
-                    }
+                    _employee = _userCreateViewModel.Employee.ID;
 
                     await currentUser.AddUser(new User(_userName, _password, dateTime, "user", _employee));
-                    //await currentUser.AddUser(new User { UserName = _userName, Password = _password, DateOfCreation = dateTime, Role = "user", EmployeeID = _employee });
                     MessageBox.Show("Пользователь создан. Пробуйте войти в аккаунт.");
+                }
+                else
+                {
+                    MessageBox.Show("Данное имя не уникально.");
                 }
             }
             else

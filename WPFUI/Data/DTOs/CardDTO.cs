@@ -8,7 +8,7 @@ namespace PASEDM.Data.DTOs
         [Key]
         public int ID {  get; set; }
         public int NumberCard { get; set; }
-        public int NameCard { get; set; }
+        public string NameCard { get; set; }
         public DateTime DateOfFormation { get; set; }
         public string Comment { get; set; }
         public int? DocumentID { get; set; }

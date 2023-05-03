@@ -29,7 +29,7 @@ namespace PASEDM.Services.PASEDMProviders
 
         private static Tasks ToTasks(TaskDTO dto)
         {
-            return new Tasks(dto.NameTask, dto.Contents);
+            return new Tasks(dto.ID, dto.NameTask, dto.Contents);
         }
     }
 }

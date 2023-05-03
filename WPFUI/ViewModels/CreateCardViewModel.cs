@@ -71,7 +71,7 @@ namespace PASEDM.ViewModels
         private DateTime _dateOfFormationDocument = DateTime.Now;
 
         private string _nameCard;
-        private string _numberCard;
+        private int _numberCard;
         private string _secrecyStamp;
         private string _summary;
         private string _conditionDoc;
@@ -192,7 +192,7 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(NameCard));
             }
         }
-        public string NumberCard
+        public int NumberCard
         {
             get
             {
@@ -388,7 +388,7 @@ namespace PASEDM.ViewModels
                 _recipients = new ObservableCollection<User>();
                 _currentRecipient = new User(_userProvider);
 
-                foreach (var item in await _currentRecipient.GetNameUsers())
+                foreach (var item in await _currentRecipient.GetAllUsers())
                 {
                     _recipients.Add(item);
                 }

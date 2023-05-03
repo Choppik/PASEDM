@@ -6,7 +6,7 @@ namespace PASEDM.Data.DTOs
     public class RecipientDTO
     {
         [Key]
-        public int ID {  get; set; }
+        public int ID { get; set; }
         public int? TaskID { get; set; }
         public TaskDTO Task { get; set; }
         public int? UserID { get; set; }

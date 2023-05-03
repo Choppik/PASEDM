@@ -30,20 +30,18 @@ namespace PASEDM.Services.PASEDMProviders
 
         private static User ToUser(UserDTO dto)
         {
-            return new User(dto.UserName, dto.Password, dto.DateOfCreation, dto.Role, dto.EmployeeID);
+            return new User(dto.ID, dto.UserName, dto.Password, dto.DateOfCreation, dto.Role, dto.EmployeeID);
         }
-        public async Task<IEnumerable<User>> GetUser()
+        public async Task<bool> GetUser(User user)
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
-                IEnumerable<UserDTO> userDTOs = await context.Users.ToListAsync();
+                UserDTO userDTO = await context.Users
+                    .Where(u => u.UserName == user.UserName)
+                    .FirstOrDefaultAsync();
 
-                return userDTOs.Select(u => ToNameUser(u));
+                return userDTO is null;
             }
-        }
-        private static User ToNameUser(UserDTO dto)
-        {
-            return new User(dto.ID, dto.UserName);
         }
     }
 }

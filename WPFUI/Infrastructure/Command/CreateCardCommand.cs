@@ -22,7 +22,7 @@ namespace PASEDM.Infrastructure.Command
         private DateTime _dateOfFormationDocument;
 
         private string _nameCard;
-        private string _numberCard;
+        private int _numberCard;
         private string _secrecyStamp;
         private string _summary;
         private string _conditionDoc;
@@ -60,7 +60,12 @@ namespace PASEDM.Infrastructure.Command
             _cardCreator = new DatabaseCardCreator(_deferredContextFactory);
 
             Document document = new(_documentCreator);
+            Recipient recipient = new(_recipientCreator);
+            Card card = new(_cardCreator);
 
+            _numberCard = _createCardViewModel.NumberCard;
+            _nameCard = _createCardViewModel.NameCard;
+            _dateOfFormation = _createCardViewModel.DateOfFormation;
             _docName = _createCardViewModel.Document;
             _docRegistrationNumber = _createCardViewModel.RegistrationNumber;
             _dateOfFormationDocument = _createCardViewModel.DateOfFormationDocument;
@@ -74,11 +79,16 @@ namespace PASEDM.Infrastructure.Command
             _case = _createCardViewModel.CurrentCase;
             _documentType = _createCardViewModel.CurrentDocTypes;
             _executor = _createCardViewModel.CurrentExecutor;
-            _dateOfFormation = _createCardViewModel.DateOfFormation;
             _createCardUser = _createCardViewModel.CurrentUser;
             _comment = _createCardViewModel.Comment;
 
             await document.AddDoc(new Document(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _conditionDoc, _secrecyStamp, _filePath, _term.ID));
+            await recipient.AddRecipient(new Recipient(_task.Id, _recipient.Id));
+
+            var docDB = await document.GetDoc(new(_docName));
+            //var recipientDB = await recipient.GetRecipient(new(_docName));
+
+            //await card.CreateCard(new Card(_numberCard, _nameCard, _dateOfFormation, _comment, docDB.Id, _documentType.ID, _case.ID, _createCardUser.Id, _executor.ID, recipientDB.Id));
             MessageBox.Show("Пользователь создан. Пробуйте войти в аккаунт.");
         }
     }

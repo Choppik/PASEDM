@@ -5,6 +5,6 @@ namespace PASEDM.Services.PASEDMCreator.InterfaceCreator
 {
     public interface IRecipientCreator
     {
-        Task CreateRecipient(Recipient recipient);
+        Task AddRecipient(Recipient recipient);
     }
 }

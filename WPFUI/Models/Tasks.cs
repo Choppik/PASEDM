@@ -13,12 +13,14 @@ namespace PASEDM.Models
             _tasksProviders = tasksProviders;
         }
 
-        public Tasks(string nameTask, string contents)
+        public Tasks(int id, string nameTask, string contents)
         {
+            Id = id;
             NameTask = nameTask;
             Contents = contents;
         }
 
+        public int Id { get; }
         public string NameTask { get; }
         public string Contents { get; }
         public Task<IEnumerable<Tasks>> GetAllTasks()

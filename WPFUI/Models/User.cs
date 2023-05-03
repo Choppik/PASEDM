@@ -4,6 +4,7 @@ using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace PASEDM.Models
 {
@@ -41,6 +42,11 @@ namespace PASEDM.Models
             DateOfCreation = dateOfCreation;
             Role = role;
             EmployeeID = employeeID;
+        }
+        public User(int id, string userName, string password, DateTime dateOfCreation, string role, int? employeeID) 
+            : this(userName, password, dateOfCreation, role, employeeID)
+        {
+            Id = id;
         }
 
         public User(IUserCreator userCreator, IUserProvider userProviders, IUserConflictValidator userConflictValidator)
@@ -86,9 +92,9 @@ namespace PASEDM.Models
         {
             return await _userProviders.GetAllUser();
         }
-        public async Task<IEnumerable<User>> GetNameUsers()
+        public async Task<bool> GetUser(User user)
         {
-            return await _userProviders.GetUser();
+            return await _userProviders.GetUser(user);
         }
     }
 }

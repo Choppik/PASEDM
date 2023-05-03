@@ -15,7 +15,7 @@ namespace PASEDM.Services.PASEDMCreator
             _dbContextFactory = dbContextFactory;
         }
 
-        public async Task CreateRecipient(Recipient recipient)
+        public async Task AddRecipient(Recipient recipient)
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {

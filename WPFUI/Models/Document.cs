@@ -3,7 +3,6 @@ using PASEDM.Services.PASEDMCreator.InterfaceCreator;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using System;
 using System.Collections.Generic;
-using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
 namespace PASEDM.Models
@@ -26,6 +25,10 @@ namespace PASEDM.Models
         public Document(int id, string nameDoc)
         {
             Id = id;
+            NameDoc = nameDoc;
+        }
+        public Document(string nameDoc)
+        {
             NameDoc = nameDoc;
         }
 
