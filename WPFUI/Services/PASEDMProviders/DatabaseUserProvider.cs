@@ -32,7 +32,7 @@ namespace PASEDM.Services.PASEDMProviders
         {
             return new User(dto.ID, dto.UserName, dto.Password, dto.DateOfCreation, dto.Role, dto.EmployeeID);
         }
-        public async Task<bool> GetUser(User user)
+        public async Task<bool> GetUserBool(User user)
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
@@ -42,6 +42,26 @@ namespace PASEDM.Services.PASEDMProviders
 
                 return userDTO is null;
             }
+        }
+        public async Task<User> GetUser(User user)
+        {
+            using (PASEDMContext context = _dbContextFactory.CreateDbContext())
+            {
+                UserDTO userDTO = await context.Users
+                    .Where(u => u.UserName == user.UserName)
+                    .FirstOrDefaultAsync();
+
+                if (userDTO == null)
+                {
+                    return null;
+                }
+
+                return ToDefiniteUser(userDTO);
+            }
+        }
+        private static User ToDefiniteUser(UserDTO dto)
+        {
+            return new User(dto.ID, dto.UserName);
         }
     }
 }

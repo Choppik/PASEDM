@@ -62,7 +62,7 @@ namespace PASEDM.Infrastructure.Command
 
                 DateTime dateTime = DateTime.Now;
 
-                var userDB = await currentUser.GetUser(new(_userName));
+                var userDB = await currentUser.GetUserBool(new(_userName));
 
                 if(userDB)
                 {

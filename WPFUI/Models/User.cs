@@ -92,7 +92,11 @@ namespace PASEDM.Models
         {
             return await _userProviders.GetAllUser();
         }
-        public async Task<bool> GetUser(User user)
+        public async Task<bool> GetUserBool(User user)
+        {
+            return await _userProviders.GetUserBool(user);
+        }
+        public async Task<User> GetUser(User user)
         {
             return await _userProviders.GetUser(user);
         }

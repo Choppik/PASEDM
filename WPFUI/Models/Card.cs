@@ -13,11 +13,10 @@ namespace PASEDM.Models
             _cardCreator = cardCreator;
         }
 
-        public Card(int numberCard, string nameCard, DateTime dateOfFormation, string comment, int? documentID, int? documentTypesID, int? caseID, int? userID, int? employeeID, int? recipientID)
+        public Card(int numberCard, string nameCard, string comment, int? documentID, int? documentTypesID, int? caseID, int? userID, int? employeeID, int? recipientID)
         {
             NumberCard = numberCard;
             NameCard = nameCard;
-            DateOfFormation = dateOfFormation;
             Comment = comment;
             DocumentID = documentID;
             DocumentTypesID = documentTypesID;
@@ -30,7 +29,6 @@ namespace PASEDM.Models
         public int Id { get; }
         public int NumberCard { get; }
         public string NameCard { get; }
-        public DateTime DateOfFormation { get; }
         public string Comment { get; }
         public int? DocumentID { get; }
         public int? DocumentTypesID { get; }

@@ -1,5 +1,7 @@
-﻿using PASEDM.Services.PASEDMCreator.InterfaceCreator;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using PASEDM.Services.PASEDMCreator.InterfaceCreator;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,33 +17,35 @@ namespace PASEDM.Models
             _recipientCreator = recipientCreator;
         }
 
-        public Recipient(int? taskID, int? userID)
+        public Recipient(DateTime dateOfReceipt, int? taskID, int? userID)
         {
+            DateOfReceipt = dateOfReceipt;
             TaskID = taskID;
             UserID = userID;
-        }
-
-        public Recipient(int id, int? taskID, int? userID)
-        {
-            Id = id;
-            TaskID = taskID;
-            UserID = userID;
-        }
-        public Recipient(int id, string user)
-        {
-            Id = id;
-            User = user;
         }
 
         public Recipient(IRecipientProvider recipientProvider)
         {
             _recipientProvider = recipientProvider;
         }
+        public Recipient(DateTime dateOfReceipt, int userID)
+        {
+            DateOfReceipt = dateOfReceipt;
+            UserID = userID;
+        }
+
+        public Recipient(int id, DateTime dateOfReceipt, int? taskID, int? userID)
+        {
+            Id = id;
+            DateOfReceipt = dateOfReceipt;
+            TaskID = taskID;
+            UserID = userID;
+        }
 
         public int Id { get; }
+        public DateTime DateOfReceipt { get; }
         public int? TaskID { get; }
         public int? UserID { get; }
-        public string User { get; }
 
         public async Task AddRecipient(Recipient recipient)
         {

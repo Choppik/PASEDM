@@ -13,7 +13,7 @@ namespace PASEDM.ViewModels
     public class NotificationsViewModel : BaseViewModels
     {
         private readonly UserStore _user;
-        public string Name => _user.CurrentUser?.UserName;
+        public string? Name => _user.CurrentUser.UserName;
         public ICommand NavigateHomeCommand { get; }
         public NotificationsViewModel(UserStore userStore, INavigationService homeNavigationService)
         {

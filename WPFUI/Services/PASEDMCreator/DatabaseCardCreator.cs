@@ -37,7 +37,6 @@ namespace PASEDM.Services.PASEDMCreator
             {
                 NumberCard = card.NumberCard,
                 NameCard = card.NameCard,
-                DateOfFormation = card.DateOfFormation,
                 Comment = card.Comment,
                 DocumentID = card.DocumentID,
                 DocumentTypesID = card.DocumentTypesID,

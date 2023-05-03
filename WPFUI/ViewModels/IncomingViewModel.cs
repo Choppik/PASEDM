@@ -9,7 +9,7 @@ namespace PASEDM.ViewModels
     public class IncomingViewModel : BaseViewModels
     {
         private readonly UserStore _user;
-        public string Name => _user.CurrentUser?.UserName;
+        public string Name => _user.CurrentUser.UserName;
         public ICommand NavigateHomeCommand { get; }
         public IncomingViewModel(UserStore userStore, INavigationService homeNavigationService)
         {

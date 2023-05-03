@@ -4,6 +4,7 @@ using PASEDM.Models;
 using PASEDM.Services.PASEDMConflictValidator;
 using PASEDM.Services.PASEDMCreator;
 using PASEDM.Services.PASEDMCreator.InterfaceCreator;
+using PASEDM.Services.PASEDMProviders;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using PASEDM.ViewModels;
 using System;
@@ -12,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Provider;
 using System.Xml.Linq;
 
 namespace PASEDM.Infrastructure.Command
@@ -47,6 +49,10 @@ namespace PASEDM.Infrastructure.Command
         private IRecipientCreator _recipientCreator;
         private ICardCreator _cardCreator;
 
+        private IDocProvider _docProvider;
+        private IRecipientProvider _recipientProvider;
+        private IUserProvider _userProvider;
+
         public CreateCardCommand(CreateCardViewModel createCardViewModel, PASEDMDbContextFactory deferredContextFactory)
         {
             _createCardViewModel = createCardViewModel;
@@ -59,9 +65,17 @@ namespace PASEDM.Infrastructure.Command
             _recipientCreator = new DatabaseRecipientCreator(_deferredContextFactory);
             _cardCreator = new DatabaseCardCreator(_deferredContextFactory);
 
+            _docProvider = new DatabaseDocProvider(_deferredContextFactory);
+            _recipientProvider = new DatabaseRecipientProvider(_deferredContextFactory);
+            _userProvider = new DatabaseUserProvider(_deferredContextFactory);
+
             Document document = new(_documentCreator);
             Recipient recipient = new(_recipientCreator);
             Card card = new(_cardCreator);
+
+            Document document1 = new(_docProvider);
+            Recipient recipient1 = new(_recipientProvider);
+            User user = new(_userProvider);
 
             _numberCard = _createCardViewModel.NumberCard;
             _nameCard = _createCardViewModel.NameCard;
@@ -83,13 +97,14 @@ namespace PASEDM.Infrastructure.Command
             _comment = _createCardViewModel.Comment;
 
             await document.AddDoc(new Document(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _conditionDoc, _secrecyStamp, _filePath, _term.ID));
-            await recipient.AddRecipient(new Recipient(_task.Id, _recipient.Id));
+            await recipient.AddRecipient(new Recipient(_dateOfFormation, _task.Id, _recipient.Id));
 
-            var docDB = await document.GetDoc(new(_docName));
-            //var recipientDB = await recipient.GetRecipient(new(_docName));
+            var docDB = await document1.GetDoc(new(_docName));
+            var recipientDB = await recipient1.GetRecipient(new(_dateOfFormation, _recipient.Id));
+            var userDB = await user.GetUser(new(_createCardUser.UserName));
 
-            //await card.CreateCard(new Card(_numberCard, _nameCard, _dateOfFormation, _comment, docDB.Id, _documentType.ID, _case.ID, _createCardUser.Id, _executor.ID, recipientDB.Id));
-            MessageBox.Show("Пользователь создан. Пробуйте войти в аккаунт.");
+            await card.CreateCard(new Card(_numberCard, _nameCard, _comment, docDB.Id, _documentType.ID, _case.ID, userDB.Id, _executor.ID, recipientDB.Id));
+            MessageBox.Show("Карта создана");
         }
     }
 }

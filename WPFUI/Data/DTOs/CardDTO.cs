@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PASEDM.Data.DTOs
 {
@@ -9,7 +8,6 @@ namespace PASEDM.Data.DTOs
         public int ID {  get; set; }
         public int NumberCard { get; set; }
         public string NameCard { get; set; }
-        public DateTime DateOfFormation { get; set; }
         public string Comment { get; set; }
         public int? DocumentID { get; set; }
         public DocumentDTO Document { get; set; }

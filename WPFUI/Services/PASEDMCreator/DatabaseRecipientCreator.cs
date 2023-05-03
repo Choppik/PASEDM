@@ -36,6 +36,7 @@ namespace PASEDM.Services.PASEDMCreator
             return new RecipientDTO()
             {
                 ID = recipient.Id,
+                DateOfReceipt = recipient.DateOfReceipt,
                 TaskID = recipient.TaskID,
                 UserID = recipient.UserID
             };

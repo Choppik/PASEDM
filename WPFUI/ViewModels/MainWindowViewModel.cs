@@ -1,6 +1,5 @@
 ﻿using PASEDM.Store;
 using PASEDM.ViewModels.Base;
-using System;
 
 namespace PASEDM.ViewModels
 {

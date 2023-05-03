@@ -28,14 +28,15 @@ namespace PASEDM.Services.PASEDMProviders
         }
         private static Recipient ToRecipient(RecipientDTO dto)
         {
-            return new Recipient(dto.ID, dto.TaskID, dto.UserID);
+            return new Recipient(dto.ID, dto.DateOfReceipt, dto.TaskID, dto.UserID);
         }
         public async Task<Recipient> GetRecipient(Recipient recipient)
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
-                RecipientDTO recipientDTO = await context.Recipients.Include(u => u.User)
-                    .Where(u => u.User.UserName == recipient.User)
+                RecipientDTO recipientDTO = await context.Recipients
+                    .Where(u => u.UserID == recipient.UserID)
+                    .Where(u => u.DateOfReceipt == recipient.DateOfReceipt)
                     .FirstOrDefaultAsync();
 
                 if (recipientDTO == null)

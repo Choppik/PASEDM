@@ -7,6 +7,7 @@ namespace PASEDM.Services.PASEDMProviders.InterfaceProviders
     public interface IUserProvider
     {
         Task<IEnumerable<User>> GetAllUser();
-        Task<bool> GetUser(User user);
+        Task<bool> GetUserBool(User user);
+        Task<User> GetUser(User user);
     }
 }

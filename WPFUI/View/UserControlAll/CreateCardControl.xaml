@@ -28,7 +28,8 @@
             <TextBox materialDesign:HintAssist.Hint="Введите номер" 
                          Text="{Binding NumberCard}"/>
             <TextBlock Text="Документ" />
-            <TextBox materialDesign:HintAssist.Hint="Добавьте документ" />
+            <TextBox materialDesign:HintAssist.Hint="Добавьте документ" 
+                     Text="{Binding Document}"/>
             <TextBlock Text="Регистрационный номер документа" />
             <TextBox materialDesign:HintAssist.Hint="Введите номер доумента" 
                          Text="{Binding RegistrationNumber}"/>
