@@ -15,18 +15,22 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Исходящие документы"/>
 
         <TextBox Grid.Row="1" Text="Поиск"/>
 
-        <ListBox Grid.Row="2">
-            <ListBoxItem Content="Текст"></ListBoxItem>
-        </ListBox>
+        <ListView Grid.Row="2" ItemsSource="{Binding Cards}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding NameCard}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>

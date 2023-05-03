@@ -4,7 +4,6 @@ using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 
 namespace PASEDM.Models
 {

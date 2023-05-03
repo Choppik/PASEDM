@@ -8,13 +8,8 @@ using PASEDM.Services.PASEDMProviders;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using PASEDM.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Automation.Provider;
-using System.Xml.Linq;
 
 namespace PASEDM.Infrastructure.Command
 {
