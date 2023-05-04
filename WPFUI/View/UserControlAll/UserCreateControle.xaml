@@ -70,6 +70,10 @@
                                                 materialDesign:HintAssist.Hint="Повторите пароль">
                 </components:BindablePasswordBox>
 
+                <CheckBox IsChecked="{Binding IsChecked}" Height="auto" 
+                          Background="#FF20900B"
+                          Content="Поставьте отметку, если вы администратор"/>
+                
                 <Button Content="Создать"
                         HorizontalAlignment="Center"
                         Command="{Binding CreateUserCommand}"/>

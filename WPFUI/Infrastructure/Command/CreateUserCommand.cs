@@ -21,6 +21,8 @@ namespace PASEDM.Infrastructure.Command
         private string _userName;
         private string _password;
         private int _employee;
+        private int _role;
+        private int _roleID;
 
         private readonly UserCreateViewModel _userCreateViewModel;
         private readonly PASEDMDbContextFactory _deferredContextFactory;
@@ -28,6 +30,8 @@ namespace PASEDM.Infrastructure.Command
         private IUserCreator _userCreator;
         private IUserProvider _userProvider;
         private IUserConflictValidator _userConflictValidator;
+
+        private IRoleProvider _roleProvider;
 
         public CreateUserCommand(
             UserCreateViewModel userGreatViewModel, 
@@ -42,6 +46,8 @@ namespace PASEDM.Infrastructure.Command
             _userCreator = new DatabaseUserCreator(_deferredContextFactory);
             _userProvider = new DatabaseUserProvider(_deferredContextFactory);
             _userConflictValidator = new DatabaseUserConflictValidator(_deferredContextFactory);
+
+            _roleProvider = new DatabaseRoleProvider(_deferredContextFactory);
 
             if (_userCreateViewModel.UserName != null && 
                 _userCreateViewModel.UserName.Length <= 50 &&
@@ -58,17 +64,30 @@ namespace PASEDM.Infrastructure.Command
                 _userName = _userCreateViewModel.UserName;
                 _password = _userCreateViewModel.ReplayPassword;
 
+                if (_userCreateViewModel.IsChecked) _role = 1;
+                else _role = 0;
+
                 User currentUser = new(_userCreator, _userProvider, _userConflictValidator);
+                Role currentRole = new(_roleProvider);
 
                 DateTime dateTime = DateTime.Now;
 
                 var userDB = await currentUser.GetUserBool(new(_userName));
 
+                foreach(var role in await currentRole.GetAllRole())
+                {
+                    if (role != null && _role == role.SignificanceRole)
+                    {
+                        _roleID = role.Id;
+                        break;
+                    }
+                }
+
                 if(userDB)
                 {
                     _employee = _userCreateViewModel.Employee.ID;
 
-                    await currentUser.AddUser(new User(_userName, _password, dateTime, _employee));
+                    await currentUser.AddUser(new User(_userName, _password, dateTime, _roleID, _employee));
                     MessageBox.Show("Пользователь создан. Пробуйте войти в аккаунт.");
                 }
                 else

@@ -16,7 +16,7 @@ namespace PASEDM.Models
         public string UserName { get; set; }
         public string Password { get; set; }
         public DateTime DateOfCreation { get; set; }
-        public string Role { get; set; }
+        public int? RoleID { get; set; }
         public int? EmployeeID { get; set; }
 
         public User() { }
@@ -34,15 +34,16 @@ namespace PASEDM.Models
             Password = password;
         }
 
-        public User(string userName, string password, DateTime dateOfCreation, int? employeeID)
+        public User(string userName, string password, DateTime dateOfCreation, int? roleID, int? employeeID)
         {
             UserName = userName;
             Password = password;
             DateOfCreation = dateOfCreation;
+            RoleID = roleID;
             EmployeeID = employeeID;
         }
-        public User(int id, string userName, string password, DateTime dateOfCreation, int? employeeID) 
-            : this(userName, password, dateOfCreation, employeeID)
+        public User(int id, string userName, string password, DateTime dateOfCreation, int? roleID, int? employeeID) 
+            : this(userName, password, dateOfCreation, roleID, employeeID)
         {
             Id = id;
         }

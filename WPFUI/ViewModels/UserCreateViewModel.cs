@@ -27,6 +27,7 @@ namespace PASEDM.ViewModels
         private string _password;
         private string _replayPassword;
         private bool _isLoading;
+        private bool _isChecked;
         public bool IsLoading
         {
             get
@@ -75,6 +76,18 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(ReplayPassword));
             }
         }
+        public bool IsChecked
+        {
+            get
+            {
+                return _isChecked;
+            }
+            set
+            {
+                _isChecked = value;
+                OnPropertyChanged(nameof(IsChecked));
+            }
+        }
         public IEnumerable<Employee> Staff => _staff;
         public Employee Employee
         {
@@ -117,7 +130,7 @@ namespace PASEDM.ViewModels
             }
             catch (Exception)
             {
-                MessageBox.Show("Что-то не так", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

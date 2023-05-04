@@ -41,7 +41,7 @@ namespace PASEDM.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("AccessRights");
+                    b.ToTable("AccessRights", (string)null);
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.CardDTO", b =>
@@ -98,7 +98,7 @@ namespace PASEDM.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Cards");
+                    b.ToTable("Cards", (string)null);
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.CaseDTO", b =>
@@ -121,7 +121,7 @@ namespace PASEDM.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Cases");
+                    b.ToTable("Cases", (string)null);
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.DivisionDTO", b =>
@@ -143,7 +143,7 @@ namespace PASEDM.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Divisions");
+                    b.ToTable("Divisions", (string)null);
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.DocStagesDTO", b =>
@@ -165,7 +165,7 @@ namespace PASEDM.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("DocStages");
+                    b.ToTable("DocStages", (string)null);
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.DocumentDTO", b =>
@@ -215,7 +215,7 @@ namespace PASEDM.Migrations
 
                     b.HasIndex("TermID");
 
-                    b.ToTable("Documents");
+                    b.ToTable("Documents", (string)null);
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.DocumentTypesDTO", b =>
@@ -233,7 +233,7 @@ namespace PASEDM.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("DocumentTypes");
+                    b.ToTable("DocumentTypes", (string)null);
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.EmployeeDTO", b =>
@@ -270,7 +270,7 @@ namespace PASEDM.Migrations
 
                     b.HasIndex("DivisionID");
 
-                    b.ToTable("Staff");
+                    b.ToTable("Staff", (string)null);
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.RecipientDTO", b =>
@@ -296,7 +296,7 @@ namespace PASEDM.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Recipients");
+                    b.ToTable("Recipients", (string)null);
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.RoleDTO", b =>
@@ -318,7 +318,7 @@ namespace PASEDM.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Role");
+                    b.ToTable("Role", (string)null);
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.SecrecyStampDTO", b =>
@@ -340,7 +340,7 @@ namespace PASEDM.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("SecrecyStamps");
+                    b.ToTable("SecrecyStamps", (string)null);
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.TaskDTO", b =>
@@ -368,7 +368,7 @@ namespace PASEDM.Migrations
 
                     b.HasIndex("TaskStagesID");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("Tasks", (string)null);
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.TaskStagesDTO", b =>
@@ -390,7 +390,7 @@ namespace PASEDM.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("TaskStages");
+                    b.ToTable("TaskStages", (string)null);
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.TermDTO", b =>
@@ -413,7 +413,7 @@ namespace PASEDM.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Deadlines");
+                    b.ToTable("Deadlines", (string)null);
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.UserDTO", b =>
@@ -449,7 +449,7 @@ namespace PASEDM.Migrations
 
                     b.HasIndex("RoleID");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.CardDTO", b =>

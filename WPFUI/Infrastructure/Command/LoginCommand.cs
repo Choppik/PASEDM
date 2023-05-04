@@ -66,10 +66,6 @@ namespace PASEDM.Infrastructure.Command
                             unic = true;
                             break;
                         }
-                        else
-                        {
-                            unic = false;
-                        }
                     }
                     if (unic == false)
                     {
