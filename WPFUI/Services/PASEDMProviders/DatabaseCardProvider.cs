@@ -17,17 +17,37 @@ namespace PASEDM.Services.PASEDMProviders
         {
             _dbContextFactory = dbContextFactory;
         }
-        public async Task<IEnumerable<Card>> GetAllCard()
+        public async Task<IEnumerable<Card>> GetAllCardForSender(User user)
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
                 IEnumerable<CardDTO> cardDTOs = await context.Cards
+                    .Where(p => p.User.UserName == user.UserName)
                     .Include(u => u.Document)
                     .Include(u => u.DocumentTypes)
                     .Include(u => u.Case)
                     .Include(u => u.User)
                     .Include(u => u.Employee)
                     .Include(u => u.Recipient).ThenInclude(u => u.User)
+                    .Include(u => u.Recipient).ThenInclude(u => u.Task)
+                    .ToListAsync();
+
+                return cardDTOs.Select(u => ToCard(u));
+            }
+        }
+        public async Task<IEnumerable<Card>> GetAllCardForRecipient(User user)
+        {
+            using (PASEDMContext context = _dbContextFactory.CreateDbContext())
+            {
+                IEnumerable<CardDTO> cardDTOs = await context.Cards
+                    .Where(p => p.Recipient.User.UserName == user.UserName)
+                    .Include(u => u.Document)
+                    .Include(u => u.DocumentTypes)
+                    .Include(u => u.Case)
+                    .Include(u => u.User)
+                    .Include(u => u.Employee)
+                    .Include(u => u.Recipient).ThenInclude(u => u.User)
+                    .Include(u => u.Recipient).ThenInclude(u => u.Task)
                     .ToListAsync();
 
                 return cardDTOs.Select(u => ToCard(u));
@@ -35,7 +55,7 @@ namespace PASEDM.Services.PASEDMProviders
         }
         private static Card ToCard(CardDTO dto)
         {
-            return new Card(dto.NumberCard, dto.NameCard, dto.Comment, dto.Document.NameDoc, dto.DocumentTypes.Name, dto.Case.NumberCase, dto.User.UserName, dto.Employee.FullName, dto.Recipient.User.UserName);
+            return new Card(dto.NumberCard, dto.NameCard, dto.Comment, dto.Document.NameDoc, dto.DocumentTypes.Name, dto.Case.NumberCase, dto.User.UserName, dto.Employee.FullName, dto.Recipient.User.UserName, dto.Recipient.Task.NameTask);
         }
 /*        public async Task<Document> GetDoc(Document document)
         {

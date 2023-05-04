@@ -25,11 +25,19 @@
         <TextBox Grid.Row="1" Text="Поиск"/>
 
         <ListView Grid.Row="2" ItemsSource="{Binding Cards}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding NameCard}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Номер карты" DisplayMemberBinding="{Binding NumberCard}"/>
+                    <GridViewColumn Header="Название карты" DisplayMemberBinding="{Binding NameCard}"/>
+                    <GridViewColumn Header="Название документа" DisplayMemberBinding="{Binding NameDoc}"/>
+                    <GridViewColumn Header="Тип документа" DisplayMemberBinding="{Binding DocumentType}"/>
+                    <GridViewColumn Header="Задача" DisplayMemberBinding="{Binding Tasks}"/>
+                    <GridViewColumn Header="Дело" DisplayMemberBinding="{Binding Case}"/>
+                    <GridViewColumn Header="Исполнитель" DisplayMemberBinding="{Binding Employee}"/>
+                    <GridViewColumn Header="Комментарий" DisplayMemberBinding="{Binding Comment}"/>
+                    <GridViewColumn Header="Отправлено" DisplayMemberBinding="{Binding Recipient}"/>
+                </GridView>
+            </ListView.View>
         </ListView>
 
         <Grid Grid.Row="3">

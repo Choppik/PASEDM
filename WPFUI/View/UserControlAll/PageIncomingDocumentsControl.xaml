@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PASEDM.View.UserControlAll"
+             xmlns:local="clr-namespace:PASEDM.View.UserControlAll" xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:IncomingViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -13,9 +13,47 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Входящие документы"/>
+
+        <TextBox Grid.Row="1" Text="Поиск"/>
+
+        <ListView Grid.Row="2" ItemsSource="{Binding Cards}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Номер карты" DisplayMemberBinding="{Binding NumberCard}"/>
+                    <GridViewColumn Header="Название карты" DisplayMemberBinding="{Binding NameCard}"/>
+                    <GridViewColumn Header="Название документа" DisplayMemberBinding="{Binding NameDoc}"/>
+                    <GridViewColumn Header="Тип документа" DisplayMemberBinding="{Binding DocumentType}"/>
+                    <GridViewColumn Header="Задача" DisplayMemberBinding="{Binding Tasks}"/>
+                    <GridViewColumn Header="Дело" DisplayMemberBinding="{Binding Case}"/>
+                    <GridViewColumn Header="Исполнитель" DisplayMemberBinding="{Binding Employee}"/>
+                    <GridViewColumn Header="Комментарий" DisplayMemberBinding="{Binding Comment}"/>
+                    <GridViewColumn Header="Отправитель" DisplayMemberBinding="{Binding User}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" 
+                    Content="Добавить"
+                    HorizontalAlignment="Right" 
+                    Command="{Binding NavigateCreateCardCommand}"/>
+            <Button Grid.Column="1" 
+                    Content="Редактировать" 
+                    HorizontalAlignment="Center"/>
+            <Button Grid.Column="2" 
+                    Content="Удалить"  
+                    HorizontalAlignment="Left"/>
+        </Grid>
     </Grid>
 </UserControl>

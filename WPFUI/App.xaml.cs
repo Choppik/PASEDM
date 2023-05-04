@@ -45,12 +45,14 @@ namespace PASEDM
                 CreateEntryUserNavigationService(s)));
 
             services.AddTransient(s => new IncomingViewModel(
-                s.GetRequiredService<UserStore>(),
-                CreateEntryUserNavigationService(s)));
+                 CreateEntryUserNavigationService(s),
+                 s.GetRequiredService<PASEDMDbContextFactory>(),
+                s.GetRequiredService<UserStore>()));
 
             services.AddTransient(s => new OutgoingViewModel(
                 CreateCardNavigationService(s),
-                s.GetRequiredService<PASEDMDbContextFactory>()));
+                s.GetRequiredService<PASEDMDbContextFactory>(),
+                s.GetRequiredService<UserStore>()));
 
             services.AddTransient(CreateCardViewModel);
 

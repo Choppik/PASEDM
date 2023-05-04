@@ -32,7 +32,7 @@ namespace PASEDM.Models
             EmployeeID = employeeID;
             RecipientID = recipientID;
         }
-        public Card(int numberCard, string nameCard, string comment, string document, string documentType, string cases, string user, string employee, string recipient)
+        public Card(int numberCard, string nameCard, string comment, string document, string documentType, string cases, string user, string employee, string recipient, string tasks)
         {
             NumberCard = numberCard;
             NameCard = nameCard;
@@ -43,6 +43,7 @@ namespace PASEDM.Models
             User = user;
             Employee = employee;
             Recipient = recipient;
+            Tasks = tasks;
         }
 
         public int Id { get; }
@@ -61,14 +62,19 @@ namespace PASEDM.Models
         public string Employee { get; }
         public int? RecipientID { get; }
         public string Recipient { get; }
+        public string Tasks { get; }
 
         public async Task CreateCard(Card card)
         {
             await _cardCreator.CreateCard(card);
         }
-        public async Task<IEnumerable<Card>> GetAllCard()
+        public async Task<IEnumerable<Card>> GetAllCardForSender(User user)
         {
-            return await _cardProvider.GetAllCard();
+            return await _cardProvider.GetAllCardForSender(user);
+        }
+        public async Task<IEnumerable<Card>> GetAllCardForRecipient(User user)
+        {
+            return await _cardProvider.GetAllCardForRecipient(user);
         }
     }
 }

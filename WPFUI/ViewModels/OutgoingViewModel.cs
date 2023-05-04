@@ -10,12 +10,14 @@ using System.Windows;
 using System.Windows.Input;
 using System.Collections.Generic;
 using PASEDM.Data;
+using PASEDM.Store;
 
 namespace PASEDM.ViewModels
 {
     class OutgoingViewModel : BaseViewModels
     {
         private PASEDMDbContextFactory _contextFactory;
+        private readonly UserStore _userStore;
 
         private ObservableCollection<Card> _cards;
         private ICardProvider _cardProvider;
@@ -34,9 +36,10 @@ namespace PASEDM.ViewModels
             }
         }
         public ICommand NavigateCreateCardCommand { get; }
-        public OutgoingViewModel(INavigationService navigationService, PASEDMDbContextFactory deferredContextFactory)
+        public OutgoingViewModel(INavigationService navigationService, PASEDMDbContextFactory deferredContextFactory, UserStore userStore)
         {
             _contextFactory = deferredContextFactory;
+            _userStore = userStore;
 
             GetExecutors();
 
@@ -50,7 +53,7 @@ namespace PASEDM.ViewModels
                 _cards = new ObservableCollection<Card>();
                 _currentCard = new Card(_cardProvider);
 
-                foreach (var item in await _currentCard.GetAllCard())
+                foreach (var item in await _currentCard.GetAllCardForSender(_userStore.CurrentUser))
                 {
                     _cards.Add(item);
                 }
