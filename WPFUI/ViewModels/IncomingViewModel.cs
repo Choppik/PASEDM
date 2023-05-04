@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
 
 namespace PASEDM.ViewModels
 {
@@ -41,11 +40,11 @@ namespace PASEDM.ViewModels
         {
             _contextFactory = deferredContextFactory;
             _userStore = userStore;
-            GetExecutors();
+            GetRecipients();
 
             NavigateCreateCardCommand = new NavigateCommand(navigationService);
         }
-        private async void GetExecutors()
+        private async void GetRecipients()
         {
             try
             {

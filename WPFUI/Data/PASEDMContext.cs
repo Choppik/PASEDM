@@ -19,6 +19,11 @@ namespace PASEDM.Data
         public DbSet<TermDTO> Deadlines { get; set; }
         public DbSet<TaskDTO> Tasks { get; set; }
         public DbSet<CardDTO> Cards { get; set; }
+        public DbSet<SecrecyStampDTO> SecrecyStamps { get; set; }
+        public DbSet<TaskStagesDTO> TaskStages { get; set; }
+        public DbSet<DocStagesDTO> DocStages { get; set; }
+        public DbSet<AccessRightsDTO> AccessRights { get; set; }
+        public DbSet<RoleDTO> Role { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,6 +37,11 @@ namespace PASEDM.Data
             modelBuilder.ApplyConfiguration(new DeadlinesConfiguration());
             modelBuilder.ApplyConfiguration(new TaskConfiguration());
             modelBuilder.ApplyConfiguration(new CardConfiguration());
+            modelBuilder.ApplyConfiguration(new SecrecyStampConfiguration());
+            modelBuilder.ApplyConfiguration(new TaskStagesConfiguration());
+            modelBuilder.ApplyConfiguration(new DocStagesConfiguration());
+            modelBuilder.ApplyConfiguration(new AccessRightsConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
         }
     }
 }

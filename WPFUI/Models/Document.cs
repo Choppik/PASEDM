@@ -32,14 +32,12 @@ namespace PASEDM.Models
             NameDoc = nameDoc;
         }
 
-        public Document(string nameDoc, int registrationNumber, DateTime dateCreateDoc, string summary, string conditionDoc, string secrecyStamp, string path, int? termID)
+        public Document(string nameDoc, int registrationNumber, DateTime dateCreateDoc, string summary, string path, int? termID)
         {
             NameDoc = nameDoc;
             RegistrationNumber = registrationNumber;
             DateCreateDoc = dateCreateDoc;
             Summary = summary;
-            ConditionDoc = conditionDoc;
-            SecrecyStamp = secrecyStamp;
             Path = path;
             TermID = termID;
         }
@@ -49,11 +47,9 @@ namespace PASEDM.Models
             int registrationNumber, 
             DateTime dateCreateDoc, 
             string summary,
-            string conditionDoc, 
-            string secrecyStamp, 
             string path, 
             int? termID) 
-            : this(nameDoc, registrationNumber, dateCreateDoc, summary, conditionDoc, secrecyStamp, path, termID)
+            : this(nameDoc, registrationNumber, dateCreateDoc, summary, path, termID)
         {
             Id = id;
         }

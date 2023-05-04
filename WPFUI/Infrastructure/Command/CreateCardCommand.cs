@@ -79,8 +79,8 @@ namespace PASEDM.Infrastructure.Command
             _docRegistrationNumber = _createCardViewModel.RegistrationNumber;
             _dateOfFormationDocument = _createCardViewModel.DateOfFormationDocument;
             _summary = _createCardViewModel.Summary;
-            _conditionDoc = _createCardViewModel.ConditionDoc;
-            _secrecyStamp = _createCardViewModel.SecrecyStamp;
+            //_conditionDoc = _createCardViewModel.ConditionDoc;
+            //_secrecyStamp = _createCardViewModel.SecrecyStamp;
             _filePath = "...filePath";
             _term = _createCardViewModel.CurrentTerm;
             _task = _createCardViewModel.CurrentTask;
@@ -91,14 +91,14 @@ namespace PASEDM.Infrastructure.Command
             _createCardUser = _createCardViewModel.CurrentUser;
             _comment = _createCardViewModel.Comment;
 
-            await document.AddDoc(new Document(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _conditionDoc, _secrecyStamp, _filePath, _term.ID));
-            await recipient.AddRecipient(new Recipient(_dateOfFormation, _task.Id, _recipient.Id));
+            //await document.AddDoc(new Document(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _conditionDoc, _secrecyStamp, _filePath, _term.ID));
+            //await recipient.AddRecipient(new Recipient(_dateOfFormation, _task.Id, _recipient.Id));
 
             var docDB = await document1.GetDoc(new(_docName));
             var recipientDB = await recipient1.GetRecipient(new(_dateOfFormation, _recipient.Id));
             var userDB = await user.GetUser(new(_createCardUser.UserName));
 
-            await card.CreateCard(new Card(_numberCard, _nameCard, _comment, docDB.Id, _documentType.ID, _case.ID, userDB.Id, _executor.ID, recipientDB.Id));
+            //await card.CreateCard(new Card(_numberCard, _nameCard, _comment, docDB.Id, _documentType.ID, _case.ID, userDB.Id, _executor.ID, recipientDB.Id));
             MessageBox.Show("Карта создана");
         }
     }

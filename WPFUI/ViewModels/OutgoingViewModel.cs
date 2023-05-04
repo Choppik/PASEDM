@@ -41,11 +41,11 @@ namespace PASEDM.ViewModels
             _contextFactory = deferredContextFactory;
             _userStore = userStore;
 
-            GetExecutors();
+            GetSenders();
 
             NavigateCreateCardCommand = new NavigateCommand(navigationService);
         }
-        private async void GetExecutors()
+        private async void GetSenders()
         {
             try
             {

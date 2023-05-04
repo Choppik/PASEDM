@@ -42,7 +42,7 @@
                           materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
                           Style="{StaticResource MaterialDesignComboBox}"
                           ItemsSource="{Binding ListDocStages}"
-                          SelectedItem="{Binding ConditionDoc}">
+                          SelectedItem="{Binding CurrentDocStages}">
             </ComboBox>
             <TextBlock Text="Вид документа" />
             <ComboBox materialDesign:HintAssist.Hint="Выберите вид документа" 
@@ -82,7 +82,7 @@
                           materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
                           Style="{StaticResource MaterialDesignComboBox}"
                           ItemsSource="{Binding ListSecrecyStamp}"
-                          SelectedItem="{Binding SecrecyStamp}">
+                          SelectedItem="{Binding CurrentSecrecyStamp}">
             </ComboBox>
             <TextBlock Text="Задача" />
             <ComboBox materialDesign:HintAssist.Hint="Выберите или создайте задачу" 
@@ -105,7 +105,7 @@
                           materialDesign:TextFieldAssist.UnderlineBrush="#FF20900B" 
                           Style="{StaticResource MaterialDesignComboBox}"
                           ItemsSource="{Binding ListTaskStages}"
-                          SelectedItem="{Binding ConditionTask}">
+                          SelectedItem="{Binding CurrentTaskStages}">
             </ComboBox>
             <TextBlock Text="Исполнитель задачи" />
             <ComboBox materialDesign:HintAssist.Hint="Выберите исполнителя" 

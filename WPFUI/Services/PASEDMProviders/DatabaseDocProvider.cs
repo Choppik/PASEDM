@@ -28,7 +28,7 @@ namespace PASEDM.Services.PASEDMProviders
         }
         private static Document ToDoc(DocumentDTO dto)
         {
-            return new Document(dto.ID, dto.NameDoc, dto.RegistrationNumber, dto.DateCreateDoc, dto.Summary, dto.ConditionDoc, dto.SecrecyStamp, dto.Path, dto.TermID);
+            return new Document(dto.ID, dto.NameDoc, dto.RegistrationNumber, dto.DateCreateDoc, dto.Summary, dto.Path, dto.TermID);
         }
         public async Task<Document> GetDoc(Document document)
         {

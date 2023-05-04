@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PASEDM.Data;
 
@@ -11,9 +12,11 @@ using PASEDM.Data;
 namespace PASEDM.Migrations
 {
     [DbContext(typeof(PASEDMContext))]
-    partial class PASEDMContextModelSnapshot : ModelSnapshot
+    [Migration("20230504101737_RefTable3")]
+    partial class RefTable3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -299,28 +302,6 @@ namespace PASEDM.Migrations
                     b.ToTable("Recipients");
                 });
 
-            modelBuilder.Entity("PASEDM.Data.DTOs.RoleDTO", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("NameRole")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("SignificanceRole")
-                        .HasMaxLength(2)
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Role");
-                });
-
             modelBuilder.Entity("PASEDM.Data.DTOs.SecrecyStampDTO", b =>
                 {
                     b.Property<int>("ID")
@@ -435,8 +416,10 @@ namespace PASEDM.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("RoleID")
-                        .HasColumnType("int");
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -446,8 +429,6 @@ namespace PASEDM.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("EmployeeID");
-
-                    b.HasIndex("RoleID");
 
                     b.ToTable("Users");
                 });
@@ -557,13 +538,7 @@ namespace PASEDM.Migrations
                         .WithMany("Users")
                         .HasForeignKey("EmployeeID");
 
-                    b.HasOne("PASEDM.Data.DTOs.RoleDTO", "Role")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleID");
-
                     b.Navigation("Employee");
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.AccessRightsDTO", b =>
@@ -606,11 +581,6 @@ namespace PASEDM.Migrations
             modelBuilder.Entity("PASEDM.Data.DTOs.RecipientDTO", b =>
                 {
                     b.Navigation("Cards");
-                });
-
-            modelBuilder.Entity("PASEDM.Data.DTOs.RoleDTO", b =>
-                {
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.SecrecyStampDTO", b =>

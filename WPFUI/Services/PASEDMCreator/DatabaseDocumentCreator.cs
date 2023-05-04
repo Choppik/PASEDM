@@ -40,8 +40,6 @@ namespace PASEDM.Services.PASEDMCreator
                 RegistrationNumber = document.RegistrationNumber,
                 DateCreateDoc = document.DateCreateDoc,
                 Summary = document.Summary,
-                ConditionDoc = document.ConditionDoc,
-                SecrecyStamp = document.SecrecyStamp,
                 Path = document.Path,
                 TermID = document.TermID
             };

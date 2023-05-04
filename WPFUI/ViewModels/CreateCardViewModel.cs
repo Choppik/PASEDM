@@ -27,22 +27,22 @@ namespace PASEDM.ViewModels
 
         private PASEDMDbContextFactory _contextFactory;
 
-        private readonly List<string> _listSecrecyStamp = new() 
+/*        private readonly List<string> _listSecrecyStamp = new() 
         { 
             "Не секретно",
             "Секретно", 
             "Совершенно секретно",
             "Особая важность"
-        };
-        private readonly List<string> _listTaskStages = new () 
+        };*/
+        /*private readonly List<string> _listTaskStages = new () 
         { 
             "Стадия анализа задачи", 
             "Стадия поиска решения задачи", 
             "Стадия выполнения задачи", 
             "Стадия проверки выполненной задачи",
             "Задача выполнена"
-        };
-        private readonly List<string> _listDocStages = new()
+        };*/
+        /*private readonly List<string> _listDocStages = new()
         {
             "Поставлен на контроль",
             "Проверка своевременности доведения до исполнителей",
@@ -50,7 +50,7 @@ namespace PASEDM.ViewModels
             "Учет и обобщение результатов контроля исполнения",
             "Снят с контроля",
             "Не нуждается в контроле исполнения"
-        };
+        };*/
 
         private ObservableCollection<Tasks> _tasks;
         private ObservableCollection<Case> _cases;
@@ -58,6 +58,9 @@ namespace PASEDM.ViewModels
         private ObservableCollection<User> _recipients;
         private ObservableCollection<Employee> _executors;
         private ObservableCollection<Deadlines> _deadlines;
+        private ObservableCollection<SecrecyStamps> _listSecrecyStamp;
+        private ObservableCollection<TaskStages> _listTaskStages;
+        private ObservableCollection<DocStages> _listDocStages;
 
         private Tasks _currentTask;
         private Case _currentCase;
@@ -65,6 +68,9 @@ namespace PASEDM.ViewModels
         private User _currentRecipient;
         private Employee _currentExecutor;
         private Deadlines _currentTerm;
+        private SecrecyStamps _currentSecrecyStamp;
+        private TaskStages _currentTaskStages;
+        private DocStages _currentDocStages;
         //private User _userCreateCard;
 
         private DateTime _dateOfFormation = DateTime.Now;
@@ -72,17 +78,14 @@ namespace PASEDM.ViewModels
 
         private string _nameCard;
         private int _numberCard;
-        private string _secrecyStamp;
         private string _summary;
-        private string _conditionDoc;
-        private string _conditionTask;
         private string _comment;
         //private string _filePath;
         private string _docName;
         private int _docRegistrationNumber;
-        public IEnumerable<string> ListSecrecyStamp => _listSecrecyStamp;
-        public IEnumerable<string> ListDocStages => _listDocStages;
-        public IEnumerable<string> ListTaskStages => _listTaskStages;
+        public IEnumerable<SecrecyStamps> ListSecrecyStamp => _listSecrecyStamp;
+        public IEnumerable<DocStages> ListDocStages => _listDocStages;
+        public IEnumerable<TaskStages> ListTaskStages => _listTaskStages;
         public IEnumerable<Tasks> Tasks => _tasks;
         public IEnumerable<Case> Case => _cases;
         public IEnumerable<DocumentTypes> DocTypes => _docTypes;
@@ -162,6 +165,42 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(CurrentTerm));
             }
         }
+        public SecrecyStamps CurrentSecrecyStamp
+        {
+            get
+            {
+                return _currentSecrecyStamp;
+            }
+            set
+            {
+                _currentSecrecyStamp = value;
+                OnPropertyChanged(nameof(CurrentSecrecyStamp));
+            }
+        }
+        public TaskStages CurrentTaskStages
+        {
+            get
+            {
+                return _currentTaskStages;
+            }
+            set
+            {
+                _currentTaskStages = value;
+                OnPropertyChanged(nameof(CurrentTaskStages));
+            }
+        }
+        public DocStages CurrentDocStages
+        {
+            get
+            {
+                return _currentDocStages;
+            }
+            set
+            {
+                _currentDocStages = value;
+                OnPropertyChanged(nameof(CurrentDocStages));
+            }
+        }
 
         public DateTime DateOfFormation => _dateOfFormation;
         public DateTime DateOfFormationDocument
@@ -204,18 +243,6 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(NumberCard));
             }
         }
-        public string SecrecyStamp
-        {
-            get
-            {
-                return _secrecyStamp;
-            }
-            set
-            {
-                _secrecyStamp = value;
-                OnPropertyChanged(nameof(SecrecyStamp));
-            }
-        }
         public string Comment
         {
             get
@@ -250,30 +277,6 @@ namespace PASEDM.ViewModels
             {
                 _docRegistrationNumber = value;
                 OnPropertyChanged(nameof(RegistrationNumber));
-            }
-        }
-        public string ConditionDoc
-        {
-            get
-            {
-                return _conditionDoc;
-            }
-            set
-            {
-                _conditionDoc = value;
-                OnPropertyChanged(nameof(ConditionDoc));
-            }
-        }
-        public string ConditionTask
-        {
-            get
-            {
-                return _conditionTask;
-            }
-            set
-            {
-                _conditionTask = value;
-                OnPropertyChanged(nameof(ConditionTask));
             }
         }
         public string Summary

@@ -12,7 +12,6 @@ namespace PASEDM.Data.Configuration
             builder.Property(x => x.NumberEmployee).HasMaxLength(10);
             builder.Property(x => x.FullName).HasMaxLength(50);
             builder.Property(x => x.Mail).HasMaxLength(100);
-            builder.Property(x => x.Admittance).HasMaxLength(50);
         }
     }
 }

@@ -12,11 +12,13 @@ namespace PASEDM.Data.DTOs
         public int RegistrationNumber { get; set; }
         public DateTime DateCreateDoc { get; set; }
         public string Summary { get; set; }
-        public string ConditionDoc { get; set; }
-        public string SecrecyStamp { get; set; }
         public string Path { get; set; }
         public int? TermID { get; set; }
         public TermDTO Term { get; set; }
+        public int? SecrecyStampsID { get; set; }
+        public SecrecyStampDTO SecrecyStamps { get; set; }
+        public int? DocStagesID { get; set; }
+        public DocStagesDTO DocStages { get; set; }
         public ICollection<CardDTO> Cards { get; set; }
     }
 }

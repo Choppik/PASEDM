@@ -19,13 +19,12 @@ namespace PASEDM.Models
             _employeeProviders = employeeProviders;
         }
 
-        public Employee(int iD, int numberEmployee, string fullName, string mail, string admittance, string division)
+        public Employee(int iD, int numberEmployee, string fullName, string mail, string division)
         {
             ID = iD;
             NumberEmployee = numberEmployee;
             FullName = fullName;
             Mail = mail;
-            Admittance = admittance;
             Division = division;
         }
 
