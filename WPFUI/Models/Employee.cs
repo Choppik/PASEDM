@@ -7,7 +7,7 @@ namespace PASEDM.Models
     public class Employee
     {
         private readonly IEmployeeProvider _employeeProviders;
-        public int ID { get; }
+        public int Id { get; }
         public int NumberEmployee { get; }
         public string FullName { get; }
         public string Mail { get; }
@@ -19,9 +19,9 @@ namespace PASEDM.Models
             _employeeProviders = employeeProviders;
         }
 
-        public Employee(int iD, int numberEmployee, string fullName, string mail, string division)
+        public Employee(int id, int numberEmployee, string fullName, string mail, string division)
         {
-            ID = iD;
+            Id = id;
             NumberEmployee = numberEmployee;
             FullName = fullName;
             Mail = mail;

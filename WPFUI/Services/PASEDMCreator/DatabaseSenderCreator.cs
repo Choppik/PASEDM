@@ -1,28 +1,28 @@
 ﻿using PASEDM.Data.DTOs;
 using PASEDM.Data;
+using PASEDM.Models;
 using System.Threading.Tasks;
 using PASEDM.Services.PASEDMCreator.InterfaceCreator;
-using PASEDM.Models;
 
 namespace PASEDM.Services.PASEDMCreator
 {
-    public class DatabaseRecipientCreator : IRecipientCreator
+    public class DatabaseSenderCreator : ISenderCreator
     {
         private readonly PASEDMDbContextFactory _dbContextFactory;
 
-        public DatabaseRecipientCreator(PASEDMDbContextFactory dbContextFactory)
+        public DatabaseSenderCreator(PASEDMDbContextFactory dbContextFactory)
         {
             _dbContextFactory = dbContextFactory;
         }
 
-        public async Task AddRecipient(Recipient recipient)
+        public async Task AddSender(Recipient recipient)
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
                 try
                 {
-                    RecipientDTO recipientDTO = ToRecipientDTO(recipient);
-                    context.Recipients.Add(recipientDTO);
+                    SenderDTO senderDTO = ToSenderDTO(recipient);
+                    context.Senders.Add(senderDTO);
                 }
                 finally
                 {
@@ -31,13 +31,11 @@ namespace PASEDM.Services.PASEDMCreator
             }
         }
 
-        private static RecipientDTO ToRecipientDTO(Recipient recipient)
+        private static SenderDTO ToSenderDTO(Recipient recipient)
         {
-            return new RecipientDTO()
+            return new SenderDTO()
             {
-                ID = recipient.Id,
-                UserID = recipient.UserID,
-                CardID = recipient.CardID
+                RecipientID = recipient.Id
             };
         }
     }

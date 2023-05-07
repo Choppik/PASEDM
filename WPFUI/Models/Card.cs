@@ -1,6 +1,6 @@
 ﻿using PASEDM.Services.PASEDMCreator.InterfaceCreator;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
-using System.Collections.Generic;
+using System;
 using System.Threading.Tasks;
 
 namespace PASEDM.Models
@@ -10,71 +10,59 @@ namespace PASEDM.Models
         private ICardCreator _cardCreator;
         private ICardProvider _cardProvider;
 
-        public Card(ICardCreator cardCreator)
+        public Card() { }
+
+        public Card(int numberCard, string nameCard, string comment, DateTime dateOfFormation, int? documentID, int? documentTypesID, int? taskID, int? caseID, int? employeeID, int? senderID) 
+            :this(default, numberCard, nameCard, comment, dateOfFormation, documentID, documentTypesID, taskID, caseID, employeeID, senderID)
+        { }
+        public Card(int id, string nameCard)
+            : this(id, default, nameCard, "", default, default, default, default, default, default, default)
+        { }
+        public Card(string nameCard)
+            : this(default, default, nameCard, "", default, default, default, default, default, default, default)
+        { }
+
+
+
+        public Card(ICardCreator cardCreator, ICardProvider cardProvider)
         {
             _cardCreator = cardCreator;
-        }
-
-        public Card(ICardProvider cardProvider)
-        {
             _cardProvider = cardProvider;
         }
-
-        public Card(int numberCard, string nameCard, string comment, int? documentID, int? documentTypesID, int? caseID, int? userID, int? employeeID, int? recipientID)
+        public Card(int id, int numberCard, string nameCard, string comment, DateTime dateOfFormation, int? documentID, int? documentTypesID, int? taskID, int? caseID, int? employeeID, int? userID)
         {
+            Id = id;
             NumberCard = numberCard;
             NameCard = nameCard;
             Comment = comment;
+            DateOfFormation = dateOfFormation;
             DocumentID = documentID;
             DocumentTypesID = documentTypesID;
+            TaskID = taskID;
             CaseID = caseID;
-            UserID = userID;
             EmployeeID = employeeID;
-            RecipientID = recipientID;
-        }
-        public Card(int numberCard, string nameCard, string comment, string document, string documentType, string cases, string user, string employee, string recipient, string tasks)
-        {
-            NumberCard = numberCard;
-            NameCard = nameCard;
-            Comment = comment;
-            NameDoc = document;
-            DocumentType = documentType;
-            Case = cases;
-            User = user;
-            Employee = employee;
-            Recipient = recipient;
-            Tasks = tasks;
+            UserID = userID;
         }
 
         public int Id { get; }
         public int NumberCard { get; }
         public string NameCard { get; }
         public string Comment { get; }
+        public DateTime DateOfFormation { get; }
         public int? DocumentID { get; }
-        public string NameDoc { get; }
         public int? DocumentTypesID { get; }
-        public string DocumentType { get; }
+        public int? TaskID { get; }
         public int? CaseID { get; }
-        public string Case { get; }
-        public int? UserID { get; }
-        public string User { get; }
         public int? EmployeeID { get; }
-        public string Employee { get; }
-        public int? RecipientID { get; }
-        public string Recipient { get; }
-        public string Tasks { get; }
+        public int? UserID { get; }
 
         public async Task CreateCard(Card card)
         {
             await _cardCreator.CreateCard(card);
         }
-        public async Task<IEnumerable<Card>> GetAllCardForSender(User user)
+        public async Task<Card> GetCard(Card card)
         {
-            return await _cardProvider.GetAllCardForSender(user);
-        }
-        public async Task<IEnumerable<Card>> GetAllCardForRecipient(User user)
-        {
-            return await _cardProvider.GetAllCardForRecipient(user);
+            return await _cardProvider.GetCard(card);
         }
     }
 }

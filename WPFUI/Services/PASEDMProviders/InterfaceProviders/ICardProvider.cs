@@ -6,7 +6,6 @@ namespace PASEDM.Services.PASEDMProviders.InterfaceProviders
 {
     public interface ICardProvider
     {
-        Task<IEnumerable<Card>> GetAllCardForSender(User user);
-        Task<IEnumerable<Card>> GetAllCardForRecipient(User user);
+        Task<Card> GetCard(Card card);
     }
 }

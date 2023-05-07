@@ -22,35 +22,13 @@ namespace PASEDM.ViewModels
         private IDocTypProvider _docTypProvider;
         private IUserProvider _userProvider;
         private IDeadlinesProvider _deadlinesProvider;
+        private ITaskStagesProvider _taskStagesProvider;
+        private IDocStagesProvider _docStagesProvider;
+        private ISecrecyStampsProvider _secrecyStampsProvider;
 
         private readonly UserStore _userStore;
 
         private PASEDMDbContextFactory _contextFactory;
-
-/*        private readonly List<string> _listSecrecyStamp = new() 
-        { 
-            "Не секретно",
-            "Секретно", 
-            "Совершенно секретно",
-            "Особая важность"
-        };*/
-        /*private readonly List<string> _listTaskStages = new () 
-        { 
-            "Стадия анализа задачи", 
-            "Стадия поиска решения задачи", 
-            "Стадия выполнения задачи", 
-            "Стадия проверки выполненной задачи",
-            "Задача выполнена"
-        };*/
-        /*private readonly List<string> _listDocStages = new()
-        {
-            "Поставлен на контроль",
-            "Проверка своевременности доведения до исполнителей",
-            "Проверка и регулирование хода исполнения",
-            "Учет и обобщение результатов контроля исполнения",
-            "Снят с контроля",
-            "Не нуждается в контроле исполнения"
-        };*/
 
         private ObservableCollection<Tasks> _tasks;
         private ObservableCollection<Case> _cases;
@@ -58,9 +36,9 @@ namespace PASEDM.ViewModels
         private ObservableCollection<User> _recipients;
         private ObservableCollection<Employee> _executors;
         private ObservableCollection<Deadlines> _deadlines;
-        private ObservableCollection<SecrecyStamps> _listSecrecyStamp;
-        private ObservableCollection<TaskStages> _listTaskStages;
-        private ObservableCollection<DocStages> _listDocStages;
+        private ObservableCollection<SecrecyStamps> _secrecyStamp;
+        private ObservableCollection<TaskStages> _taskStages;
+        private ObservableCollection<DocStages> _docStages;
 
         private Tasks _currentTask;
         private Case _currentCase;
@@ -71,7 +49,6 @@ namespace PASEDM.ViewModels
         private SecrecyStamps _currentSecrecyStamp;
         private TaskStages _currentTaskStages;
         private DocStages _currentDocStages;
-        //private User _userCreateCard;
 
         private DateTime _dateOfFormation = DateTime.Now;
         private DateTime _dateOfFormationDocument = DateTime.Now;
@@ -83,9 +60,9 @@ namespace PASEDM.ViewModels
         //private string _filePath;
         private string _docName;
         private int _docRegistrationNumber;
-        public IEnumerable<SecrecyStamps> ListSecrecyStamp => _listSecrecyStamp;
-        public IEnumerable<DocStages> ListDocStages => _listDocStages;
-        public IEnumerable<TaskStages> ListTaskStages => _listTaskStages;
+        public IEnumerable<SecrecyStamps> ListSecrecyStamp => _secrecyStamp;
+        public IEnumerable<DocStages> ListDocStages => _docStages;
+        public IEnumerable<TaskStages> ListTaskStages => _taskStages;
         public IEnumerable<Tasks> Tasks => _tasks;
         public IEnumerable<Case> Case => _cases;
         public IEnumerable<DocumentTypes> DocTypes => _docTypes;
@@ -307,9 +284,12 @@ namespace PASEDM.ViewModels
             GetDocTyp();
             GetRecipient();
             GetDeadlines();
+            GetTaskStages();
+            GetDocStages();
+            GetSecrecyStamps();
 
             NavigateRefundCommand = new NavigateCommand(navigationService);
-            CreateCardCommand = new CreateCardCommand(this, deferredContextFactory);
+            CreateCardCommand = new CreateCardCommand(this, deferredContextFactory, navigationService);
         }
         private async void GetExecutors()
         {
@@ -412,6 +392,60 @@ namespace PASEDM.ViewModels
                 foreach (var item in await _currentTerm.GetAllDeadlines())
                 {
                     _deadlines.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private async void GetTaskStages()
+        {
+            try
+            {
+                _taskStagesProvider = new DatabaseTaskStagesProvider(_contextFactory);
+                _taskStages = new ObservableCollection<TaskStages>();
+                _currentTaskStages = new TaskStages(_taskStagesProvider);
+
+                foreach (var item in await _currentTaskStages.GetAllTaskStages())
+                {
+                    _taskStages.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private async void GetDocStages()
+        {
+            try
+            {
+                _docStagesProvider = new DatabaseDocStagesProvider(_contextFactory);
+                _docStages = new ObservableCollection<DocStages>();
+                _currentDocStages = new DocStages(_docStagesProvider);
+
+                foreach (var item in await _currentDocStages.GetAllDocStages())
+                {
+                    _docStages.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private async void GetSecrecyStamps()
+        {
+            try
+            {
+                _secrecyStampsProvider = new DatabaseSecrecyStampsProvider(_contextFactory);
+                _secrecyStamp = new ObservableCollection<SecrecyStamps>();
+                _currentSecrecyStamp = new SecrecyStamps(_secrecyStampsProvider);
+
+                foreach (var item in await _currentSecrecyStamp.GetAllSecrecyStamps())
+                {
+                    _secrecyStamp.Add(item);
                 }
             }
             catch (Exception)

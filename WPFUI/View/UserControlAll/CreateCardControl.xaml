@@ -43,6 +43,11 @@
                           Style="{StaticResource MaterialDesignComboBox}"
                           ItemsSource="{Binding ListDocStages}"
                           SelectedItem="{Binding CurrentDocStages}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding NameDocStage}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBlock Text="Вид документа" />
             <ComboBox materialDesign:HintAssist.Hint="Выберите вид документа" 
@@ -83,6 +88,11 @@
                           Style="{StaticResource MaterialDesignComboBox}"
                           ItemsSource="{Binding ListSecrecyStamp}"
                           SelectedItem="{Binding CurrentSecrecyStamp}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding NameSecrecyStamp}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBlock Text="Задача" />
             <ComboBox materialDesign:HintAssist.Hint="Выберите или создайте задачу" 
@@ -106,6 +116,11 @@
                           Style="{StaticResource MaterialDesignComboBox}"
                           ItemsSource="{Binding ListTaskStages}"
                           SelectedItem="{Binding CurrentTaskStages}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding NameTaskStage}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBlock Text="Исполнитель задачи" />
             <ComboBox materialDesign:HintAssist.Hint="Выберите исполнителя" 

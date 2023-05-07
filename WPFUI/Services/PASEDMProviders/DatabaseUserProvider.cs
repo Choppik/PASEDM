@@ -22,7 +22,7 @@ namespace PASEDM.Services.PASEDMProviders
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
-                IEnumerable<UserDTO> userDTOs = await context.Users.Include(u => u.Employee).ToListAsync();
+                IEnumerable<UserDTO> userDTOs = await context.Users.ToListAsync();
 
                 return userDTOs.Select(u => ToUser(u));
             }

@@ -22,18 +22,22 @@
 
         <TextBox Grid.Row="1" Text="Поиск"/>
 
-        <ListView Grid.Row="2" ItemsSource="{Binding Cards}">
+        <ListView Grid.Row="2" ItemsSource="{Binding Recipients}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Номер карты" DisplayMemberBinding="{Binding NumberCard}"/>
                     <GridViewColumn Header="Название карты" DisplayMemberBinding="{Binding NameCard}"/>
                     <GridViewColumn Header="Название документа" DisplayMemberBinding="{Binding NameDoc}"/>
-                    <GridViewColumn Header="Тип документа" DisplayMemberBinding="{Binding DocumentType}"/>
-                    <GridViewColumn Header="Задача" DisplayMemberBinding="{Binding Tasks}"/>
-                    <GridViewColumn Header="Дело" DisplayMemberBinding="{Binding Case}"/>
-                    <GridViewColumn Header="Исполнитель" DisplayMemberBinding="{Binding Employee}"/>
+                    <GridViewColumn Header="Тип документа" DisplayMemberBinding="{Binding DocType}"/>
+                    <GridViewColumn Header="Задача" DisplayMemberBinding="{Binding NameTask}"/>
+                    <GridViewColumn Header="Описание задачи" DisplayMemberBinding="{Binding ContentTask}"/>
+                    <GridViewColumn Header="Состояние задачи" DisplayMemberBinding="{Binding TaskStage}"/>
+                    <GridViewColumn Header="Дело" DisplayMemberBinding="{Binding NumberCase}"/>
+                    <GridViewColumn Header="Опиание дела" DisplayMemberBinding="{Binding DesriptionCase}"/>
+                    <GridViewColumn Header="Исполнитель" DisplayMemberBinding="{Binding Executor}"/>
                     <GridViewColumn Header="Комментарий" DisplayMemberBinding="{Binding Comment}"/>
-                    <GridViewColumn Header="Отправитель" DisplayMemberBinding="{Binding User}"/>
+                    <GridViewColumn Header="Дата отправки" DisplayMemberBinding="{Binding DateOfFormation}"/>
+                    <GridViewColumn Header="Отправитель" DisplayMemberBinding="{Binding Sender}"/>
                 </GridView>
             </ListView.View>
         </ListView>

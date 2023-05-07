@@ -13,14 +13,14 @@ namespace PASEDM.Models
             _deadlinesProvider = deadlinesProvider;
         }
 
-        public Deadlines(int iD, string nameTerm, string term)
+        public Deadlines(int id, string nameTerm, string term)
         {
-            ID = iD;
+            Id = id;
             NameTerm = nameTerm;
             Term = term;
         }
 
-        public int ID { get; }
+        public int Id { get; }
         public string NameTerm { get; }
         public string Term { get; }
         public Task<IEnumerable<Deadlines>> GetAllDeadlines()

@@ -4,9 +4,8 @@ using System.Threading.Tasks;
 
 namespace PASEDM.Services.PASEDMProviders.InterfaceProviders
 {
-    public interface IRecipientProvider
+    public interface ISenderProvider
     {
-        Task<IEnumerable<Recipient>> GetAllRecipient(User user);
-        Task<Recipient> GetRecipient(Recipient recipient);
+        Task<IEnumerable<Sender>> GetAllSender(User user);
     }
 }

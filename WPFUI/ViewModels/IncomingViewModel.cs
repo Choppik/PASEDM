@@ -19,20 +19,20 @@ namespace PASEDM.ViewModels
         private PASEDMDbContextFactory _contextFactory;
         private readonly UserStore _userStore;
 
-        private ObservableCollection<Card> _cards;
-        private ICardProvider _cardProvider;
-        private Card _currentCard;
-        public IEnumerable<Card> Cards => _cards;
-        public Card CurrentCard
+        private ObservableCollection<Recipient> _recipients;
+        private IRecipientProvider _recipientProvider;
+        private Recipient _currentRecipient;
+        public IEnumerable<Recipient> Recipients => _recipients;
+        public Recipient CurrentRecipient
         {
             get
             {
-                return _currentCard;
+                return _currentRecipient;
             }
             set
             {
-                _currentCard = value;
-                OnPropertyChanged(nameof(CurrentCard));
+                _currentRecipient = value;
+                OnPropertyChanged(nameof(CurrentRecipient));
             }
         }
         public ICommand NavigateCreateCardCommand { get; }
@@ -48,13 +48,13 @@ namespace PASEDM.ViewModels
         {
             try
             {
-                _cardProvider = new DatabaseCardProvider(_contextFactory);
-                _cards = new ObservableCollection<Card>();
-                _currentCard = new Card(_cardProvider);
+                _recipientProvider = new DatabaseRecipientProvider(_contextFactory);
+                _recipients = new ObservableCollection<Recipient>();
+                _currentRecipient = new Recipient(_recipientProvider);
 
-                foreach (var item in await _currentCard.GetAllCardForRecipient(_userStore.CurrentUser))
+                foreach (var item in await _currentRecipient.GetAllRecipient(_userStore.CurrentUser))
                 {
-                    _cards.Add(item);
+                    _recipients.Add(item);
                 }
             }
             catch (Exception)

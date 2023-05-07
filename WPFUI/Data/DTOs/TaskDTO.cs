@@ -11,6 +11,6 @@ namespace PASEDM.Data.DTOs
         public string Contents { get; set; }
         public int? TaskStagesID { get; set; }
         public TaskStagesDTO TaskStages { get; set; }
-        public ICollection<RecipientDTO> Recipients { get; set; }
+        public ICollection<CardDTO> Cards { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using PASEDM.Data.DTOs;
 using PASEDM.Data;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
@@ -17,65 +16,25 @@ namespace PASEDM.Services.PASEDMProviders
         {
             _dbContextFactory = dbContextFactory;
         }
-        public async Task<IEnumerable<Card>> GetAllCardForSender(User user)
+        public async Task<Card> GetCard(Card card)
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
-                IEnumerable<CardDTO> cardDTOs = await context.Cards
-                    .Where(p => p.User.UserName == user.UserName)
-                    .Include(u => u.Document)
-                    .Include(u => u.DocumentTypes)
-                    .Include(u => u.Case)
-                    .Include(u => u.User)
-                    .Include(u => u.Employee)
-                    .Include(u => u.Recipient).ThenInclude(u => u.User)
-                    .Include(u => u.Recipient).ThenInclude(u => u.Task)
-                    .ToListAsync();
-
-                return cardDTOs.Select(u => ToCard(u));
-            }
-        }
-        public async Task<IEnumerable<Card>> GetAllCardForRecipient(User user)
-        {
-            using (PASEDMContext context = _dbContextFactory.CreateDbContext())
-            {
-                IEnumerable<CardDTO> cardDTOs = await context.Cards
-                    .Where(p => p.Recipient.User.UserName == user.UserName)
-                    .Include(u => u.Document)
-                    .Include(u => u.DocumentTypes)
-                    .Include(u => u.Case)
-                    .Include(u => u.User)
-                    .Include(u => u.Employee)
-                    .Include(u => u.Recipient).ThenInclude(u => u.User)
-                    .Include(u => u.Recipient).ThenInclude(u => u.Task)
-                    .ToListAsync();
-
-                return cardDTOs.Select(u => ToCard(u));
-            }
-        }
-        private static Card ToCard(CardDTO dto)
-        {
-            return new Card(dto.NumberCard, dto.NameCard, dto.Comment, dto.Document.NameDoc, dto.DocumentTypes.Name, dto.Case.NumberCase, dto.User.UserName, dto.Employee.FullName, dto.Recipient.User.UserName, dto.Recipient.Task.NameTask);
-        }
-/*        public async Task<Document> GetDoc(Document document)
-        {
-            using (PASEDMContext context = _dbContextFactory.CreateDbContext())
-            {
-                DocumentDTO docDTO = await context.Documents
-                    .Where(u => u.NameDoc == document.NameDoc)
+                CardDTO cardDTO = await context.Cards
+                    .Where(u => u.NameCard == card.NameCard)
                     .FirstOrDefaultAsync();
 
-                if (docDTO == null)
+                if (cardDTO == null)
                 {
                     return null;
                 }
 
-                return ToDefiniteDoc(docDTO);
+                return ToDefiniteCard(cardDTO);
             }
         }
-        private static Document ToDefiniteDoc(DocumentDTO dto)
+        private static Card ToDefiniteCard(CardDTO dto)
         {
-            return new Document(dto.ID, dto.NameDoc);
-        }*/
+            return new Card(dto.ID, dto.NameCard);
+        }
     }
 }

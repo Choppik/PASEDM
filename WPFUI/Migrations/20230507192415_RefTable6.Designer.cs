@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PASEDM.Data;
 
@@ -11,9 +12,11 @@ using PASEDM.Data;
 namespace PASEDM.Migrations
 {
     [DbContext(typeof(PASEDMContext))]
-    partial class PASEDMContextModelSnapshot : ModelSnapshot
+    [Migration("20230507192415_RefTable6")]
+    partial class RefTable6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -354,9 +357,12 @@ namespace PASEDM.Migrations
                     b.Property<int?>("RecipientID")
                         .HasColumnType("int");
 
+                    b.Property<int>("RecipientsID")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
-                    b.HasIndex("RecipientID");
+                    b.HasIndex("RecipientsID");
 
                     b.ToTable("Senders");
                 });
@@ -562,11 +568,13 @@ namespace PASEDM.Migrations
 
             modelBuilder.Entity("PASEDM.Data.DTOs.SenderDTO", b =>
                 {
-                    b.HasOne("PASEDM.Data.DTOs.RecipientDTO", "Recipient")
+                    b.HasOne("PASEDM.Data.DTOs.RecipientDTO", "Recipients")
                         .WithMany("Senders")
-                        .HasForeignKey("RecipientID");
+                        .HasForeignKey("RecipientsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Recipient");
+                    b.Navigation("Recipients");
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.TaskDTO", b =>

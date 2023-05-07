@@ -13,13 +13,13 @@ namespace PASEDM.Models
             _docTypProvider = docTypProvider;
         }
 
-        public DocumentTypes(int iD, string name)
+        public DocumentTypes(int id, string name)
         {
-            ID = iD;
+            Id = id;
             Name = name;
         }
 
-        public int ID { get; }
+        public int Id { get; }
         public string Name { get; }
         public Task<IEnumerable<DocumentTypes>> GetAllDocTyp()
         {

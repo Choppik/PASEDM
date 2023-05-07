@@ -1,15 +1,31 @@
-﻿using System;
+﻿using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PASEDM.Models
 {
     public class DocStages
     {
+        private IDocStagesProvider _docStagesProvider;
+
+        public DocStages(IDocStagesProvider docStagesProvider)
+        {
+            _docStagesProvider = docStagesProvider;
+        }
+
+        public DocStages(int id, string nameDocStage, int docStagesValue)
+        {
+            Id = id;
+            NameDocStage = nameDocStage;
+            DocStagesValue = docStagesValue;
+        }
+
         public int Id { get; }
         public string NameDocStage { get; }
         public int DocStagesValue { get; }
+        public Task<IEnumerable<DocStages>> GetAllDocStages()
+        {
+            return _docStagesProvider.GetAllDocStages();
+        }
     }
 }

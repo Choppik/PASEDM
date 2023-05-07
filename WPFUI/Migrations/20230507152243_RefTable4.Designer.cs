@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PASEDM.Data;
 
@@ -11,9 +12,11 @@ using PASEDM.Data;
 namespace PASEDM.Migrations
 {
     [DbContext(typeof(PASEDMContext))]
-    partial class PASEDMContextModelSnapshot : ModelSnapshot
+    [Migration("20230507152243_RefTable4")]
+    partial class RefTable4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -351,12 +354,17 @@ namespace PASEDM.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int?>("RecipientID")
+                    b.Property<int?>("CardID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserDTOID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("RecipientID");
+                    b.HasIndex("CardID");
+
+                    b.HasIndex("UserDTOID");
 
                     b.ToTable("Senders");
                 });
@@ -493,7 +501,7 @@ namespace PASEDM.Migrations
                         .HasForeignKey("TaskID");
 
                     b.HasOne("PASEDM.Data.DTOs.UserDTO", "User")
-                        .WithMany("Cards")
+                        .WithMany()
                         .HasForeignKey("UserID");
 
                     b.Navigation("Case");
@@ -552,7 +560,7 @@ namespace PASEDM.Migrations
                         .HasForeignKey("CardID");
 
                     b.HasOne("PASEDM.Data.DTOs.UserDTO", "User")
-                        .WithMany()
+                        .WithMany("Recipients")
                         .HasForeignKey("UserID");
 
                     b.Navigation("Card");
@@ -562,11 +570,15 @@ namespace PASEDM.Migrations
 
             modelBuilder.Entity("PASEDM.Data.DTOs.SenderDTO", b =>
                 {
-                    b.HasOne("PASEDM.Data.DTOs.RecipientDTO", "Recipient")
+                    b.HasOne("PASEDM.Data.DTOs.CardDTO", "Card")
                         .WithMany("Senders")
-                        .HasForeignKey("RecipientID");
+                        .HasForeignKey("CardID");
 
-                    b.Navigation("Recipient");
+                    b.HasOne("PASEDM.Data.DTOs.UserDTO", null)
+                        .WithMany("Senders")
+                        .HasForeignKey("UserDTOID");
+
+                    b.Navigation("Card");
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.TaskDTO", b =>
@@ -601,6 +613,8 @@ namespace PASEDM.Migrations
             modelBuilder.Entity("PASEDM.Data.DTOs.CardDTO", b =>
                 {
                     b.Navigation("Recipients");
+
+                    b.Navigation("Senders");
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.CaseDTO", b =>
@@ -635,11 +649,6 @@ namespace PASEDM.Migrations
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("PASEDM.Data.DTOs.RecipientDTO", b =>
-                {
-                    b.Navigation("Senders");
-                });
-
             modelBuilder.Entity("PASEDM.Data.DTOs.RoleDTO", b =>
                 {
                     b.Navigation("Users");
@@ -667,7 +676,9 @@ namespace PASEDM.Migrations
 
             modelBuilder.Entity("PASEDM.Data.DTOs.UserDTO", b =>
                 {
-                    b.Navigation("Cards");
+                    b.Navigation("Recipients");
+
+                    b.Navigation("Senders");
                 });
 #pragma warning restore 612, 618
         }

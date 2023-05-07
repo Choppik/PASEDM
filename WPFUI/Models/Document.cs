@@ -12,59 +12,46 @@ namespace PASEDM.Models
         private readonly IDocumentCreator _documentCreator;
         private readonly IDocProvider _docProvider;
 
-        public Document(IDocumentCreator documentCreator)
-        {
-            _documentCreator = documentCreator;
-        }
+        public Document() { }
+        public Document(string nameDoc, int registrationNumber, DateTime dateCreateDoc, string summary, string path, int? termID, int? secrecyStampID, int? docStagesID)
+            : this(default, nameDoc, registrationNumber, dateCreateDoc, summary, path, termID, secrecyStampID, docStagesID)
+        { }
 
-        public Document(IDocProvider docProvider)
-        {
-            _docProvider = docProvider;
-        }
+        public Document(int id, string nameDoc) 
+            : this(id, nameDoc, default, default, "", "", default, default, default)
+        { }
+        public Document(string nameDoc)
+            : this(default, nameDoc, default, default, "", "", default, default, default)
+        { }
 
-        public Document(int id, string nameDoc)
+        public Document(int id, string nameDoc, int registrationNumber, DateTime dateCreateDoc, string summary, string path, int? termID, int? secrecyStampID, int? docStagesID)
         {
             Id = id;
-            NameDoc = nameDoc;
-        }
-        public Document(string nameDoc)
-        {
-            NameDoc = nameDoc;
-        }
-
-        public Document(string nameDoc, int registrationNumber, DateTime dateCreateDoc, string summary, string path, int? termID)
-        {
             NameDoc = nameDoc;
             RegistrationNumber = registrationNumber;
             DateCreateDoc = dateCreateDoc;
             Summary = summary;
             Path = path;
             TermID = termID;
-        }
-        public Document(
-            int id, 
-            string nameDoc, 
-            int registrationNumber, 
-            DateTime dateCreateDoc, 
-            string summary,
-            string path, 
-            int? termID) 
-            : this(nameDoc, registrationNumber, dateCreateDoc, summary, path, termID)
-        {
-            Id = id;
+            SecrecyStampID = secrecyStampID;
+            DocStagesID = docStagesID;
         }
 
-        //private readonly IDocumentProvider _documentProviders;
-        //private readonly IDocumentConflictValidator _documentConflictValidator;
+        public Document(IDocumentCreator documentCreator, IDocProvider docProvider)
+        {
+            _documentCreator = documentCreator;
+            _docProvider = docProvider;
+        }
+
         public int Id { get; }
         public string NameDoc { get; }
         public int RegistrationNumber { get; }
         public DateTime DateCreateDoc { get; }
         public string Summary { get; }
-        public string ConditionDoc { get; }
-        public string SecrecyStamp { get; }
         public string Path { get; }
         public int? TermID { get; }
+        public int? SecrecyStampID { get; }
+        public int? DocStagesID { get; }
 
         public async Task AddDoc(Document document)
         {
