@@ -19,20 +19,20 @@ namespace PASEDM.ViewModels
         private PASEDMDbContextFactory _contextFactory;
         private readonly UserStore _userStore;
 
-        private ObservableCollection<Recipient> _recipients;
-        private IRecipientProvider _recipientProvider;
-        private Recipient _currentRecipient;
-        public IEnumerable<Recipient> Recipients => _recipients;
-        public Recipient CurrentRecipient
+        private ObservableCollection<MoveUser> _moveUser;
+        private IMoveUserProvider _moveUserProvider;
+        private MoveUser _currentMoveUser;
+        public IEnumerable<MoveUser> MoveUsers => _moveUser;
+        public MoveUser CurrentMoveUser
         {
             get
             {
-                return _currentRecipient;
+                return _currentMoveUser;
             }
             set
             {
-                _currentRecipient = value;
-                OnPropertyChanged(nameof(CurrentRecipient));
+                _currentMoveUser = value;
+                OnPropertyChanged(nameof(CurrentMoveUser));
             }
         }
         public ICommand NavigateCreateCardCommand { get; }
@@ -40,21 +40,21 @@ namespace PASEDM.ViewModels
         {
             _contextFactory = deferredContextFactory;
             _userStore = userStore;
-            GetRecipients();
+            GetMoveUser();
 
             NavigateCreateCardCommand = new NavigateCommand(navigationService);
         }
-        private async void GetRecipients()
+        private async void GetMoveUser()
         {
             try
             {
-                _recipientProvider = new DatabaseRecipientProvider(_contextFactory);
-                _recipients = new ObservableCollection<Recipient>();
-                _currentRecipient = new Recipient(_recipientProvider);
+                _moveUserProvider = new DatabaseMoveUserProvider(_contextFactory);
+                _moveUser = new ObservableCollection<MoveUser>();
+                _currentMoveUser = new MoveUser(_moveUserProvider);
 
-                foreach (var item in await _currentRecipient.GetAllRecipient(_userStore.CurrentUser))
+                foreach (var item in await _currentMoveUser.GetAllMoveUserRecipient(new(1), _userStore.CurrentUser))
                 {
-                    _recipients.Add(item);
+                    _moveUser.Add(item);
                 }
             }
             catch (Exception)

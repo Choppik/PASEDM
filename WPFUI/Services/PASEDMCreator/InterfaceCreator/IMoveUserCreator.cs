@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace PASEDM.Services.PASEDMCreator.InterfaceCreator
 {
-    public interface ISenderCreator
+    public interface IMoveUserCreator
     {
-        Task AddSender(Recipient recipient);
+        Task AddMoveUser(MoveUser moveUser);
     }
 }

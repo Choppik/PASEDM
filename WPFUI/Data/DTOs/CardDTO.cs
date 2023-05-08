@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PASEDM.Data.DTOs
@@ -24,6 +23,7 @@ namespace PASEDM.Data.DTOs
         public EmployeeDTO Employee { get; set; }
         public int? UserID { get; set; }
         public UserDTO User { get; set; }
-        public ICollection<RecipientDTO> Recipients { get; set; }
+        public int? RecipientID { get; set; }
+        public RecipientDTO Recipient { get; set; }
     }
 }

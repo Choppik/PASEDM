@@ -6,23 +6,23 @@ using PASEDM.Services.PASEDMCreator.InterfaceCreator;
 
 namespace PASEDM.Services.PASEDMCreator
 {
-    public class DatabaseSenderCreator : ISenderCreator
+    public class DatabaseMoveUserCreator : IMoveUserCreator
     {
         private readonly PASEDMDbContextFactory _dbContextFactory;
 
-        public DatabaseSenderCreator(PASEDMDbContextFactory dbContextFactory)
+        public DatabaseMoveUserCreator(PASEDMDbContextFactory dbContextFactory)
         {
             _dbContextFactory = dbContextFactory;
         }
 
-        public async Task AddSender(Recipient recipient)
+        public async Task AddMoveUser(MoveUser moveUser)
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
                 try
                 {
-                    SenderDTO senderDTO = ToSenderDTO(recipient);
-                    context.Senders.Add(senderDTO);
+                    MoveUserDTO moveUserDTO = ToMoveUserDTO(moveUser);
+                    context.MoveUsers.Add(moveUserDTO);
                 }
                 finally
                 {
@@ -31,11 +31,12 @@ namespace PASEDM.Services.PASEDMCreator
             }
         }
 
-        private static SenderDTO ToSenderDTO(Recipient recipient)
+        private static MoveUserDTO ToMoveUserDTO(MoveUser moveUser)
         {
-            return new SenderDTO()
+            return new MoveUserDTO()
             {
-                RecipientID = recipient.Id
+                TypeUserID = moveUser.TypeUserID,
+                CardID = moveUser.CardID
             };
         }
     }

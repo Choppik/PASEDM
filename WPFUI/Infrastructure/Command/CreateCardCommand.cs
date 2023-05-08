@@ -46,12 +46,13 @@ namespace PASEDM.Infrastructure.Command
 
         private IDocumentCreator _documentCreator;
         private IRecipientCreator _recipientCreator;
-        private ISenderCreator _senderCreator;
+        private IMoveUserCreator _moveUserCreator;
         private ICardCreator _cardCreator;
 
         private IDocProvider _docProvider;
         private IRecipientProvider _recipientProvider;
         private ICardProvider _cardProvider;
+        private ITypeUserProvider _typeUserProvider;
 
         public CreateCardCommand(CreateCardViewModel createCardViewModel, PASEDMDbContextFactory deferredContextFactory, INavigationService navigationService)
         {
@@ -65,17 +66,19 @@ namespace PASEDM.Infrastructure.Command
         {
             _documentCreator = new DatabaseDocumentCreator(_deferredContextFactory);
             _recipientCreator = new DatabaseRecipientCreator(_deferredContextFactory);
-            _senderCreator = new DatabaseSenderCreator(_deferredContextFactory);
+            _moveUserCreator = new DatabaseMoveUserCreator(_deferredContextFactory);
             _cardCreator = new DatabaseCardCreator(_deferredContextFactory);
 
             _docProvider = new DatabaseDocProvider(_deferredContextFactory);
             _recipientProvider = new DatabaseRecipientProvider(_deferredContextFactory);
             _cardProvider = new DatabaseCardProvider(_deferredContextFactory);
+            _typeUserProvider = new DatabaseTypeUserProvider(_deferredContextFactory);
 
             Document document = new(_documentCreator, _docProvider);
             Recipient recipient = new(_recipientCreator, _recipientProvider);
-            Sender sender = new(_senderCreator);
+            TypeUser typeUser = new(_typeUserProvider);
             Card card = new(_cardCreator, _cardProvider);
+            MoveUser moveUser = new(_moveUserCreator);
 
             _numberCard = _createCardViewModel.NumberCard;
             _nameCard = _createCardViewModel.NameCard;
@@ -102,13 +105,16 @@ namespace PASEDM.Infrastructure.Command
 
             //Создание задачи
 
-            await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB.Id, _documentType.Id, _task.Id, _case.Id, _executor.Id, _createCardUser.Id));
+            await recipient.AddRecipient(new(_recipient.Id));
+            var recipientDB = await recipient.GetRecipient(new(_recipient.Id));//Надо разобраться
+
+            await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB.Id, _documentType.Id, _task.Id, _case.Id, _executor.Id, _createCardUser.Id, recipientDB.Id));
             var cardDB = await card.GetCard(new(_nameCard));
 
-            await recipient.AddRecipient(new(_recipient.Id, cardDB.Id));
-            var recipientDB = await recipient.GetRecipient(new(cardDB.Id));
-
-            await sender.AddSender(recipientDB);
+            foreach(var item in await typeUser.GetAllTypeUsers())
+            {
+                await moveUser.AddMoveUser(new(item.Id, cardDB.Id));
+            }
 
             _navigationService.Navigate();
             MessageBox.Show("Карта создана");

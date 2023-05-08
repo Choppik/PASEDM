@@ -12,14 +12,14 @@ namespace PASEDM.Models
 
         public Card() { }
 
-        public Card(int numberCard, string nameCard, string comment, DateTime dateOfFormation, int? documentID, int? documentTypesID, int? taskID, int? caseID, int? employeeID, int? senderID) 
-            :this(default, numberCard, nameCard, comment, dateOfFormation, documentID, documentTypesID, taskID, caseID, employeeID, senderID)
+        public Card(int numberCard, string nameCard, string comment, DateTime dateOfFormation, int? documentID, int? documentTypesID, int? taskID, int? caseID, int? employeeID, int? userID, int? recipientID) 
+            :this(default, numberCard, nameCard, comment, dateOfFormation, documentID, documentTypesID, taskID, caseID, employeeID, userID, recipientID)
         { }
         public Card(int id, string nameCard)
-            : this(id, default, nameCard, "", default, default, default, default, default, default, default)
+            : this(id, default, nameCard, "", default, default, default, default, default, default, default, default)
         { }
         public Card(string nameCard)
-            : this(default, default, nameCard, "", default, default, default, default, default, default, default)
+            : this(default, default, nameCard, "", default, default, default, default, default, default, default, default)
         { }
 
 
@@ -29,7 +29,8 @@ namespace PASEDM.Models
             _cardCreator = cardCreator;
             _cardProvider = cardProvider;
         }
-        public Card(int id, int numberCard, string nameCard, string comment, DateTime dateOfFormation, int? documentID, int? documentTypesID, int? taskID, int? caseID, int? employeeID, int? userID)
+
+        public Card(int id, int numberCard, string nameCard, string comment, DateTime dateOfFormation, int? documentID, int? documentTypesID, int? taskID, int? caseID, int? employeeID, int? userID, int? recipientID)
         {
             Id = id;
             NumberCard = numberCard;
@@ -42,6 +43,7 @@ namespace PASEDM.Models
             CaseID = caseID;
             EmployeeID = employeeID;
             UserID = userID;
+            RecipientID = recipientID;
         }
 
         public int Id { get; }
@@ -55,6 +57,7 @@ namespace PASEDM.Models
         public int? CaseID { get; }
         public int? EmployeeID { get; }
         public int? UserID { get; }
+        public int? RecipientID { get; }
 
         public async Task CreateCard(Card card)
         {

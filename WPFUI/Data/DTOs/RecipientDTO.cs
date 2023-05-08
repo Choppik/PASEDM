@@ -9,8 +9,6 @@ namespace PASEDM.Data.DTOs
         public int ID { get; set; }
         public int? UserID { get; set; }
         public UserDTO User { get; set; }
-        public int? CardID { get; set; }
-        public CardDTO Card { get; set; }
-        public ICollection<SenderDTO> Senders { get; set; }
+        public ICollection<CardDTO> Cards { get; set; }
     }
 }

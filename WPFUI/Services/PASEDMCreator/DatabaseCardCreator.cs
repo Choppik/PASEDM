@@ -45,6 +45,7 @@ namespace PASEDM.Services.PASEDMCreator
                 CaseID = card.CaseID,
                 EmployeeID = card.EmployeeID,
                 UserID = card.UserID,
+                RecipientID = card.RecipientID
             };
         }
     }

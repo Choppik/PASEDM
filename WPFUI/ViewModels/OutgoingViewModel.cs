@@ -19,20 +19,20 @@ namespace PASEDM.ViewModels
         private PASEDMDbContextFactory _contextFactory;
         private readonly UserStore _userStore;
 
-        private ObservableCollection<Sender> _senders;
-        private ISenderProvider _senderProvider;
-        private Sender _currentSender;
-        public IEnumerable<Sender> Senders => _senders;
-        public Sender CurrentSender
+        private ObservableCollection<MoveUser> _moveUser;
+        private IMoveUserProvider _moveUserProvider;
+        private MoveUser _currentMoveUser;
+        public IEnumerable<MoveUser> MoveUsers => _moveUser;
+        public MoveUser CurrentMoveUser
         {
             get
             {
-                return _currentSender;
+                return _currentMoveUser;
             }
             set
             {
-                _currentSender = value;
-                OnPropertyChanged(nameof(CurrentSender));
+                _currentMoveUser = value;
+                OnPropertyChanged(nameof(CurrentMoveUser));
             }
         }
         public ICommand NavigateCreateCardCommand { get; }
@@ -41,21 +41,21 @@ namespace PASEDM.ViewModels
             _contextFactory = deferredContextFactory;
             _userStore = userStore;
 
-            GetSenders();
+            GetMoveUser();
 
             NavigateCreateCardCommand = new NavigateCommand(navigationService);
         }
-        private async void GetSenders()
+        private async void GetMoveUser()
         {
             try
             {
-                _senderProvider = new DatabaseSenderProvider(_contextFactory);
-                _senders = new ObservableCollection<Sender>();
-                _currentSender = new Sender(_senderProvider);
+                _moveUserProvider = new DatabaseMoveUserProvider(_contextFactory);
+                _moveUser = new ObservableCollection<MoveUser>();
+                _currentMoveUser = new MoveUser(_moveUserProvider);
 
-                foreach (var item in await _currentSender.GetAllSender(_userStore.CurrentUser))
+                foreach (var item in await _currentMoveUser.GetAllMoveUserSender(new(2), _userStore.CurrentUser))
                 {
-                    _senders.Add(item);
+                    _moveUser.Add(item);
                 }
             }
             catch (Exception)

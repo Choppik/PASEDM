@@ -36,8 +36,7 @@ namespace PASEDM.Services.PASEDMCreator
             return new RecipientDTO()
             {
                 ID = recipient.Id,
-                UserID = recipient.UserID,
-                CardID = recipient.CardID
+                UserID = recipient.UserID
             };
         }
     }

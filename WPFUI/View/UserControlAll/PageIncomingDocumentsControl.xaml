@@ -22,7 +22,7 @@
 
         <TextBox Grid.Row="1" Text="Поиск"/>
 
-        <ListView Grid.Row="2" ItemsSource="{Binding Recipients}">
+        <ListView Grid.Row="2" ItemsSource="{Binding MoveUsers}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Номер карты" DisplayMemberBinding="{Binding NumberCard}"/>
