@@ -11,7 +11,6 @@ using PASEDM.ViewModels;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Navigation;
 
 namespace PASEDM.Infrastructure.Command
 {
@@ -106,7 +105,7 @@ namespace PASEDM.Infrastructure.Command
             //Создание задачи
 
             await recipient.AddRecipient(new(_recipient.Id));
-            var recipientDB = await recipient.GetRecipient(new(_recipient.Id));//Надо разобраться
+            var recipientDB = await recipient.GetRecipient(new(_recipient.Id));
 
             await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB.Id, _documentType.Id, _task.Id, _case.Id, _executor.Id, _createCardUser.Id, recipientDB.Id));
             var cardDB = await card.GetCard(new(_nameCard));

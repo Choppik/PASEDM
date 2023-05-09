@@ -21,6 +21,7 @@ namespace PASEDM.Services.PASEDMProviders
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
                 RecipientDTO recipientDTO = await context.Recipients
+                    .OrderByDescending(u => u.ID)
                     .Where(u => u.UserID == recipient.UserID)
                     .FirstOrDefaultAsync();
 
