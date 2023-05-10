@@ -19,13 +19,15 @@ namespace PASEDM.Infrastructure.Command
         private DateTime _dateOfFormation;
         private DateTime _dateOfFormationDocument;
 
-        private string _nameCard;
         private int _numberCard;
+        private int _docRegistrationNumber;
+        private string _nameCard;
         private string _summary;
         private string _comment;
         private string _filePath;
         private string _docName;
-        private int _docRegistrationNumber;
+        private string _nameTask;
+        private string _contentTask;
 
         private User _createCardUser;
 
@@ -47,11 +49,13 @@ namespace PASEDM.Infrastructure.Command
         private IRecipientCreator _recipientCreator;
         private IMoveUserCreator _moveUserCreator;
         private ICardCreator _cardCreator;
+        private ITaskCreator _taskCreator;
 
         private IDocProvider _docProvider;
         private IRecipientProvider _recipientProvider;
         private ICardProvider _cardProvider;
         private ITypeUserProvider _typeUserProvider;
+        private ITasksProvider _tasksProvider;
 
         public CreateCardCommand(CreateCardViewModel createCardViewModel, PASEDMDbContextFactory deferredContextFactory, INavigationService navigationService)
         {
@@ -67,17 +71,20 @@ namespace PASEDM.Infrastructure.Command
             _recipientCreator = new DatabaseRecipientCreator(_deferredContextFactory);
             _moveUserCreator = new DatabaseMoveUserCreator(_deferredContextFactory);
             _cardCreator = new DatabaseCardCreator(_deferredContextFactory);
+            _taskCreator = new DatabaseTaskCreator(_deferredContextFactory);
 
             _docProvider = new DatabaseDocProvider(_deferredContextFactory);
             _recipientProvider = new DatabaseRecipientProvider(_deferredContextFactory);
             _cardProvider = new DatabaseCardProvider(_deferredContextFactory);
             _typeUserProvider = new DatabaseTypeUserProvider(_deferredContextFactory);
+            _tasksProvider = new DatabaseTasksProvider(_deferredContextFactory);
 
             Document document = new(_documentCreator, _docProvider);
             Recipient recipient = new(_recipientCreator, _recipientProvider);
             TypeUser typeUser = new(_typeUserProvider);
             Card card = new(_cardCreator, _cardProvider);
             MoveUser moveUser = new(_moveUserCreator);
+            Tasks tasks = new(_taskCreator, _tasksProvider);
 
             _numberCard = _createCardViewModel.NumberCard;
             _nameCard = _createCardViewModel.NameCard;
@@ -88,10 +95,12 @@ namespace PASEDM.Infrastructure.Command
             _summary = _createCardViewModel.Summary;
             _docStages = _createCardViewModel.CurrentDocStages;
             _secrecyStamps = _createCardViewModel.CurrentSecrecyStamp;
-            _taskStages = _createCardViewModel.CurrentTaskStages;
             _filePath = "...filePath";
             _term = _createCardViewModel.CurrentTerm;
             _task = _createCardViewModel.CurrentTask;
+            _taskStages = _createCardViewModel.CurrentTaskStages;
+            _nameTask = _createCardViewModel.NameTask;
+            _contentTask = _createCardViewModel.ContentTask;
             _recipient = _createCardViewModel.CurrentRecipient;
             _case = _createCardViewModel.CurrentCase;
             _documentType = _createCardViewModel.CurrentDocTypes;
@@ -102,12 +111,22 @@ namespace PASEDM.Infrastructure.Command
             await document.AddDoc(new(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _filePath, _term.Id, _secrecyStamps.Id, _docStages.Id));
             var docDB = await document.GetDoc(new(_docName));
 
-            //Создание задачи
-
             await recipient.AddRecipient(new(_recipient.Id));
             var recipientDB = await recipient.GetRecipient(new(_recipient.Id));
 
-            await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB.Id, _documentType.Id, _task.Id, _case.Id, _executor.Id, _createCardUser.Id, recipientDB.Id));
+            if (_createCardViewModel.IsCheckedTask)
+            {
+                await tasks.EditTask(_task);
+                await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB.Id, _documentType.Id, _task.Id, _case.Id, _executor.Id, _createCardUser.Id, recipientDB.Id));
+            }
+            else
+            {
+                await tasks.AddTask(new(_nameTask, _contentTask, _taskStages.Id));
+                var taskDB = await tasks.GetTask(new(_nameTask, _contentTask, _taskStages.Id));
+
+                await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB.Id, _documentType.Id, taskDB.Id, _case.Id, _executor.Id, _createCardUser.Id, recipientDB.Id));
+            }
+
             var cardDB = await card.GetCard(new(_nameCard));
 
             foreach(var item in await typeUser.GetAllTypeUsers())

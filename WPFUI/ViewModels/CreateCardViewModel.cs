@@ -53,13 +53,30 @@ namespace PASEDM.ViewModels
         private DateTime _dateOfFormation = DateTime.Now;
         private DateTime _dateOfFormationDocument = DateTime.Now;
 
-        private string _nameCard;
         private int _numberCard;
+        private int _docRegistrationNumber;
+        private string _nameCard;
         private string _summary;
         private string _comment;
         //private string _filePath;
         private string _docName;
-        private int _docRegistrationNumber;
+        private string _nameTask;
+        private string _contentTask;
+
+        private bool _isCheckedTask = true;
+        public bool IsCheckedTask
+        {
+            get
+            {
+                return _isCheckedTask;
+            }
+            set
+            {
+                _isCheckedTask = value;
+                OnPropertyChanged(nameof(IsCheckedTask));
+            }
+        }
+
         public IEnumerable<SecrecyStamps> ListSecrecyStamp => _secrecyStamp;
         public IEnumerable<DocStages> ListDocStages => _docStages;
         public IEnumerable<TaskStages> ListTaskStages => _taskStages;
@@ -196,16 +213,17 @@ namespace PASEDM.ViewModels
         public User CurrentUser => _userStore.CurrentUser;
 
         public string UserCreateCard => CurrentUser.UserName;
-        public string NameCard
+
+        public int RegistrationNumber
         {
             get
             {
-                return _nameCard;
+                return _docRegistrationNumber;
             }
             set
             {
-                _nameCard = value;
-                OnPropertyChanged(nameof(NameCard));
+                _docRegistrationNumber = value;
+                OnPropertyChanged(nameof(RegistrationNumber));
             }
         }
         public int NumberCard
@@ -218,6 +236,18 @@ namespace PASEDM.ViewModels
             {
                 _numberCard = value;
                 OnPropertyChanged(nameof(NumberCard));
+            }
+        }
+        public string NameCard
+        {
+            get
+            {
+                return _nameCard;
+            }
+            set
+            {
+                _nameCard = value;
+                OnPropertyChanged(nameof(NameCard));
             }
         }
         public string Comment
@@ -244,18 +274,6 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(Document));
             }
         }
-        public int RegistrationNumber
-        {
-            get
-            {
-                return _docRegistrationNumber;
-            }
-            set
-            {
-                _docRegistrationNumber = value;
-                OnPropertyChanged(nameof(RegistrationNumber));
-            }
-        }
         public string Summary
         {
             get
@@ -266,6 +284,30 @@ namespace PASEDM.ViewModels
             {
                 _summary = value;
                 OnPropertyChanged(nameof(Summary));
+            }
+        }
+        public string NameTask
+        {
+            get
+            {
+                return _nameTask;
+            }
+            set
+            {
+                _nameTask = value;
+                OnPropertyChanged(nameof(NameTask));
+            }
+        }
+        public string ContentTask
+        {
+            get
+            {
+                return _contentTask;
+            }
+            set
+            {
+                _contentTask = value;
+                OnPropertyChanged(nameof(ContentTask));
             }
         }
 

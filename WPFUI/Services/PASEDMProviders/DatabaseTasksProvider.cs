@@ -29,7 +29,49 @@ namespace PASEDM.Services.PASEDMProviders
 
         private static Tasks ToTasks(TaskDTO dto)
         {
-            return new Tasks(dto.ID, dto.NameTask, dto.Contents);
+            return new Tasks(dto.ID, dto.NameTask, dto.Contents, dto.TaskStagesID);
+        }
+
+        public async Task EditTask(Tasks task)
+        {
+            using (PASEDMContext context = _dbContextFactory.CreateDbContext())
+            {
+                try
+                {
+                    TaskDTO taskDTO = await context.Tasks
+                        .Where(t => t.ID == task.Id)
+                        .FirstOrDefaultAsync();
+
+                    if (taskDTO != null)
+                    {
+                        taskDTO.TaskStagesID = task.TaskStageID;
+                    }
+                }
+                finally
+                {
+                    await context.SaveChangesAsync();
+                }
+            }
+        }
+        public async Task<Tasks> GetTask(Tasks tasks)
+        {
+            using (PASEDMContext context = _dbContextFactory.CreateDbContext())
+            {
+                TaskDTO taskDTO = await context.Tasks
+                    .Where(u => u.NameTask == tasks.NameTask)
+                    .FirstOrDefaultAsync();
+
+                if (taskDTO == null)
+                {
+                    return null;
+                }
+
+                return ToDefiniteTask(taskDTO);
+            }
+        }
+        private static Tasks ToDefiniteTask(TaskDTO dto)
+        {
+            return new Tasks(dto.ID, dto.NameTask, dto.Contents, dto.TaskStagesID);
         }
     }
 }
