@@ -116,7 +116,7 @@ namespace PASEDM.Infrastructure.Command
 
             if (_createCardViewModel.IsCheckedTask)
             {
-                await tasks.EditTask(_task);
+                await tasks.EditTask(new(_task.Id, _task.NameTask, _taskStages.Id));
                 await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB.Id, _documentType.Id, _task.Id, _case.Id, _executor.Id, _createCardUser.Id, recipientDB.Id));
             }
             else

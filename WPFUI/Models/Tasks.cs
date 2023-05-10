@@ -13,6 +13,9 @@ namespace PASEDM.Models
         public Tasks(string nameTask, string contents, int? taskStageID)
             :this(default, nameTask, contents, taskStageID)
         { }
+        public Tasks(int id, string nameTask, int? taskStageID)
+            :this(id, nameTask, "", taskStageID)
+        { }
         public Tasks(int id, string nameTask, string contents, int? taskStageID)
         {
             Id = id;
