@@ -320,6 +320,8 @@ namespace PASEDM.ViewModels
             
             _userStore = userStore;
 
+            
+
             GetExecutors();
             GetTasks();
             GetCases();

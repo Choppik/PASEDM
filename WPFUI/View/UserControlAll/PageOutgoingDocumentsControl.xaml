@@ -24,7 +24,7 @@
 
         <TextBox Grid.Row="1" Text="Поиск"/>
 
-        <ListView Grid.Row="2" ItemsSource="{Binding MoveUsers}">
+        <ListView Grid.Row="2" ItemsSource="{Binding MoveUsers}" SelectedItem="{Binding CurrentMoveUser}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Номер карты" DisplayMemberBinding="{Binding NumberCard}"/>
@@ -51,7 +51,7 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" 
-                    Content="Добавить"
+                    Content="Создать"
                     HorizontalAlignment="Right" 
                     Command="{Binding NavigateCreateCardCommand}"/>
             <Button Grid.Column="1" 

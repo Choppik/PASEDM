@@ -49,7 +49,7 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" 
-                    Content="Добавить"
+                    Content="Создать"
                     HorizontalAlignment="Right" 
                     Command="{Binding NavigateCreateCardCommand}"/>
             <Button Grid.Column="1" 

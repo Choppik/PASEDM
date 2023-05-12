@@ -36,6 +36,7 @@ namespace PASEDM.ViewModels
             }
         }
         public ICommand NavigateCreateCardCommand { get; }
+        public ICommand NavigateEditCardCommand { get; }
         public OutgoingViewModel(INavigationService navigationService, PASEDMDbContextFactory deferredContextFactory, UserStore userStore)
         {
             _contextFactory = deferredContextFactory;
@@ -44,6 +45,7 @@ namespace PASEDM.ViewModels
             GetMoveUser();
 
             NavigateCreateCardCommand = new NavigateCommand(navigationService);
+            NavigateEditCardCommand = new NavigateCommand(navigationService);
         }
         private async void GetMoveUser()
         {
