@@ -10,6 +10,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" 
              d:DesignWidth="800">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -83,6 +84,14 @@
                             </Trigger>
                         </Style.Triggers>
                     </Style>
+                    <Style x:Key="AdminTrue" TargetType="hamburgermenu:HamburgerMenuItem" BasedOn="{StaticResource {x:Type hamburgermenu:HamburgerMenuItem}}">
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsAdmin}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
                 </hamburgermenu:HamburgerMenu.Resources>
 
                 <hamburgermenu:HamburgerMenu.Content>
@@ -91,16 +100,25 @@
                             <TextBlock Text="Входящие документы"/>
                         </hamburgermenu:HamburgerMenuItem>
                         <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateOutgoingCommand}">
-                            <TextBlock Text="Исходящие документы" />
+                            <TextBlock Text="Исходящие документы"/>
                         </hamburgermenu:HamburgerMenuItem>
                         <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateNotificationCommand}">
-                            <TextBlock Text="Уведомления" />
+                            <TextBlock Text="Уведомления"/>
                         </hamburgermenu:HamburgerMenuItem>
-                        <hamburgermenu:HamburgerMenuItem>
+                        <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateJournalCommand}" Style="{StaticResource AdminTrue}">
+                            <TextBlock Text="Журнал"/>
+                        </hamburgermenu:HamburgerMenuItem>
+                        <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateMeDocumemtCommand}">
+                            <TextBlock Text="Мои документы"/>
+                        </hamburgermenu:HamburgerMenuItem>
+                        <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateMeTasksCommand}">
+                            <TextBlock Text="Мои задачи"/>
+                        </hamburgermenu:HamburgerMenuItem>
+                        <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateReferencesCommand}" Style="{StaticResource AdminTrue}">
+                            <TextBlock Text="Справочная информация"/>
+                        </hamburgermenu:HamburgerMenuItem>
+                        <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateSettingsCommand}">
                             <TextBlock Text="Настройки" />
-                        </hamburgermenu:HamburgerMenuItem>
-                        <hamburgermenu:HamburgerMenuItem>
-                            <TextBlock Text="Справочная информация" />
                         </hamburgermenu:HamburgerMenuItem>
                     </StackPanel>
                 </hamburgermenu:HamburgerMenu.Content>

@@ -25,6 +25,21 @@
                 <DataTemplate DataType="{x:Type vm:NotificationsViewModel}">
                     <v:PageNotificationsControl/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:JournalViewModel}">
+                    <v:PageJournalControl/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:MyDocumentsViewModel}">
+                    <v:PageMyDocumentsControl/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:MyTasksViewModel}">
+                    <v:PageMyTaskControl/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:ReferencesViewModel}">
+                    <v:PageReferencesControl/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
+                    <v:PageSettingsControl/>
+                </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:IncomingViewModel}">
                     <v:PageIncomingDocumentsControl/>
                 </DataTemplate>

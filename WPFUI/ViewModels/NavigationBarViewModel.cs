@@ -17,18 +17,33 @@ namespace PASEDM.ViewModels
         public ICommand NavigateIncomingCommand { get; }
         public ICommand NavigateOutgoingCommand { get; }
         public ICommand NavigateNotificationCommand { get; }
+        public ICommand NavigateJournalCommand { get; }
+        public ICommand NavigateMeDocumemtCommand { get; }
+        public ICommand NavigateMeTasksCommand { get; }
+        public ICommand NavigateReferencesCommand { get; }
+        public ICommand NavigateSettingsCommand { get; }
         public NavigationBarViewModel(
             UserStore userStore, 
             INavigationService navigationServiceIncoming,
             INavigationService navigationServiceOutgoing,
             INavigationService navigationServiceNotification,
-            INavigationService navigationServiceEntryUser) 
+            INavigationService navigationServiceEntryUser, 
+            INavigationService navigationServiceJourna, 
+            INavigationService navigationServiceMeDocumemt, 
+            INavigationService navigationServiceMeTasks, 
+            INavigationService navigationServiceReferences, 
+            INavigationService navigationServiceSettings) 
         {
             _userStore = userStore;
             NavigateIncomingCommand = new NavigateCommand(navigationServiceIncoming);
             NavigateOutgoingCommand = new NavigateCommand(navigationServiceOutgoing);
             NavigateNotificationCommand = new NavigateCommand(navigationServiceNotification);
             NavigateEntryUser = new NavigateCommand(navigationServiceEntryUser);
+            NavigateJournalCommand = new NavigateCommand(navigationServiceJourna);
+            NavigateMeDocumemtCommand = new NavigateCommand(navigationServiceMeDocumemt);
+            NavigateMeTasksCommand = new NavigateCommand(navigationServiceMeTasks);
+            NavigateReferencesCommand = new NavigateCommand(navigationServiceReferences);
+            NavigateSettingsCommand = new NavigateCommand(navigationServiceSettings);
             //LogoutCommand = new LogoutCommand(userStore);
 
             _userStore.CurrentUserChanged += OnCurrentUserChanged;

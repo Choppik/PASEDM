@@ -21,31 +21,30 @@ namespace PASEDM.Models
 
         public User() { }
         public User(string userName)
-        {
-            UserName = userName;
-        }
-        public User (int id, string userName) : this(userName)
-        {
-            Id = id;
-        }
+            :this(default, userName, "", default, default, default)
+        { }
+        public User (int id, string userName) 
+            : this(id, userName, "", default, default, default)
+        { }
+        public User(int id, string userName, int? roleID)
+            : this(id, userName, "", default, roleID, default)
+        { }
 
-        public User(int id, string userName, string password) : this(id, userName)
-        {
-            Password = password;
-        }
+        public User(int id, string userName, string password) 
+            : this(id, userName, password, default, default, default)
+        { }
 
         public User(string userName, string password, DateTime dateOfCreation, int? roleID, int? employeeID)
+            :this(default, userName, password, dateOfCreation, roleID, employeeID)
+        { }
+        public User(int id, string userName, string password, DateTime dateOfCreation, int? roleID, int? employeeID) 
         {
+            Id = id;
             UserName = userName;
             Password = password;
             DateOfCreation = dateOfCreation;
             RoleID = roleID;
             EmployeeID = employeeID;
-        }
-        public User(int id, string userName, string password, DateTime dateOfCreation, int? roleID, int? employeeID) 
-            : this(userName, password, dateOfCreation, roleID, employeeID)
-        {
-            Id = id;
         }
 
         public User(IUserCreator userCreator, IUserProvider userProviders, IUserConflictValidator userConflictValidator)

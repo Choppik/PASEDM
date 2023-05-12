@@ -43,6 +43,21 @@ namespace PASEDM
             services.AddTransient(s => new NotificationsViewModel(
                 s.GetRequiredService<UserStore>(),
                 CreateEntryUserNavigationService(s)));
+            
+            services.AddTransient(s => new JournalViewModel(
+                s.GetRequiredService<UserStore>()));
+
+            services.AddTransient(s => new MyDocumentsViewModel(
+                s.GetRequiredService<UserStore>()));
+
+            services.AddTransient(s => new MyTasksViewModel(
+                s.GetRequiredService<UserStore>()));
+
+            services.AddTransient(s => new ReferencesViewModel(
+                s.GetRequiredService<UserStore>()));
+
+            services.AddTransient(s => new SettingsViewModel(
+                s.GetRequiredService<UserStore>()));
 
             services.AddTransient(s => new IncomingViewModel(
                  CreateEntryUserNavigationService(s),
@@ -102,13 +117,62 @@ namespace PASEDM
         private static INavigationService CreateNotificationsNavigationService(IServiceProvider serviceProvider)
         {
             return new LayoutNavigationService<NotificationsViewModel>(
+                serviceProvider.GetRequiredService<UserStore>(),
+                serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<NotificationsViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+        private static INavigationService CreateJournalNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<JournalViewModel>(
+                serviceProvider.GetRequiredService<UserStore>(),
+                serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<JournalViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+        private static INavigationService CreateMyDocumentsNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<MyDocumentsViewModel>(
+                serviceProvider.GetRequiredService<UserStore>(),
+                serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<MyDocumentsViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+        private static INavigationService CreateMyTasksNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<MyTasksViewModel>(
+                serviceProvider.GetRequiredService<UserStore>(),
+                serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<MyTasksViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+        private static INavigationService CreateReferencesNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<ReferencesViewModel>(
+                serviceProvider.GetRequiredService<UserStore>(),
+                serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<ReferencesViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
+        private static INavigationService CreateSettingsNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<SettingsViewModel>(
+                serviceProvider.GetRequiredService<UserStore>(),
+                serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<SettingsViewModel>(),
                 () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
         }
         private static INavigationService CreateIncomingNavigationService(IServiceProvider serviceProvider)
         {
             return new LayoutNavigationService<IncomingViewModel>(
+                serviceProvider.GetRequiredService<UserStore>(),
+                serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<IncomingViewModel>(),
                 () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
@@ -116,6 +180,8 @@ namespace PASEDM
         private static INavigationService CreateOutgoingNavigationService(IServiceProvider serviceProvider)
         {
             return new LayoutNavigationService<OutgoingViewModel>(
+                serviceProvider.GetRequiredService<UserStore>(),
+                serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<OutgoingViewModel>(),
                 () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
@@ -144,7 +210,12 @@ namespace PASEDM
                 CreateIncomingNavigationService(serviceProvider),
                 CreateOutgoingNavigationService(serviceProvider),
                 CreateNotificationsNavigationService(serviceProvider),
-                CreateEntryUserNavigationService(serviceProvider));
+                CreateEntryUserNavigationService(serviceProvider),
+                CreateJournalNavigationService(serviceProvider),
+                CreateMyDocumentsNavigationService(serviceProvider),
+                CreateMyTasksNavigationService(serviceProvider),
+                CreateReferencesNavigationService(serviceProvider),
+                CreateSettingsNavigationService(serviceProvider));
         }
     }
 }

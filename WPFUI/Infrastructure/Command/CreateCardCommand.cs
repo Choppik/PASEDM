@@ -135,6 +135,7 @@ namespace PASEDM.Infrastructure.Command
             }
 
             _navigationService.Navigate();
+
             MessageBox.Show("Карта создана");
         }
     }
