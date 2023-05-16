@@ -64,7 +64,7 @@ namespace PASEDM.Infrastructure.Command
                         if (user.UserName == _userName && user.Password == _password)
                         {
                             unic = true;
-                            _userStore.CurrentUser = new(user.Id, user.UserName, user.RoleID);
+                            _userStore.CurrentUser = new(user.Id, user.UserName, user.RoleID, user.EmployeeID);
                             break;
                         }
                     }

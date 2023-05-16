@@ -29,8 +29,20 @@
             <TextBox materialDesign:HintAssist.Hint="Введите номер" 
                          Text="{Binding NumberCard}"/>
             <TextBlock Text="Документ" />
-            <TextBox materialDesign:HintAssist.Hint="Добавьте документ" 
-                     Text="{Binding Document}"/>
+            <Grid Margin="0,10,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+                           Text="{Binding Document}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+                <Button Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        Command="{Binding AddDocCommand}"
+                        Content="Обзор" Margin="0,0,0,0" />
+            </Grid>
             <TextBlock Text="Регистрационный номер документа" />
             <TextBox materialDesign:HintAssist.Hint="Введите номер доумента" 
                          Text="{Binding RegistrationNumber}"/>

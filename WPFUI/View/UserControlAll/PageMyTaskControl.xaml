@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PASEDM.View.UserControlAll"
+             xmlns:local="clr-namespace:PASEDM.View.UserControlAll" 
+             xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MyTasksViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -11,25 +12,19 @@
         <Style TargetType="TextBox" BasedOn="{StaticResource TextBox_Style}"></Style>
         <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockTitle_Style}"></Style>
     </UserControl.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Мои задачи"/>
-        <ListView Grid.Row="1" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Top">
+
+        <ListView Grid.Row="1" ItemsSource="{Binding Card}" SelectedItem="{Binding CurrentCard}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn>
-                        <TextBlock Text="Колонка 1"/>
-                    </GridViewColumn>
-                    <GridViewColumn>
-                        <TextBlock Text="Колонка 2"/>
-                    </GridViewColumn>
-                    <GridViewColumn>
-                        <TextBlock Text="Колонка 3"/>
-                    </GridViewColumn>
+                    <GridViewColumn Header="Задача" DisplayMemberBinding="{Binding NameTask}"/>
+                    <GridViewColumn Header="Содержание" DisplayMemberBinding="{Binding Content}"/>
+                    <GridViewColumn Header="Стадия исполнения" DisplayMemberBinding="{Binding TaskStage}"/>
                 </GridView>
             </ListView.View>
         </ListView>

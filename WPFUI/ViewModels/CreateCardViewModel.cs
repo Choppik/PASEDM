@@ -1,5 +1,7 @@
-﻿using PASEDM.Data;
+﻿using Microsoft.Win32;
+using PASEDM.Data;
 using PASEDM.Infrastructure.Command;
+using PASEDM.Infrastructure.Command.Base;
 using PASEDM.Models;
 using PASEDM.Services;
 using PASEDM.Services.PASEDMProviders;
@@ -9,6 +11,7 @@ using PASEDM.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 
@@ -58,7 +61,7 @@ namespace PASEDM.ViewModels
         private string _nameCard;
         private string _summary;
         private string _comment;
-        //private string _filePath;
+        private string _filePath;
         private string _docName;
         private string _nameTask;
         private string _contentTask;
@@ -310,17 +313,31 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(ContentTask));
             }
         }
+        public string FilePath
+        {
+            get
+            {
+                return _filePath;
+            }
+            set
+            {
+                _filePath = value;
+                OnPropertyChanged(nameof(FilePath));
+            }
+        }
 
         public ICommand NavigateRefundCommand { get; }
         public ICommand CreateCardCommand { get; }
+        public ICommand AddDocCommand { get; }
 
-        public CreateCardViewModel(INavigationService navigationService, UserStore userStore, PASEDMDbContextFactory deferredContextFactory)
+        public CreateCardViewModel(INavigationService navigationService, 
+            UserStore userStore, 
+            PASEDMDbContextFactory deferredContextFactory,
+            OpenFileDialog openFileDialog)
         {
             _contextFactory = deferredContextFactory;
             
             _userStore = userStore;
-
-            
 
             GetExecutors();
             GetTasks();
@@ -332,7 +349,23 @@ namespace PASEDM.ViewModels
             GetDocStages();
             GetSecrecyStamps();
 
+            /*OpenFileDialog openFile = new OpenFileDialog();
+            if (openFile.ShowDialog() != true) return;
+            FilePath = openFile.FileName;
+            DateOfFormationDocument = File.GetLastWriteTime(FilePath);*/
+
             NavigateRefundCommand = new NavigateCommand(navigationService);
+            /*AddDocCommand = new BaseCommand(
+                () =>
+                {
+                    openFileDialog.ShowDialog();
+                }
+                );*/
+
+            //AddDocCommand = 
+
+            //FilePath = openFileDialog.FileName;
+            
             CreateCardCommand = new CreateCardCommand(this, deferredContextFactory, navigationService);
         }
         private async void GetExecutors()

@@ -7,12 +7,17 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using PASEDM.Data;
+using PASEDM.Services.FTPClient;
+using Microsoft.Win32;
 
 namespace PASEDM
 {
     public partial class App : Application
     {
         private const string CONNECTION_STRING = "Server=localhost;Database=AppPASEDM;User Id=user1;Password=sa;TrustServerCertificate=True";
+        private const string CONNECTION_FTP_SERVER = "ftp://192.168.1.1/";
+        private const string USER_FTP_SERVER = "us";
+        private const string PASSWORD_FTP_SERVER = "1";
         private readonly IServiceProvider _serviceProvider;
 
         public App()
@@ -23,8 +28,11 @@ namespace PASEDM
             services.AddSingleton<NavigationStore>();
             services.AddSingleton<ModalNavigationStore>();
             services.AddSingleton<UserStore>();
+            services.AddSingleton<OpenFileDialog>();
 
             services.AddSingleton<CloseModalNavigationService>();
+
+            services.AddSingleton(s => new FtpClient(CONNECTION_FTP_SERVER, USER_FTP_SERVER, PASSWORD_FTP_SERVER));
 
             services.AddSingleton(s => new PASEDMDbContextFactory(CONNECTION_STRING));
 
@@ -51,6 +59,7 @@ namespace PASEDM
                 s.GetRequiredService<UserStore>()));
 
             services.AddTransient(s => new MyTasksViewModel(
+                s.GetRequiredService<PASEDMDbContextFactory>(),
                 s.GetRequiredService<UserStore>()));
 
             services.AddTransient(s => new ReferencesViewModel(
@@ -201,7 +210,8 @@ namespace PASEDM
             return new CreateCardViewModel(
                 navigationService, 
                 serviceProvider.GetRequiredService<UserStore>(),
-                serviceProvider.GetRequiredService<PASEDMDbContextFactory>());
+                serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
+                serviceProvider.GetRequiredService<OpenFileDialog>());
         }
         private NavigationBarViewModel CreateNavigationBarViewModel(IServiceProvider serviceProvider)
         {

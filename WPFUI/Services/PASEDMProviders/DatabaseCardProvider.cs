@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using PASEDM.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System;
 
 namespace PASEDM.Services.PASEDMProviders
 {
@@ -35,6 +37,30 @@ namespace PASEDM.Services.PASEDMProviders
         private static Card ToDefiniteCard(CardDTO dto)
         {
             return new Card(dto.ID, dto.NameCard);
+        }
+
+        public async Task<IEnumerable<Card>> GetAllTaskExecutor(User user)
+        {
+            using (PASEDMContext context = _dbContextFactory.CreateDbContext())
+            {
+                IEnumerable<CardDTO> cardDTO = await context.Cards
+                    .Where(u => u.EmployeeID == user.EmployeeID)
+                    .Include(u => u.Task).ThenInclude(u => u.TaskStages)
+                    .OrderBy(u => u.Task.TaskStages.TaskStagesValue)
+                    .ToListAsync();
+
+                if (cardDTO == null)
+                {
+                    return null;
+                }
+
+                return cardDTO.Select(u => ToTasksExecutor(u)).DistinctBy(u => u.TaskID);
+            }
+        }
+
+        private Card ToTasksExecutor(CardDTO dto)
+        {
+            return new Card(dto.ID, dto.TaskID, dto.Task.NameTask, dto.Task.Contents, dto.Task.TaskStages.TaskStages);
         }
     }
 }

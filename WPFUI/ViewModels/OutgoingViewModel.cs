@@ -14,7 +14,7 @@ using PASEDM.Store;
 
 namespace PASEDM.ViewModels
 {
-    class OutgoingViewModel : BaseViewModels
+    public class OutgoingViewModel : BaseViewModels
     {
         private PASEDMDbContextFactory _contextFactory;
         private readonly UserStore _userStore;

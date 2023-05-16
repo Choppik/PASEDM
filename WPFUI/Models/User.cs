@@ -26,8 +26,8 @@ namespace PASEDM.Models
         public User (int id, string userName) 
             : this(id, userName, "", default, default, default)
         { }
-        public User(int id, string userName, int? roleID)
-            : this(id, userName, "", default, roleID, default)
+        public User(int id, string userName, int? roleID, int? employeeID)
+            : this(id, userName, "", default, roleID, employeeID)
         { }
 
         public User(int id, string userName, string password) 
