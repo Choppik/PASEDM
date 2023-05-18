@@ -14,24 +14,9 @@ namespace PASEDM.ViewModels
     {
         private readonly UserStore _user;
         public string? Name => _user.CurrentUser.UserName;
-        public ICommand NavigateHomeCommand { get; }
-        public NotificationsViewModel(UserStore userStore, INavigationService homeNavigationService)
+        public NotificationsViewModel(UserStore userStore)
         {
             _user = userStore;
-
-            NavigateHomeCommand = new NavigateCommand(homeNavigationService);
-
-            _user.CurrentUserChanged += OnCurrentUserChanged;
-        }
-
-        private void OnCurrentUserChanged()
-        {
-            OnPropertyChanged(nameof(Name));
-        }
-        public override void Dispose() 
-        {
-            _user.CurrentUserChanged -= OnCurrentUserChanged;
-            base.Dispose();
         }
     }
 }

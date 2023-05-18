@@ -1,4 +1,5 @@
-﻿using PASEDM.Store;
+﻿using PASEDM.Models;
+using PASEDM.Store;
 using PASEDM.ViewModels.Base;
 
 namespace PASEDM.ViewModels

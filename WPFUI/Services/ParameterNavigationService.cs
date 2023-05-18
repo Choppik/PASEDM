@@ -4,19 +4,13 @@ using System;
 
 namespace PASEDM.Services
 {
-
-    /// <summary>
-    /// Не используется, но может пригодиться
-    /// </summary>
-    /// <typeparam name="TParameter"></typeparam>
-    /// <typeparam name="TViewModel"></typeparam>
-    public class ParameterNavigationService<TParameter, TViewModel>
+    public class ParameterNavigationService<TParameter, TViewModel> : IParamNavigationService<TParameter>
         where TViewModel : BaseViewModels
     {
-        private readonly NavigationStore _navigationStore;
+        private readonly ModalNavigationStore _navigationStore;
         private readonly Func<TParameter, TViewModel> _createViewModel;
 
-        public ParameterNavigationService(NavigationStore navigationStore, Func<TParameter, TViewModel> createViewModel)
+        public ParameterNavigationService(ModalNavigationStore navigationStore, Func<TParameter, TViewModel> createViewModel)
         {
             _navigationStore = navigationStore;
             _createViewModel = createViewModel;

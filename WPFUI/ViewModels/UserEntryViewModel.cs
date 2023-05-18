@@ -40,10 +40,10 @@ namespace PASEDM.ViewModels
         public ICommand LoginMainMenuCommand { get; }
         public UserEntryViewModel (UserStore userStore,
             INavigationService accountNavigationService,
-            INavigationService greateUserNavigationService,
+            INavigationService createUserNavigationService,
             PASEDMDbContextFactory deferredContextFactory)
         {
-            NavigateGreatUserCommand = new NavigateCommand(greateUserNavigationService);
+            NavigateGreatUserCommand = new NavigateCommand(createUserNavigationService);
             
             LoginMainMenuCommand = new LoginCommand(this, userStore, accountNavigationService, deferredContextFactory);
         }

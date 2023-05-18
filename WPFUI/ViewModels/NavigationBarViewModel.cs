@@ -18,7 +18,7 @@ namespace PASEDM.ViewModels
         public ICommand NavigateOutgoingCommand { get; }
         public ICommand NavigateNotificationCommand { get; }
         public ICommand NavigateJournalCommand { get; }
-        public ICommand NavigateMeDocumemtCommand { get; }
+        public ICommand NavigateMeDocumentCommand { get; }
         public ICommand NavigateMeTasksCommand { get; }
         public ICommand NavigateReferencesCommand { get; }
         public ICommand NavigateSettingsCommand { get; }
@@ -28,8 +28,8 @@ namespace PASEDM.ViewModels
             INavigationService navigationServiceOutgoing,
             INavigationService navigationServiceNotification,
             INavigationService navigationServiceEntryUser, 
-            INavigationService navigationServiceJourna, 
-            INavigationService navigationServiceMeDocumemt, 
+            INavigationService navigationServiceJournal, 
+            INavigationService navigationServiceMeDocument, 
             INavigationService navigationServiceMeTasks, 
             INavigationService navigationServiceReferences, 
             INavigationService navigationServiceSettings) 
@@ -39,8 +39,8 @@ namespace PASEDM.ViewModels
             NavigateOutgoingCommand = new NavigateCommand(navigationServiceOutgoing);
             NavigateNotificationCommand = new NavigateCommand(navigationServiceNotification);
             NavigateEntryUser = new NavigateCommand(navigationServiceEntryUser);
-            NavigateJournalCommand = new NavigateCommand(navigationServiceJourna);
-            NavigateMeDocumemtCommand = new NavigateCommand(navigationServiceMeDocumemt);
+            NavigateJournalCommand = new NavigateCommand(navigationServiceJournal);
+            NavigateMeDocumentCommand = new NavigateCommand(navigationServiceMeDocument);
             NavigateMeTasksCommand = new NavigateCommand(navigationServiceMeTasks);
             NavigateReferencesCommand = new NavigateCommand(navigationServiceReferences);
             NavigateSettingsCommand = new NavigateCommand(navigationServiceSettings);

@@ -108,7 +108,7 @@
                         <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateJournalCommand}" Style="{StaticResource AdminTrue}">
                             <TextBlock Text="Журнал"/>
                         </hamburgermenu:HamburgerMenuItem>
-                        <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateMeDocumemtCommand}">
+                        <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateMeDocumentCommand}">
                             <TextBlock Text="Мои документы"/>
                         </hamburgermenu:HamburgerMenuItem>
                         <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateMeTasksCommand}">

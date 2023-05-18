@@ -331,6 +331,7 @@ namespace PASEDM.ViewModels
         public ICommand AddDocCommand { get; }
 
         public CreateCardViewModel(INavigationService navigationService, 
+            OutgoingViewModel viewModel,
             UserStore userStore, 
             PASEDMDbContextFactory deferredContextFactory,
             OpenFileDialog openFileDialog)
@@ -338,6 +339,8 @@ namespace PASEDM.ViewModels
             _contextFactory = deferredContextFactory;
             
             _userStore = userStore;
+
+            _nameCard = viewModel.CurrentMoveUser.NameCard;
 
             GetExecutors();
             GetTasks();

@@ -11,6 +11,7 @@ namespace PASEDM.Models
         private IMoveUserCreator _moveUserCreator;
         private IMoveUserProvider _moveUserProvider;
 
+        public MoveUser() { }
         public MoveUser(IMoveUserCreator moveUserCreator)
         {
             _moveUserCreator = moveUserCreator;

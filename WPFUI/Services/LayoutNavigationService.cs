@@ -1,4 +1,5 @@
 ﻿using PASEDM.Data;
+using PASEDM.Models;
 using PASEDM.Store;
 using PASEDM.ViewModels;
 using PASEDM.ViewModels.Base;
@@ -11,6 +12,7 @@ namespace PASEDM.Services
     {
 
         private readonly UserStore _userStore;
+        private readonly MoveUser _moveUser;
         private readonly PASEDMDbContextFactory _deferredContextFactory;
         private readonly NavigationStore _navigationStore;
         private readonly Func<TViewModel> _createViewModel;
@@ -18,12 +20,14 @@ namespace PASEDM.Services
 
         public LayoutNavigationService(
             UserStore userStore,
+            MoveUser moveUser,
             PASEDMDbContextFactory deferredContextFactory,
             NavigationStore navigationStore, 
             Func<TViewModel> createViewModel, 
             Func<NavigationBarViewModel> createNavigationBarViewModel)
         {
             _userStore = userStore;
+            _moveUser = moveUser;
             _deferredContextFactory = deferredContextFactory;
             _navigationStore = navigationStore;
             _createViewModel = createViewModel;
@@ -32,7 +36,7 @@ namespace PASEDM.Services
 
         public void Navigate()
         {
-            _navigationStore.CurrentViewModel = new LayoutViewModel(_userStore, _deferredContextFactory, _createNavigationBarViewModel(), _createViewModel());
+            _navigationStore.CurrentViewModel = new LayoutViewModel(_userStore, _moveUser, _deferredContextFactory, _createNavigationBarViewModel(), _createViewModel());
         }
     }
 }

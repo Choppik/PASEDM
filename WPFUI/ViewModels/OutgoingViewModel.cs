@@ -18,6 +18,8 @@ namespace PASEDM.ViewModels
     {
         private PASEDMDbContextFactory _contextFactory;
         private readonly UserStore _userStore;
+        private ParameterNavigationService<OutgoingViewModel, CreateCardViewModel> _parameterNavigationService;
+        private INavigationService _navigationService;
 
         private ObservableCollection<MoveUser> _moveUser;
         private IMoveUserProvider _moveUserProvider;
@@ -32,20 +34,37 @@ namespace PASEDM.ViewModels
             set
             {
                 _currentMoveUser = value;
+                EditCommand();
                 OnPropertyChanged(nameof(CurrentMoveUser));
             }
         }
+
+        private ICommand _navigateEditCardCommand;
         public ICommand NavigateCreateCardCommand { get; }
-        public ICommand NavigateEditCardCommand { get; }
-        public OutgoingViewModel(INavigationService navigationService, PASEDMDbContextFactory deferredContextFactory, UserStore userStore)
+        public ICommand NavigateEditCardCommand
         {
+            get => _navigateEditCardCommand;
+            set
+            {
+                _navigateEditCardCommand = value;
+                OnPropertyChanged(nameof(NavigateEditCardCommand));
+            }
+        }
+        public OutgoingViewModel(
+            ParameterNavigationService<OutgoingViewModel, CreateCardViewModel> parameterNavigationService,
+            INavigationService navigationService, 
+            PASEDMDbContextFactory deferredContextFactory, 
+            UserStore userStore)
+        {
+            _parameterNavigationService = parameterNavigationService;
             _contextFactory = deferredContextFactory;
             _userStore = userStore;
+            _navigationService = navigationService;
 
             GetMoveUser();
 
             NavigateCreateCardCommand = new NavigateCommand(navigationService);
-            NavigateEditCardCommand = new NavigateCommand(navigationService);
+            EditCommand();
         }
         private async void GetMoveUser()
         {
@@ -65,5 +84,6 @@ namespace PASEDM.ViewModels
                 MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private ICommand EditCommand() => NavigateEditCardCommand = new NavigateEditCardCommand(this, _parameterNavigationService);
     }
 }

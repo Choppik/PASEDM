@@ -56,7 +56,8 @@
                     Command="{Binding NavigateCreateCardCommand}"/>
             <Button Grid.Column="1" 
                     Content="Редактировать" 
-                    HorizontalAlignment="Center"/>
+                    HorizontalAlignment="Center"
+                    Command="{Binding NavigateEditCardCommand}"/>
             <Button Grid.Column="2" 
                     Content="Удалить"  
                     HorizontalAlignment="Left"/>
