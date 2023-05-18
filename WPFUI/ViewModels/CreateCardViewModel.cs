@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using PASEDM.Data;
 using PASEDM.Infrastructure.Command;
+using PASEDM.Infrastructure.Command.Base;
 using PASEDM.Models;
 using PASEDM.Services;
 using PASEDM.Services.PASEDMProviders;
@@ -8,16 +9,23 @@ using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using PASEDM.Store;
 using PASEDM.ViewModels.Base;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace PASEDM.ViewModels
 {
-    public class CreateCardViewModel : BaseViewModels
+    public class CreateCardViewModel : BaseViewModels, INotifyDataErrorInfo
     {
+        #region Переменные и свойства
+        private readonly Dictionary<string, List<string>> _propertyNameToErrorsDictionary;
+
         private IEmployeeProvider _employeeProvider;
         private ITasksProvider _tasksProvider;
         private ICasesProvider _casesProvider;
@@ -61,7 +69,7 @@ namespace PASEDM.ViewModels
         private string _summary;
         private string _comment;
         private string _filePath;
-        private string _docName;
+        private string _docName = "text";
         private string _nameTask;
         private string _contentTask;
 
@@ -99,19 +107,12 @@ namespace PASEDM.ViewModels
             {
                 _currentTask = value;
                 OnPropertyChanged(nameof(CurrentTask));
-            }
-        }
-        private string _nameTask2;
-        public string NameTask2
-        {
-            get
-            {
-                return _nameTask2;
-            }
-            set
-            {
-                _nameTask2 = value;
-                OnPropertyChanged(nameof(NameTask2));
+                ClearErrors(nameof(CurrentTask));
+
+                if (CurrentTask == null)
+                {
+                    AddErrors("Необходимо выбрать значение из списка", nameof(CurrentTask));
+                }
             }
         }
         public DocumentTypes CurrentDocTypes
@@ -338,9 +339,23 @@ namespace PASEDM.ViewModels
             }
         }
 
+        private ICommand _addDocCommand;
         public ICommand NavigateRefundCommand { get; }
         public ICommand CreateCardCommand { get; }
-        public ICommand AddDocCommand { get; }
+        public ICommand AddDocCommand
+        {
+            get => _addDocCommand;
+            set
+            {
+                _addDocCommand = value;
+                OnPropertyChanged(nameof(AddDocCommand));
+                OpenFile();
+            }
+        }
+
+        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+        public bool HasErrors => _propertyNameToErrorsDictionary.Any();
+        #endregion
 
         public CreateCardViewModel(INavigationService navigationService, 
             OutgoingViewModel viewModel,
@@ -352,6 +367,7 @@ namespace PASEDM.ViewModels
             
             _userStore = userStore;
 
+            _propertyNameToErrorsDictionary = new Dictionary<string, List<string>>();
 
             GetExecutors();
             GetTasks();
@@ -365,23 +381,8 @@ namespace PASEDM.ViewModels
 
             _nameCard = viewModel.CurrentMoveUser.NameCard;
             CurrentTask = viewModel.CurrentMoveUser.Tasks;
-            _nameTask2 = CurrentTask.NameTask;
-            /*OpenFileDialog openFile = new OpenFileDialog();
-            if (openFile.ShowDialog() != true) return;
-            FilePath = openFile.FileName;
-            DateOfFormationDocument = File.GetLastWriteTime(FilePath);*/
 
             NavigateRefundCommand = new NavigateCommand(navigationService);
-            /*AddDocCommand = new BaseCommand(
-                () =>
-                {
-                    openFileDialog.ShowDialog();
-                }
-                );*/
-
-            //AddDocCommand = 
-
-            //FilePath = openFileDialog.FileName;
             
             CreateCardCommand = new CreateCardCommand(this, deferredContextFactory, navigationService);
         }
@@ -546,6 +547,37 @@ namespace PASEDM.ViewModels
             {
                 MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        private void OpenFile()
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.ShowDialog();
+            FilePath = openFile.FileName;
+            DateOfFormationDocument = File.GetLastWriteTime(FilePath);
+            /*return AddDocCommand = new SimpleCommand();*/
+        }
+
+        public IEnumerable GetErrors(string propertyName)
+        {
+            return _propertyNameToErrorsDictionary.GetValueOrDefault(propertyName, new List<string>());
+        }
+        private void ClearErrors(string property)
+        {
+            _propertyNameToErrorsDictionary.Remove(property);
+            OnErrorsChanged(property);
+        }
+        private void OnErrorsChanged(string property)
+        {
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(property));
+        }
+        private void AddErrors(string errorMessage, string property)
+        {
+            if (!_propertyNameToErrorsDictionary.ContainsKey(property))
+            {
+                _propertyNameToErrorsDictionary.Add(property, new List<string>());
+            }
+            _propertyNameToErrorsDictionary[property].Add(errorMessage);
+            OnErrorsChanged(property);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using PASEDM.Services.PASEDMCreator.InterfaceCreator;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -55,6 +56,10 @@ namespace PASEDM.Models
         public Task<Tasks> GetTask(Tasks task)
         {
             return _tasksProviders.GetTask(task);
+        }
+        public override string ToString()
+        {
+            return $"{NameTask}";
         }
     }
 }
