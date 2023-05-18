@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using PASEDM.Data;
 using PASEDM.Infrastructure.Command;
-using PASEDM.Infrastructure.Command.Base;
 using PASEDM.Models;
 using PASEDM.Services;
 using PASEDM.Services.PASEDMProviders;
@@ -100,6 +99,19 @@ namespace PASEDM.ViewModels
             {
                 _currentTask = value;
                 OnPropertyChanged(nameof(CurrentTask));
+            }
+        }
+        private string _nameTask2;
+        public string NameTask2
+        {
+            get
+            {
+                return _nameTask2;
+            }
+            set
+            {
+                _nameTask2 = value;
+                OnPropertyChanged(nameof(NameTask2));
             }
         }
         public DocumentTypes CurrentDocTypes
@@ -340,7 +352,6 @@ namespace PASEDM.ViewModels
             
             _userStore = userStore;
 
-            _nameCard = viewModel.CurrentMoveUser.NameCard;
 
             GetExecutors();
             GetTasks();
@@ -352,6 +363,9 @@ namespace PASEDM.ViewModels
             GetDocStages();
             GetSecrecyStamps();
 
+            _nameCard = viewModel.CurrentMoveUser.NameCard;
+            CurrentTask = viewModel.CurrentMoveUser.Tasks;
+            _nameTask2 = CurrentTask.NameTask;
             /*OpenFileDialog openFile = new OpenFileDialog();
             if (openFile.ShowDialog() != true) return;
             FilePath = openFile.FileName;

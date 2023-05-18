@@ -51,6 +51,21 @@ namespace PASEDM.Models
             Sender = sender;
             Recipient = recipient;
         }
+        public MoveUser(int numberCard, string nameCard, string nameDoc, string docType, Tasks tasks, string numberCase, string desriptionCase, string executor, DateTime dateOfFormation, string comment, string sender, string recipient)
+        {
+            NumberCard = numberCard;
+            NameCard = nameCard;
+            NameDoc = nameDoc;
+            DocType = docType;
+            Tasks = tasks;
+            NumberCase = numberCase;
+            DesriptionCase = desriptionCase;
+            Executor = executor;
+            DateOfFormation = dateOfFormation;
+            Comment = comment;
+            Sender = sender;
+            Recipient = recipient;
+        }
 
         public int Id { get; }
         public int? TypeUserID { get; }
@@ -59,6 +74,7 @@ namespace PASEDM.Models
         public string NameCard { get; }
         public string NameDoc { get; }
         public string DocType { get; }
+        public Tasks Tasks { get; }
         public string NameTask { get; }
         public string ContentTask { get; }
         public string TaskStage { get; }

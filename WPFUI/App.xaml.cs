@@ -30,12 +30,10 @@ namespace PASEDM
             services.AddSingleton<NavigationStore>();
             services.AddSingleton<ModalNavigationStore>();
             services.AddSingleton<UserStore>();
-            services.AddSingleton<MoveUser>();
             services.AddSingleton<OpenFileDialog>();
 
             services.AddSingleton<CloseModalNavigationService>();
-            services.AddSingleton<OutgoingViewModel>();
-            services.AddSingleton<CreateCardViewModel>();
+            
             services.AddSingleton<ParameterNavigationService<OutgoingViewModel, CreateCardViewModel>>();
 
             services.AddSingleton(s => new FtpClient(CONNECTION_FTP_SERVER, USER_FTP_SERVER, PASSWORD_FTP_SERVER));
@@ -134,7 +132,6 @@ namespace PASEDM
         {
             return new LayoutNavigationService<NotificationsViewModel>(
                 serviceProvider.GetRequiredService<UserStore>(),
-                serviceProvider.GetRequiredService<MoveUser>(),
                 serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<NotificationsViewModel>(),
@@ -144,7 +141,6 @@ namespace PASEDM
         {
             return new LayoutNavigationService<JournalViewModel>(
                 serviceProvider.GetRequiredService<UserStore>(),
-                serviceProvider.GetRequiredService<MoveUser>(),
                 serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<JournalViewModel>(),
@@ -154,7 +150,6 @@ namespace PASEDM
         {
             return new LayoutNavigationService<MyDocumentsViewModel>(
                 serviceProvider.GetRequiredService<UserStore>(),
-                serviceProvider.GetRequiredService<MoveUser>(),
                 serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<MyDocumentsViewModel>(),
@@ -164,7 +159,6 @@ namespace PASEDM
         {
             return new LayoutNavigationService<MyTasksViewModel>(
                 serviceProvider.GetRequiredService<UserStore>(),
-                serviceProvider.GetRequiredService<MoveUser>(),
                 serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<MyTasksViewModel>(),
@@ -174,7 +168,6 @@ namespace PASEDM
         {
             return new LayoutNavigationService<ReferencesViewModel>(
                 serviceProvider.GetRequiredService<UserStore>(),
-                serviceProvider.GetRequiredService<MoveUser>(),
                 serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<ReferencesViewModel>(),
@@ -184,7 +177,6 @@ namespace PASEDM
         {
             return new LayoutNavigationService<SettingsViewModel>(
                 serviceProvider.GetRequiredService<UserStore>(),
-                serviceProvider.GetRequiredService<MoveUser>(),
                 serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<SettingsViewModel>(),
@@ -194,7 +186,6 @@ namespace PASEDM
         {
             return new LayoutNavigationService<IncomingViewModel>(
                 serviceProvider.GetRequiredService<UserStore>(),
-                serviceProvider.GetRequiredService<MoveUser>(),
                 serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<IncomingViewModel>(),
@@ -204,7 +195,6 @@ namespace PASEDM
         {
             return new LayoutNavigationService<OutgoingViewModel>(
                 serviceProvider.GetRequiredService<UserStore>(),
-                serviceProvider.GetRequiredService<MoveUser>(),
                 serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                 serviceProvider.GetRequiredService<NavigationStore>(),
                 () => serviceProvider.GetRequiredService<OutgoingViewModel>(),

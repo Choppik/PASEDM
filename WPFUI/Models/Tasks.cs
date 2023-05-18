@@ -36,7 +36,7 @@ namespace PASEDM.Models
         }
 
         public int Id { get; }
-        public string NameTask { get; }
+        public string NameTask { get; set; }
         public string Contents { get; }
         public int? TaskStageID { get; }
 

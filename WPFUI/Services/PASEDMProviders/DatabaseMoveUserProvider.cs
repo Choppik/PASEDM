@@ -37,7 +37,7 @@ namespace PASEDM.Services.PASEDMProviders
                     return null;
                 }
 
-                return moveUserDTO.Select(u => ToMoveUser(u));
+                return moveUserDTO.Select(u => ToMoveUserEdit(u));
             }
         }
         public async Task<IEnumerable<MoveUser>> GetAllMoveUserRecipient(MoveUser moveUser, User user)
@@ -73,6 +73,27 @@ namespace PASEDM.Services.PASEDMProviders
                 dto.Card.Task.NameTask,
                 dto.Card.Task.Contents,
                 dto.Card.Task.TaskStages.TaskStages,
+                dto.Card.Case.NumberCase,
+                dto.Card.Case.Desription,
+                dto.Card.Employee.FullName,
+                dto.Card.DateOfFormation,
+                dto.Card.Comment,
+                dto.Card.User.UserName,
+                dto.Card.Recipient.User.UserName
+                );
+        }
+        private static MoveUser ToMoveUserEdit(MoveUserDTO dto)
+        {
+            Tasks tasks = new(dto.Card.Task.NameTask, dto.Card.Task.Contents, dto.Card.Task.TaskStagesID);
+            return new MoveUser(
+                dto.Card.NumberCard,
+                dto.Card.NameCard,
+                dto.Card.Document.NameDoc,
+                dto.Card.DocumentTypes.Name,
+                tasks,
+                /*dto.Card.Task.NameTask,
+                dto.Card.Task.Contents,
+                dto.Card.Task.TaskStages.TaskStages,*/
                 dto.Card.Case.NumberCase,
                 dto.Card.Case.Desription,
                 dto.Card.Employee.FullName,

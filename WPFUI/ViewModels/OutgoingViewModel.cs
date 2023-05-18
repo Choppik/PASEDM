@@ -18,7 +18,7 @@ namespace PASEDM.ViewModels
     {
         private PASEDMDbContextFactory _contextFactory;
         private readonly UserStore _userStore;
-        private ParameterNavigationService<OutgoingViewModel, CreateCardViewModel> _parameterNavigationService;
+        private IParamNavigationService<OutgoingViewModel> _parameterNavigationService;
         private INavigationService _navigationService;
 
         private ObservableCollection<MoveUser> _moveUser;
@@ -51,7 +51,7 @@ namespace PASEDM.ViewModels
             }
         }
         public OutgoingViewModel(
-            ParameterNavigationService<OutgoingViewModel, CreateCardViewModel> parameterNavigationService,
+            IParamNavigationService<OutgoingViewModel> parameterNavigationService,
             INavigationService navigationService, 
             PASEDMDbContextFactory deferredContextFactory, 
             UserStore userStore)

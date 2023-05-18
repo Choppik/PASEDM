@@ -105,7 +105,7 @@
                           Visibility="{Binding IsCheckedTask, Converter={StaticResource BooleanToVisibilityConverter}}"
                           materialDesign:HintAssist.Hint="Выберите задачу" 
                           ItemsSource="{Binding Tasks}"
-                          SelectedItem="{Binding CurrentTask}" VerticalAlignment="Top">
+                          SelectedItem="{Binding CurrentTask, Mode=TwoWay}" VerticalAlignment="Top">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding NameTask}"/>

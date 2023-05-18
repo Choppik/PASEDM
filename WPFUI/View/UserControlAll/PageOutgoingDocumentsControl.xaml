@@ -25,14 +25,26 @@
         <TextBox Grid.Row="1" Text="Поиск"/>
 
         <ListView Grid.Row="2" ItemsSource="{Binding MoveUsers}" SelectedItem="{Binding CurrentMoveUser}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FFE4FF89"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true" >
+                            <Setter Property="Background" Value="#FF20900B"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Номер карты" DisplayMemberBinding="{Binding NumberCard}"/>
                     <GridViewColumn Header="Название карты" DisplayMemberBinding="{Binding NameCard}"/>
                     <GridViewColumn Header="Название документа" DisplayMemberBinding="{Binding NameDoc}"/>
                     <GridViewColumn Header="Тип документа" DisplayMemberBinding="{Binding DocType}"/>
-                    <GridViewColumn Header="Задача" DisplayMemberBinding="{Binding NameTask}"/>
-                    <GridViewColumn Header="Описание задачи" DisplayMemberBinding="{Binding ContentTask}"/>
+                    <GridViewColumn Header="Задача" DisplayMemberBinding="{Binding Tasks.NameTask}"/>
+                    <GridViewColumn Header="Описание задачи" DisplayMemberBinding="{Binding Tasks.Contents}"/>
                     <GridViewColumn Header="Состояние задачи" DisplayMemberBinding="{Binding TaskStage}"/>
                     <GridViewColumn Header="Дело" DisplayMemberBinding="{Binding NumberCase}"/>
                     <GridViewColumn Header="Опиание дела" DisplayMemberBinding="{Binding DesriptionCase}"/>

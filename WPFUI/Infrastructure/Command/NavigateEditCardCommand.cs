@@ -6,11 +6,11 @@ namespace PASEDM.Infrastructure.Command
 {
     public class NavigateEditCardCommand : BaseCommand
     {
-        private readonly ParameterNavigationService<OutgoingViewModel, CreateCardViewModel> _navigationService;
+        private readonly IParamNavigationService<OutgoingViewModel> _navigationService;
         private OutgoingViewModel _outgoingViewModel;
 
-        public NavigateEditCardCommand(OutgoingViewModel viewModel, 
-            ParameterNavigationService<OutgoingViewModel, CreateCardViewModel> navigationService)
+        public NavigateEditCardCommand(OutgoingViewModel viewModel,
+            IParamNavigationService<OutgoingViewModel> navigationService)
         {
             _outgoingViewModel = viewModel;
             _navigationService = navigationService;
