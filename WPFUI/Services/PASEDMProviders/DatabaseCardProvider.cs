@@ -6,7 +6,6 @@ using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using PASEDM.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System;
 
 namespace PASEDM.Services.PASEDMProviders
 {
@@ -23,7 +22,7 @@ namespace PASEDM.Services.PASEDMProviders
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
                 CardDTO cardDTO = await context.Cards
-                    .Where(u => u.NameCard == card.NameCard)
+                    .Where(u => u.DateOfFormation == card.DateOfFormation)
                     .FirstOrDefaultAsync();
 
                 if (cardDTO == null)

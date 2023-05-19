@@ -7,7 +7,7 @@ namespace PASEDM.Data.DTOs
     {
         [Key]
         public int ID { get; set; }
-        public string DocStages { get; set; }
+        public string NameDocStage { get; set; }
         public int DocStagesValue { get; set; }
         public ICollection<DocumentDTO> Documents { get; set; }
     }

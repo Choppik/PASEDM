@@ -20,10 +20,14 @@ namespace PASEDM.Models
         }
 
         public int Id { get; }
-        public string Name { get; }
+        public string Name { get; set; }
         public Task<IEnumerable<DocumentTypes>> GetAllDocTyp()
         {
             return _docTypProvider.GetAllDocTyp();
+        }
+        public override string ToString()
+        {
+            return $"{Name}";
         }
     }
 }

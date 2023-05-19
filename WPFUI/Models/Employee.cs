@@ -7,30 +7,35 @@ namespace PASEDM.Models
     public class Employee
     {
         private readonly IEmployeeProvider _employeeProviders;
-        public int Id { get; }
+        public int? Id { get; }
         public int NumberEmployee { get; }
-        public string FullName { get; }
+        public string FullName { get; set; }
         public string Mail { get; }
-        public string Admittance { get; }
-        public string Division { get; }
+        public int? AccessRightsID { get; }
+        public int? DivisionID { get; }
 
         public Employee(IEmployeeProvider employeeProviders)
         {
             _employeeProviders = employeeProviders;
         }
 
-        public Employee(int id, int numberEmployee, string fullName, string mail, string division)
+        public Employee(int? id, int numberEmployee, string fullName, string mail, int? accessRightsID, int? divisionID)
         {
             Id = id;
             NumberEmployee = numberEmployee;
             FullName = fullName;
             Mail = mail;
-            Division = division;
+            AccessRightsID = accessRightsID;
+            DivisionID = divisionID;
         }
 
         public Task<IEnumerable<Employee>> GetAllEmployee()
         {
             return _employeeProviders.GetAllEmployee();
+        }
+        public override string ToString()
+        {
+            return $"{FullName}";
         }
     }
 }

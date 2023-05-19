@@ -9,7 +9,7 @@ namespace PASEDM.Data.Configuration
         public void Configure(EntityTypeBuilder<DocStagesDTO> builder)
         {
             builder.Property(x => x.ID).ValueGeneratedOnAdd();
-            builder.Property(x => x.DocStages).HasMaxLength(100);
+            builder.Property(x => x.NameDocStage).HasMaxLength(100);
             builder.Property(x => x.DocStagesValue).HasMaxLength(2);
         }
     }

@@ -98,5 +98,9 @@ namespace PASEDM.Models
         {
             return await _userProviders.GetUser(user);
         }
+        public override string ToString()
+        {
+            return $"{UserName}";
+        }
     }
 }

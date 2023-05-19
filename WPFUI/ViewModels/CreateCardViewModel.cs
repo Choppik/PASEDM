@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using PASEDM.Data;
 using PASEDM.Infrastructure.Command;
-using PASEDM.Infrastructure.Command.Base;
 using PASEDM.Models;
 using PASEDM.Services;
 using PASEDM.Services.PASEDMProviders;
@@ -17,7 +16,6 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace PASEDM.ViewModels
 {
@@ -349,7 +347,7 @@ namespace PASEDM.ViewModels
             {
                 _addDocCommand = value;
                 OnPropertyChanged(nameof(AddDocCommand));
-                OpenFile();
+                //OpenFile();
             }
         }
 
@@ -358,7 +356,8 @@ namespace PASEDM.ViewModels
         #endregion
 
         public CreateCardViewModel(INavigationService navigationService, 
-            OutgoingViewModel viewModel,
+            OutgoingViewModel outgoingViewModel,
+            IncomingViewModel incomingViewModel,
             UserStore userStore, 
             PASEDMDbContextFactory deferredContextFactory,
             OpenFileDialog openFileDialog)
@@ -379,12 +378,53 @@ namespace PASEDM.ViewModels
             GetDocStages();
             GetSecrecyStamps();
 
-            _nameCard = viewModel.CurrentMoveUser.NameCard;
-            CurrentTask = viewModel.CurrentMoveUser.Tasks;
+            if (outgoingViewModel.CurrentMoveUser.CardID != null)
+            {
+                _nameCard = outgoingViewModel.CurrentMoveUser.NameCard;
+                _docRegistrationNumber = outgoingViewModel.CurrentMoveUser.Document.RegistrationNumber;
+                _numberCard = outgoingViewModel.CurrentMoveUser.NumberCard;
+                _summary = outgoingViewModel.CurrentMoveUser.Document.Summary;
+                _comment = outgoingViewModel.CurrentMoveUser.Comment;
+                _filePath = outgoingViewModel.CurrentMoveUser.Document.Path;
+                _docName = outgoingViewModel.CurrentMoveUser.Document.NameDoc;
+                _dateOfFormation = outgoingViewModel.CurrentMoveUser.DateOfFormation;
+                _dateOfFormationDocument = outgoingViewModel.CurrentMoveUser.Document.DateCreateDoc;
+                CurrentTask = outgoingViewModel.CurrentMoveUser.Tasks;
+                CurrentTaskStages = outgoingViewModel.CurrentMoveUser.TaskStages;
+                CurrentCase = outgoingViewModel.CurrentMoveUser.Cases;
+                CurrentDocStages = outgoingViewModel.CurrentMoveUser.DocStages;
+                CurrentDocTypes = outgoingViewModel.CurrentMoveUser.DocumentTypes;
+                CurrentExecutor = outgoingViewModel.CurrentMoveUser.Executor;
+                CurrentSecrecyStamp = outgoingViewModel.CurrentMoveUser.SecrecyStamps;
+                CurrentTerm = outgoingViewModel.CurrentMoveUser.Deadlines;
+                CurrentRecipient = outgoingViewModel.CurrentMoveUser.Recipient;
+            }
+            if (incomingViewModel.CurrentMoveUser.CardID != null)
+            {
+                _nameCard = incomingViewModel.CurrentMoveUser.NameCard;
+                _docRegistrationNumber = incomingViewModel.CurrentMoveUser.Document.RegistrationNumber;
+                _numberCard = incomingViewModel.CurrentMoveUser.NumberCard;
+                _summary = incomingViewModel.CurrentMoveUser.Document.Summary;
+                _comment = incomingViewModel.CurrentMoveUser.Comment;
+                _filePath = incomingViewModel.CurrentMoveUser.Document.Path;
+                _docName = incomingViewModel.CurrentMoveUser.Document.NameDoc;
+                _dateOfFormation = incomingViewModel.CurrentMoveUser.DateOfFormation;
+                _dateOfFormationDocument = incomingViewModel.CurrentMoveUser.Document.DateCreateDoc;
+                CurrentTask = incomingViewModel.CurrentMoveUser.Tasks;
+                CurrentTaskStages = incomingViewModel.CurrentMoveUser.TaskStages;
+                CurrentCase = incomingViewModel.CurrentMoveUser.Cases;
+                CurrentDocStages = incomingViewModel.CurrentMoveUser.DocStages;
+                CurrentDocTypes = incomingViewModel.CurrentMoveUser.DocumentTypes;
+                CurrentExecutor = incomingViewModel.CurrentMoveUser.Executor;
+                CurrentSecrecyStamp = incomingViewModel.CurrentMoveUser.SecrecyStamps;
+                CurrentTerm = incomingViewModel.CurrentMoveUser.Deadlines;
+                CurrentRecipient = incomingViewModel.CurrentMoveUser.Recipient;
+            }
 
             NavigateRefundCommand = new NavigateCommand(navigationService);
             
             CreateCardCommand = new CreateCardCommand(this, deferredContextFactory, navigationService);
+            AddDocCommand = new CommandAdd(OpenFile);
         }
         private async void GetExecutors()
         {

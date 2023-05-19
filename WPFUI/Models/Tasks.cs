@@ -17,7 +17,7 @@ namespace PASEDM.Models
         public Tasks(int id, string nameTask, int? taskStageID)
             :this(id, nameTask, "", taskStageID)
         { }
-        public Tasks(int id, string nameTask, string contents, int? taskStageID)
+        public Tasks(int? id, string nameTask, string contents, int? taskStageID)
         {
             Id = id;
             NameTask = nameTask;
@@ -36,7 +36,7 @@ namespace PASEDM.Models
             _tasksProviders = tasksProviders;
         }
 
-        public int Id { get; }
+        public int? Id { get; }
         public string NameTask { get; set; }
         public string Contents { get; }
         public int? TaskStageID { get; }

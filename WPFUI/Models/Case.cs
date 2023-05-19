@@ -6,11 +6,12 @@ namespace PASEDM.Models
 {
     public class Case
     {
+        public Case () { }
         public Case(int id, string numberCase, string desription)
         {
             Id = id;
             NumberCase = numberCase;
-            Desription = desription;
+            Description = desription;
         }
 
         public Case(ICasesProvider casesProvider)
@@ -20,11 +21,15 @@ namespace PASEDM.Models
 
         private readonly ICasesProvider _casesProvider;
         public int Id { get; }
-        public string NumberCase { get; }
-        public string Desription { get; }
+        public string NumberCase { get; set; }
+        public string Description { get; }
         public Task<IEnumerable<Case>> GetAllCase()
         {
             return _casesProvider.GetAllCase();
+        }
+        public override string ToString()
+        {
+            return $"{NumberCase}";
         }
     }
 }

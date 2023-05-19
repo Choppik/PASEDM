@@ -21,11 +21,15 @@ namespace PASEDM.Models
         }
 
         public int Id { get; }
-        public string NameSecrecyStamp { get; }
+        public string NameSecrecyStamp { get; set; }
         public int SecrecyStampValue { get; }
         public Task<IEnumerable<SecrecyStamps>> GetAllSecrecyStamps()
         {
             return _secrecyStampsProvider.GetAllSecrecyStamps();
+        }
+        public override string ToString()
+        {
+            return $"{NameSecrecyStamp}";
         }
     }
 }

@@ -28,7 +28,7 @@ namespace PASEDM.Services.PASEDMProviders
         }
         private static DocStages ToDocStages(DocStagesDTO dto)
         {
-            return new DocStages(dto.ID, dto.DocStages, dto.DocStagesValue);
+            return new DocStages(dto.ID, dto.NameDocStage, dto.DocStagesValue);
         }
     }
 }

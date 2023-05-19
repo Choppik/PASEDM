@@ -20,7 +20,7 @@ namespace PASEDM.Infrastructure.Command
 
         private string _userName;
         private string _password;
-        private int _employee;
+        private int? _employee;
         private int _role;
         private int _roleID;
 

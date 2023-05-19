@@ -50,6 +50,9 @@
             <DatePicker IsTodayHighlighted="True" SelectedDate="{Binding DateOfFormationDocument}"/>
             <TextBlock Text="Состояние исполнения документа" />
             <ComboBox materialDesign:HintAssist.Hint="Состояние исполнения" 
+                          IsTextSearchEnabled="True"
+                          IsEditable="True"
+                          Text="{Binding CurrentDocStages.NameDocStage}"
                           ItemsSource="{Binding ListDocStages}"
                           SelectedItem="{Binding CurrentDocStages}">
                 <ComboBox.ItemTemplate>
@@ -59,7 +62,10 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBlock Text="Вид документа" />
-            <ComboBox materialDesign:HintAssist.Hint="Выберите вид документа" 
+            <ComboBox materialDesign:HintAssist.Hint="Выберите вид документа"
+                          IsTextSearchEnabled="True"
+                          IsEditable="True"
+                          Text="{Binding CurrentDocTypes.Name}"
                           ItemsSource="{Binding DocTypes}"
                           SelectedItem="{Binding CurrentDocTypes}">
                 <ComboBox.ItemTemplate>
@@ -70,6 +76,9 @@
             </ComboBox>
             <TextBlock Text="Срок исполнения документа" />
             <ComboBox materialDesign:HintAssist.Hint="Выберите срок" 
+                          IsTextSearchEnabled="True"
+                          IsEditable="True"
+                          Text="{Binding CurrentTerm.NameTerm}"
                           ItemsSource="{Binding Deadlines}"
                           SelectedItem="{Binding CurrentTerm}">
                 <ComboBox.ItemTemplate>
@@ -83,8 +92,11 @@
                          Text="{Binding Summary}"/>
             <TextBlock Text="Гриф секретности" />
             <ComboBox materialDesign:HintAssist.Hint="Гриф" 
-                          ItemsSource="{Binding ListSecrecyStamp}"
-                          SelectedItem="{Binding CurrentSecrecyStamp}">
+                      IsTextSearchEnabled="True"
+                      IsEditable="True"
+                      Text="{Binding CurrentSecrecyStamp.NameSecrecyStamp}"
+                      ItemsSource="{Binding ListSecrecyStamp}"
+                      SelectedItem="{Binding CurrentSecrecyStamp}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding NameSecrecyStamp}"/>
@@ -108,7 +120,7 @@
                           IsTextSearchEnabled="True"
                           IsEditable="True"
                           Text="{Binding CurrentTask.NameTask}"
-                          SelectedItem="{Binding CurrentTask, Mode=TwoWay}" VerticalAlignment="Top">
+                          SelectedItem="{Binding CurrentTask}" VerticalAlignment="Top">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding NameTask}"/>
@@ -133,8 +145,11 @@
             </Grid>
             <TextBlock Text="Состояние задачи" />
             <ComboBox materialDesign:HintAssist.Hint="Состояние исполнения задачи" 
-                          ItemsSource="{Binding ListTaskStages}"
-                          SelectedItem="{Binding CurrentTaskStages}">
+                      IsTextSearchEnabled="True"
+                      IsEditable="True"
+                      Text="{Binding CurrentTaskStages.NameTaskStage}"
+                      ItemsSource="{Binding ListTaskStages}"
+                      SelectedItem="{Binding CurrentTaskStages}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding NameTaskStage}"/>
@@ -143,8 +158,11 @@
             </ComboBox>
             <TextBlock Text="Исполнитель задачи" />
             <ComboBox materialDesign:HintAssist.Hint="Выберите исполнителя" 
-                          ItemsSource="{Binding Executors}"
-                          SelectedItem="{Binding CurrentExecutor}">
+                      IsTextSearchEnabled="True"
+                      IsEditable="True"
+                      Text="{Binding CurrentExecutor.FullName}"
+                      ItemsSource="{Binding Executors}"
+                      SelectedItem="{Binding CurrentExecutor}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding FullName}"/>
@@ -153,8 +171,11 @@
             </ComboBox>
             <TextBlock Text="Дело N" />
             <ComboBox materialDesign:HintAssist.Hint="Выберите связанное дело" 
-                          ItemsSource="{Binding Case}"
-                          SelectedItem="{Binding CurrentCase}">
+                      IsTextSearchEnabled="True"
+                      IsEditable="True"
+                      Text="{Binding CurrentCase.NumberCase}"
+                      ItemsSource="{Binding Case}"
+                      SelectedItem="{Binding CurrentCase}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding NumberCase}"/>
@@ -163,8 +184,11 @@
             </ComboBox>
             <TextBlock Text="Получатель" />
             <ComboBox materialDesign:HintAssist.Hint="Выберите получателя" 
-                          ItemsSource="{Binding Recipients}"
-                          SelectedItem="{Binding CurrentRecipient}">
+                      IsTextSearchEnabled="True"
+                      IsEditable="True"
+                      Text="{Binding CurrentRecipient.UserName}"
+                      ItemsSource="{Binding Recipients}"
+                      SelectedItem="{Binding CurrentRecipient}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding UserName}"/>

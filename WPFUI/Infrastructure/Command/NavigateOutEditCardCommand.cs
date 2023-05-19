@@ -4,12 +4,12 @@ using PASEDM.ViewModels;
 
 namespace PASEDM.Infrastructure.Command
 {
-    public class NavigateEditCardCommand : BaseCommand
+    public class NavigateOutEditCardCommand : BaseCommand
     {
         private readonly IParamNavigationService<OutgoingViewModel> _navigationService;
         private OutgoingViewModel _outgoingViewModel;
 
-        public NavigateEditCardCommand(OutgoingViewModel viewModel,
+        public NavigateOutEditCardCommand(OutgoingViewModel viewModel,
             IParamNavigationService<OutgoingViewModel> navigationService)
         {
             _outgoingViewModel = viewModel;

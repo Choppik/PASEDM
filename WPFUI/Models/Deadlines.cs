@@ -21,11 +21,15 @@ namespace PASEDM.Models
         }
 
         public int Id { get; }
-        public string NameTerm { get; }
+        public string NameTerm { get; set; }
         public string Term { get; }
         public Task<IEnumerable<Deadlines>> GetAllDeadlines()
         {
             return _deadlinesProvider.GetAllDeadlines();
+        }
+        public override string ToString()
+        {
+            return $"{NameTerm}";
         }
     }
 }

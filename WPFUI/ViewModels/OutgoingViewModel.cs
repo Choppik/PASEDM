@@ -11,9 +11,6 @@ using System.Windows.Input;
 using System.Collections.Generic;
 using PASEDM.Data;
 using PASEDM.Store;
-using System.ComponentModel;
-using System.Collections;
-using System.Linq;
 
 namespace PASEDM.ViewModels
 {
@@ -26,7 +23,7 @@ namespace PASEDM.ViewModels
         private INavigationService _navigationService;
 
         private bool _isLoading;
-        private ICommand _navigateEditCardCommand;
+        private ICommand _navigateOutEditCardCommand;
         private ObservableCollection<MoveUser> _moveUser;
         private IMoveUserProvider _moveUserProvider;
         private MoveUser _currentMoveUser;
@@ -56,17 +53,16 @@ namespace PASEDM.ViewModels
         }
 
         public ICommand NavigateCreateCardCommand { get; }
-        public ICommand NavigateEditCardCommand
+        public ICommand NavigateOutEditCardCommand
         {
-            get => _navigateEditCardCommand;
+            get => _navigateOutEditCardCommand;
             set
             {
-                _navigateEditCardCommand = value;
-                OnPropertyChanged(nameof(NavigateEditCardCommand));
+                _navigateOutEditCardCommand = value;
+                OnPropertyChanged(nameof(NavigateOutEditCardCommand));
             }
         }
         #endregion
-
 
         public OutgoingViewModel(
             IParamNavigationService<OutgoingViewModel> parameterNavigationService,
@@ -104,6 +100,6 @@ namespace PASEDM.ViewModels
             }
             IsLoading = false;
         }
-        private ICommand EditCommand() => NavigateEditCardCommand = new NavigateEditCardCommand(this, _parameterNavigationService);
+        private ICommand EditCommand() => NavigateOutEditCardCommand = new NavigateOutEditCardCommand(this, _parameterNavigationService);
     }
 }

@@ -71,21 +71,11 @@ namespace PASEDM
             services.AddTransient(s => new SettingsViewModel(
                 s.GetRequiredService<UserStore>()));
 
-            services.AddTransient(s => new IncomingViewModel(
-                CreateCardNavigationService(s),
-                s.GetRequiredService<PASEDMDbContextFactory>(),
-                s.GetRequiredService<UserStore>()));
-
-            /*services.AddTransient(s => new OutgoingViewModel(
-                s.GetRequiredService<ParameterNavigationService<OutgoingViewModel, CreateCardViewModel>>(),
-                CreateCardNavigationService(s),
-                s.GetRequiredService<PASEDMDbContextFactory>(),
-                s.GetRequiredService<UserStore>()));*/
-
             services.AddTransient(CreateCardViewModelMet);
             services.AddTransient(OutgoingViewModelMet);
-
+            services.AddTransient(IncomingViewModelMet);
             services.AddTransient(CreateNavigationBarViewModel);
+
             services.AddSingleton<MainWindowViewModel>();
 
             services.AddSingleton(s => new MainWindow()
@@ -215,6 +205,7 @@ namespace PASEDM
             return new CreateCardViewModel(
                 navigationService,
                 serviceProvider.GetRequiredService<OutgoingViewModel>(),
+                serviceProvider.GetRequiredService<IncomingViewModel>(),
                 serviceProvider.GetRequiredService<UserStore>(),
                 serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                 serviceProvider.GetRequiredService<OpenFileDialog>());
@@ -230,12 +221,37 @@ namespace PASEDM
                 (parameter) => new CreateCardViewModel(
                     navigationService,
                     parameter,
+                    serviceProvider.GetRequiredService<IncomingViewModel>(),
                     serviceProvider.GetRequiredService<UserStore>(),
                     serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                     serviceProvider.GetRequiredService<OpenFileDialog>()));
 
 
             return new OutgoingViewModel(
+                parameterNavigationService,
+                CreateCardNavigationService(serviceProvider),
+                serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
+                serviceProvider.GetRequiredService<UserStore>()
+                );
+        }
+        private IncomingViewModel IncomingViewModelMet(IServiceProvider serviceProvider)
+        {
+            CompositeNavigationService navigationService = new(
+                serviceProvider.GetRequiredService<CloseModalNavigationService>(),
+                CreateOutgoingNavigationService(serviceProvider));
+
+            ParameterNavigationService<IncomingViewModel, CreateCardViewModel> parameterNavigationService = new(
+                serviceProvider.GetRequiredService<ModalNavigationStore>(),
+                (parameter) => new CreateCardViewModel(
+                    navigationService,
+                    serviceProvider.GetRequiredService<OutgoingViewModel>(),
+                    parameter,
+                    serviceProvider.GetRequiredService<UserStore>(),
+                    serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
+                    serviceProvider.GetRequiredService<OpenFileDialog>()));
+
+
+            return new IncomingViewModel(
                 parameterNavigationService,
                 CreateCardNavigationService(serviceProvider),
                 serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),

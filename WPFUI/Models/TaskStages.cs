@@ -21,11 +21,15 @@ namespace PASEDM.Models
         }
 
         public int Id { get; }
-        public string NameTaskStage { get; }
+        public string NameTaskStage { get; set; }
         public int TaskStagesValue { get; }
         public Task<IEnumerable<TaskStages>> GetAllTaskStages()
         {
             return _taskStagesProvider.GetAllTaskStages();
+        }
+        public override string ToString()
+        {
+            return $"{NameTaskStage}";
         }
     }
 }

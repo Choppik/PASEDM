@@ -33,38 +33,24 @@ namespace PASEDM.Models
             TypeUserID = typeUserID;
             CardID = cardID;
         }
-
-        public MoveUser(int numberCard, string nameCard, string nameDoc, string docType, string nameTask, string contentTask, string taskStage, string numberCase, string desriptionCase, string executor, DateTime dateOfFormation, string comment, string sender, string recipient)
+        public MoveUser(int? cardID, int numberCard, string nameCard, Document document, Deadlines deadlines, DocStages docStages, SecrecyStamps secrecyStamps, DocumentTypes documentTypes, Tasks tasks, TaskStages taskStages, Case cases, Employee executor, DateTime dateOfFormation, string comment, User recipient, string sender)
         {
+            CardID = cardID;
             NumberCard = numberCard;
             NameCard = nameCard;
-            NameDoc = nameDoc;
-            DocType = docType;
-            NameTask = nameTask;
-            ContentTask = contentTask;
-            TaskStage = taskStage;
-            NumberCase = numberCase;
-            DesriptionCase = desriptionCase;
-            Executor = executor;
-            DateOfFormation = dateOfFormation;
-            Comment = comment;
-            Sender = sender;
-            Recipient = recipient;
-        }
-        public MoveUser(int numberCard, string nameCard, string nameDoc, string docType, Tasks tasks, string numberCase, string desriptionCase, string executor, DateTime dateOfFormation, string comment, string sender, string recipient)
-        {
-            NumberCard = numberCard;
-            NameCard = nameCard;
-            NameDoc = nameDoc;
-            DocType = docType;
+            Document = document;
+            Deadlines = deadlines;
+            DocStages = docStages;
+            SecrecyStamps = secrecyStamps;
+            DocumentTypes = documentTypes;
             Tasks = tasks;
-            NumberCase = numberCase;
-            DesriptionCase = desriptionCase;
+            TaskStages = taskStages;
+            Cases = cases;
             Executor = executor;
             DateOfFormation = dateOfFormation;
             Comment = comment;
-            Sender = sender;
             Recipient = recipient;
+            Sender = sender;
         }
 
         public int Id { get; }
@@ -72,19 +58,19 @@ namespace PASEDM.Models
         public int? CardID { get; }
         public int NumberCard { get; }
         public string NameCard { get; }
-        public string NameDoc { get; }
-        public string DocType { get; }
+        public Document Document { get; }
+        public DocStages DocStages { get; }
+        public SecrecyStamps SecrecyStamps { get; }
+        public Deadlines Deadlines { get; }
+        public DocumentTypes DocumentTypes { get; }
         public Tasks Tasks { get; }
-        public string NameTask { get; }
-        public string ContentTask { get; }
-        public string TaskStage { get; }
-        public string NumberCase { get; }
-        public string DesriptionCase { get; }
-        public string Executor { get; }
+        public TaskStages TaskStages { get; }
+        public Case Cases { get; }
+        public Employee Executor { get; }
         public DateTime DateOfFormation { get; }
         public string Comment { get; }
         public string Sender { get; }
-        public string Recipient { get; }
+        public User Recipient { get; }
         public async Task AddMoveUser(MoveUser moveUser)
         {
             await _moveUserCreator.AddMoveUser(moveUser);

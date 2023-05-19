@@ -22,12 +22,14 @@ namespace PASEDM.Services.PASEDMProviders
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
                 IEnumerable<MoveUserDTO> moveUserDTO = await context.MoveUsers
+                    .Include(u => u.Card).ThenInclude(u => u.Recipient).ThenInclude(u => u.User)
                     .Where(p => p.TypeUserID == moveUser.TypeUserID && p.Card.UserID == user.Id)
-                    .Include(u => u.Card).ThenInclude(u => u.Document)
+                    .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.DocStages)
+                    .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.SecrecyStamps)
+                    .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.Term)
                     .Include(u => u.Card).ThenInclude(u => u.DocumentTypes)
                     .Include(u => u.Card).ThenInclude(u => u.Employee)
                     .Include(u => u.Card).ThenInclude(u => u.Task).ThenInclude(u => u.TaskStages)
-                    .Include(u => u.Card).ThenInclude(u => u.Recipient).ThenInclude(u => u.User)
                     .Include(u => u.Card).ThenInclude(u => u.Case)
                     .Include(u => u.Card).ThenInclude(u => u.User)
                     .ToListAsync();
@@ -47,12 +49,15 @@ namespace PASEDM.Services.PASEDMProviders
                 IEnumerable<MoveUserDTO> moveUserDTO = await context.MoveUsers
                     .Include(u => u.Card).ThenInclude(u => u.Recipient).ThenInclude(u => u.User)
                     .Where(p => p.TypeUserID == moveUser.TypeUserID && p.Card.Recipient.UserID == user.Id)
-                    .Include(u => u.Card).ThenInclude(u => u.Document)
+                    .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.DocStages)
+                    .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.SecrecyStamps)
+                    .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.Term)
                     .Include(u => u.Card).ThenInclude(u => u.DocumentTypes)
                     .Include(u => u.Card).ThenInclude(u => u.Employee)
                     .Include(u => u.Card).ThenInclude(u => u.Task).ThenInclude(u => u.TaskStages)
                     .Include(u => u.Card).ThenInclude(u => u.Case)
                     .Include(u => u.Card).ThenInclude(u => u.User)
+                    .OrderBy(u => u.CardID)
                     .ToListAsync();
 
                 if (moveUserDTO == null)
@@ -60,49 +65,40 @@ namespace PASEDM.Services.PASEDMProviders
                     return null;
                 }
 
-                return moveUserDTO.Select(u => ToMoveUser(u));
+                return moveUserDTO.Select(u => ToMoveUserEdit(u));
             }
-        }
-        private static MoveUser ToMoveUser(MoveUserDTO dto)
-        {
-            return new MoveUser(
-                dto.Card.NumberCard,
-                dto.Card.NameCard,
-                dto.Card.Document.NameDoc,
-                dto.Card.DocumentTypes.Name,
-                dto.Card.Task.NameTask,
-                dto.Card.Task.Contents,
-                dto.Card.Task.TaskStages.TaskStages,
-                dto.Card.Case.NumberCase,
-                dto.Card.Case.Desription,
-                dto.Card.Employee.FullName,
-                dto.Card.DateOfFormation,
-                dto.Card.Comment,
-                dto.Card.User.UserName,
-                dto.Card.Recipient.User.UserName
-                );
         }
         private static MoveUser ToMoveUserEdit(MoveUserDTO dto)
         {
-            Tasks tasks = new(dto.Card.Task.NameTask, dto.Card.Task.Contents, dto.Card.Task.TaskStagesID);
+            Document document = new(dto.Card.Document.ID, dto.Card.Document.NameDoc, dto.Card.Document.RegistrationNumber, dto.Card.Document.DateCreateDoc, dto.Card.Document.Summary, dto.Card.Document.Path, dto.Card.Document.TermID, dto.Card.Document.SecrecyStampsID, dto.Card.Document.DocStagesID);
+            DocumentTypes documentTypes = new(dto.Card.DocumentTypes.ID, dto.Card.DocumentTypes.Name);
+            Tasks tasks = new(dto.Card.TaskID, dto.Card.Task.NameTask, dto.Card.Task.Contents, dto.Card.Task.TaskStagesID);
+            TaskStages taskStages = new(dto.Card.Task.TaskStages.ID, dto.Card.Task.TaskStages.TaskStages, dto.Card.Task.TaskStages.TaskStagesValue);
+            Case cases = new(dto.Card.Case.ID, dto.Card.Case.NumberCase, dto.Card.Case.Desription);
+            Employee employee = new(dto.Card.EmployeeID, dto.Card.Employee.NumberEmployee, dto.Card.Employee.FullName, dto.Card.Employee.Mail, dto.Card.Employee.AccessRightsID, dto.Card.Employee.DivisionID);
+            DocStages docStages = new(dto.Card.Document.DocStagesID, dto.Card.Document.DocStages.NameDocStage, dto.Card.Document.DocStages.DocStagesValue);
+            SecrecyStamps secrecyStamps = new(dto.Card.Document.SecrecyStamps.ID, dto.Card.Document.SecrecyStamps.SecrecyStamp, dto.Card.Document.SecrecyStamps.SecrecyStampValue);
+            Deadlines deadlines = new(dto.Card.Document.Term.ID, dto.Card.Document.Term.NameTerm, dto.Card.Document.Term.Term);
+            User user = new(dto.Card.Recipient.User.ID, dto.Card.Recipient.User.UserName);
+
             return new MoveUser(
+                dto.CardID,
                 dto.Card.NumberCard,
                 dto.Card.NameCard,
-                dto.Card.Document.NameDoc,
-                dto.Card.DocumentTypes.Name,
+                document,
+                deadlines,
+                docStages,
+                secrecyStamps,
+                documentTypes,
                 tasks,
-                /*dto.Card.Task.NameTask,
-                dto.Card.Task.Contents,
-                dto.Card.Task.TaskStages.TaskStages,*/
-                dto.Card.Case.NumberCase,
-                dto.Card.Case.Desription,
-                dto.Card.Employee.FullName,
+                taskStages,
+                cases,
+                employee,
                 dto.Card.DateOfFormation,
                 dto.Card.Comment,
-                dto.Card.User.UserName,
-                dto.Card.Recipient.User.UserName
+                user,
+                dto.Card.User.UserName
                 );
         }
-
     }
 }

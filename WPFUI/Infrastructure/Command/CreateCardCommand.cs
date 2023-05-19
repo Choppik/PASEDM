@@ -16,6 +16,7 @@ namespace PASEDM.Infrastructure.Command
 {
     public class CreateCardCommand : AsyncBaseCommand
     {
+        #region Переменные и свойтва
         private DateTime _dateOfFormation;
         private DateTime _dateOfFormationDocument;
 
@@ -56,6 +57,7 @@ namespace PASEDM.Infrastructure.Command
         private ICardProvider _cardProvider;
         private ITypeUserProvider _typeUserProvider;
         private ITasksProvider _tasksProvider;
+        #endregion
 
         public CreateCardCommand(CreateCardViewModel createCardViewModel, PASEDMDbContextFactory deferredContextFactory, INavigationService navigationService)
         {
@@ -88,7 +90,7 @@ namespace PASEDM.Infrastructure.Command
 
             _numberCard = _createCardViewModel.NumberCard;
             _nameCard = _createCardViewModel.NameCard;
-            _dateOfFormation = _createCardViewModel.DateOfFormation;
+            _dateOfFormation = DateTime.Now;
             _docName = _createCardViewModel.Document;
             _docRegistrationNumber = _createCardViewModel.RegistrationNumber;
             _dateOfFormationDocument = _createCardViewModel.DateOfFormationDocument;
@@ -116,7 +118,7 @@ namespace PASEDM.Infrastructure.Command
 
             if (_createCardViewModel.IsCheckedTask)
             {
-                await tasks.EditTask(new(_task.Id, _task.NameTask, _taskStages.Id));
+                await tasks.EditTask(new(_task.Id, _task.NameTask, _task.Contents, _taskStages.Id));
                 await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB.Id, _documentType.Id, _task.Id, _case.Id, _executor.Id, _createCardUser.Id, recipientDB.Id));
             }
             else
@@ -127,7 +129,7 @@ namespace PASEDM.Infrastructure.Command
                 await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB.Id, _documentType.Id, taskDB.Id, _case.Id, _executor.Id, _createCardUser.Id, recipientDB.Id));
             }
 
-            var cardDB = await card.GetCard(new(_nameCard));
+            var cardDB = await card.GetCard(new(_dateOfFormation));
 
             foreach(var item in await typeUser.GetAllTypeUsers())
             {

@@ -19,8 +19,8 @@ namespace PASEDM.Models
         public Card(int id, string nameCard)
             : this(id, default, nameCard, "", default, default, default, default, default, default, default, default)
         { }
-        public Card(string nameCard)
-            : this(default, default, nameCard, "", default, default, default, default, default, default, default, default)
+        public Card(DateTime dateOfFormation)
+            : this(default, default, "", "", dateOfFormation, default, default, default, default, default, default, default)
         { }
 
         public Card(int id, int numberCard, string nameCard, string comment, DateTime dateOfFormation, int? documentID, int? documentTypesID, int? taskID, int? caseID, int? employeeID, int? userID, int? recipientID)
@@ -85,6 +85,10 @@ namespace PASEDM.Models
         public Task<IEnumerable<Card>> GetAllTaskExecutor(User user)
         {
             return _cardProvider.GetAllTaskExecutor(user);
+        }
+        public override string ToString()
+        {
+            return $"{NameCard}";
         }
     }
 }

@@ -44,7 +44,7 @@ namespace PASEDM.Models
         }
 
         public int Id { get; }
-        public string NameDoc { get; }
+        public string NameDoc { get; set; }
         public int RegistrationNumber { get; }
         public DateTime DateCreateDoc { get; }
         public string Summary { get; }
@@ -64,6 +64,10 @@ namespace PASEDM.Models
         public async Task<Document> GetDoc(Document document)
         {
             return await _docProvider.GetDoc(document);
+        }
+        public override string ToString()
+        {
+            return $"{NameDoc}";
         }
     }
 }
