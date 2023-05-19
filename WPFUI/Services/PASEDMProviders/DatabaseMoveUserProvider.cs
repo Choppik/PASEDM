@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using MaterialDesignThemes.Wpf;
 
 namespace PASEDM.Services.PASEDMProviders
 {
@@ -82,6 +83,7 @@ namespace PASEDM.Services.PASEDMProviders
             User user = new(dto.Card.Recipient.User.ID, dto.Card.Recipient.User.UserName);
 
             return new MoveUser(
+                dto.ID,
                 dto.CardID,
                 dto.Card.NumberCard,
                 dto.Card.NameCard,
@@ -99,6 +101,24 @@ namespace PASEDM.Services.PASEDMProviders
                 user,
                 dto.Card.User.UserName
                 );
+        }
+        public async Task DeleteMoveUser(MoveUser moveUser)
+        {
+            using (PASEDMContext context = _dbContextFactory.CreateDbContext())
+            {
+                try
+                {
+                    MoveUserDTO moveUserDTO = await context.MoveUsers
+                        .Where(x => x.ID == moveUser.Id)
+                        .FirstOrDefaultAsync();
+
+                    if (moveUserDTO != null) context.MoveUsers.Remove(moveUserDTO);
+                }
+                finally
+                {
+                    await context.SaveChangesAsync();
+                }
+            }
         }
     }
 }

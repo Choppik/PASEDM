@@ -230,6 +230,7 @@ namespace PASEDM
             return new OutgoingViewModel(
                 parameterNavigationService,
                 CreateCardNavigationService(serviceProvider),
+                CreateOutgoingNavigationService(serviceProvider),
                 serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                 serviceProvider.GetRequiredService<UserStore>()
                 );
@@ -253,7 +254,7 @@ namespace PASEDM
 
             return new IncomingViewModel(
                 parameterNavigationService,
-                CreateCardNavigationService(serviceProvider),
+                CreateIncomingNavigationService(serviceProvider),
                 serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                 serviceProvider.GetRequiredService<UserStore>()
                 );

@@ -79,7 +79,8 @@
                     Command="{Binding NavigateOutEditCardCommand}"/>
             <Button Grid.Column="2" 
                     Content="Удалить"  
-                    HorizontalAlignment="Left"/>
+                    HorizontalAlignment="Left"
+                    Command="{Binding DeleteCardCommand}"/>
         </Grid>
     </Grid>
 </UserControl>

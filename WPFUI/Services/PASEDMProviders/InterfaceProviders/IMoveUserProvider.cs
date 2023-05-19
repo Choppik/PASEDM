@@ -8,5 +8,6 @@ namespace PASEDM.Services.PASEDMProviders.InterfaceProviders
     {
         Task<IEnumerable<MoveUser>> GetAllMoveUserSender(MoveUser moveUser, User user);
         Task<IEnumerable<MoveUser>> GetAllMoveUserRecipient(MoveUser moveUser, User user);
+        Task DeleteMoveUser(MoveUser moveUser);
     }
 }

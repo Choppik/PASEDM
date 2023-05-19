@@ -21,9 +21,11 @@ namespace PASEDM.ViewModels
         private PASEDMDbContextFactory _contextFactory;
         private IParamNavigationService<OutgoingViewModel> _parameterNavigationService;
         private INavigationService _navigationService;
+        private INavigationService _navigationServiceBack;
 
         private bool _isLoading;
         private ICommand _navigateOutEditCardCommand;
+        private ICommand _deleteCardCommand;
         private ObservableCollection<MoveUser> _moveUser;
         private IMoveUserProvider _moveUserProvider;
         private MoveUser _currentMoveUser;
@@ -37,8 +39,9 @@ namespace PASEDM.ViewModels
             set
             {
                 _currentMoveUser = value;
-                EditCommand();
                 OnPropertyChanged(nameof(CurrentMoveUser));
+                EditCommand();
+                DeleteCommand();
             }
         }
 
@@ -62,11 +65,21 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(NavigateOutEditCardCommand));
             }
         }
+        public ICommand DeleteCardCommand
+        {
+            get => _deleteCardCommand;
+            set
+            {
+                _deleteCardCommand = value;
+                OnPropertyChanged(nameof(DeleteCardCommand));
+            }
+        }
         #endregion
 
         public OutgoingViewModel(
             IParamNavigationService<OutgoingViewModel> parameterNavigationService,
             INavigationService navigationService, 
+            INavigationService navigationServiceBack, 
             PASEDMDbContextFactory deferredContextFactory, 
             UserStore userStore)
         {
@@ -74,6 +87,7 @@ namespace PASEDM.ViewModels
             _contextFactory = deferredContextFactory;
             _userStore = userStore;
             _navigationService = navigationService;
+            _navigationServiceBack = navigationServiceBack;
 
             GetMoveUser();
 
@@ -101,5 +115,6 @@ namespace PASEDM.ViewModels
             IsLoading = false;
         }
         private ICommand EditCommand() => NavigateOutEditCardCommand = new NavigateOutEditCardCommand(this, _parameterNavigationService);
+        private ICommand DeleteCommand() => DeleteCardCommand = new DeleteCard(_currentMoveUser, _contextFactory, _navigationServiceBack);
     }
 }

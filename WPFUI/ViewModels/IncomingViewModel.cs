@@ -11,18 +11,22 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace PASEDM.ViewModels
 {
     public class IncomingViewModel : BaseViewModels
     {
+        #region Переменные и свойства
         private PASEDMDbContextFactory _contextFactory;
         private IParamNavigationService<IncomingViewModel> _parameterNavigationService;
+        private INavigationService _navigationService;
         private readonly UserStore _userStore;
 
         private bool _isLoading;
         private ObservableCollection<MoveUser> _moveUser;
         private ICommand _navigateIncEditCardCommand;
+        private ICommand _deleteCardCommand;
         private IMoveUserProvider _moveUserProvider;
         private MoveUser _currentMoveUser;
         public IEnumerable<MoveUser> MoveUsers => _moveUser;
@@ -37,6 +41,7 @@ namespace PASEDM.ViewModels
                 _currentMoveUser = value;
                 OnPropertyChanged(nameof(CurrentMoveUser));
                 EditCommand();
+                DeleteCommand();
             }
         }
         public bool IsLoading
@@ -57,23 +62,36 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(NavigateIncEditCardCommand));
             }
         }
+        public ICommand DeleteCardCommand
+        {
+            get => _deleteCardCommand;
+            set
+            {
+                _deleteCardCommand = value;
+                OnPropertyChanged(nameof(DeleteCardCommand));
+            }
+        }
+        #endregion
         public IncomingViewModel(
             IParamNavigationService<IncomingViewModel> parameterNavigationService,
             INavigationService navigationService, 
             PASEDMDbContextFactory deferredContextFactory, 
             UserStore userStore)
         {
+            _navigationService = navigationService;
             _parameterNavigationService = parameterNavigationService;
             _contextFactory = deferredContextFactory;
             _userStore = userStore;
             GetMoveUser();
 
             EditCommand();
+            DeleteCommand();
         }
         private async void GetMoveUser()
         {
             try
             {
+                IsLoading = true;
                 _moveUserProvider = new DatabaseMoveUserProvider(_contextFactory);
                 _moveUser = new ObservableCollection<MoveUser>();
                 _currentMoveUser = new MoveUser(_moveUserProvider);
@@ -87,7 +105,9 @@ namespace PASEDM.ViewModels
             {
                 MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            IsLoading = false;
         }
         private ICommand EditCommand() => NavigateIncEditCardCommand = new NavigateIncEditCardCommand(this, _parameterNavigationService);
+        private ICommand DeleteCommand() => DeleteCardCommand = new DeleteCard(_currentMoveUser, _contextFactory, _navigationService);
     }
 }

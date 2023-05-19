@@ -11,6 +11,7 @@ namespace PASEDM.Models
         private IMoveUserCreator _moveUserCreator;
         private IMoveUserProvider _moveUserProvider;
 
+        #region Конструкторы
         public MoveUser() { }
         public MoveUser(IMoveUserCreator moveUserCreator)
         {
@@ -33,8 +34,9 @@ namespace PASEDM.Models
             TypeUserID = typeUserID;
             CardID = cardID;
         }
-        public MoveUser(int? cardID, int numberCard, string nameCard, Document document, Deadlines deadlines, DocStages docStages, SecrecyStamps secrecyStamps, DocumentTypes documentTypes, Tasks tasks, TaskStages taskStages, Case cases, Employee executor, DateTime dateOfFormation, string comment, User recipient, string sender)
+        public MoveUser(int? id, int? cardID, int numberCard, string nameCard, Document document, Deadlines deadlines, DocStages docStages, SecrecyStamps secrecyStamps, DocumentTypes documentTypes, Tasks tasks, TaskStages taskStages, Case cases, Employee executor, DateTime dateOfFormation, string comment, User recipient, string sender)
         {
+            Id = id;
             CardID = cardID;
             NumberCard = numberCard;
             NameCard = nameCard;
@@ -52,8 +54,10 @@ namespace PASEDM.Models
             Recipient = recipient;
             Sender = sender;
         }
+        #endregion
 
-        public int Id { get; }
+        #region Свойства
+        public int? Id { get; }
         public int? TypeUserID { get; }
         public int? CardID { get; }
         public int NumberCard { get; }
@@ -71,6 +75,7 @@ namespace PASEDM.Models
         public string Comment { get; }
         public string Sender { get; }
         public User Recipient { get; }
+        #endregion
         public async Task AddMoveUser(MoveUser moveUser)
         {
             await _moveUserCreator.AddMoveUser(moveUser);
@@ -82,6 +87,10 @@ namespace PASEDM.Models
         public Task<IEnumerable<MoveUser>> GetAllMoveUserRecipient(MoveUser moveUser, User user)
         {
             return _moveUserProvider.GetAllMoveUserRecipient(moveUser, user);
+        }
+        public async Task DeleteMoveUser(MoveUser moveUser)
+        {
+            await _moveUserProvider.DeleteMoveUser(moveUser);
         }
     }
 }
