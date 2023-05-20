@@ -21,14 +21,17 @@ namespace PASEDM.Services.PASEDMProviders
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
-                IEnumerable<DocumentDTO> docDTOs = await context.Documents.ToListAsync();
+                IEnumerable<DocumentDTO> docDTOs = await context.Documents
+                    .Include(u => u.SecrecyStamps)
+                    .ToListAsync();
 
                 return docDTOs.Select(u => ToDoc(u));
             }
         }
         private static Document ToDoc(DocumentDTO dto)
         {
-            return new Document(dto.ID, dto.NameDoc, dto.RegistrationNumber, dto.DateCreateDoc, dto.Summary, dto.Path, dto.TermID, dto.SecrecyStampsID, dto.DocStagesID);
+            SecrecyStamps secrecyStamps = new(dto.SecrecyStamps.ID, dto.SecrecyStamps.SecrecyStamp, dto.SecrecyStamps.SecrecyStampValue);
+            return new Document(dto.ID, dto.NameDoc, dto.RegistrationNumber, dto.DateCreateDoc, dto.Summary, dto.Path, dto.TermID, secrecyStamps, dto.DocStagesID);
         }
         public async Task<Document> GetDoc(Document document)
         {

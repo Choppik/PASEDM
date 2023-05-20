@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PASEDM.Data;
 
@@ -11,9 +12,11 @@ using PASEDM.Data;
 namespace PASEDM.Migrations
 {
     [DbContext(typeof(PASEDMContext))]
-    partial class PASEDMContextModelSnapshot : ModelSnapshot
+    [Migration("20230520124047_RefTable9")]
+    partial class RefTable9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -281,7 +284,7 @@ namespace PASEDM.Migrations
                     b.ToTable("Staff");
                 });
 
-            modelBuilder.Entity("PASEDM.Data.DTOs.MoveCardDTO", b =>
+            modelBuilder.Entity("PASEDM.Data.DTOs.MoveUserDTO", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -295,40 +298,13 @@ namespace PASEDM.Migrations
                     b.Property<int?>("TypeUserID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Viewed")
-                        .HasMaxLength(1)
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
                     b.HasIndex("CardID");
 
                     b.HasIndex("TypeUserID");
 
-                    b.ToTable("MoveCards");
-                });
-
-            modelBuilder.Entity("PASEDM.Data.DTOs.MoveDocumentDTO", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int?>("DocumentID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("DocumentID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("MoveDocuments");
+                    b.ToTable("MoveUsers");
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.RecipientDTO", b =>
@@ -609,34 +585,19 @@ namespace PASEDM.Migrations
                     b.Navigation("Division");
                 });
 
-            modelBuilder.Entity("PASEDM.Data.DTOs.MoveCardDTO", b =>
+            modelBuilder.Entity("PASEDM.Data.DTOs.MoveUserDTO", b =>
                 {
                     b.HasOne("PASEDM.Data.DTOs.CardDTO", "Card")
-                        .WithMany("MoveCards")
+                        .WithMany()
                         .HasForeignKey("CardID");
 
                     b.HasOne("PASEDM.Data.DTOs.TypeUserDTO", "TypeUser")
-                        .WithMany("MoveCards")
+                        .WithMany("MoveUsers")
                         .HasForeignKey("TypeUserID");
 
                     b.Navigation("Card");
 
                     b.Navigation("TypeUser");
-                });
-
-            modelBuilder.Entity("PASEDM.Data.DTOs.MoveDocumentDTO", b =>
-                {
-                    b.HasOne("PASEDM.Data.DTOs.DocumentDTO", "Document")
-                        .WithMany("MoveDocuments")
-                        .HasForeignKey("DocumentID");
-
-                    b.HasOne("PASEDM.Data.DTOs.UserDTO", "User")
-                        .WithMany("MoveDocuments")
-                        .HasForeignKey("UserID");
-
-                    b.Navigation("Document");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.RecipientDTO", b =>
@@ -677,11 +638,6 @@ namespace PASEDM.Migrations
                     b.Navigation("Staff");
                 });
 
-            modelBuilder.Entity("PASEDM.Data.DTOs.CardDTO", b =>
-                {
-                    b.Navigation("MoveCards");
-                });
-
             modelBuilder.Entity("PASEDM.Data.DTOs.CaseDTO", b =>
                 {
                     b.Navigation("Cards");
@@ -700,8 +656,6 @@ namespace PASEDM.Migrations
             modelBuilder.Entity("PASEDM.Data.DTOs.DocumentDTO", b =>
                 {
                     b.Navigation("Cards");
-
-                    b.Navigation("MoveDocuments");
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.DocumentTypesDTO", b =>
@@ -748,14 +702,12 @@ namespace PASEDM.Migrations
 
             modelBuilder.Entity("PASEDM.Data.DTOs.TypeUserDTO", b =>
                 {
-                    b.Navigation("MoveCards");
+                    b.Navigation("MoveUsers");
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.UserDTO", b =>
                 {
                     b.Navigation("Cards");
-
-                    b.Navigation("MoveDocuments");
                 });
 #pragma warning restore 612, 618
         }

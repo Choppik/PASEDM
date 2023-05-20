@@ -25,7 +25,8 @@ namespace PASEDM.Data
         public DbSet<DocStagesDTO> DocStages { get; set; }
         public DbSet<AccessRightsDTO> AccessRights { get; set; }
         public DbSet<RoleDTO> Role { get; set; }
-        public DbSet<MoveUserDTO> MoveUsers { get; set; }
+        public DbSet<MoveCardDTO> MoveCards { get; set; }
+        public DbSet<MoveDocumentDTO> MoveDocuments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -45,7 +46,8 @@ namespace PASEDM.Data
             modelBuilder.ApplyConfiguration(new DocStagesConfiguration());
             modelBuilder.ApplyConfiguration(new AccessRightsConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
-            modelBuilder.ApplyConfiguration(new MoveUserConfiguration());
+            modelBuilder.ApplyConfiguration(new MoveCardConfiguration());
+            modelBuilder.ApplyConfiguration(new MoveDocumentConfiguration());
         }
     }
 }

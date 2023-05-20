@@ -24,13 +24,14 @@ namespace PASEDM.ViewModels
         private INavigationService _navigationServiceBack;
 
         private bool _isLoading;
+        private bool _isActive;
         private ICommand _navigateOutEditCardCommand;
         private ICommand _deleteCardCommand;
-        private ObservableCollection<MoveUser> _moveUser;
-        private IMoveUserProvider _moveUserProvider;
-        private MoveUser _currentMoveUser;
-        public IEnumerable<MoveUser> MoveUsers => _moveUser;
-        public MoveUser CurrentMoveUser
+        private ObservableCollection<MoveCard> _moveCard;
+        private IMoveCardProvider _moveUserProvider;
+        private MoveCard _currentMoveUser;
+        public IEnumerable<MoveCard> MoveCards => _moveCard;
+        public MoveCard CurrentMoveUser
         {
             get
             {
@@ -42,6 +43,7 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(CurrentMoveUser));
                 EditCommand();
                 DeleteCommand();
+                IsActive = true;
             }
         }
 
@@ -52,6 +54,15 @@ namespace PASEDM.ViewModels
             {
                 _isLoading = value;
                 OnPropertyChanged(nameof(IsLoading));
+            }
+        }
+        public bool IsActive
+        {
+            get => _isActive;
+            set
+            {
+                _isActive = value;
+                OnPropertyChanged(nameof(IsActive));
             }
         }
 
@@ -92,20 +103,19 @@ namespace PASEDM.ViewModels
             GetMoveUser();
 
             NavigateCreateCardCommand = new NavigateCommand(navigationService);
-            EditCommand();
         }
         private async void GetMoveUser()
         {
             try
             {
                 IsLoading = true;
-                _moveUserProvider = new DatabaseMoveUserProvider(_contextFactory);
-                _moveUser = new ObservableCollection<MoveUser>();
-                _currentMoveUser = new MoveUser(_moveUserProvider);
+                _moveUserProvider = new DatabaseMoveCardProvider(_contextFactory);
+                _moveCard = new ObservableCollection<MoveCard>();
+                _currentMoveUser = new MoveCard(_moveUserProvider);
 
                 foreach (var item in await _currentMoveUser.GetAllMoveUserSender(new(2), _userStore.CurrentUser))
                 {
-                    _moveUser.Add(item);
+                    _moveCard.Add(item);
                 }
             }
             catch (Exception)
@@ -115,6 +125,6 @@ namespace PASEDM.ViewModels
             IsLoading = false;
         }
         private ICommand EditCommand() => NavigateOutEditCardCommand = new NavigateOutEditCardCommand(this, _parameterNavigationService);
-        private ICommand DeleteCommand() => DeleteCardCommand = new DeleteCard(_currentMoveUser, _contextFactory, _navigationServiceBack);
+        private ICommand DeleteCommand() => DeleteCardCommand = new DeleteCardCommand(_currentMoveUser, _contextFactory, _navigationServiceBack);
     }
 }

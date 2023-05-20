@@ -4,9 +4,9 @@ using PASEDM.Data.DTOs;
 
 namespace PASEDM.Data.Configuration
 {
-    internal class MoveUserConfiguration : IEntityTypeConfiguration<MoveUserDTO>
+    internal class MoveDocumentConfiguration : IEntityTypeConfiguration<MoveDocumentDTO>
     {
-        public void Configure(EntityTypeBuilder<MoveUserDTO> builder)
+        public void Configure(EntityTypeBuilder<MoveDocumentDTO> builder)
         {
             builder.Property(x => x.ID).ValueGeneratedOnAdd();
         }

@@ -48,7 +48,7 @@ namespace PASEDM.Infrastructure.Command
 
         private IDocumentCreator _documentCreator;
         private IRecipientCreator _recipientCreator;
-        private IMoveUserCreator _moveUserCreator;
+        private IMoveCardCreator _moveUserCreator;
         private ICardCreator _cardCreator;
         private ITaskCreator _taskCreator;
 
@@ -71,7 +71,7 @@ namespace PASEDM.Infrastructure.Command
         {
             _documentCreator = new DatabaseDocumentCreator(_deferredContextFactory);
             _recipientCreator = new DatabaseRecipientCreator(_deferredContextFactory);
-            _moveUserCreator = new DatabaseMoveUserCreator(_deferredContextFactory);
+            _moveUserCreator = new DatabaseMoveCardCreator(_deferredContextFactory);
             _cardCreator = new DatabaseCardCreator(_deferredContextFactory);
             _taskCreator = new DatabaseTaskCreator(_deferredContextFactory);
 
@@ -85,7 +85,7 @@ namespace PASEDM.Infrastructure.Command
             Recipient recipient = new(_recipientCreator, _recipientProvider);
             TypeUser typeUser = new(_typeUserProvider);
             Card card = new(_cardCreator, _cardProvider);
-            MoveUser moveUser = new(_moveUserCreator);
+            MoveCard moveUser = new(_moveUserCreator);
             Tasks tasks = new(_taskCreator, _tasksProvider);
 
             _numberCard = _createCardViewModel.NumberCard;
@@ -110,7 +110,9 @@ namespace PASEDM.Infrastructure.Command
             _createCardUser = _createCardViewModel.CurrentUser;
             _comment = _createCardViewModel.Comment;
 
-            await document.AddDoc(new(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _filePath, _term.Id, _secrecyStamps.Id, _docStages.Id));
+            var _viewed = 0;
+
+            await document.AddDoc(new(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _filePath, _term.Id, _secrecyStamps, _docStages.Id));
             var docDB = await document.GetDoc(new(_docName));
 
             await recipient.AddRecipient(new(_recipient.Id));
@@ -133,7 +135,7 @@ namespace PASEDM.Infrastructure.Command
 
             foreach(var item in await typeUser.GetAllTypeUsers())
             {
-                await moveUser.AddMoveUser(new(item.Id, cardDB.Id));
+                await moveUser.AddMoveUser(new(item.Id, _viewed, cardDB.Id));
             }
 
             _navigationService.Navigate();

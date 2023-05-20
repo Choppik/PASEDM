@@ -26,7 +26,7 @@
         <Grid Grid.Row="2">
             <TextBlock Text="Идет загрузка данных ..." 
                        Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-            <ListView ItemsSource="{Binding MoveUsers}"
+            <ListView ItemsSource="{Binding MoveCards}"
                       SelectedItem="{Binding CurrentMoveUser}" 
                       Visibility="{Binding IsLoading, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
                     <ListView.ItemContainerStyle>
@@ -69,14 +69,17 @@
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" 
                     Content="Посмотреть"
-                    HorizontalAlignment="Right"/>
+                    HorizontalAlignment="Right"
+                    IsEnabled="{Binding IsPrivilege}"/>
             <Button Grid.Column="1" 
                     Content="Редактировать" 
                     HorizontalAlignment="Center"
+                    IsEnabled="{Binding IsPrivilege}"
                     Command="{Binding NavigateIncEditCardCommand}"/>
-            <Button Grid.Column="2" 
-                    Content="Удалить"  
+            <Button Grid.Column="2"
+                    Content="Удалить"
                     HorizontalAlignment="Left"
+                    IsEnabled="{Binding IsActive}"
                     Command="{Binding DeleteCardCommand}"/>
         </Grid>
     </Grid>

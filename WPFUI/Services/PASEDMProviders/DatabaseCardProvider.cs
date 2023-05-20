@@ -43,7 +43,7 @@ namespace PASEDM.Services.PASEDMProviders
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
                 IEnumerable<CardDTO> cardDTO = await context.Cards
-                    .Where(u => u.EmployeeID == user.EmployeeID)
+                    .Where(u => u.EmployeeID == user.Employee.Id)
                     .Include(u => u.Task).ThenInclude(u => u.TaskStages)
                     .OrderBy(u => u.Task.TaskStages.TaskStagesValue)
                     .ToListAsync();

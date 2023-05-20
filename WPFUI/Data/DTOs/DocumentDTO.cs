@@ -20,5 +20,6 @@ namespace PASEDM.Data.DTOs
         public int? DocStagesID { get; set; }
         public DocStagesDTO DocStages { get; set; }
         public ICollection<CardDTO> Cards { get; set; }
+        public ICollection<MoveDocumentDTO> MoveDocuments { get; set; }
     }
 }

@@ -2,10 +2,11 @@
 
 namespace PASEDM.Data.DTOs
 {
-    public class MoveUserDTO
+    public class MoveCardDTO
     {
         [Key]
         public int ID { get; set; }
+        public int Viewed { get; set; }
         public int? TypeUserID { get; set; }
         public TypeUserDTO TypeUser { get; set; }
         public int? CardID { get; set; }

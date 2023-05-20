@@ -22,7 +22,9 @@ namespace PASEDM.Services.PASEDMProviders
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
-                IEnumerable<UserDTO> userDTOs = await context.Users.ToListAsync();
+                IEnumerable<UserDTO> userDTOs = await context.Users
+                    .Include(u => u.Employee).ThenInclude(u => u.AccessRights)
+                    .ToListAsync();
 
                 return userDTOs.Select(u => ToUser(u));
             }
@@ -30,7 +32,9 @@ namespace PASEDM.Services.PASEDMProviders
 
         private static User ToUser(UserDTO dto)
         {
-            return new User(dto.ID, dto.UserName, dto.Password, dto.DateOfCreation, dto.RoleID, dto.EmployeeID);
+            AccessRights accessRights = new(dto.Employee.AccessRights.ID, dto.Employee.AccessRights.AccessRights, dto.Employee.AccessRights.AccessRightsValue);
+            Employee employee = new(dto.Employee.ID, dto.Employee.NumberEmployee, dto.Employee.FullName, dto.Employee.Mail, accessRights, dto.Employee.DivisionID);
+            return new User(dto.ID, dto.UserName, dto.Password, dto.RecordConfirmation, dto.DateOfCreation, dto.RoleID, employee);
         }
         public async Task<bool> GetUserBool(User user)
         {

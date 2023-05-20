@@ -6,37 +6,39 @@ using System.Threading.Tasks;
 
 namespace PASEDM.Models
 {
-    public class MoveUser
+    public class MoveCard
     {
-        private IMoveUserCreator _moveUserCreator;
-        private IMoveUserProvider _moveUserProvider;
+        private IMoveCardCreator _moveUserCreator;
+        private IMoveCardProvider _moveUserProvider;
 
         #region Конструкторы
-        public MoveUser() { }
-        public MoveUser(IMoveUserCreator moveUserCreator)
+        public MoveCard() { }
+        public MoveCard(IMoveCardCreator moveUserCreator)
         {
             _moveUserCreator = moveUserCreator;
         }
 
-        public MoveUser(IMoveUserProvider moveUserProvider)
+        public MoveCard(IMoveCardProvider moveUserProvider)
         {
             _moveUserProvider = moveUserProvider;
         }
-        public MoveUser(int? typeUserID)
-            : this(default, typeUserID, default)
+        public MoveCard(int? typeUserID)
+            : this(default, default, typeUserID, default)
         { }
-        public MoveUser(int? typeUserID, int? cardID)
-            :this(default, typeUserID, cardID)
+        public MoveCard(int viewed, int? typeUserID, int? cardID)
+            :this(default, viewed, typeUserID, cardID)
         { }
-        public MoveUser(int id, int? typeUserID, int? cardID)
+        public MoveCard(int id, int viewed, int? typeUserID, int? cardID)
         {
             Id = id;
+            Viewed = viewed;
             TypeUserID = typeUserID;
             CardID = cardID;
         }
-        public MoveUser(int? id, int? cardID, int numberCard, string nameCard, Document document, Deadlines deadlines, DocStages docStages, SecrecyStamps secrecyStamps, DocumentTypes documentTypes, Tasks tasks, TaskStages taskStages, Case cases, Employee executor, DateTime dateOfFormation, string comment, User recipient, string sender)
+        public MoveCard(int? id, int viewed, int? cardID, int numberCard, string nameCard, Document document, Deadlines deadlines, DocStages docStages, SecrecyStamps secrecyStamps, DocumentTypes documentTypes, Tasks tasks, TaskStages taskStages, Case cases, Employee executor, DateTime dateOfFormation, string comment, User recipient, string sender)
         {
             Id = id;
+            Viewed = viewed;
             CardID = cardID;
             NumberCard = numberCard;
             NameCard = nameCard;
@@ -58,6 +60,7 @@ namespace PASEDM.Models
 
         #region Свойства
         public int? Id { get; }
+        public int Viewed { get; }
         public int? TypeUserID { get; }
         public int? CardID { get; }
         public int NumberCard { get; }
@@ -76,21 +79,21 @@ namespace PASEDM.Models
         public string Sender { get; }
         public User Recipient { get; }
         #endregion
-        public async Task AddMoveUser(MoveUser moveUser)
+        public async Task AddMoveUser(MoveCard moveUser)
         {
-            await _moveUserCreator.AddMoveUser(moveUser);
+            await _moveUserCreator.AddMoveCard(moveUser);
         }
-        public Task<IEnumerable<MoveUser>> GetAllMoveUserSender(MoveUser moveUser, User user)
+        public Task<IEnumerable<MoveCard>> GetAllMoveUserSender(MoveCard moveUser, User user)
         {
             return _moveUserProvider.GetAllMoveUserSender(moveUser, user);
         }
-        public Task<IEnumerable<MoveUser>> GetAllMoveUserRecipient(MoveUser moveUser, User user)
+        public Task<IEnumerable<MoveCard>> GetAllMoveUserRecipient(MoveCard moveUser, User user)
         {
             return _moveUserProvider.GetAllMoveUserRecipient(moveUser, user);
         }
-        public async Task DeleteMoveUser(MoveUser moveUser)
+        public async Task DeleteMoveUser(MoveCard moveUser)
         {
-            await _moveUserProvider.DeleteMoveUser(moveUser);
+            await _moveUserProvider.DeleteMoveCard(moveUser);
         }
     }
 }

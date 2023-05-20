@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PASEDM.Data.DTOs
@@ -25,5 +26,6 @@ namespace PASEDM.Data.DTOs
         public UserDTO User { get; set; }
         public int? RecipientID { get; set; }
         public RecipientDTO Recipient { get; set; }
+        public ICollection<MoveCardDTO> MoveCards { get; set; }
     }
 }

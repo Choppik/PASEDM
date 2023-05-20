@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
 
 namespace PASEDM.ViewModels
 {
@@ -24,13 +23,15 @@ namespace PASEDM.ViewModels
         private readonly UserStore _userStore;
 
         private bool _isLoading;
-        private ObservableCollection<MoveUser> _moveUser;
+        private bool _isPrivilege;
+        private bool _isActive;
+        private ObservableCollection<MoveCard> _moveCard;
         private ICommand _navigateIncEditCardCommand;
         private ICommand _deleteCardCommand;
-        private IMoveUserProvider _moveUserProvider;
-        private MoveUser _currentMoveUser;
-        public IEnumerable<MoveUser> MoveUsers => _moveUser;
-        public MoveUser CurrentMoveUser
+        private IMoveCardProvider _moveUserProvider;
+        private MoveCard _currentMoveUser;
+        public IEnumerable<MoveCard> MoveCards => _moveCard;
+        public MoveCard CurrentMoveUser
         {
             get
             {
@@ -42,6 +43,8 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(CurrentMoveUser));
                 EditCommand();
                 DeleteCommand();
+                GetAccessRights();
+                IsActive = true;
             }
         }
         public bool IsLoading
@@ -51,6 +54,24 @@ namespace PASEDM.ViewModels
             {
                 _isLoading = value;
                 OnPropertyChanged(nameof(IsLoading));
+            }
+        }
+        public bool IsPrivilege
+        {
+            get => _isPrivilege;
+            set
+            {
+                _isPrivilege = value;
+                OnPropertyChanged(nameof(IsPrivilege));
+            }
+        }
+        public bool IsActive
+        {
+            get => _isActive;
+            set
+            {
+                _isActive = value;
+                OnPropertyChanged(nameof(IsActive));
             }
         }
         public ICommand NavigateIncEditCardCommand
@@ -82,23 +103,23 @@ namespace PASEDM.ViewModels
             _parameterNavigationService = parameterNavigationService;
             _contextFactory = deferredContextFactory;
             _userStore = userStore;
-            GetMoveUser();
 
-            EditCommand();
-            DeleteCommand();
+            GetMoveUser();
         }
+        private ICommand EditCommand() => NavigateIncEditCardCommand = new NavigateIncEditCardCommand(this, _parameterNavigationService);
+        private ICommand DeleteCommand() => DeleteCardCommand = new DeleteCardCommand(_currentMoveUser, _contextFactory, _navigationService);
         private async void GetMoveUser()
         {
             try
             {
                 IsLoading = true;
-                _moveUserProvider = new DatabaseMoveUserProvider(_contextFactory);
-                _moveUser = new ObservableCollection<MoveUser>();
-                _currentMoveUser = new MoveUser(_moveUserProvider);
+                _moveUserProvider = new DatabaseMoveCardProvider(_contextFactory);
+                _moveCard = new ObservableCollection<MoveCard>();
+                _currentMoveUser = new MoveCard(_moveUserProvider);
 
                 foreach (var item in await _currentMoveUser.GetAllMoveUserRecipient(new(1), _userStore.CurrentUser))
                 {
-                    _moveUser.Add(item);
+                    _moveCard.Add(item);
                 }
             }
             catch (Exception)
@@ -107,7 +128,17 @@ namespace PASEDM.ViewModels
             }
             IsLoading = false;
         }
-        private ICommand EditCommand() => NavigateIncEditCardCommand = new NavigateIncEditCardCommand(this, _parameterNavigationService);
-        private ICommand DeleteCommand() => DeleteCardCommand = new DeleteCard(_currentMoveUser, _contextFactory, _navigationService);
+        private void GetAccessRights()
+        {
+            IsPrivilege = true;
+            if(_currentMoveUser.Id != null)
+            {
+                if(_userStore.CurrentUser.Employee.AccessRights.AccessRightsValue < _currentMoveUser.Document.SecrecyStamp.SecrecyStampValue)
+                {
+                    IsPrivilege = false;
+                    MessageBox.Show("Недостаточно прав доступа", "Права доступа", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
     }
 }

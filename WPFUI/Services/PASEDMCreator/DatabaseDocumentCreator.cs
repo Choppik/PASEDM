@@ -42,7 +42,7 @@ namespace PASEDM.Services.PASEDMCreator
                 Summary = document.Summary,
                 Path = document.Path,
                 TermID = document.TermID,
-                SecrecyStampsID = document.SecrecyStampID,
+                SecrecyStampsID = document.SecrecyStamp.Id,
                 DocStagesID = document.DocStagesID
             };
         }

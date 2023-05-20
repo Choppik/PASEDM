@@ -11,7 +11,7 @@ namespace PASEDM.Models
         public int NumberEmployee { get; }
         public string FullName { get; set; }
         public string Mail { get; }
-        public int? AccessRightsID { get; }
+        public AccessRights AccessRights { get; }
         public int? DivisionID { get; }
 
         public Employee(IEmployeeProvider employeeProviders)
@@ -19,13 +19,13 @@ namespace PASEDM.Models
             _employeeProviders = employeeProviders;
         }
 
-        public Employee(int? id, int numberEmployee, string fullName, string mail, int? accessRightsID, int? divisionID)
+        public Employee(int? id, int numberEmployee, string fullName, string mail, AccessRights accessRights, int? divisionID)
         {
             Id = id;
             NumberEmployee = numberEmployee;
             FullName = fullName;
             Mail = mail;
-            AccessRightsID = accessRightsID;
+            AccessRights = accessRights;
             DivisionID = divisionID;
         }
 

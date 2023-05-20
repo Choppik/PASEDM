@@ -54,21 +54,24 @@ namespace PASEDM.Infrastructure.Command
                 _password = _userEntryViewModel.Password;
 
                 User currentUser = new(_userCreator, _userProvider, _userConflictValidator);
-
-                bool unic = false;
-
+                
+                //Нужен метод для поиска единственное пользователя
                 if (await currentUser.GetAllUsers() != null)
                 {
                     foreach (var user in await currentUser.GetAllUsers())
                     {
                         if (user.UserName == _userName && user.Password == _password)
                         {
-                            unic = true;
-                            _userStore.CurrentUser = new(user.Id, user.UserName, user.RoleID, user.EmployeeID);
+                            if(user.RecordConfirmation == 0)
+                            {
+                                MessageBox.Show("Учетная запись не подтверждена. Вход невозможен.");
+                                break;
+                            }
+                            _userStore.CurrentUser = new(user.Id, user.UserName, user.RecordConfirmation, user.RoleID, user.Employee);
                             break;
                         }
                     }
-                    if (unic == false)
+                    if (_userStore.CurrentUser == null)
                     {
                         MessageBox.Show("Неверно введено имя пользователя или пароль.");
                     }

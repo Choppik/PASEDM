@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace PASEDM.Services.PASEDMCreator.InterfaceCreator
 {
-    public interface IMoveUserCreator
+    public interface IMoveCardCreator
     {
-        Task AddMoveUser(MoveUser moveUser);
+        Task AddMoveCard(MoveCard moveUser);
     }
 }

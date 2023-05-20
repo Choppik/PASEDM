@@ -7,7 +7,7 @@ namespace PASEDM.Infrastructure.Command
     public class NavigateIncEditCardCommand : BaseCommand
     {
         private readonly IParamNavigationService<IncomingViewModel> _navigationService;
-        private IncomingViewModel _incomingViewModel;
+        private readonly IncomingViewModel _incomingViewModel;
 
         public NavigateIncEditCardCommand(IncomingViewModel viewModel,
             IParamNavigationService<IncomingViewModel> navigationService)

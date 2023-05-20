@@ -22,7 +22,7 @@ namespace PASEDM.Services.PASEDMProviders
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
                 IEnumerable<EmployeeDTO> employeeDTOs = await context.Staff
-                    .Include(u => u.Division)
+                    .Include(u => u.AccessRights)
                     .ToListAsync();
 
                 return employeeDTOs.Select(u => ToEmployee(u));
@@ -31,7 +31,8 @@ namespace PASEDM.Services.PASEDMProviders
 
         private static Employee ToEmployee(EmployeeDTO dto)
         {
-            return new Employee(dto.ID, dto.NumberEmployee, dto.FullName, dto.Mail, dto.AccessRightsID, dto.DivisionID);
+            AccessRights accessRights = new (dto.AccessRights.ID, dto.AccessRights.AccessRights, dto.AccessRights.AccessRightsValue);
+            return new Employee(dto.ID, dto.NumberEmployee, dto.FullName, dto.Mail, accessRights, dto.DivisionID);
         }
     }
 }

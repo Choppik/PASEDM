@@ -33,8 +33,6 @@ namespace PASEDM
             services.AddSingleton<OpenFileDialog>();
 
             services.AddSingleton<CloseModalNavigationService>();
-            
-            services.AddSingleton<ParameterNavigationService<OutgoingViewModel, CreateCardViewModel>>();
 
             services.AddSingleton(s => new FtpClient(CONNECTION_FTP_SERVER, USER_FTP_SERVER, PASSWORD_FTP_SERVER));
 

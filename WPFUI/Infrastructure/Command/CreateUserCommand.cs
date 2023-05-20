@@ -20,9 +20,10 @@ namespace PASEDM.Infrastructure.Command
 
         private string _userName;
         private string _password;
-        private int? _employee;
+        private Employee _employee;
         private int _role;
         private int _roleID;
+        private int _recordConfirmation = 0;
 
         private readonly UserCreateViewModel _userCreateViewModel;
         private readonly PASEDMDbContextFactory _deferredContextFactory;
@@ -85,10 +86,9 @@ namespace PASEDM.Infrastructure.Command
 
                 if(userDB)
                 {
-                    _employee = _userCreateViewModel.Employee.Id;
-
-                    await currentUser.AddUser(new User(_userName, _password, dateTime, _roleID, _employee));
-                    MessageBox.Show("Пользователь создан. Пробуйте войти в аккаунт.");
+                    _employee = _userCreateViewModel.Employee;
+                    await currentUser.AddUser(new User(_userName, _password, _recordConfirmation, dateTime, _roleID, _employee));
+                    MessageBox.Show("Пользователь создан. После подтверждения учетной записи пробуйте войти в аккаунт.");
                 }
                 else
                 {
@@ -99,7 +99,7 @@ namespace PASEDM.Infrastructure.Command
             {
                 MessageBox.Show($"Что-то введено неверно. Пароль должен соответствовать следующему формату: только латинские символы," +
                     $" длина пароля не менее 8 символов," +
-                    $" минимум один символ в верхнем регистре и один в нижнем, минимум один специальный символ (!$%^&*-) и минимум одна цифра");
+                    $" минимум один символ в верхнем регистре и один в нижнем, минимум один специальный символ (!$%^&*-) и минимум одна цифра.");
             }
         }
     }

@@ -9,6 +9,6 @@ namespace PASEDM.Data.DTOs
         public int ID { get; set; }
         public string TypeUser { get; set; }
         public int TypeUserValue { get; set; }
-        public ICollection<MoveUserDTO> MoveUsers { get; set; }
+        public ICollection<MoveCardDTO> MoveCards { get; set; }
     }
 }

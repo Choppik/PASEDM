@@ -12,39 +12,41 @@ namespace PASEDM.Models
         private readonly IUserCreator _userCreator;
         private readonly IUserProvider _userProviders;
         private readonly IUserConflictValidator _userConflictValidator;
-        public int Id { get; set; }
+        public int Id { get; }
         public string UserName { get; set; }
-        public string Password { get; set; }
-        public DateTime DateOfCreation { get; set; }
-        public int? RoleID { get; set; }
-        public int? EmployeeID { get; set; }
+        public string Password { get; }
+        public int RecordConfirmation { get; }
+        public DateTime DateOfCreation { get; }
+        public int? RoleID { get; }
+        public Employee Employee { get; }
 
         public User() { }
         public User(string userName)
-            :this(default, userName, "", default, default, default)
+            :this(default, userName, "", default, default, default, default)
         { }
         public User (int id, string userName) 
-            : this(id, userName, "", default, default, default)
+            : this(id, userName, "", default, default, default, default)
         { }
-        public User(int id, string userName, int? roleID, int? employeeID)
-            : this(id, userName, "", default, roleID, employeeID)
-        { }
-
-        public User(int id, string userName, string password) 
-            : this(id, userName, password, default, default, default)
+        public User(int id, string userName, int recordConfirmation, int? roleID, Employee employee)
+            : this(id, userName, "", recordConfirmation, default, roleID, employee)
         { }
 
-        public User(string userName, string password, DateTime dateOfCreation, int? roleID, int? employeeID)
-            :this(default, userName, password, dateOfCreation, roleID, employeeID)
+        public User(int id, string userName, string password, int recordConfirmation) 
+            : this(id, userName, password, recordConfirmation, default, default, default)
         { }
-        public User(int id, string userName, string password, DateTime dateOfCreation, int? roleID, int? employeeID) 
+
+        public User(string userName, string password, int recordConfirmation, DateTime dateOfCreation, int? roleID, Employee employee)
+            :this(default, userName, password, recordConfirmation, dateOfCreation, roleID, employee)
+        { }
+        public User(int id, string userName, string password, int recordConfirmation, DateTime dateOfCreation, int? roleID, Employee employee) 
         {
             Id = id;
             UserName = userName;
             Password = password;
+            RecordConfirmation = recordConfirmation;
             DateOfCreation = dateOfCreation;
             RoleID = roleID;
-            EmployeeID = employeeID;
+            Employee = employee;
         }
 
         public User(IUserCreator userCreator, IUserProvider userProviders, IUserConflictValidator userConflictValidator)

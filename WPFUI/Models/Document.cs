@@ -13,8 +13,8 @@ namespace PASEDM.Models
         private readonly IDocProvider _docProvider;
 
         public Document() { }
-        public Document(string nameDoc, int registrationNumber, DateTime dateCreateDoc, string summary, string path, int? termID, int? secrecyStampID, int? docStagesID)
-            : this(default, nameDoc, registrationNumber, dateCreateDoc, summary, path, termID, secrecyStampID, docStagesID)
+        public Document(string nameDoc, int registrationNumber, DateTime dateCreateDoc, string summary, string path, int? termID, SecrecyStamps secrecyStamp, int? docStagesID)
+            : this(default, nameDoc, registrationNumber, dateCreateDoc, summary, path, termID, secrecyStamp, docStagesID)
         { }
 
         public Document(int id, string nameDoc) 
@@ -24,7 +24,7 @@ namespace PASEDM.Models
             : this(default, nameDoc, default, default, "", "", default, default, default)
         { }
 
-        public Document(int id, string nameDoc, int registrationNumber, DateTime dateCreateDoc, string summary, string path, int? termID, int? secrecyStampID, int? docStagesID)
+        public Document(int id, string nameDoc, int registrationNumber, DateTime dateCreateDoc, string summary, string path, int? termID, SecrecyStamps secrecyStamp, int? docStagesID)
         {
             Id = id;
             NameDoc = nameDoc;
@@ -33,7 +33,7 @@ namespace PASEDM.Models
             Summary = summary;
             Path = path;
             TermID = termID;
-            SecrecyStampID = secrecyStampID;
+            SecrecyStamp = secrecyStamp;
             DocStagesID = docStagesID;
         }
 
@@ -50,7 +50,7 @@ namespace PASEDM.Models
         public string Summary { get; }
         public string Path { get; }
         public int? TermID { get; }
-        public int? SecrecyStampID { get; }
+        public SecrecyStamps SecrecyStamp { get; }
         public int? DocStagesID { get; }
 
         public async Task AddDoc(Document document)

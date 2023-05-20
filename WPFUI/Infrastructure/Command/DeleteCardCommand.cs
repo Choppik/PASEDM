@@ -9,15 +9,15 @@ using System.Windows;
 
 namespace PASEDM.Infrastructure.Command
 {
-    public class DeleteCard : AsyncBaseCommand
+    public class DeleteCardCommand : AsyncBaseCommand
     {
-        private readonly MoveUser _moveUser;
+        private readonly MoveCard _moveUser;
         private readonly PASEDMDbContextFactory _deferredContextFactory;
         private readonly INavigationService _navigationService;
 
-        private IMoveUserProvider _moveUserProvider;
+        private IMoveCardProvider _moveUserProvider;
 
-        public DeleteCard(MoveUser moveUser, PASEDMDbContextFactory deferredContextFactory, INavigationService navigationService)
+        public DeleteCardCommand(MoveCard moveUser, PASEDMDbContextFactory deferredContextFactory, INavigationService navigationService)
         {
             _moveUser = moveUser;
             _deferredContextFactory = deferredContextFactory;
@@ -26,11 +26,11 @@ namespace PASEDM.Infrastructure.Command
 
         public async override Task ExecuteAsync(object? parameter)
         {
-            _moveUserProvider = new DatabaseMoveUserProvider(_deferredContextFactory);
-            MoveUser moveUserProvider = new(_moveUserProvider);
+            _moveUserProvider = new DatabaseMoveCardProvider(_deferredContextFactory);
+            MoveCard moveUserProvider = new(_moveUserProvider);
             await moveUserProvider.DeleteMoveUser(_moveUser);
 
-            MessageBox.Show("Карта удалена");
+            MessageBox.Show("Карта удалена", "Удаление карты", MessageBoxButton.OK, MessageBoxImage.Information);
             _navigationService.Navigate();
         }
     }
