@@ -10,7 +10,11 @@
         }
 
         public int Id { get; }
-        public string NameAccessRight { get; }
+        public string NameAccessRight { get; set; }
         public int AccessRightsValue { get; }
+        public override string ToString()
+        {
+            return $"{NameAccessRight}";
+        }
     }
 }

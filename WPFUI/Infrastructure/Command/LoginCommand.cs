@@ -67,7 +67,7 @@ namespace PASEDM.Infrastructure.Command
                                 MessageBox.Show("Учетная запись не подтверждена. Вход невозможен.");
                                 break;
                             }
-                            _userStore.CurrentUser = new(user.Id, user.UserName, user.RecordConfirmation, user.RoleID, user.Employee);
+                            _userStore.CurrentUser = new(user.Id, user.UserName, user.RecordConfirmation, user.Role, user.Employee);
                             break;
                         }
                     }

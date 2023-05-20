@@ -41,24 +41,29 @@
                             </Style.Triggers>
                         </Style>
                     </ListView.ItemContainerStyle>
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Номер карты" DisplayMemberBinding="{Binding NumberCard}"/>
-                            <GridViewColumn Header="Название карты" DisplayMemberBinding="{Binding NameCard}"/>
-                            <GridViewColumn Header="Название документа" DisplayMemberBinding="{Binding Document.NameDoc}"/>
-                            <GridViewColumn Header="Тип документа" DisplayMemberBinding="{Binding DocumentTypes.Name}"/>
-                            <GridViewColumn Header="Задача" DisplayMemberBinding="{Binding Tasks.NameTask}"/>
-                            <GridViewColumn Header="Описание задачи" DisplayMemberBinding="{Binding Tasks.Contents}"/>
-                            <GridViewColumn Header="Состояние задачи" DisplayMemberBinding="{Binding TaskStages.NameTaskStage}"/>
-                            <GridViewColumn Header="Дело" DisplayMemberBinding="{Binding Cases.NumberCase}"/>
-                            <GridViewColumn Header="Опиание дела" DisplayMemberBinding="{Binding Cases.Description}"/>
-                            <GridViewColumn Header="Исполнитель" DisplayMemberBinding="{Binding Executor.FullName}"/>
-                            <GridViewColumn Header="Комментарий" DisplayMemberBinding="{Binding Comment}"/>
-                            <GridViewColumn Header="Дата отправки" DisplayMemberBinding="{Binding DateOfFormation}"/>
-                            <GridViewColumn Header="Отправитель" DisplayMemberBinding="{Binding Sender}"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="24545" Command="{Binding NavigateIncEditCardCommand}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Номер карты" DisplayMemberBinding="{Binding NumberCard}"/>
+                        <GridViewColumn Header="Название карты" DisplayMemberBinding="{Binding NameCard}"/>
+                        <GridViewColumn Header="Название документа" DisplayMemberBinding="{Binding Document.NameDoc}"/>
+                        <GridViewColumn Header="Тип документа" DisplayMemberBinding="{Binding DocumentTypes.Name}"/>
+                        <GridViewColumn Header="Задача" DisplayMemberBinding="{Binding Tasks.NameTask}"/>
+                        <GridViewColumn Header="Описание задачи" DisplayMemberBinding="{Binding Tasks.Contents}"/>
+                        <GridViewColumn Header="Состояние задачи" DisplayMemberBinding="{Binding TaskStages.NameTaskStage}"/>
+                        <GridViewColumn Header="Дело" DisplayMemberBinding="{Binding Cases.NumberCase}"/>
+                        <GridViewColumn Header="Опиание дела" DisplayMemberBinding="{Binding Cases.Description}"/>
+                        <GridViewColumn Header="Исполнитель" DisplayMemberBinding="{Binding Executor.FullName}"/>
+                        <GridViewColumn Header="Комментарий" DisplayMemberBinding="{Binding Comment}"/>
+                        <GridViewColumn Header="Дата отправки" DisplayMemberBinding="{Binding DateOfFormation}"/>
+                        <GridViewColumn Header="Отправитель" DisplayMemberBinding="{Binding Sender}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
 
         <Grid Grid.Row="3">
@@ -71,7 +76,7 @@
                     Content="Посмотреть"
                     HorizontalAlignment="Right"
                     IsEnabled="{Binding IsPrivilege}"/>
-            <Button Grid.Column="1" 
+            <Button Grid.Column="1" Name="_btn"
                     Content="Редактировать" 
                     HorizontalAlignment="Center"
                     IsEnabled="{Binding IsPrivilege}"

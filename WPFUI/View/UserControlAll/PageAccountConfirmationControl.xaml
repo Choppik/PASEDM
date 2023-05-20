@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="PASEDM.View.UserControlAll.PageAccountConfirmationControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PASEDM.View.UserControlAll" xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AccountConfirmationViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource Button_Style}"></Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource TextBox_Style}"></Style>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockTitle_Style}"></Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Регистрация пользователей"/>
+
+        <Grid Grid.Row="1">
+            <TextBlock Text="Идет загрузка данных ..." 
+                       Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <ListView ItemsSource="{Binding Users}"
+                      SelectedItem="{Binding CurrentUser}" 
+                      Visibility="{Binding IsLoading, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FFE4FF89"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="true" >
+                                <Setter Property="Background" Value="#FF20900B"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Пользователь" DisplayMemberBinding="{Binding UserName}"/>
+                        <GridViewColumn Header="Дата создания" DisplayMemberBinding="{Binding DateOfCreation}"/>
+                        <GridViewColumn Header="Роль" DisplayMemberBinding="{Binding Role.NameRole}"/>
+                        <GridViewColumn Header="Сотрудник" DisplayMemberBinding="{Binding Employee.FullName}"/>
+                        <GridViewColumn Header="Права доступа" DisplayMemberBinding="{Binding Employee.AccessRights.NameAccessRight}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Button Content="Подтвердить"
+                    HorizontalAlignment="Center"
+                    IsEnabled="{Binding IsActive}"
+                    Command="{Binding ConfirmUserCommand}"/>
+        </Grid>
+    </Grid>
+</UserControl>

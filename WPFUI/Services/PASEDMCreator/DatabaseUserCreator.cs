@@ -38,7 +38,7 @@ namespace PASEDM.Services.PASEDMCreator
                 UserName = user.UserName,
                 Password = user.Password,
                 DateOfCreation = user.DateOfCreation,
-                RoleID = user.RoleID,
+                RoleID = user.Role.Id,
                 EmployeeID = user.Employee.Id
             };
         }

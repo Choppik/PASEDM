@@ -15,13 +15,13 @@ namespace PASEDM.Services.PASEDMCreator
             _dbContextFactory = dbContextFactory;
         }
 
-        public async Task AddMoveCard(MoveCard moveUser)
+        public async Task AddMoveCard(MoveCard moveCard)
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
                 try
                 {
-                    MoveCardDTO moveCardDTO = ToMoveCardDTO(moveUser);
+                    MoveCardDTO moveCardDTO = ToMoveCardDTO(moveCard);
                     context.MoveCards.Add(moveCardDTO);
                 }
                 finally
@@ -31,13 +31,13 @@ namespace PASEDM.Services.PASEDMCreator
             }
         }
 
-        private static MoveCardDTO ToMoveCardDTO(MoveCard moveUser)
+        private static MoveCardDTO ToMoveCardDTO(MoveCard moveCard)
         {
             return new MoveCardDTO()
             {
-                TypeUserID = moveUser.TypeUserID,
-                Viewed = moveUser.Viewed,
-                CardID = moveUser.CardID
+                TypeUserID = moveCard.TypeUserID,
+                Viewed = moveCard.Viewed,
+                CardID = moveCard.CardID
             };
         }
     }

@@ -17,7 +17,7 @@ namespace PASEDM.Models
         public string Password { get; }
         public int RecordConfirmation { get; }
         public DateTime DateOfCreation { get; }
-        public int? RoleID { get; }
+        public Role Role { get; }
         public Employee Employee { get; }
 
         public User() { }
@@ -27,25 +27,28 @@ namespace PASEDM.Models
         public User (int id, string userName) 
             : this(id, userName, "", default, default, default, default)
         { }
-        public User(int id, string userName, int recordConfirmation, int? roleID, Employee employee)
-            : this(id, userName, "", recordConfirmation, default, roleID, employee)
+        public User(int id, string userName, int recordConfirmation, Role role, Employee employee)
+            : this(id, userName, "", recordConfirmation, default, role, employee)
         { }
 
         public User(int id, string userName, string password, int recordConfirmation) 
             : this(id, userName, password, recordConfirmation, default, default, default)
         { }
-
-        public User(string userName, string password, int recordConfirmation, DateTime dateOfCreation, int? roleID, Employee employee)
-            :this(default, userName, password, recordConfirmation, dateOfCreation, roleID, employee)
+        public User(int id, string userName, DateTime dateOfCreation, Role role, Employee employee)
+            : this(id, userName, "", default, dateOfCreation, role, employee)
         { }
-        public User(int id, string userName, string password, int recordConfirmation, DateTime dateOfCreation, int? roleID, Employee employee) 
+
+        public User(string userName, string password, int recordConfirmation, DateTime dateOfCreation, Role role, Employee employee)
+            :this(default, userName, password, recordConfirmation, dateOfCreation, role, employee)
+        { }
+        public User(int id, string userName, string password, int recordConfirmation, DateTime dateOfCreation, Role role, Employee employee) 
         {
             Id = id;
             UserName = userName;
             Password = password;
             RecordConfirmation = recordConfirmation;
             DateOfCreation = dateOfCreation;
-            RoleID = roleID;
+            Role = role;
             Employee = employee;
         }
 
@@ -88,9 +91,17 @@ namespace PASEDM.Models
 
             await _userCreator.CreateUser(user);
         }
+        public async Task ConfirmationUser(User user)
+        {
+            await _userProviders.ConfirmationUser(user);
+        }
         public async Task<IEnumerable<User>> GetAllUsers()
         {
             return await _userProviders.GetAllUser();
+        }
+        public async Task<IEnumerable<User>> GetUserRecordConfirmation()
+        {
+            return await _userProviders.GetUserRecordConfirmation();
         }
         public async Task<bool> GetUserBool(User user)
         {

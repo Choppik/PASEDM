@@ -22,7 +22,7 @@ namespace PASEDM.Infrastructure.Command
         private string _password;
         private Employee _employee;
         private int _role;
-        private int _roleID;
+        private Role _roleDB;
         private int _recordConfirmation = 0;
 
         private readonly UserCreateViewModel _userCreateViewModel;
@@ -79,7 +79,7 @@ namespace PASEDM.Infrastructure.Command
                 {
                     if (role != null && _role == role.SignificanceRole)
                     {
-                        _roleID = role.Id;
+                        _roleDB = role;
                         break;
                     }
                 }
@@ -87,7 +87,7 @@ namespace PASEDM.Infrastructure.Command
                 if(userDB)
                 {
                     _employee = _userCreateViewModel.Employee;
-                    await currentUser.AddUser(new User(_userName, _password, _recordConfirmation, dateTime, _roleID, _employee));
+                    await currentUser.AddUser(new User(_userName, _password, _recordConfirmation, dateTime, _roleDB, _employee));
                     MessageBox.Show("Пользователь создан. После подтверждения учетной записи пробуйте войти в аккаунт.");
                 }
                 else

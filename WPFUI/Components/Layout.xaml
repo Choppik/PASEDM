@@ -117,6 +117,9 @@
                         <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateReferencesCommand}" Style="{StaticResource AdminTrue}">
                             <TextBlock Text="Справочная информация"/>
                         </hamburgermenu:HamburgerMenuItem>
+                        <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateAccountConfirmationCommand}" Style="{StaticResource AdminTrue}">
+                            <TextBlock Text="Регистрация пользователей"/>
+                        </hamburgermenu:HamburgerMenuItem>
                         <hamburgermenu:HamburgerMenuItem Command="{Binding NavigateSettingsCommand}">
                             <TextBlock Text="Настройки" />
                         </hamburgermenu:HamburgerMenuItem>

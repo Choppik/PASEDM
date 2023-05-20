@@ -9,8 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using PASEDM.Data;
 using PASEDM.Services.FTPClient;
 using Microsoft.Win32;
-using PASEDM.Models;
-using System.Reflection.Metadata;
 
 namespace PASEDM
 {
@@ -68,6 +66,10 @@ namespace PASEDM
 
             services.AddTransient(s => new SettingsViewModel(
                 s.GetRequiredService<UserStore>()));
+
+            services.AddTransient(s => new AccountConfirmationViewModel(
+                s.GetRequiredService<PASEDMDbContextFactory>(),
+                CreateAccountConfirmationNavigationService(s)));
 
             services.AddTransient(CreateCardViewModelMet);
             services.AddTransient(OutgoingViewModelMet);
@@ -170,6 +172,15 @@ namespace PASEDM
                 () => serviceProvider.GetRequiredService<SettingsViewModel>(),
                 () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
         }
+        private static INavigationService CreateAccountConfirmationNavigationService(IServiceProvider serviceProvider)
+        {
+            return new LayoutNavigationService<AccountConfirmationViewModel>(
+                serviceProvider.GetRequiredService<UserStore>(),
+                serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<AccountConfirmationViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
+        }
         private static INavigationService CreateIncomingNavigationService(IServiceProvider serviceProvider)
         {
             return new LayoutNavigationService<IncomingViewModel>(
@@ -269,7 +280,8 @@ namespace PASEDM
                 CreateMyDocumentsNavigationService(serviceProvider),
                 CreateMyTasksNavigationService(serviceProvider),
                 CreateReferencesNavigationService(serviceProvider),
-                CreateSettingsNavigationService(serviceProvider));
+                CreateSettingsNavigationService(serviceProvider),
+                CreateAccountConfirmationNavigationService(serviceProvider));
         }
     }
 }

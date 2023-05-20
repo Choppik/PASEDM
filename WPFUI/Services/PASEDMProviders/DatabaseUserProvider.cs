@@ -24,6 +24,7 @@ namespace PASEDM.Services.PASEDMProviders
             {
                 IEnumerable<UserDTO> userDTOs = await context.Users
                     .Include(u => u.Employee).ThenInclude(u => u.AccessRights)
+                    .Include(u => u.Role)
                     .ToListAsync();
 
                 return userDTOs.Select(u => ToUser(u));
@@ -32,9 +33,10 @@ namespace PASEDM.Services.PASEDMProviders
 
         private static User ToUser(UserDTO dto)
         {
+            Role role = new(dto.Role.ID, dto.Role.NameRole, dto.Role.SignificanceRole);
             AccessRights accessRights = new(dto.Employee.AccessRights.ID, dto.Employee.AccessRights.AccessRights, dto.Employee.AccessRights.AccessRightsValue);
             Employee employee = new(dto.Employee.ID, dto.Employee.NumberEmployee, dto.Employee.FullName, dto.Employee.Mail, accessRights, dto.Employee.DivisionID);
-            return new User(dto.ID, dto.UserName, dto.Password, dto.RecordConfirmation, dto.DateOfCreation, dto.RoleID, employee);
+            return new User(dto.ID, dto.UserName, dto.Password, dto.RecordConfirmation, dto.DateOfCreation, role, employee);
         }
         public async Task<bool> GetUserBool(User user)
         {
@@ -66,6 +68,49 @@ namespace PASEDM.Services.PASEDMProviders
         private static User ToDefiniteUser(UserDTO dto)
         {
             return new User(dto.ID, dto.UserName);
+        }
+
+        public async Task<IEnumerable<User>> GetUserRecordConfirmation()
+        {
+            using (PASEDMContext context = _dbContextFactory.CreateDbContext())
+            {
+                IEnumerable<UserDTO> userDTOs = await context.Users
+                    .Where(u => u.RecordConfirmation == 0)
+                    .Include(u => u.Employee).ThenInclude(u => u.AccessRights)
+                    .Include(u => u.Role)
+                    .ToListAsync();
+
+                return userDTOs.Select(u => ToUserNoConfirmation(u));
+            }
+        }
+        private static User ToUserNoConfirmation(UserDTO dto)
+        {
+            Role role = new(dto.Role.ID, dto.Role.NameRole, dto.Role.SignificanceRole);
+            AccessRights accessRights = new(dto.Employee.AccessRights.ID, dto.Employee.AccessRights.AccessRights, dto.Employee.AccessRights.AccessRightsValue);
+            Employee employee = new(dto.Employee.ID, dto.Employee.NumberEmployee, dto.Employee.FullName, dto.Employee.Mail, accessRights, dto.Employee.DivisionID);
+            
+            return new User(dto.ID, dto.UserName, dto.DateOfCreation, role, employee);
+        }
+        public async Task ConfirmationUser(User user)
+        {
+            using (PASEDMContext context = _dbContextFactory.CreateDbContext())
+            {
+                try
+                {
+                    UserDTO userDTO = await context.Users
+                        .Where(t => t.ID == user.Id)
+                        .FirstOrDefaultAsync();
+
+                    if (userDTO != null)
+                    {
+                        userDTO.RecordConfirmation = 1;
+                    }
+                }
+                finally
+                {
+                    await context.SaveChangesAsync();
+                }
+            }
         }
     }
 }

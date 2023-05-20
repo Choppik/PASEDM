@@ -17,7 +17,7 @@ namespace PASEDM.ViewModels
         private readonly PASEDMDbContextFactory _deferredContextFactory;
 
         private readonly UserStore _userStore;
-        private int? _roleID => _userStore.CurrentUser.RoleID;
+        private int? _roleID => _userStore.CurrentUser.Role.Id;
         private int _roleSign;
 
         private Role role;
@@ -42,6 +42,7 @@ namespace PASEDM.ViewModels
         public ICommand NavigateMeTasksCommand { get; }
         public ICommand NavigateReferencesCommand { get; }
         public ICommand NavigateSettingsCommand { get; }
+        public ICommand NavigateAccountConfirmationCommand { get; }
         public LayoutViewModel(
             UserStore userStore,
             PASEDMDbContextFactory deferredContextFactory,
@@ -64,6 +65,7 @@ namespace PASEDM.ViewModels
             NavigateMeTasksCommand = navigationBarViewModel.NavigateMeTasksCommand;
             NavigateReferencesCommand = navigationBarViewModel.NavigateReferencesCommand;
             NavigateSettingsCommand = navigationBarViewModel.NavigateSettingsCommand;
+            NavigateAccountConfirmationCommand = navigationBarViewModel.NavigateAccountConfirmationCommand;
         }
 
         public NavigationBarViewModel NavigationBarViewModel { get; }

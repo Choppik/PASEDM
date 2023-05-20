@@ -22,6 +22,7 @@ namespace PASEDM.ViewModels
         public ICommand NavigateMeTasksCommand { get; }
         public ICommand NavigateReferencesCommand { get; }
         public ICommand NavigateSettingsCommand { get; }
+        public ICommand NavigateAccountConfirmationCommand { get; }
         public NavigationBarViewModel(
             UserStore userStore, 
             INavigationService navigationServiceIncoming,
@@ -32,19 +33,21 @@ namespace PASEDM.ViewModels
             INavigationService navigationServiceMeDocument, 
             INavigationService navigationServiceMeTasks, 
             INavigationService navigationServiceReferences, 
-            INavigationService navigationServiceSettings) 
+            INavigationService navigationServiceSettings,
+            INavigationService navigationServiceAccountConfirmation)
         {
             _userStore = userStore;
             NavigateIncomingCommand = new NavigateCommand(navigationServiceIncoming);
             NavigateOutgoingCommand = new NavigateCommand(navigationServiceOutgoing);
             NavigateNotificationCommand = new NavigateCommand(navigationServiceNotification);
-            NavigateEntryUser = new NavigateCommand(navigationServiceEntryUser);
+            //NavigateEntryUser = new NavigateCommand(navigationServiceEntryUser);
             NavigateJournalCommand = new NavigateCommand(navigationServiceJournal);
             NavigateMeDocumentCommand = new NavigateCommand(navigationServiceMeDocument);
             NavigateMeTasksCommand = new NavigateCommand(navigationServiceMeTasks);
             NavigateReferencesCommand = new NavigateCommand(navigationServiceReferences);
             NavigateSettingsCommand = new NavigateCommand(navigationServiceSettings);
-            //LogoutCommand = new LogoutCommand(userStore);
+            NavigateAccountConfirmationCommand = new NavigateCommand(navigationServiceAccountConfirmation);
+            LogoutCommand = new LogoutCommand(userStore, navigationServiceEntryUser);
 
             _userStore.CurrentUserChanged += OnCurrentUserChanged;
         }

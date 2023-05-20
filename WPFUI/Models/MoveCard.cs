@@ -25,7 +25,7 @@ namespace PASEDM.Models
         public MoveCard(int? typeUserID)
             : this(default, default, typeUserID, default)
         { }
-        public MoveCard(int viewed, int? typeUserID, int? cardID)
+        public MoveCard(int? typeUserID, int viewed, int? cardID)
             :this(default, viewed, typeUserID, cardID)
         { }
         public MoveCard(int id, int viewed, int? typeUserID, int? cardID)

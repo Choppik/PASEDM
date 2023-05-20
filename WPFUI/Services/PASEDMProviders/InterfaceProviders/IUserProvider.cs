@@ -9,5 +9,7 @@ namespace PASEDM.Services.PASEDMProviders.InterfaceProviders
         Task<IEnumerable<User>> GetAllUser();
         Task<bool> GetUserBool(User user);
         Task<User> GetUser(User user);
+        Task ConfirmationUser(User user);
+        Task<IEnumerable<User>> GetUserRecordConfirmation();
     }
 }

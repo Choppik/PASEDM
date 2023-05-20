@@ -21,11 +21,15 @@ namespace PASEDM.Models
         }
 
         public int Id { get; }
-        public string NameRole { get; }
+        public string NameRole { get; set; }
         public int SignificanceRole { get; }
         public async Task<IEnumerable<Role>> GetAllRole()
         {
             return await _roleProvider.GetAllRole();
+        }
+        public override string ToString()
+        {
+            return $"{NameRole}";
         }
     }
 }
