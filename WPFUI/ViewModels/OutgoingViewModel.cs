@@ -113,7 +113,7 @@ namespace PASEDM.ViewModels
                 _moveCard = new ObservableCollection<MoveCard>();
                 _currentMoveUser = new MoveCard(_moveUserProvider);
 
-                foreach (var item in await _currentMoveUser.GetAllMoveUserSender(new(2), _userStore.CurrentUser))
+                foreach (var item in await _currentMoveUser.GetAllMoveUserSender(new(1), _userStore.CurrentUser))
                 {
                     _moveCard.Add(item);
                 }

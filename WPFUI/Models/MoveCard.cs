@@ -1,4 +1,5 @@
-﻿using PASEDM.Services.PASEDMCreator.InterfaceCreator;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using PASEDM.Services.PASEDMCreator.InterfaceCreator;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using System;
 using System.Collections.Generic;
@@ -94,6 +95,10 @@ namespace PASEDM.Models
         public async Task DeleteMoveUser(MoveCard moveUser)
         {
             await _moveUserProvider.DeleteMoveCard(moveUser);
+        }
+        public int GetCountViewedMoveCard(User user)
+        {
+            return _moveUserProvider.GetCountViewedMoveCard(user);
         }
     }
 }

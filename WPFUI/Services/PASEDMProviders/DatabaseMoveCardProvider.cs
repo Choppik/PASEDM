@@ -22,8 +22,8 @@ namespace PASEDM.Services.PASEDMProviders
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
                 IEnumerable<MoveCardDTO> moveCardDTO = await context.MoveCards
-                    .Include(u => u.Card).ThenInclude(u => u.Recipient).ThenInclude(u => u.User)
-                    .Where(p => p.TypeUserID == moveCard.TypeUserID && p.Card.UserID == user.Id)
+                    .Include(u => u.Card).ThenInclude(u => u.User)
+                    .Where(p => p.TypeUserID == moveCard.TypeUserID && p.Card.User.ID == user.Id)
                     .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.DocStages)
                     .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.SecrecyStamps)
                     .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.Term)
@@ -31,7 +31,7 @@ namespace PASEDM.Services.PASEDMProviders
                     .Include(u => u.Card).ThenInclude(u => u.Employee).ThenInclude(u => u.AccessRights)
                     .Include(u => u.Card).ThenInclude(u => u.Task).ThenInclude(u => u.TaskStages)
                     .Include(u => u.Card).ThenInclude(u => u.Case)
-                    .Include(u => u.Card).ThenInclude(u => u.User)
+                    .Include(u => u.Card).ThenInclude(u => u.Recipient).ThenInclude(u => u.User)
                     .ToListAsync();
 
                 if (moveCardDTO == null)
@@ -119,6 +119,19 @@ namespace PASEDM.Services.PASEDMProviders
                 {
                     await context.SaveChangesAsync();
                 }
+            }
+        }
+        public int GetCountViewedMoveCard(User user)
+        {
+            using (PASEDMContext context = _dbContextFactory.CreateDbContext())
+            {
+                int moveCardDTO = context.MoveCards
+                    .Include(x => x.Card).ThenInclude(x => x.Recipient).ThenInclude(x => x.User)
+                    .Include(x => x.TypeUser)
+                    .Where(u => u.Viewed == 0 && u.TypeUser.TypeUserValue == 1 && u.Card.Recipient.User.ID == user.Id)
+                    .Count();
+
+                return moveCardDTO;
             }
         }
     }

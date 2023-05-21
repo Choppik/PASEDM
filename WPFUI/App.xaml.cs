@@ -49,6 +49,8 @@ namespace PASEDM
                 s.GetRequiredService<PASEDMDbContextFactory>()));
 
             services.AddTransient(s => new NotificationsViewModel(
+                s.GetRequiredService<PASEDMDbContextFactory>(),
+                CreateIncomingNavigationService(s),
                 s.GetRequiredService<UserStore>()));
 
             services.AddTransient(s => new JournalViewModel(

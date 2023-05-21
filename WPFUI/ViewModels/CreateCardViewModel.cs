@@ -508,6 +508,7 @@ namespace PASEDM.ViewModels
 
                 foreach (var item in await _currentRecipient.GetAllUsers())
                 {
+                    if(_userStore.CurrentUser.Employee.FullName != item.Employee.FullName)
                     _recipients.Add(item);
                 }
             }
@@ -580,6 +581,7 @@ namespace PASEDM.ViewModels
 
                 foreach (var item in await _currentSecrecyStamp.GetAllSecrecyStamps())
                 {
+                    if(_userStore.CurrentUser.Employee.AccessRights.AccessRightsValue >= item.SecrecyStampValue)
                     _secrecyStamp.Add(item);
                 }
             }

@@ -28,7 +28,7 @@ namespace PASEDM.ViewModels
         private ObservableCollection<MoveCard> _moveCard;
         private ICommand _navigateIncEditCardCommand;
         private ICommand _deleteCardCommand;
-        private IMoveCardProvider _moveUserProvider;
+        private IMoveCardProvider _moveCardProvider;
         private MoveCard _currentMoveUser;
         public IEnumerable<MoveCard> MoveCards => _moveCard;
         public MoveCard CurrentMoveUser
@@ -113,11 +113,11 @@ namespace PASEDM.ViewModels
             try
             {
                 IsLoading = true;
-                _moveUserProvider = new DatabaseMoveCardProvider(_contextFactory);
+                _moveCardProvider = new DatabaseMoveCardProvider(_contextFactory);
                 _moveCard = new ObservableCollection<MoveCard>();
-                _currentMoveUser = new MoveCard(_moveUserProvider);
+                _currentMoveUser = new MoveCard(_moveCardProvider);
 
-                foreach (var item in await _currentMoveUser.GetAllMoveUserRecipient(new(1), _userStore.CurrentUser))
+                foreach (var item in await _currentMoveUser.GetAllMoveUserRecipient(new(2), _userStore.CurrentUser))
                 {
                     _moveCard.Add(item);
                 }

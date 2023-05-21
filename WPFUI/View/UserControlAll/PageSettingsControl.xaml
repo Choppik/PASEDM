@@ -1,37 +1,47 @@
 ﻿<UserControl x:Class="PASEDM.View.UserControlAll.PageSettingsControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PASEDM.View.UserControlAll"
+             xmlns:local="clr-namespace:PASEDM.View.UserControlAll" xmlns:components="clr-namespace:PASEDM.Components"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <Style TargetType="Button" BasedOn="{StaticResource Button_Style}"></Style>
         <Style TargetType="TextBox" BasedOn="{StaticResource TextBox_Style}"></Style>
-        <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockTitle_Style}"></Style>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockDefault_Style}"></Style>
+        <Style TargetType="ComboBox" BasedOn="{StaticResource ComboBox_Style}"></Style>
     </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Настройки"/>
-        <ListView Grid.Row="1" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn>
-                        <TextBlock Text="Колонка 1"/>
-                    </GridViewColumn>
-                    <GridViewColumn>
-                        <TextBlock Text="Колонка 2"/>
-                    </GridViewColumn>
-                    <GridViewColumn>
-                        <TextBlock Text="Колонка 3"/>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <TextBlock Grid.Row="0" Text="Настройки" Style="{StaticResource TextBlockTitle_Style}"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Смена пароля" FontSize="20" HorizontalAlignment="Left" Margin="20,20,0,0" Style="{StaticResource TextBlockTitle_Style}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Текущий пароль:" FontSize="15" HorizontalAlignment="Left" Margin="35,20,20,20"/>
+            <components:BindablePasswordBox Grid.Row="1" Grid.Column="1" Password="{Binding Password}"
+                                            materialDesign:HintAssist.Hint="Введите пароль" Margin="30,0,20,20" VerticalAlignment="Top"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Новый пароль:" FontSize="15" HorizontalAlignment="Left" Margin="35,20,20,20"/>
+            <components:BindablePasswordBox Grid.Row="2" Grid.Column="1" Password="{Binding NewPassword}"
+                                            materialDesign:HintAssist.Hint="Введите пароль" Margin="30,0,20,20" VerticalAlignment="Top"/>
+            <Button Content="Подтвердить" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                        Command="{Binding ChangePasswordCommand}" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+
+        </Grid>
+        
     </Grid>
 </UserControl>
