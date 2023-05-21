@@ -19,6 +19,8 @@ namespace PASEDM.Data.DTOs
         public SecrecyStampDTO SecrecyStamps { get; set; }
         public int? DocStagesID { get; set; }
         public DocStagesDTO DocStages { get; set; }
+        public int? DocumentTypesID { get; set; }
+        public DocumentTypesDTO DocumentTypes { get; set; }
         public ICollection<CardDTO> Cards { get; set; }
         public ICollection<MoveDocumentDTO> MoveDocuments { get; set; }
     }

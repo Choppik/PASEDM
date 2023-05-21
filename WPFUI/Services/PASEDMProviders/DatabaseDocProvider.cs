@@ -23,6 +23,9 @@ namespace PASEDM.Services.PASEDMProviders
             {
                 IEnumerable<DocumentDTO> docDTOs = await context.Documents
                     .Include(u => u.SecrecyStamps)
+                    .Include(u => u.DocStages)
+                    .Include(u => u.DocumentTypes)
+                    .Include(u => u.Term)
                     .ToListAsync();
 
                 return docDTOs.Select(u => ToDoc(u));
@@ -31,14 +34,18 @@ namespace PASEDM.Services.PASEDMProviders
         private static Document ToDoc(DocumentDTO dto)
         {
             SecrecyStamps secrecyStamps = new(dto.SecrecyStamps.ID, dto.SecrecyStamps.SecrecyStamp, dto.SecrecyStamps.SecrecyStampValue);
-            return new Document(dto.ID, dto.NameDoc, dto.RegistrationNumber, dto.DateCreateDoc, dto.Summary, dto.Path, dto.TermID, secrecyStamps, dto.DocStagesID);
+            DocumentTypes documentTypes = new(dto.DocumentTypes.ID, dto.DocumentTypes.Name);
+            DocStages docStages = new(dto.DocStagesID, dto.DocStages.NameDocStage, dto.DocStages.DocStagesValue);
+            Deadlines deadlines = new(dto.Term.ID, dto.Term.NameTerm, dto.Term.Term);
+
+            return new Document(dto.ID, dto.NameDoc, dto.RegistrationNumber, dto.DateCreateDoc, dto.Summary, dto.Path, deadlines, secrecyStamps, docStages, documentTypes);
         }
         public async Task<Document> GetDoc(Document document)
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
                 DocumentDTO docDTO = await context.Documents
-                    .Where(u => u.NameDoc == document.NameDoc)
+                    .Where(u => u.DateCreateDoc == document.DateCreateDoc)
                     .FirstOrDefaultAsync();
 
                 if (docDTO == null)

@@ -29,80 +29,106 @@
             <TextBox materialDesign:HintAssist.Hint="Введите номер" 
                          Text="{Binding NumberCard}"/>
             <TextBlock Text="Документ" />
-            <Grid Margin="0,10,0,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0"
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <RadioButton GroupName="Document" Content="Добавить новый документ" IsChecked="{Binding IsCheckedTask}" />
+                    <RadioButton GroupName="Document" Content="Добавить из папки 'Мои документы'" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Visibility="{Binding IsCheckedTask, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid Margin="0,10,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"
                            Text="{Binding Document}"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"/>
-                <Button Grid.Column="1"
+                        <Button Grid.Column="1"
                         HorizontalAlignment="Center"
                         Command="{Binding AddDocCommand}"
                         Content="Обзор"/>
-            </Grid>
-            <TextBlock Text="Регистрационный номер документа" />
-            <TextBox materialDesign:HintAssist.Hint="Введите номер доумента" 
+                    </Grid>
+                    <TextBlock Text="Регистрационный номер документа"/>
+                    <TextBox materialDesign:HintAssist.Hint="Введите номер доумента" 
                          Text="{Binding RegistrationNumber}"/>
-            <TextBlock Text="Дата создания документа" />
-            <DatePicker IsTodayHighlighted="True" SelectedDate="{Binding DateOfFormationDocument}"/>
-            <TextBlock Text="Состояние исполнения документа" />
-            <ComboBox materialDesign:HintAssist.Hint="Состояние исполнения" 
+                    <TextBlock Text="Дата создания документа"/>
+                    <DatePicker IsTodayHighlighted="True" SelectedDate="{Binding DateOfFormationDocument}"/>
+                    <TextBlock Text="Состояние исполнения документа" />
+                    <ComboBox materialDesign:HintAssist.Hint="Состояние исполнения" 
                           IsTextSearchEnabled="True"
                           IsEditable="True"
                           Text="{Binding CurrentDocStages.NameDocStage}"
                           ItemsSource="{Binding ListDocStages}"
                           SelectedItem="{Binding CurrentDocStages}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding NameDocStage}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <TextBlock Text="Вид документа" />
-            <ComboBox materialDesign:HintAssist.Hint="Выберите вид документа"
-                          IsTextSearchEnabled="True"
-                          IsEditable="True"
-                          Text="{Binding CurrentDocTypes.Name}"
-                          ItemsSource="{Binding DocTypes}"
-                          SelectedItem="{Binding CurrentDocTypes}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <TextBlock Text="Срок исполнения документа" />
-            <ComboBox materialDesign:HintAssist.Hint="Выберите срок" 
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding NameDocStage}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBlock Text="Срок исполнения документа" />
+                    <ComboBox materialDesign:HintAssist.Hint="Выберите срок" 
                           IsTextSearchEnabled="True"
                           IsEditable="True"
                           Text="{Binding CurrentTerm.NameTerm}"
                           ItemsSource="{Binding Deadlines}"
                           SelectedItem="{Binding CurrentTerm}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding NameTerm}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <TextBlock Text="Краткое содержание документа" />
-            <TextBox materialDesign:HintAssist.Hint="Кратко опишите документ" 
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding NameTerm}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBlock Text="Краткое содержание документа" />
+                    <TextBox materialDesign:HintAssist.Hint="Кратко опишите документ" 
                          Text="{Binding Summary}"/>
-            <TextBlock Text="Гриф секретности" />
-            <ComboBox materialDesign:HintAssist.Hint="Гриф" 
+                    <TextBlock Text="Гриф секретности" />
+                    <ComboBox materialDesign:HintAssist.Hint="Гриф" 
                       IsTextSearchEnabled="True"
                       IsEditable="True"
                       Text="{Binding CurrentSecrecyStamp.NameSecrecyStamp}"
                       ItemsSource="{Binding ListSecrecyStamp}"
                       SelectedItem="{Binding CurrentSecrecyStamp}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding NameSecrecyStamp}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding NameSecrecyStamp}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBlock Text="Вид документа" />
+                    <ComboBox materialDesign:HintAssist.Hint="Выберите вид документа"
+                          IsTextSearchEnabled="True"
+                          IsEditable="True"
+                          Text="{Binding CurrentDocTypes.Name}"
+                          ItemsSource="{Binding DocTypes}"
+                          SelectedItem="{Binding CurrentDocTypes}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <ComboBox Grid.Row="1" x:Name="comboBoxDoc"
+                          materialDesign:HintAssist.Hint="Выберите задачу" 
+                          ItemsSource="{Binding Documents}"
+                          IsTextSearchEnabled="True"
+                          IsEditable="True"
+                          Text="{Binding CurrentDocument.NameDoc}"
+                          SelectedItem="{Binding CurrentDocument}" VerticalAlignment="Top">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding NameDoc}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
+
             <TextBlock Text="Задача" />
             <Grid>
                 <Grid.RowDefinitions>

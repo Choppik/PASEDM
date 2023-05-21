@@ -15,7 +15,6 @@ namespace PASEDM.ViewModels
     public class NotificationsViewModel : BaseViewModels
     {
         private PASEDMDbContextFactory _contextFactory;
-        private INavigationService _navigationService;
         private readonly UserStore _userStore;
 
         private bool _isVisible;
@@ -60,7 +59,6 @@ namespace PASEDM.ViewModels
         {
             _contextFactory = contextFactory;
             _userStore = userStore;
-            _navigationService = navigationService;
             GetMoveUser();
             if (_moveCardCount == 0)
             {

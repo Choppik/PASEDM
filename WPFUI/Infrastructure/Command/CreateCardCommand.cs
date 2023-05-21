@@ -91,6 +91,7 @@ namespace PASEDM.Infrastructure.Command
             _numberCard = _createCardViewModel.NumberCard;
             _nameCard = _createCardViewModel.NameCard;
             _dateOfFormation = DateTime.Now;
+
             _docName = _createCardViewModel.Document;
             _docRegistrationNumber = _createCardViewModel.RegistrationNumber;
             _dateOfFormationDocument = _createCardViewModel.DateOfFormationDocument;
@@ -98,22 +99,23 @@ namespace PASEDM.Infrastructure.Command
             _docStages = _createCardViewModel.CurrentDocStages;
             _secrecyStamps = _createCardViewModel.CurrentSecrecyStamp;
             _filePath = "...filePath";
+            _documentType = _createCardViewModel.CurrentDocTypes;
             _term = _createCardViewModel.CurrentTerm;
+
             _task = _createCardViewModel.CurrentTask;
             _taskStages = _createCardViewModel.CurrentTaskStages;
             _nameTask = _createCardViewModel.NameTask;
             _contentTask = _createCardViewModel.ContentTask;
             _recipient = _createCardViewModel.CurrentRecipient;
             _case = _createCardViewModel.CurrentCase;
-            _documentType = _createCardViewModel.CurrentDocTypes;
             _executor = _createCardViewModel.CurrentExecutor;
             _createCardUser = _createCardViewModel.CurrentUser;
             _comment = _createCardViewModel.Comment;
 
             var _viewed = 0;
 
-            await document.AddDoc(new(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _filePath, _term.Id, _secrecyStamps, _docStages.Id));
-            var docDB = await document.GetDoc(new(_docName));
+            await document.AddDoc(new(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _filePath, _term, _secrecyStamps, _docStages, _documentType));
+            var docDB = await document.GetDoc(new(_dateOfFormationDocument));
 
             await recipient.AddRecipient(new(_recipient.Id));
             var recipientDB = await recipient.GetRecipient(new(_recipient.Id));

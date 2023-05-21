@@ -4,34 +4,81 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PASEDM.View.UserControlAll"
+             xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" 
+             xmlns:converters="clr-namespace:PASEDM.Converters" d:DataContext="{d:DesignInstance Type=viewmodels:MyDocumentsViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <Style TargetType="Button" BasedOn="{StaticResource Button_Style}"></Style>
         <Style TargetType="TextBox" BasedOn="{StaticResource TextBox_Style}"></Style>
         <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockTitle_Style}"></Style>
+        <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
     </UserControl.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Мои документы"/>
-        <ListView Grid.Row="1" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn>
-                        <TextBlock Text="Колонка 1"/>
-                    </GridViewColumn>
-                    <GridViewColumn>
-                        <TextBlock Text="Колонка 2"/>
-                    </GridViewColumn>
-                    <GridViewColumn>
-                        <TextBlock Text="Колонка 3"/>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+
+        <TextBox Grid.Row="1" Text="Поиск"/>
+
+        <Grid Grid.Row="2">
+            <TextBlock Text="Идет загрузка данных ..." 
+                       Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <ListView ItemsSource="{Binding MoveDocuments}"
+                      SelectedItem="{Binding CurrentMoveDocument}" 
+                      Visibility="{Binding IsLoading, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FFE4FF89"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="true" >
+                                <Setter Property="Background" Value="#FF20900B"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Название документа" DisplayMemberBinding="{Binding Document.NameDoc}"/>
+                        <GridViewColumn Header="Регистрационный номер" DisplayMemberBinding="{Binding Document.RegistrationNumber}"/>
+                        <GridViewColumn Header="Тип документа" DisplayMemberBinding="{Binding Document.DocumentTypes.Name}"/>
+                        <GridViewColumn Header="Дата создания" DisplayMemberBinding="{Binding Document.DateCreateDoc}"/>
+                        <GridViewColumn Header="Описание" DisplayMemberBinding="{Binding Document.Summary}"/>
+                        <GridViewColumn Header="Срок исполнения" DisplayMemberBinding="{Binding Document.Term.NameTerm}"/>
+                        <GridViewColumn Header="Конкретный срок" DisplayMemberBinding="{Binding Document.Term.Term}"/>
+                        <GridViewColumn Header="Стадия" DisplayMemberBinding="{Binding Document.DocStages.NameDocStage}"/>
+                        <GridViewColumn Header="Гриф секретности" DisplayMemberBinding="{Binding Document.SecrecyStamp.NameSecrecyStamp}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" 
+                    Content="Добавить"
+                    HorizontalAlignment="Right"
+                    Command="{Binding NavigateAddDocCommand}"/>
+            <Button Grid.Column="1"
+                    Content="Редактировать" 
+                    HorizontalAlignment="Center"
+                    IsEnabled="{Binding IsActive}"
+                    Command="{Binding NavigateEditDocCommand}"/>
+            <Button Grid.Column="2"
+                    Content="Удалить"
+                    HorizontalAlignment="Left"
+                    IsEnabled="{Binding IsActive}"
+                    Command="{Binding DeleteDocumentCommand}"/>
+        </Grid>
     </Grid>
 </UserControl>

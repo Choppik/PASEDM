@@ -371,10 +371,10 @@ namespace PASEDM.ViewModels
             GetExecutors();
             GetTasks();
             GetCases();
-            GetDocTyp();
             GetRecipient();
-            GetDeadlines();
             GetTaskStages();
+            GetDocTyp();
+            GetDeadlines();
             GetDocStages();
             GetSecrecyStamps();
 
@@ -480,24 +480,6 @@ namespace PASEDM.ViewModels
                 MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private async void GetDocTyp()
-        {
-            try
-            {
-                _docTypProvider = new DatabaseDocTypProvider(_contextFactory);
-                _docTypes = new ObservableCollection<DocumentTypes>();
-                _currentDocTypes = new DocumentTypes(_docTypProvider);
-
-                foreach (var item in await _currentDocTypes.GetAllDocTyp())
-                {
-                    _docTypes.Add(item);
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
         private async void GetRecipient()
         {
             try
@@ -517,24 +499,6 @@ namespace PASEDM.ViewModels
                 MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private async void GetDeadlines()
-        {
-            try
-            {
-                _deadlinesProvider = new DatabaseDeadlinesProvider(_contextFactory);
-                _deadlines = new ObservableCollection<Deadlines>();
-                _currentTerm = new Deadlines(_deadlinesProvider);
-
-                foreach (var item in await _currentTerm.GetAllDeadlines())
-                {
-                    _deadlines.Add(item);
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
         private async void GetTaskStages()
         {
             try
@@ -546,6 +510,42 @@ namespace PASEDM.ViewModels
                 foreach (var item in await _currentTaskStages.GetAllTaskStages())
                 {
                     _taskStages.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private async void GetDocTyp()
+        {
+            try
+            {
+                _docTypProvider = new DatabaseDocTypProvider(_contextFactory);
+                _docTypes = new ObservableCollection<DocumentTypes>();
+                _currentDocTypes = new DocumentTypes(_docTypProvider);
+
+                foreach (var item in await _currentDocTypes.GetAllDocTyp())
+                {
+                    _docTypes.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private async void GetDeadlines()
+        {
+            try
+            {
+                _deadlinesProvider = new DatabaseDeadlinesProvider(_contextFactory);
+                _deadlines = new ObservableCollection<Deadlines>();
+                _currentTerm = new Deadlines(_deadlinesProvider);
+
+                foreach (var item in await _currentTerm.GetAllDeadlines())
+                {
+                    _deadlines.Add(item);
                 }
             }
             catch (Exception)

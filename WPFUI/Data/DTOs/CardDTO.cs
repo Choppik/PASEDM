@@ -14,8 +14,6 @@ namespace PASEDM.Data.DTOs
         public DateTime DateOfFormation { get; set; }
         public int? DocumentID { get; set; }
         public DocumentDTO Document { get; set; }
-        public int? DocumentTypesID { get; set; }
-        public DocumentTypesDTO DocumentTypes { get; set; }
         public int? TaskID { get; set; }
         public TaskDTO Task { get; set; }
         public int? CaseID { get; set; }

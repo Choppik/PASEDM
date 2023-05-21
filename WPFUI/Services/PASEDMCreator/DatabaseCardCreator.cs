@@ -40,7 +40,6 @@ namespace PASEDM.Services.PASEDMCreator
                 Comment = card.Comment,
                 DateOfFormation = card.DateOfFormation,
                 DocumentID = card.DocumentID,
-                DocumentTypesID = card.DocumentTypesID,
                 TaskID = card.TaskID,
                 CaseID = card.CaseID,
                 EmployeeID = card.EmployeeID,

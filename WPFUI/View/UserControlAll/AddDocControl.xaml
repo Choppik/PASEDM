@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="PASEDM.View.UserControlAll.AddDocControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PASEDM.View.UserControlAll" 
+             xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AddDocViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource Button_Style}"></Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource TextBox_Style}"></Style>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockDefault_Style}"></Style>
+        <Style TargetType="ComboBox" BasedOn="{StaticResource ComboBox_Style}"></Style>
+    </UserControl.Resources>
+    <ScrollViewer>
+
+        <StackPanel Margin="20">
+            <TextBlock Style="{StaticResource TextBlockTitle_Style}"
+                   Text="Добавление документа" 
+                   HorizontalAlignment="Left" />
+            <TextBlock Text="Документ" />
+            <Grid Margin="0,10,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                           Text="{Binding Document}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+                    <Button Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        Command="{Binding AddDocCommand}"
+                        Content="Обзор"/>
+                </Grid>
+                <TextBlock Text="Регистрационный номер документа"/>
+                <TextBox materialDesign:HintAssist.Hint="Введите номер доумента" 
+                         Text="{Binding RegistrationNumber}"/>
+                <TextBlock Text="Дата создания документа"/>
+                <DatePicker IsTodayHighlighted="True" SelectedDate="{Binding DateOfFormationDocument}"/>
+                <TextBlock Text="Состояние исполнения документа" />
+                <ComboBox materialDesign:HintAssist.Hint="Состояние исполнения" 
+                          IsTextSearchEnabled="True"
+                          IsEditable="True"
+                          Text="{Binding CurrentDocStages.NameDocStage}"
+                          ItemsSource="{Binding ListDocStages}"
+                          SelectedItem="{Binding CurrentDocStages}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding NameDocStage}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock Text="Срок исполнения документа" />
+                <ComboBox materialDesign:HintAssist.Hint="Выберите срок" 
+                          IsTextSearchEnabled="True"
+                          IsEditable="True"
+                          Text="{Binding CurrentTerm.NameTerm}"
+                          ItemsSource="{Binding Deadlines}"
+                          SelectedItem="{Binding CurrentTerm}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding NameTerm}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock Text="Краткое содержание документа" />
+                <TextBox materialDesign:HintAssist.Hint="Кратко опишите документ" 
+                         Text="{Binding Summary}"/>
+                <TextBlock Text="Гриф секретности" />
+                <ComboBox materialDesign:HintAssist.Hint="Гриф" 
+                      IsTextSearchEnabled="True"
+                      IsEditable="True"
+                      Text="{Binding CurrentSecrecyStamp.NameSecrecyStamp}"
+                      ItemsSource="{Binding ListSecrecyStamp}"
+                      SelectedItem="{Binding CurrentSecrecyStamp}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding NameSecrecyStamp}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock Text="Вид документа" />
+            <ComboBox materialDesign:HintAssist.Hint="Выберите вид документа"
+                          IsTextSearchEnabled="True"
+                          IsEditable="True"
+                          Text="{Binding CurrentDocTypes.Name}"
+                          ItemsSource="{Binding DocTypes}"
+                          SelectedItem="{Binding CurrentDocTypes}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                       HorizontalAlignment="Center"
+                       Command="{Binding AddDocCommand}"
+                       Content="Отправить" />
+                <Button Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       Command="{Binding NavigateRefundCommand}"
+                       Content="Отмена" />
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

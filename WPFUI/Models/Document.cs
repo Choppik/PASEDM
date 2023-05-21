@@ -13,18 +13,18 @@ namespace PASEDM.Models
         private readonly IDocProvider _docProvider;
 
         public Document() { }
-        public Document(string nameDoc, int registrationNumber, DateTime dateCreateDoc, string summary, string path, int? termID, SecrecyStamps secrecyStamp, int? docStagesID)
-            : this(default, nameDoc, registrationNumber, dateCreateDoc, summary, path, termID, secrecyStamp, docStagesID)
+        public Document(string nameDoc, int registrationNumber, DateTime dateCreateDoc, string summary, string path, Deadlines term, SecrecyStamps secrecyStamp, DocStages docStages, DocumentTypes documentTypes)
+            : this(default, nameDoc, registrationNumber, dateCreateDoc, summary, path, term, secrecyStamp, docStages, documentTypes)
         { }
 
         public Document(int id, string nameDoc) 
-            : this(id, nameDoc, default, default, "", "", default, default, default)
+            : this(id, nameDoc, default, default, "", "", default, default, default, default)
         { }
-        public Document(string nameDoc)
-            : this(default, nameDoc, default, default, "", "", default, default, default)
+        public Document(DateTime dateCreateDoc)
+            : this(default, default, default, dateCreateDoc, "", "", default, default, default, default)
         { }
 
-        public Document(int id, string nameDoc, int registrationNumber, DateTime dateCreateDoc, string summary, string path, int? termID, SecrecyStamps secrecyStamp, int? docStagesID)
+        public Document(int id, string nameDoc, int registrationNumber, DateTime dateCreateDoc, string summary, string path, Deadlines term, SecrecyStamps secrecyStamp, DocStages docStages, DocumentTypes documentTypes)
         {
             Id = id;
             NameDoc = nameDoc;
@@ -32,9 +32,10 @@ namespace PASEDM.Models
             DateCreateDoc = dateCreateDoc;
             Summary = summary;
             Path = path;
-            TermID = termID;
+            Term = term;
             SecrecyStamp = secrecyStamp;
-            DocStagesID = docStagesID;
+            DocStages = docStages;
+            DocumentTypes = documentTypes;
         }
 
         public Document(IDocumentCreator documentCreator, IDocProvider docProvider)
@@ -49,9 +50,10 @@ namespace PASEDM.Models
         public DateTime DateCreateDoc { get; }
         public string Summary { get; }
         public string Path { get; }
-        public int? TermID { get; }
+        public Deadlines Term { get; }
         public SecrecyStamps SecrecyStamp { get; }
-        public int? DocStagesID { get; }
+        public DocStages DocStages { get; }
+        public DocumentTypes DocumentTypes { get; }
 
         public async Task AddDoc(Document document)
         {

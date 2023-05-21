@@ -16,45 +16,48 @@
         WindowStartupLocation="CenterScreen">
     <Grid Background="#ffdadada">
         <Grid.Resources>
-                <DataTemplate DataType="{x:Type vm:UserEntryViewModel}">
-                    <v:UserEntryControl/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:UserCreateViewModel}">
-                    <v:UserCreateControle/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:NotificationsViewModel}">
-                    <v:PageNotificationsControl/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:JournalViewModel}">
-                    <v:PageJournalControl/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:MyDocumentsViewModel}">
-                    <v:PageMyDocumentsControl/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:MyTasksViewModel}">
-                    <v:PageMyTaskControl/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:ReferencesViewModel}">
-                    <v:PageReferencesControl/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
-                    <v:PageSettingsControl/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:IncomingViewModel}">
-                    <v:PageIncomingDocumentsControl/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:OutgoingViewModel}">
-                    <v:PageOutgoingDocumentsControl/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:AccountConfirmationViewModel}">
-                    <v:PageAccountConfirmationControl/>
-                </DataTemplate>
-                    <DataTemplate DataType="{x:Type vm:CreateCardViewModel}">
-                    <v:CreateCardControl/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:LayoutViewModel}">
-                    <component:Layout/>
-                </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:UserEntryViewModel}">
+                <v:UserEntryControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:UserCreateViewModel}">
+                <v:UserCreateControle/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:NotificationsViewModel}">
+                <v:PageNotificationsControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:JournalViewModel}">
+                <v:PageJournalControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:MyDocumentsViewModel}">
+                <v:PageMyDocumentsControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:MyTasksViewModel}">
+                <v:PageMyTaskControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:ReferencesViewModel}">
+                <v:PageReferencesControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
+                <v:PageSettingsControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:IncomingViewModel}">
+                <v:PageIncomingDocumentsControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:OutgoingViewModel}">
+                <v:PageOutgoingDocumentsControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AccountConfirmationViewModel}">
+                <v:PageAccountConfirmationControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:CreateCardViewModel}">
+                <v:CreateCardControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AddDocViewModel}">
+                <v:AddDocControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:LayoutViewModel}">
+                <component:Layout/>
+            </DataTemplate>
         </Grid.Resources>
         <custom:Modal Panel.ZIndex="100" IsOpen="{Binding IsOpen}">
             <ContentControl Content="{Binding CurrentModalViewModel}"/>

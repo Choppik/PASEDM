@@ -41,9 +41,10 @@ namespace PASEDM.Services.PASEDMCreator
                 DateCreateDoc = document.DateCreateDoc,
                 Summary = document.Summary,
                 Path = document.Path,
-                TermID = document.TermID,
+                TermID = document.Term.Id,
                 SecrecyStampsID = document.SecrecyStamp.Id,
-                DocStagesID = document.DocStagesID
+                DocStagesID = document.DocStages.Id,
+                DocumentTypesID = document.DocumentTypes.Id
             };
         }
     }
