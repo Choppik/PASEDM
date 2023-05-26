@@ -61,6 +61,7 @@ namespace PASEDM
                 s.GetRequiredService<UserStore>()));
 
             services.AddTransient(s => new ReferencesViewModel(
+                s.GetRequiredService<PASEDMDbContextFactory>(),
                 s.GetRequiredService<UserStore>()));
 
             services.AddTransient(s => new SettingsViewModel(

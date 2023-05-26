@@ -37,7 +37,7 @@ namespace PASEDM.Services.PASEDMCreator
             {
                 NameTask = tasks.NameTask,
                 Contents = tasks.Contents,
-                TaskStagesID = tasks.TaskStageID
+                TaskStagesID = tasks.TaskStage.Id
             };
         }
     }

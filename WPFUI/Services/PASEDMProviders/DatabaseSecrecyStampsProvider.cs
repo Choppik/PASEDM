@@ -30,5 +30,29 @@ namespace PASEDM.Services.PASEDMProviders
         {
             return new SecrecyStamps(dto.ID, dto.SecrecyStamp, dto.SecrecyStampValue);
         }
+
+        public async Task EditSecrecyStamps(SecrecyStamps secrecyStamps)
+        {
+            using (PASEDMContext context = _dbContextFactory.CreateDbContext())
+            {
+                try
+                {
+                    SecrecyStampDTO secrecyStampsDTOs = await context.SecrecyStamps
+                        .Where(t => t.ID == secrecyStamps.Id)
+                        .FirstOrDefaultAsync();
+
+                    if (secrecyStampsDTOs != null)
+                    {
+                        secrecyStampsDTOs.ID = secrecyStamps.Id;
+                        secrecyStampsDTOs.SecrecyStamp = secrecyStamps.NameSecrecyStamp;
+                        secrecyStampsDTOs.SecrecyStampValue = secrecyStamps.SecrecyStampValue;
+                    }
+                }
+                finally
+                {
+                    await context.SaveChangesAsync();
+                }
+            }
+        }
     }
 }

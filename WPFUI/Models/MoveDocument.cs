@@ -10,6 +10,7 @@ namespace PASEDM.Models
         private IMoveDocumentProvider _moveDocumentProvider;
         private IMoveDocumentCreator _moveDocumentCreator;
 
+        public MoveDocument() { }
         public MoveDocument(IMoveDocumentCreator moveDocumentCreator)
         {
             _moveDocumentCreator = moveDocumentCreator;

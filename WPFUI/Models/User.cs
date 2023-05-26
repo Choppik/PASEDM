@@ -15,6 +15,7 @@ namespace PASEDM.Models
         public int Id { get; }
         public string UserName { get; set; }
         public string Password { get; }
+        public string Salt { get; }
         public int RecordConfirmation { get; }
         public DateTime DateOfCreation { get; }
         public Role Role { get; }
@@ -22,30 +23,31 @@ namespace PASEDM.Models
 
         public User() { }
         public User(string userName)
-            :this(default, userName, "", default, default, default, default)
+            :this(default, userName, "", "", default, default, default, default)
         { }
         public User (int id, string userName) 
-            : this(id, userName, "", default, default, default, default)
+            : this(id, userName, "", "", default, default, default, default)
         { }
         public User(int id, string userName, int recordConfirmation, Role role, Employee employee)
-            : this(id, userName, "", recordConfirmation, default, role, employee)
+            : this(id, userName, "", "", recordConfirmation, default, role, employee)
         { }
 
-        public User(int id, string userName, string password, int recordConfirmation) 
-            : this(id, userName, password, recordConfirmation, default, default, default)
+        public User(int id, string userName, string password, string salt, int recordConfirmation) 
+            : this(id, userName, password, salt, recordConfirmation, default, default, default)
         { }
         public User(int id, string userName, DateTime dateOfCreation, Role role, Employee employee)
-            : this(id, userName, "", default, dateOfCreation, role, employee)
+            : this(id, userName, "", "", default, dateOfCreation, role, employee)
         { }
 
-        public User(string userName, string password, int recordConfirmation, DateTime dateOfCreation, Role role, Employee employee)
-            :this(default, userName, password, recordConfirmation, dateOfCreation, role, employee)
+        public User(string userName, string password, string salt, int recordConfirmation, DateTime dateOfCreation, Role role, Employee employee)
+            :this(default, userName, password, salt, recordConfirmation, dateOfCreation, role, employee)
         { }
-        public User(int id, string userName, string password, int recordConfirmation, DateTime dateOfCreation, Role role, Employee employee) 
+        public User(int id, string userName, string password, string salt, int recordConfirmation, DateTime dateOfCreation, Role role, Employee employee) 
         {
             Id = id;
             UserName = userName;
             Password = password;
+            Salt = salt;
             RecordConfirmation = recordConfirmation;
             DateOfCreation = dateOfCreation;
             Role = role;

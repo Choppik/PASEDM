@@ -21,7 +21,9 @@ namespace PASEDM.Services.PASEDMProviders
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
-                IEnumerable<TaskDTO> taskDTOs = await context.Tasks.ToListAsync();
+                IEnumerable<TaskDTO> taskDTOs = await context.Tasks
+                    .Include(u => u.TaskStages)
+                    .ToListAsync();
 
                 return taskDTOs.Select(u => ToTasks(u));
             }
@@ -29,7 +31,8 @@ namespace PASEDM.Services.PASEDMProviders
 
         private static Tasks ToTasks(TaskDTO dto)
         {
-            return new Tasks(dto.ID, dto.NameTask, dto.Contents, dto.TaskStagesID);
+            TaskStages taskStages = new (dto.TaskStages.ID, dto.TaskStages.TaskStages, dto.TaskStages.TaskStagesValue);
+            return new Tasks(dto.ID, dto.NameTask, dto.Contents, taskStages);
         }
 
         public async Task EditTask(Tasks task)
@@ -44,7 +47,7 @@ namespace PASEDM.Services.PASEDMProviders
 
                     if (taskDTO != null)
                     {
-                        taskDTO.TaskStagesID = task.TaskStageID;
+                        taskDTO.TaskStagesID = task.TaskStage.Id;
                     }
                 }
                 finally
@@ -59,6 +62,7 @@ namespace PASEDM.Services.PASEDMProviders
             {
                 TaskDTO taskDTO = await context.Tasks
                     .Where(u => u.NameTask == tasks.NameTask)
+                    .Include(u => u.TaskStages)
                     .FirstOrDefaultAsync();
 
                 if (taskDTO == null)
@@ -71,7 +75,8 @@ namespace PASEDM.Services.PASEDMProviders
         }
         private static Tasks ToDefiniteTask(TaskDTO dto)
         {
-            return new Tasks(dto.ID, dto.NameTask, dto.Contents, dto.TaskStagesID);
+            TaskStages taskStages = new (dto.TaskStages.ID, dto.TaskStages.TaskStages, dto.TaskStages.TaskStagesValue);
+            return new Tasks(dto.ID, dto.NameTask, dto.Contents, taskStages);
         }
     }
 }

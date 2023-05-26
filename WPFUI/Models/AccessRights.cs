@@ -2,6 +2,7 @@
 {
     public class AccessRights
     {
+        public AccessRights() { }
         public AccessRights(int id, string nameAccessRight, int accessRightsValue)
         {
             Id = id;

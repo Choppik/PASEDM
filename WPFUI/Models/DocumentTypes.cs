@@ -8,6 +8,7 @@ namespace PASEDM.Models
     {
         private IDocTypProvider _docTypProvider;
 
+        public DocumentTypes() { }
         public DocumentTypes(IDocTypProvider docTypProvider)
         {
             _docTypProvider = docTypProvider;

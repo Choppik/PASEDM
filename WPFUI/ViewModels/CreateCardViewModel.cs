@@ -421,8 +421,7 @@ namespace PASEDM.ViewModels
                 CurrentRecipient = incomingViewModel.CurrentMoveUser.Recipient;
             }
 
-            NavigateRefundCommand = new NavigateCommand(navigationService);
-            
+            NavigateRefundCommand = new NavigateCommand(navigationService); 
             CreateCardCommand = new CreateCardCommand(this, deferredContextFactory, navigationService);
             AddDocCommand = new CommandAdd(OpenFile);
         }
@@ -590,15 +589,6 @@ namespace PASEDM.ViewModels
                 MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private void OpenFile()
-        {
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.ShowDialog();
-            FilePath = openFile.FileName;
-            DateOfFormationDocument = File.GetLastWriteTime(FilePath);
-            /*return AddDocCommand = new SimpleCommand();*/
-        }
-
         public IEnumerable GetErrors(string propertyName)
         {
             return _propertyNameToErrorsDictionary.GetValueOrDefault(propertyName, new List<string>());
@@ -620,6 +610,14 @@ namespace PASEDM.ViewModels
             }
             _propertyNameToErrorsDictionary[property].Add(errorMessage);
             OnErrorsChanged(property);
+        }
+        private void OpenFile()
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.ShowDialog();
+            FilePath = openFile.FileName;
+            DateOfFormationDocument = File.GetLastWriteTime(FilePath);
+            /*return AddDocCommand = new SimpleCommand();*/
         }
     }
 }

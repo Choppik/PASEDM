@@ -1,6 +1,5 @@
 ﻿using PASEDM.Services.PASEDMCreator.InterfaceCreator;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,18 +10,19 @@ namespace PASEDM.Models
         private readonly ITaskCreator _taskCreator;
         private readonly ITasksProvider _tasksProviders;
 
-        public Tasks(string nameTask, string contents, int? taskStageID)
-            :this(default, nameTask, contents, taskStageID)
+        public Tasks() { }
+        public Tasks(string nameTask, string contents, TaskStages taskStage)
+            :this(default, nameTask, contents, taskStage)
         { }
-        public Tasks(int id, string nameTask, int? taskStageID)
-            :this(id, nameTask, "", taskStageID)
+        public Tasks(int id, string nameTask, TaskStages taskStage)
+            :this(id, nameTask, "", taskStage)
         { }
-        public Tasks(int? id, string nameTask, string contents, int? taskStageID)
+        public Tasks(int? id, string nameTask, string contents, TaskStages taskStage)
         {
             Id = id;
             NameTask = nameTask;
             Contents = contents;
-            TaskStageID = taskStageID;
+            TaskStage = taskStage;
         }
 
         public Tasks(ITaskCreator taskCreator, ITasksProvider tasksProviders)
@@ -39,7 +39,7 @@ namespace PASEDM.Models
         public int? Id { get; }
         public string NameTask { get; set; }
         public string Contents { get; }
-        public int? TaskStageID { get; }
+        public TaskStages TaskStage { get; }
 
         public async Task AddTask(Tasks task)
         {

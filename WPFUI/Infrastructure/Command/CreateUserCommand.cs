@@ -87,7 +87,7 @@ namespace PASEDM.Infrastructure.Command
                 if(userDB)
                 {
                     _employee = _userCreateViewModel.Employee;
-                    await currentUser.AddUser(new User(_userName, _password, _recordConfirmation, dateTime, _roleDB, _employee));
+                    await currentUser.AddUser(new User(_userName, _password, "salt", _recordConfirmation, dateTime, _roleDB, _employee));
                     MessageBox.Show("Пользователь создан. После подтверждения учетной записи пробуйте войти в аккаунт.");
                 }
                 else

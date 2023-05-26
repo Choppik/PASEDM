@@ -8,6 +8,7 @@ namespace PASEDM.Models
     {
         private ITaskStagesProvider _taskStagesProvider;
 
+        public TaskStages() { }
         public TaskStages(ITaskStagesProvider taskStagesProvider)
         {
             _taskStagesProvider = taskStagesProvider;

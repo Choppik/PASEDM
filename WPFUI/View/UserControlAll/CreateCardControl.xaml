@@ -38,7 +38,7 @@
                     <RadioButton GroupName="Document" Content="Добавить новый документ" IsChecked="{Binding IsCheckedTask}" />
                     <RadioButton GroupName="Document" Content="Добавить из папки 'Мои документы'" />
                 </StackPanel>
-                <StackPanel Grid.Row="1" Visibility="{Binding IsCheckedTask, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <StackPanel Grid.Row="1" Visibility="{Binding но, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Grid Margin="0,10,0,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -136,11 +136,12 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0">
-                    <RadioButton GroupName="Task" Content="Выбрать существующую" IsChecked="{Binding IsCheckedTask}" />
-                    <RadioButton GroupName="Task" Content="Создать новую" />
+                    <RadioButton GroupName="Task" x:Name="rb1" Content="Выбрать существующую" IsChecked="{Binding IsCheckedTask}" />
+                    <RadioButton GroupName="Task" x:Name="rb2" Content="Создать новую"/>
+                    <RadioButton GroupName="Task" x:Name="rb3" Content="54j5yyiю"/>
                 </StackPanel>
                 <ComboBox Grid.Row="1" x:Name="comboBoxTask"
-                          Visibility="{Binding IsCheckedTask, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Visibility="{Binding ElementName=rb1, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
                           materialDesign:HintAssist.Hint="Выберите задачу" 
                           ItemsSource="{Binding Tasks}"
                           IsTextSearchEnabled="True"
@@ -153,20 +154,12 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <StackPanel Grid.Row="1">
-                    <StackPanel.Style>
-                        <Style>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=comboBoxTask, Path=Visibility}" Value="Visible">
-                                    <Setter Property="ComboBox.Visibility" Value="Collapsed"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
+                <StackPanel Grid.Row="1" 
+                            Visibility="{Binding ElementName=rb2, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <TextBox materialDesign:HintAssist.Hint="Введите название задачи" 
-                         Text="{Binding NameTask}"/>
+                             Text="{Binding NameTask}"/>
                     <TextBox materialDesign:HintAssist.Hint="Опишите задачу" 
-                         Text="{Binding ContentTask}"/>
+                             Text="{Binding ContentTask}"/>
                 </StackPanel>
             </Grid>
             <TextBlock Text="Состояние задачи" />

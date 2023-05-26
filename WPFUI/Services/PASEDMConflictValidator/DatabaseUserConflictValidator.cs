@@ -34,7 +34,7 @@ namespace PASEDM.Services.PASEDMConflictValidator
         }
         private static User ToUser(UserDTO dto)
         {
-            return new User(dto.ID, dto.UserName, dto.Password, dto.RecordConfirmation);
+            return new User(dto.ID, dto.UserName, dto.Password, dto.Salt, dto.RecordConfirmation);
         }
     }
 }

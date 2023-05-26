@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PASEDM.View.UserControlAll"
+             xmlns:local="clr-namespace:PASEDM.View.UserControlAll" 
+             xmlns:viewmodels="clr-namespace:PASEDM.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ReferencesViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -14,24 +15,117 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Справочная информация"/>
-        <ListView Grid.Row="1" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn>
-                        <TextBlock Text="Колонка 1"/>
-                    </GridViewColumn>
-                    <GridViewColumn>
-                        <TextBlock Text="Колонка 2"/>
-                    </GridViewColumn>
-                    <GridViewColumn>
-                        <TextBlock Text="Колонка 3"/>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="20,0,0,0">
+                <RadioButton GroupName="Table" x:Name="rb1" Content="Таблица - Сотрудники" IsChecked="True" />
+                <RadioButton GroupName="Table" x:Name="rb2" Content="Таблица - Уровни секретности"/>
+                <RadioButton GroupName="Table" x:Name="rb3" Content="Таблица - Права доступа"/>
+                <RadioButton GroupName="Table" x:Name="rb4" Content="Таблица - Дела"/>
+                <RadioButton GroupName="Table" x:Name="rb5" Content="Таблица - Подразделения"/>
+                <RadioButton GroupName="Table" x:Name="rb6" Content="Таблица - Стадии документа"/>
+                <RadioButton GroupName="Table" x:Name="rb7" Content="Таблица - Стадии задачи"/>
+                <RadioButton GroupName="Table" x:Name="rb8" Content="Таблица - Типы документов"/>
+                <RadioButton GroupName="Table" x:Name="rb9" Content="Таблица - Роль пользователей"/>
+                <RadioButton GroupName="Table" x:Name="rb10" Content="Таблица - Типы пользователей"/>
+                <RadioButton GroupName="Table" x:Name="rb11" Content="Таблица - Сроки документа"/>
+            </StackPanel>
+            <DataGrid Grid.Column="0" 
+                      Visibility="{Binding ElementName=rb1, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      ItemsSource="{Binding Employee, Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      SelectedItem="{Binding CurrentEmployee}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}"/>
+                    <DataGridTextColumn Header="Номер сотрудника" Binding="{Binding NumberEmployee}"/>
+                    <DataGridTextColumn Header="Почта" Binding="{Binding Mail}"/>
+                    <DataGridTextColumn Header="Право доступа" Binding="{Binding AccessRights.NameAccessRight}"/>
+                    <DataGridTextColumn Header="Подразделение" Binding="{Binding DivisionName.NameDivision}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid Grid.Column="0" 
+                      Visibility="{Binding ElementName=rb2, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      ItemsSource="{Binding SecrecyStamps, Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      SelectedItem="{Binding CurrentSecrecyStamp}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Гриф секретности" Binding="{Binding NameSecrecyStamp}"/>
+                    <DataGridTextColumn Header="Значение уровня секретноти" Binding="{Binding SecrecyStampValue}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid Grid.Column="0" 
+                      Visibility="{Binding ElementName=rb4, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      ItemsSource="{Binding Cases, Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      SelectedItem="{Binding CurrentCase}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Номер дела" Binding="{Binding NumberCase}"/>
+                    <DataGridTextColumn Header="Содержание" Binding="{Binding Description}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid Grid.Column="0" 
+                      Visibility="{Binding ElementName=rb6, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      ItemsSource="{Binding DocStages, Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      SelectedItem="{Binding CurrentDocStages}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Стадия" Binding="{Binding NameDocStage}"/>
+                    <DataGridTextColumn Header="Значение" Binding="{Binding DocStagesValue}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid Grid.Column="0" 
+                      Visibility="{Binding ElementName=rb7, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      ItemsSource="{Binding TaskStages, Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      SelectedItem="{Binding CurrentTaskStages}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Стадия" Binding="{Binding NameTaskStage}"/>
+                    <DataGridTextColumn Header="Значение" Binding="{Binding TaskStagesValue}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid Grid.Column="0" 
+                      Visibility="{Binding ElementName=rb8, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      ItemsSource="{Binding DocTypes, Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      SelectedItem="{Binding CurrentDocTypes}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Name}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"
+                       HorizontalAlignment="Center"
+                       Command="{Binding SaveCommand}"
+                       Content="Сохранить изменения"/>
+            <Button Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       Command="{Binding DeleteCommand}"
+                       Content="Удалить строку"/>
+        </Grid>
     </Grid>
 </UserControl>

@@ -74,7 +74,7 @@ namespace PASEDM.ViewModels
                 _moveCardProvider = new DatabaseMoveCardProvider(_contextFactory);
                 _currentMoveUser = new MoveCard(_moveCardProvider);
                 _moveCardCount = _currentMoveUser.GetCountViewedMoveCard(_userStore.CurrentUser);
-                _moveCardStr = $"У вас {_moveCardCount} новых входящих документов.";
+                _moveCardStr = $"У вас {_moveCardCount} новых входящих документа.";
             }
             catch (Exception)
             {

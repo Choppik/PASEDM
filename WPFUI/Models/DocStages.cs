@@ -8,6 +8,7 @@ namespace PASEDM.Models
     {
         private IDocStagesProvider _docStagesProvider;
 
+        public DocStages() { }
         public DocStages(IDocStagesProvider docStagesProvider)
         {
             _docStagesProvider = docStagesProvider;

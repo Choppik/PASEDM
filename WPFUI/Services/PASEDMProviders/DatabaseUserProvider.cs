@@ -24,6 +24,7 @@ namespace PASEDM.Services.PASEDMProviders
             {
                 IEnumerable<UserDTO> userDTOs = await context.Users
                     .Include(u => u.Employee).ThenInclude(u => u.AccessRights)
+                    .Include(u => u.Employee).ThenInclude(u => u.Division)
                     .Include(u => u.Role)
                     .ToListAsync();
 
@@ -35,8 +36,9 @@ namespace PASEDM.Services.PASEDMProviders
         {
             Role role = new(dto.Role.ID, dto.Role.NameRole, dto.Role.SignificanceRole);
             AccessRights accessRights = new(dto.Employee.AccessRights.ID, dto.Employee.AccessRights.AccessRights, dto.Employee.AccessRights.AccessRightsValue);
-            Employee employee = new(dto.Employee.ID, dto.Employee.NumberEmployee, dto.Employee.FullName, dto.Employee.Mail, accessRights, dto.Employee.DivisionID);
-            return new User(dto.ID, dto.UserName, dto.Password, dto.RecordConfirmation, dto.DateOfCreation, role, employee);
+            Division division = new (dto.Employee.Division.ID, dto.Employee.Division.NumberDivision, dto.Employee.Division.Division);
+            Employee employee = new(dto.Employee.ID, dto.Employee.NumberEmployee, dto.Employee.FullName, dto.Employee.Mail, accessRights, division);
+            return new User(dto.ID, dto.UserName, dto.Password, dto.Salt, dto.RecordConfirmation, dto.DateOfCreation, role, employee);
         }
         public async Task<bool> GetUserBool(User user)
         {
@@ -77,6 +79,7 @@ namespace PASEDM.Services.PASEDMProviders
                 IEnumerable<UserDTO> userDTOs = await context.Users
                     .Where(u => u.RecordConfirmation == 0)
                     .Include(u => u.Employee).ThenInclude(u => u.AccessRights)
+                    .Include(u => u.Employee).ThenInclude(u => u.Division)
                     .Include(u => u.Role)
                     .ToListAsync();
 
@@ -87,7 +90,8 @@ namespace PASEDM.Services.PASEDMProviders
         {
             Role role = new(dto.Role.ID, dto.Role.NameRole, dto.Role.SignificanceRole);
             AccessRights accessRights = new(dto.Employee.AccessRights.ID, dto.Employee.AccessRights.AccessRights, dto.Employee.AccessRights.AccessRightsValue);
-            Employee employee = new(dto.Employee.ID, dto.Employee.NumberEmployee, dto.Employee.FullName, dto.Employee.Mail, accessRights, dto.Employee.DivisionID);
+            Division division = new(dto.Employee.Division.ID, dto.Employee.Division.NumberDivision, dto.Employee.Division.Division);
+            Employee employee = new(dto.Employee.ID, dto.Employee.NumberEmployee, dto.Employee.FullName, dto.Employee.Mail, accessRights, division);
             
             return new User(dto.ID, dto.UserName, dto.DateOfCreation, role, employee);
         }

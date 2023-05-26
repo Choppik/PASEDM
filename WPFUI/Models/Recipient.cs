@@ -1,7 +1,5 @@
 ﻿using PASEDM.Services.PASEDMCreator.InterfaceCreator;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PASEDM.Models

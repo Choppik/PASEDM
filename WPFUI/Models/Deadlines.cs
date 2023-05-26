@@ -8,6 +8,7 @@ namespace PASEDM.Models
     {
         private readonly IDeadlinesProvider _deadlinesProvider;
 
+        public Deadlines() { }
         public Deadlines(IDeadlinesProvider deadlinesProvider)
         {
             _deadlinesProvider = deadlinesProvider;

@@ -29,6 +29,7 @@ namespace PASEDM.Services.PASEDMProviders
                     .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.Term)
                     .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.DocumentTypes)
                     .Include(u => u.Card).ThenInclude(u => u.Employee).ThenInclude(u => u.AccessRights)
+                    .Include(u => u.Card).ThenInclude(u => u.Employee).ThenInclude(u => u.Division)
                     .Include(u => u.Card).ThenInclude(u => u.Task).ThenInclude(u => u.TaskStages)
                     .Include(u => u.Card).ThenInclude(u => u.Case)
                     .Include(u => u.Card).ThenInclude(u => u.Recipient).ThenInclude(u => u.User)
@@ -54,6 +55,7 @@ namespace PASEDM.Services.PASEDMProviders
                     .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.Term)
                     .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.DocumentTypes)
                     .Include(u => u.Card).ThenInclude(u => u.Employee).ThenInclude(u => u.AccessRights)
+                    .Include(u => u.Card).ThenInclude(u => u.Employee).ThenInclude(u => u.Division)
                     .Include(u => u.Card).ThenInclude(u => u.Task).ThenInclude(u => u.TaskStages)
                     .Include(u => u.Card).ThenInclude(u => u.Case)
                     .Include(u => u.Card).ThenInclude(u => u.User)
@@ -75,11 +77,12 @@ namespace PASEDM.Services.PASEDMProviders
             DocStages docStages = new(dto.Card.Document.DocStagesID, dto.Card.Document.DocStages.NameDocStage, dto.Card.Document.DocStages.DocStagesValue);
             Deadlines deadlines = new(dto.Card.Document.Term.ID, dto.Card.Document.Term.NameTerm, dto.Card.Document.Term.Term);
             Document document = new(dto.Card.Document.ID, dto.Card.Document.NameDoc, dto.Card.Document.RegistrationNumber, dto.Card.Document.DateCreateDoc, dto.Card.Document.Summary, dto.Card.Document.Path, deadlines, secrecyStamps, docStages, documentTypes);
-            Tasks tasks = new(dto.Card.TaskID, dto.Card.Task.NameTask, dto.Card.Task.Contents, dto.Card.Task.TaskStagesID);
             TaskStages taskStages = new(dto.Card.Task.TaskStages.ID, dto.Card.Task.TaskStages.TaskStages, dto.Card.Task.TaskStages.TaskStagesValue);
+            Tasks tasks = new(dto.Card.TaskID, dto.Card.Task.NameTask, dto.Card.Task.Contents, taskStages);
             Case cases = new(dto.Card.Case.ID, dto.Card.Case.NumberCase, dto.Card.Case.Desription);
             AccessRights accessRights = new(dto.Card.Employee.AccessRights.ID, dto.Card.Employee.AccessRights.AccessRights, dto.Card.Employee.AccessRights.AccessRightsValue);
-            Employee employee = new(dto.Card.EmployeeID, dto.Card.Employee.NumberEmployee, dto.Card.Employee.FullName, dto.Card.Employee.Mail, accessRights, dto.Card.Employee.DivisionID);
+            Division division = new (dto.Card.Employee.Division.ID, dto.Card.Employee.Division.NumberDivision, dto.Card.Employee.Division.Division);
+            Employee employee = new(dto.Card.EmployeeID, dto.Card.Employee.NumberEmployee, dto.Card.Employee.FullName, dto.Card.Employee.Mail, accessRights, division);
             User user = new(dto.Card.Recipient.User.ID, dto.Card.Recipient.User.UserName);
 
             return new MoveCard(

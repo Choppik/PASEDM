@@ -7,5 +7,6 @@ namespace PASEDM.Services.PASEDMProviders.InterfaceProviders
     public interface ISecrecyStampsProvider
     {
         Task<IEnumerable<SecrecyStamps>> GetAllSecrecyStamps();
+        Task EditSecrecyStamps(SecrecyStamps secrecyStamps);
     }
 }

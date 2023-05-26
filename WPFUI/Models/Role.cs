@@ -8,6 +8,7 @@ namespace PASEDM.Models
     {
         private IRoleProvider _roleProvider;
 
+        public Role() { }
         public Role(IRoleProvider roleProvider)
         {
             _roleProvider = roleProvider;

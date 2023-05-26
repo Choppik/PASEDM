@@ -8,6 +8,7 @@ namespace PASEDM.Models
     {
         private ITypeUserProvider _typeUserProvider;
 
+        public TypeUser() { }
         public TypeUser(ITypeUserProvider typeUserProvider)
         {
             _typeUserProvider = typeUserProvider;

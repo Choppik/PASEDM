@@ -23,6 +23,7 @@ namespace PASEDM.Services.PASEDMProviders
             {
                 IEnumerable<EmployeeDTO> employeeDTOs = await context.Staff
                     .Include(u => u.AccessRights)
+                    .Include(u => u.Division)
                     .ToListAsync();
 
                 return employeeDTOs.Select(u => ToEmployee(u));
@@ -32,7 +33,8 @@ namespace PASEDM.Services.PASEDMProviders
         private static Employee ToEmployee(EmployeeDTO dto)
         {
             AccessRights accessRights = new (dto.AccessRights.ID, dto.AccessRights.AccessRights, dto.AccessRights.AccessRightsValue);
-            return new Employee(dto.ID, dto.NumberEmployee, dto.FullName, dto.Mail, accessRights, dto.DivisionID);
+            Division division = new (dto.Division.ID, dto.Division.NumberDivision, dto.Division.Division);
+            return new Employee(dto.ID, dto.NumberEmployee, dto.FullName, dto.Mail, accessRights, division);
         }
     }
 }

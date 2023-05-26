@@ -10,6 +10,7 @@ namespace PASEDM.Data.DTOs
         public int ID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
+        public string Salt { get; set; }
         public int RecordConfirmation { get; set; }
         public DateTime DateOfCreation { get; set; }
         public int? RoleID { get; set; }

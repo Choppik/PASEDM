@@ -49,5 +49,9 @@ namespace PASEDM.Data
             modelBuilder.ApplyConfiguration(new MoveCardConfiguration());
             modelBuilder.ApplyConfiguration(new MoveDocumentConfiguration());
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.LogTo(message => System.Diagnostics.Debug.WriteLine(message));
+        }
     }
 }
