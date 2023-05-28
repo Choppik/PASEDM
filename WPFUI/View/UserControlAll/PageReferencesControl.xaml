@@ -66,6 +66,18 @@
                 </DataGrid.Columns>
             </DataGrid>
             <DataGrid Grid.Column="0" 
+                      Visibility="{Binding ElementName=rb3, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      ItemsSource="{Binding AccessRights, Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      SelectedItem="{Binding CurrentAccessRights}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Право доступа" Binding="{Binding NameAccessRight}"/>
+                    <DataGridTextColumn Header="Значение права доступа" Binding="{Binding AccessRightsValue}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid Grid.Column="0" 
                       Visibility="{Binding ElementName=rb4, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
                       ItemsSource="{Binding Cases, Mode=TwoWay}"
                       AutoGenerateColumns="False"
@@ -75,6 +87,18 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Номер дела" Binding="{Binding NumberCase}"/>
                     <DataGridTextColumn Header="Содержание" Binding="{Binding Description}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid Grid.Column="0" 
+                      Visibility="{Binding ElementName=rb5, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      ItemsSource="{Binding Divisions, Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      SelectedItem="{Binding CurrentDivision}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Номер подразделения" Binding="{Binding NumberDivision}"/>
+                    <DataGridTextColumn Header="Подразделение" Binding="{Binding NameDivision}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <DataGrid Grid.Column="0" 
@@ -110,6 +134,42 @@
                       VerticalAlignment="Center">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Название" Binding="{Binding Name}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid Grid.Column="0" 
+                      Visibility="{Binding ElementName=rb9, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      ItemsSource="{Binding Role, Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      SelectedItem="{Binding CurrentRole}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Роль" Binding="{Binding NameRole}"/>
+                    <DataGridTextColumn Header="Значимость роли" Binding="{Binding SignificanceRole}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid Grid.Column="0" 
+                      Visibility="{Binding ElementName=rb10, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      ItemsSource="{Binding TypeUser, Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      SelectedItem="{Binding CurrentTypeUser}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Тип пользователя" Binding="{Binding NameTypeUser}"/>
+                    <DataGridTextColumn Header="Значение типа пользователя" Binding="{Binding TypeUserValue}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid Grid.Column="0" 
+                      Visibility="{Binding ElementName=rb11, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      ItemsSource="{Binding Deadlines, Mode=TwoWay}"
+                      AutoGenerateColumns="False"
+                      SelectedItem="{Binding CurrentTerm}"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Название срока" Binding="{Binding NameTerm}"/>
+                    <DataGridTextColumn Header="Срок" Binding="{Binding Term}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

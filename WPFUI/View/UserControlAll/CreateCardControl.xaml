@@ -114,19 +114,6 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                 </StackPanel>
-                <ComboBox Grid.Row="1" x:Name="comboBoxDoc"
-                          materialDesign:HintAssist.Hint="Выберите задачу" 
-                          ItemsSource="{Binding Documents}"
-                          IsTextSearchEnabled="True"
-                          IsEditable="True"
-                          Text="{Binding CurrentDocument.NameDoc}"
-                          SelectedItem="{Binding CurrentDocument}" VerticalAlignment="Top">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding NameDoc}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
             </Grid>
 
             <TextBlock Text="Задача" />
@@ -138,7 +125,6 @@
                 <StackPanel Grid.Row="0">
                     <RadioButton GroupName="Task" x:Name="rb1" Content="Выбрать существующую" IsChecked="{Binding IsCheckedTask}" />
                     <RadioButton GroupName="Task" x:Name="rb2" Content="Создать новую"/>
-                    <RadioButton GroupName="Task" x:Name="rb3" Content="54j5yyiю"/>
                 </StackPanel>
                 <ComboBox Grid.Row="1" x:Name="comboBoxTask"
                           Visibility="{Binding ElementName=rb1, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -226,9 +212,9 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="Карту сформировал:" />
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Карту формирует: " />
                 <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding UserCreateCard}" />
-                <TextBlock Grid.Column="0" Grid.Row="1" Text="Создана:" />
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Создана: " />
                 <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding DateOfFormation, Mode=OneWay}"/>
             </Grid>
 

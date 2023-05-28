@@ -1,5 +1,6 @@
 ﻿<UserControl x:Class="PASEDM.View.UserControlAll.PageIncomingDocumentsControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
@@ -29,38 +30,57 @@
             <TextBlock Text="Идет загрузка данных ..." 
                        Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <ListView ItemsSource="{Binding MoveCards}"
+                      
                       SelectedItem="{Binding CurrentMoveUser}" 
-                      Visibility="{Binding IsLoading, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListViewItem}">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FFE4FF89"/>
-                                </Trigger>
-                                <Trigger Property="IsSelected" Value="true" >
-                                    <Setter Property="Background" Value="#FF20900B"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Button Content="24545" Command="{Binding NavigateIncEditCardCommand}"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+                      Visibility="{Binding IsLoading, Converter={StaticResource InverseBooleanToVisibilityConverter}}" 
+                      FontSize="10">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FFE4FF89"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="true" >
+                                <Setter Property="Background" Value="#FF20900B"/>
+                            </Trigger>
+                        </Style.Triggers>
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="FontSize" Value="5"/>
+                        <Setter Property="Margin" Value="2"></Setter>
+                        <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Номер карты" DisplayMemberBinding="{Binding NumberCard}"/>
+                        <GridViewColumn Header="Номер карты" DisplayMemberBinding="{Binding NumberCard}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="Gray"
+                                            BorderThickness="1,0,1,0"
+                                            Margin="-6,0,-6,0">
+                                        <Grid Margin="6,0,6,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="20"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="356"
+                                                       Grid.Column="0"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       VerticalAlignment="Center"
+                                                       ToolTipService.ToolTip="47667"/>
+                                            
+                                        </Grid>
+                                    </Border>
+
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                         <GridViewColumn Header="Название карты" DisplayMemberBinding="{Binding NameCard}"/>
                         <GridViewColumn Header="Название документа" DisplayMemberBinding="{Binding Document.NameDoc}"/>
                         <GridViewColumn Header="Тип документа" DisplayMemberBinding="{Binding DocumentTypes.Name}"/>
                         <GridViewColumn Header="Задача" DisplayMemberBinding="{Binding Tasks.NameTask}"/>
-                        <GridViewColumn Header="Описание задачи" DisplayMemberBinding="{Binding Tasks.Contents}"/>
                         <GridViewColumn Header="Состояние задачи" DisplayMemberBinding="{Binding TaskStages.NameTaskStage}"/>
-                        <GridViewColumn Header="Дело" DisplayMemberBinding="{Binding Cases.NumberCase}"/>
-                        <GridViewColumn Header="Опиание дела" DisplayMemberBinding="{Binding Cases.Description}"/>
                         <GridViewColumn Header="Исполнитель" DisplayMemberBinding="{Binding Executor.FullName}"/>
-                        <GridViewColumn Header="Комментарий" DisplayMemberBinding="{Binding Comment}"/>
                         <GridViewColumn Header="Дата отправки" DisplayMemberBinding="{Binding DateOfFormation}"/>
                         <GridViewColumn Header="Отправитель" DisplayMemberBinding="{Binding Sender}"/>
                     </GridView>

@@ -88,7 +88,7 @@ namespace PASEDM.ViewModels
                     if (item.Id == _roleID) _roleSign = item.SignificanceRole;
                 }
 
-                if (_roleSign == 0) IsAdmin = false; else IsAdmin = true;
+                if (_roleSign == 0) IsAdmin = true; else IsAdmin = false;
             }
             catch (Exception)
             {

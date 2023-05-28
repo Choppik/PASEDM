@@ -45,7 +45,15 @@ namespace PASEDM.Services.PASEDMProviders
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
                 DocumentDTO docDTO = await context.Documents
-                    .Where(u => u.DateCreateDoc == document.DateCreateDoc)
+                    .Where(u => u.DateCreateDoc == document.DateCreateDoc
+                    && u.NameDoc == document.NameDoc
+                    && u.RegistrationNumber == document.RegistrationNumber
+                    && u.Summary == document.Summary
+                    && u.Path == document.Path
+                    && u.TermID == document.Term.Id
+                    && u.SecrecyStampsID == document.SecrecyStamp.Id
+                    && u.DocStagesID == document.DocStages.Id
+                    && u.DocumentTypesID == document.DocumentTypes.Id)
                     .FirstOrDefaultAsync();
 
                 if (docDTO == null)

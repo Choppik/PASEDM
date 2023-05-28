@@ -27,6 +27,10 @@ namespace PASEDM.ViewModels
         private IDeadlinesProvider _deadlinesProvider;
         private ITaskStagesProvider _taskStagesProvider;
         private IDocStagesProvider _docStagesProvider;
+        private IDivisionProvider _divisionProvider;
+        private IAccessRightsProvider _accessRightsProvider;
+        private ITypeUserProvider _typeUserProvider;
+        private IRoleProvider _roleProvider;
 
         private bool _isActive;
 
@@ -37,6 +41,10 @@ namespace PASEDM.ViewModels
         private ObservableCollection<Deadlines> _deadlines;
         private ObservableCollection<TaskStages> _taskStages;
         private ObservableCollection<DocStages> _docStages;
+        private ObservableCollection<Division> _divisions;
+        private ObservableCollection<AccessRights> _accessRights;
+        private ObservableCollection<Role> _role;
+        private ObservableCollection<TypeUser> _typeUser;
 
         private SecrecyStamps _currentSecrecyStamp;
         private Case _currentCase;
@@ -45,6 +53,10 @@ namespace PASEDM.ViewModels
         private Deadlines _currentTerm;
         private TaskStages _currentTaskStages;
         private DocStages _currentDocStages;
+        private Division _currentDivisions;
+        private AccessRights _currentAccessRights;
+        private Role _currentRole;
+        private TypeUser _currentTypeUser;
 
         private ICommand _saveCommand;
         private ICommand _deleteCommand;
@@ -111,7 +123,42 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(DocStages));
             }
         }
-
+        public ObservableCollection<Division> Divisions
+        {
+            get => _divisions;
+            set
+            {
+                _divisions = value;
+                OnPropertyChanged(nameof(Divisions));
+            }
+        }
+        public ObservableCollection<AccessRights> AccessRights
+        {
+            get => _accessRights;
+            set
+            {
+                _accessRights = value;
+                OnPropertyChanged(nameof(AccessRights));
+            }
+        }
+        public ObservableCollection<Role> Role
+        {
+            get => _role;
+            set
+            {
+                _role = value;
+                OnPropertyChanged(nameof(Role));
+            }
+        }
+        public ObservableCollection<TypeUser> TypeUser
+        {
+            get => _typeUser;
+            set
+            {
+                _typeUser = value;
+                OnPropertyChanged(nameof(TypeUser));
+            }
+        }
 
         public SecrecyStamps CurrentSecrecyStamp
         {
@@ -199,6 +246,54 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(CurrentDocStages));
             }
         }
+        public Division CurrentDivision
+        {
+            get
+            {
+                return _currentDivisions;
+            }
+            set
+            {
+                _currentDivisions = value;
+                OnPropertyChanged(nameof(CurrentDivision));
+            }
+        }
+        public AccessRights CurrentAccessRights
+        {
+            get
+            {
+                return _currentAccessRights;
+            }
+            set
+            {
+                _currentAccessRights = value;
+                OnPropertyChanged(nameof(CurrentAccessRights));
+            }
+        }
+        public Role CurrentRole
+        {
+            get
+            {
+                return _currentRole;
+            }
+            set
+            {
+                _currentRole = value;
+                OnPropertyChanged(nameof(CurrentRole));
+            }
+        }
+        public TypeUser CurrentTypeUser
+        {
+            get
+            {
+                return _currentTypeUser;
+            }
+            set
+            {
+                _currentTypeUser = value;
+                OnPropertyChanged(nameof(CurrentTypeUser));
+            }
+        }
 
         public bool IsActive
         {
@@ -242,6 +337,11 @@ namespace PASEDM.ViewModels
             GetTaskStages();
             GetDocType();
             GetEmployee();
+            GetDivisions();
+            GetRole();
+            GetAccessRights();
+            GetTypeUser();
+
 
         }
         private async void GetSecrecyStamps()
@@ -363,6 +463,78 @@ namespace PASEDM.ViewModels
                 foreach (var item in await _currentDocStages.GetAllDocStages())
                 {
                     _docStages.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private async void GetDivisions()
+        {
+            try
+            {
+                _divisionProvider = new DatabaseDivisionProvider(_contextFactory);
+                _divisions = new ObservableCollection<Division>();
+                _currentDivisions = new Division(_divisionProvider);
+
+                foreach (var item in await _currentDivisions.GetAllDivisions())
+                {
+                    _divisions.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private async void GetRole()
+        {
+            try
+            {
+                _roleProvider = new DatabaseRoleProvider(_contextFactory);
+                _role = new ObservableCollection<Role>();
+                _currentRole = new Role(_roleProvider);
+
+                foreach (var item in await _currentRole.GetAllRole())
+                {
+                    _role.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private async void GetAccessRights()
+        {
+            try
+            {
+                _accessRightsProvider = new DatabaseAccessRightsProvider(_contextFactory);
+                _accessRights = new ObservableCollection<AccessRights>();
+                _currentAccessRights = new AccessRights(_accessRightsProvider);
+
+                foreach (var item in await _currentAccessRights.GetAllAccessRights())
+                {
+                    _accessRights.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private async void GetTypeUser()
+        {
+            try
+            {
+                _typeUserProvider = new DatabaseTypeUserProvider(_contextFactory);
+                _typeUser = new ObservableCollection<TypeUser>();
+                _currentTypeUser = new TypeUser(_typeUserProvider);
+
+                foreach (var item in await _currentTypeUser.GetAllTypeUsers())
+                {
+                    _typeUser.Add(item);
                 }
             }
             catch (Exception)

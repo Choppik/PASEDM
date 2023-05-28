@@ -63,7 +63,7 @@ namespace PASEDM.Infrastructure.Command
             _term = _addDocViewModel.CurrentTerm;
 
             await document.AddDoc(new(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _filePath, _term, _secrecyStamps, _docStages, _documentType));
-            var docDB = await document.GetDoc(new(_dateOfFormationDocument));
+            var docDB = await document.GetDoc(new(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _filePath, _term, _secrecyStamps, _docStages, _documentType));
             await moveDocument.AddMoveDocument(new(_addDocViewModel.CurrentUser, docDB));
 
             _navigationService.Navigate();

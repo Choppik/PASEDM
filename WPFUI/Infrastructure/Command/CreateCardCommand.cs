@@ -117,7 +117,7 @@ namespace PASEDM.Infrastructure.Command
                 var _viewed = 0;
 
                 await document.AddDoc(new(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _filePath, _term, _secrecyStamps, _docStages, _documentType));
-                var docDB = await document.GetDoc(new(_dateOfFormationDocument));
+                var docDB = await document.GetDoc(new(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _filePath, _term, _secrecyStamps, _docStages, _documentType));
 
                 await recipient.AddRecipient(new(_recipient.Id));
                 var recipientDB = await recipient.GetRecipient(new(_recipient.Id));
