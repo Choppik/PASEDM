@@ -73,6 +73,7 @@ namespace PASEDM
 
             services.AddTransient(CreateCardViewModelMet);
             services.AddTransient(AddDocViewModelMet);
+            services.AddTransient(ViewingCardViewModelMet);
             services.AddTransient(OutgoingViewModelMet);
             services.AddTransient(IncomingViewModelMet);
             services.AddTransient(MyDocumentsViewModelMet);
@@ -201,6 +202,12 @@ namespace PASEDM
                 () => serviceProvider.GetRequiredService<OutgoingViewModel>(),
                 () => serviceProvider.GetRequiredService<NavigationBarViewModel>());
         }
+        private static INavigationService CreateViewingCardNavigationService(IServiceProvider serviceProvider)
+        {
+            return new ModalNavigationService<ViewingCardViewModel>(
+                serviceProvider.GetRequiredService<ModalNavigationStore>(),
+                () => serviceProvider.GetRequiredService<ViewingCardViewModel>());
+        }
         private static INavigationService CreateCardNavigationService(IServiceProvider serviceProvider)
         {
             return new ModalNavigationService<CreateCardViewModel>(
@@ -224,6 +231,18 @@ namespace PASEDM
                 serviceProvider.GetRequiredService<MyDocumentsViewModel>(),
                 serviceProvider.GetRequiredService<UserStore>(),
                 serviceProvider.GetRequiredService<PASEDMDbContextFactory>());
+        }
+        private ViewingCardViewModel ViewingCardViewModelMet(IServiceProvider serviceProvider)
+        {
+            CompositeNavigationService navigationService = new(
+                serviceProvider.GetRequiredService<CloseModalNavigationService>(),
+                CreateIncomingNavigationService(serviceProvider));
+
+            return new ViewingCardViewModel(
+                serviceProvider.GetRequiredService<IncomingViewModel>(),
+                navigationService,
+                serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
+                serviceProvider.GetRequiredService<UserStore>());
         }
         private CreateCardViewModel CreateCardViewModelMet(IServiceProvider serviceProvider)
         {
@@ -255,7 +274,6 @@ namespace PASEDM
                     serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                     serviceProvider.GetRequiredService<OpenFileDialog>()));
 
-
             return new OutgoingViewModel(
                 parameterNavigationService,
                 CreateCardNavigationService(serviceProvider),
@@ -268,9 +286,9 @@ namespace PASEDM
         {
             CompositeNavigationService navigationService = new(
                 serviceProvider.GetRequiredService<CloseModalNavigationService>(),
-                CreateOutgoingNavigationService(serviceProvider));
+                CreateIncomingNavigationService(serviceProvider));
 
-            ParameterNavigationService<IncomingViewModel, CreateCardViewModel> parameterNavigationService = new(
+            ParameterNavigationService<IncomingViewModel, CreateCardViewModel> parameterCreateCardNavigationService = new(
                 serviceProvider.GetRequiredService<ModalNavigationStore>(),
                 (parameter) => new CreateCardViewModel(
                     navigationService,
@@ -280,13 +298,20 @@ namespace PASEDM
                     serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
                     serviceProvider.GetRequiredService<OpenFileDialog>()));
 
+            ParameterNavigationService<IncomingViewModel, ViewingCardViewModel> parameterViewingCardNavigationService = new(
+                serviceProvider.GetRequiredService<ModalNavigationStore>(),
+                (parameter) => new ViewingCardViewModel(
+                    parameter,
+                    navigationService,
+                    serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
+                    serviceProvider.GetRequiredService<UserStore>()));
 
             return new IncomingViewModel(
-                parameterNavigationService,
+                parameterCreateCardNavigationService,
+                parameterViewingCardNavigationService,
                 CreateIncomingNavigationService(serviceProvider),
                 serviceProvider.GetRequiredService<PASEDMDbContextFactory>(),
-                serviceProvider.GetRequiredService<UserStore>()
-                );
+                serviceProvider.GetRequiredService<UserStore>());
         }
         private MyDocumentsViewModel MyDocumentsViewModelMet(IServiceProvider serviceProvider)
         {
@@ -301,7 +326,6 @@ namespace PASEDM
                     parameter,
                     serviceProvider.GetRequiredService<UserStore>(),
                     serviceProvider.GetRequiredService<PASEDMDbContextFactory>()));
-
 
             return new MyDocumentsViewModel(
                 parameterNavigationService,

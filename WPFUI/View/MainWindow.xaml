@@ -55,6 +55,9 @@
             <DataTemplate DataType="{x:Type vm:AddDocViewModel}">
                 <v:AddDocControl/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:ViewingCardViewModel}">
+                <v:ViewingCardControl/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type vm:LayoutViewModel}">
                 <component:Layout/>
             </DataTemplate>

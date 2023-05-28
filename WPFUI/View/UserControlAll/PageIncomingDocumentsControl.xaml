@@ -97,7 +97,8 @@
             <Button Grid.Column="0" 
                     Content="Посмотреть"
                     HorizontalAlignment="Right"
-                    IsEnabled="{Binding IsPrivilege}"/>
+                    IsEnabled="{Binding IsPrivilege}"
+                    Command="{Binding NavigateViewingCardCommand}"/>
             <Button Grid.Column="1" Name="_btn"
                     Content="Редактировать" 
                     HorizontalAlignment="Center"

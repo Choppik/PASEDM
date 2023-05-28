@@ -19,6 +19,7 @@ namespace PASEDM.ViewModels
         #region Переменные и свойства
         private PASEDMDbContextFactory _contextFactory;
         private IParamNavigationService<IncomingViewModel> _parameterNavigationService;
+        private IParamNavigationService<IncomingViewModel> _parameterNavigationService2;
         private INavigationService _navigationService;
         private readonly UserStore _userStore;
 
@@ -27,6 +28,7 @@ namespace PASEDM.ViewModels
         private bool _isActive;
         private ObservableCollection<MoveCard> _moveCard;
         private ICommand _navigateIncEditCardCommand;
+        private ICommand _navigateViewingCardCommand;
         private ICommand _deleteCardCommand;
         private IMoveCardProvider _moveCardProvider;
         private MoveCard _currentMoveUser;
@@ -42,6 +44,7 @@ namespace PASEDM.ViewModels
                 _currentMoveUser = value;
                 OnPropertyChanged(nameof(CurrentMoveUser));
                 EditCommand();
+                ViewingCommand();
                 DeleteCommand();
                 GetAccessRights();
                 IsActive = true;
@@ -83,6 +86,15 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(NavigateIncEditCardCommand));
             }
         }
+        public ICommand NavigateViewingCardCommand
+        {
+            get => _navigateViewingCardCommand;
+            set
+            {
+                _navigateViewingCardCommand = value;
+                OnPropertyChanged(nameof(NavigateViewingCardCommand));
+            }
+        }
         public ICommand DeleteCardCommand
         {
             get => _deleteCardCommand;
@@ -95,18 +107,21 @@ namespace PASEDM.ViewModels
         #endregion
         public IncomingViewModel(
             IParamNavigationService<IncomingViewModel> parameterNavigationService,
+            IParamNavigationService<IncomingViewModel> parameterNavigationService2,
             INavigationService navigationService, 
             PASEDMDbContextFactory deferredContextFactory, 
             UserStore userStore)
         {
             _navigationService = navigationService;
             _parameterNavigationService = parameterNavigationService;
+            _parameterNavigationService2 = parameterNavigationService2;
             _contextFactory = deferredContextFactory;
             _userStore = userStore;
 
             GetMoveUser();
         }
         private ICommand EditCommand() => NavigateIncEditCardCommand = new NavigateIncEditCardCommand(this, _parameterNavigationService);
+        private ICommand ViewingCommand() => NavigateViewingCardCommand = new NavigateViewingCardCommand(this, _parameterNavigationService2);
         private ICommand DeleteCommand() => DeleteCardCommand = new DeleteCardCommand(_currentMoveUser, _contextFactory, _navigationService);
         private async void GetMoveUser()
         {

@@ -26,17 +26,17 @@
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="20,0,0,0">
-                <RadioButton GroupName="Table" x:Name="rb1" Content="Таблица - Сотрудники" IsChecked="True" />
-                <RadioButton GroupName="Table" x:Name="rb2" Content="Таблица - Уровни секретности"/>
-                <RadioButton GroupName="Table" x:Name="rb3" Content="Таблица - Права доступа"/>
-                <RadioButton GroupName="Table" x:Name="rb4" Content="Таблица - Дела"/>
-                <RadioButton GroupName="Table" x:Name="rb5" Content="Таблица - Подразделения"/>
-                <RadioButton GroupName="Table" x:Name="rb6" Content="Таблица - Стадии документа"/>
-                <RadioButton GroupName="Table" x:Name="rb7" Content="Таблица - Стадии задачи"/>
-                <RadioButton GroupName="Table" x:Name="rb8" Content="Таблица - Типы документов"/>
-                <RadioButton GroupName="Table" x:Name="rb9" Content="Таблица - Роль пользователей"/>
-                <RadioButton GroupName="Table" x:Name="rb10" Content="Таблица - Типы пользователей"/>
-                <RadioButton GroupName="Table" x:Name="rb11" Content="Таблица - Сроки документа"/>
+                <RadioButton GroupName="Table" x:Name="rb1" Content="Таблица - Сотрудники" IsChecked="True" Margin="0,0,0,10" />
+                <RadioButton GroupName="Table" x:Name="rb2" Content="Таблица - Уровни секретности" Margin="0,0,0,10"/>
+                <RadioButton GroupName="Table" x:Name="rb3" Content="Таблица - Права доступа" Margin="0,0,0,10"/>
+                <RadioButton GroupName="Table" x:Name="rb4" Content="Таблица - Дела" Margin="0,0,0,10"/>
+                <RadioButton GroupName="Table" x:Name="rb5" Content="Таблица - Подразделения" Margin="0,0,0,10"/>
+                <RadioButton GroupName="Table" x:Name="rb6" Content="Таблица - Стадии документа" Margin="0,0,0,10"/>
+                <RadioButton GroupName="Table" x:Name="rb7" Content="Таблица - Стадии задачи" Margin="0,0,0,10"/>
+                <RadioButton GroupName="Table" x:Name="rb8" Content="Таблица - Типы документов" Margin="0,0,0,10"/>
+                <RadioButton GroupName="Table" x:Name="rb9" Content="Таблица - Роль пользователей" Margin="0,0,0,10"/>
+                <RadioButton GroupName="Table" x:Name="rb10" Content="Таблица - Типы пользователей" Margin="0,0,0,10"/>
+                <RadioButton GroupName="Table" x:Name="rb11" Content="Таблица - Сроки документа" Margin="0,0,0,10"/>
             </StackPanel>
             <DataGrid Grid.Column="0" 
                       Visibility="{Binding ElementName=rb1, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -179,13 +179,13 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0"
-                       HorizontalAlignment="Center"
-                       Command="{Binding SaveCommand}"
-                       Content="Сохранить изменения"/>
+                    HorizontalAlignment="Center"
+                    Command="{Binding SaveCommand}"
+                    Content="Сохранить изменения"/>
             <Button Grid.Column="1"
-                       HorizontalAlignment="Center"
-                       Command="{Binding DeleteCommand}"
-                       Content="Удалить строку"/>
+                    HorizontalAlignment="Center"
+                    Command="{Binding DeleteCommand}"
+                    Content="Удалить строку"/>
         </Grid>
     </Grid>
 </UserControl>

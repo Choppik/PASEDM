@@ -1,22 +1,19 @@
 ﻿using PASEDM.Data;
 using PASEDM.Models;
-using PASEDM.Services;
 using PASEDM.Services.PASEDMProviders;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using PASEDM.Store;
 using PASEDM.ViewModels.Base;
 using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace PASEDM.ViewModels
 {
     public class ReferencesViewModel : BaseViewModels
     {
+        #region Переменные и свойства
         private readonly PASEDMDbContextFactory _contextFactory;
         private readonly UserStore _userStore;
 
@@ -184,6 +181,7 @@ namespace PASEDM.ViewModels
             {
                 _currentDocTypes = value;
                 OnPropertyChanged(nameof(CurrentDocTypes));
+                OnPropertyChanged(nameof(DocTypes));
             }
         }
         public Case CurrentCase
@@ -196,6 +194,7 @@ namespace PASEDM.ViewModels
             {
                 _currentCase = value;
                 OnPropertyChanged(nameof(CurrentCase));
+                OnPropertyChanged(nameof(Cases));
             }
         }
         public Employee CurrentEmployee
@@ -208,6 +207,7 @@ namespace PASEDM.ViewModels
             {
                 _currentEmployee = value;
                 OnPropertyChanged(nameof(CurrentEmployee));
+                OnPropertyChanged(nameof(Employee));
             }
         }
         public Deadlines CurrentTerm
@@ -220,6 +220,7 @@ namespace PASEDM.ViewModels
             {
                 _currentTerm = value;
                 OnPropertyChanged(nameof(CurrentTerm));
+                OnPropertyChanged(nameof(Deadlines));
             }
         }
         public TaskStages CurrentTaskStages
@@ -232,6 +233,7 @@ namespace PASEDM.ViewModels
             {
                 _currentTaskStages = value;
                 OnPropertyChanged(nameof(CurrentTaskStages));
+                OnPropertyChanged(nameof(TaskStages));
             }
         }
         public DocStages CurrentDocStages
@@ -244,6 +246,7 @@ namespace PASEDM.ViewModels
             {
                 _currentDocStages = value;
                 OnPropertyChanged(nameof(CurrentDocStages));
+                OnPropertyChanged(nameof(DocStages));
             }
         }
         public Division CurrentDivision
@@ -256,6 +259,7 @@ namespace PASEDM.ViewModels
             {
                 _currentDivisions = value;
                 OnPropertyChanged(nameof(CurrentDivision));
+                OnPropertyChanged(nameof(Divisions));
             }
         }
         public AccessRights CurrentAccessRights
@@ -268,6 +272,7 @@ namespace PASEDM.ViewModels
             {
                 _currentAccessRights = value;
                 OnPropertyChanged(nameof(CurrentAccessRights));
+                OnPropertyChanged(nameof(AccessRights));
             }
         }
         public Role CurrentRole
@@ -280,6 +285,7 @@ namespace PASEDM.ViewModels
             {
                 _currentRole = value;
                 OnPropertyChanged(nameof(CurrentRole));
+                OnPropertyChanged(nameof(Role));
             }
         }
         public TypeUser CurrentTypeUser
@@ -291,6 +297,7 @@ namespace PASEDM.ViewModels
             set
             {
                 _currentTypeUser = value;
+                OnPropertyChanged(nameof(CurrentTypeUser));
                 OnPropertyChanged(nameof(CurrentTypeUser));
             }
         }
@@ -322,13 +329,12 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(DeleteCommand));
             }
         }
-
+        #endregion
 
         public ReferencesViewModel(PASEDMDbContextFactory contextFactory, UserStore userStore)
         {
             _contextFactory = contextFactory;
             _userStore = userStore;
-
 
             GetSecrecyStamps();
             GetCases();
@@ -341,9 +347,8 @@ namespace PASEDM.ViewModels
             GetRole();
             GetAccessRights();
             GetTypeUser();
-
-
         }
+        #region Методы
         private async void GetSecrecyStamps()
         {
             try
@@ -542,5 +547,6 @@ namespace PASEDM.ViewModels
                 MessageBox.Show("Потеряно соединение с БД", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        #endregion
     }
 }
