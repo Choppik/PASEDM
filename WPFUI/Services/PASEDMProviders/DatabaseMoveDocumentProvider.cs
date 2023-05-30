@@ -18,10 +18,6 @@ namespace PASEDM.Services.PASEDMProviders
         {
             _dbContextFactory = dbContextFactory;
         }
-        public async Task DeleteMoveDocument(MoveDocument moveDocument)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<IEnumerable<MoveDocument>> GetAllMoveDocument(User user)
         {
@@ -59,6 +55,25 @@ namespace PASEDM.Services.PASEDMProviders
                 user,
                 document
                 );
+        }
+
+        public async Task DeleteMoveDocument(MoveDocument moveDocument)
+        {
+            using (PASEDMContext context = _dbContextFactory.CreateDbContext())
+            {
+                try
+                {
+                    MoveDocumentDTO moveDocumentDTO = await context.MoveDocuments
+                        .Where(x => x.ID == moveDocument.Id)
+                        .FirstOrDefaultAsync();
+
+                    if (moveDocumentDTO != null) context.MoveDocuments.Remove(moveDocumentDTO);
+                }
+                finally
+                {
+                    await context.SaveChangesAsync();
+                }
+            }
         }
     }
 }

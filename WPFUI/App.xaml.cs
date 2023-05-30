@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using PASEDM.Data;
 using PASEDM.Services.FTPClient;
 using Microsoft.Win32;
+using Microsoft.Extensions.Hosting;
 
 namespace PASEDM
 {
@@ -18,13 +19,15 @@ namespace PASEDM
         private const string CONNECTION_FTP_SERVER = "ftp://192.168.1.1/";
         private const string USER_FTP_SERVER = "us";
         private const string PASSWORD_FTP_SERVER = "1";
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IHost _host;
+
 
         public App()
         {
             #region Зависимости
-            IServiceCollection services = new ServiceCollection();
 
+            _host = Host.CreateDefaultBuilder().ConfigureServices(services =>
+            {
             services.AddSingleton<NavigationStore>();
             services.AddSingleton<ModalNavigationStore>();
             services.AddSingleton<UserStore>();
@@ -85,28 +88,35 @@ namespace PASEDM
             {
                 DataContext = s.GetRequiredService<MainWindowViewModel>()
             });
-
-            _serviceProvider = services.BuildServiceProvider();
+            }).Build();
             #endregion
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            DbContextOptions options = new DbContextOptionsBuilder().UseSqlServer(CONNECTION_STRING).Options;
-            using (PASEDMContext dbContext = new(options))
+            _host.Start();
+
+            //DbContextOptions options = new DbContextOptionsBuilder().UseSqlServer(CONNECTION_STRING).Options;
+            PASEDMDbContextFactory options = _host.Services.GetRequiredService<PASEDMDbContextFactory>();
+            using (PASEDMContext dbContext = options.CreateDbContext())
             {
                 //dbContext.Database.EnsureDeleted();
                 //dbContext.Database.EnsureCreated();
                 dbContext.Database.Migrate();
             }
 
-            INavigationService initialNavigationService = _serviceProvider.GetRequiredService<INavigationService>();
+            INavigationService initialNavigationService = _host.Services.GetRequiredService<INavigationService>();
             initialNavigationService.Navigate();
 
-            MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
 
             base.OnStartup(e);
+        }
+        protected override void OnExit(ExitEventArgs e)
+        {
+            _host.Dispose();
+            base.OnExit(e);
         }
 
         private static INavigationService CreateUserNewNavigationService(IServiceProvider serviceProvider)

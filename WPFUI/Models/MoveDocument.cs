@@ -48,5 +48,9 @@ namespace PASEDM.Models
         {
             return _moveDocumentProvider.GetAllMoveDocument(user);
         }
+        public async Task DeleteMoveDocument(MoveDocument moveDocument)
+        {
+            await _moveDocumentProvider.DeleteMoveDocument(moveDocument);
+        }
     }
 }

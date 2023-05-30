@@ -11,7 +11,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -199,6 +198,19 @@ namespace PASEDM.ViewModels
             GetDeadlines();
             GetDocStages();
             GetSecrecyStamps();
+
+            if (myDocumentsViewModel.CurrentMoveDocument.Id != null)
+            {
+                _docRegistrationNumber = myDocumentsViewModel.CurrentMoveDocument.Document.RegistrationNumber;
+                _summary = myDocumentsViewModel.CurrentMoveDocument.Document.Summary;
+                _filePath = myDocumentsViewModel.CurrentMoveDocument.Document.Path;
+                _docName = myDocumentsViewModel.CurrentMoveDocument.Document.NameDoc;
+                _dateOfFormationDocument = myDocumentsViewModel.CurrentMoveDocument.Document.DateCreateDoc;
+                CurrentDocStages = myDocumentsViewModel.CurrentMoveDocument.Document.DocStages;
+                CurrentDocTypes = myDocumentsViewModel.CurrentMoveDocument.Document.DocumentTypes;
+                CurrentSecrecyStamp = myDocumentsViewModel.CurrentMoveDocument.Document.SecrecyStamp;
+                CurrentTerm = myDocumentsViewModel.CurrentMoveDocument.Document.Term;
+            }
 
             NavigateRefundCommand = new NavigateCommand(navigationService);
             AddDocCommand = new AddDocCommand(this, contextFactory, navigationService);

@@ -43,8 +43,8 @@ namespace PASEDM.ViewModels
             {
                 _currentMoveDocument = value;
                 OnPropertyChanged(nameof(CurrentMoveDocument));
-                //EditCommand();
-                //DeleteCommand();
+                EditCommand();
+                DeleteCommand();
                 IsActive = true;
             }
         }
@@ -100,8 +100,8 @@ namespace PASEDM.ViewModels
             NavigateAddDocCommand = new NavigateCommand(navigationAddDocService);
             GetMoveDoc();
         }
-        //private ICommand EditCommand() => NavigateEditDocCommand = new NavigateIncEditCardCommand(this, _parameterNavigationService);
-        //private ICommand DeleteCommand() => DeleteDocumentCommand = new DeleteCardCommand(_currentMoveDocument, _contextFactory, _navigationService);
+        private ICommand EditCommand() => NavigateEditDocCommand = new NavigateEditDocCommand(this, _parameterNavigationService);
+        private ICommand DeleteCommand() => DeleteDocumentCommand = new DeleteDocCommand(_currentMoveDocument, _contextFactory, _navigationService);
         private async void GetMoveDoc()
         {
             try
