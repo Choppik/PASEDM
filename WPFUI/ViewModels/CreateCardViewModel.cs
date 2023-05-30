@@ -82,6 +82,7 @@ namespace PASEDM.ViewModels
             {
                 _isCheckedTask = value;
                 OnPropertyChanged(nameof(IsCheckedTask));
+                ClearErrors(nameof(CurrentTask));
             }
         }
 
@@ -123,6 +124,12 @@ namespace PASEDM.ViewModels
             {
                 _currentDocTypes = value;
                 OnPropertyChanged(nameof(CurrentDocTypes));
+                ClearErrors(nameof(CurrentDocTypes));
+
+                if (CurrentDocTypes == null)
+                {
+                    AddErrors("Необходимо выбрать значение из списка", nameof(CurrentDocTypes));
+                }
             }
         }
         public Case CurrentCase
@@ -135,6 +142,12 @@ namespace PASEDM.ViewModels
             {
                 _currentCase = value;
                 OnPropertyChanged(nameof(CurrentCase));
+                ClearErrors(nameof(CurrentCase));
+
+                if (CurrentCase == null)
+                {
+                    AddErrors("Необходимо выбрать значение из списка", nameof(CurrentCase));
+                }
             }
         }
         public User CurrentRecipient
@@ -147,6 +160,12 @@ namespace PASEDM.ViewModels
             {
                 _currentRecipient = value;
                 OnPropertyChanged(nameof(CurrentRecipient));
+                ClearErrors(nameof(CurrentRecipient));
+
+                if (CurrentRecipient == null)
+                {
+                    AddErrors("Необходимо выбрать значение из списка", nameof(CurrentRecipient));
+                }
             }
         }
         public Employee CurrentExecutor
@@ -159,6 +178,12 @@ namespace PASEDM.ViewModels
             {
                 _currentExecutor = value;
                 OnPropertyChanged(nameof(CurrentExecutor));
+                ClearErrors(nameof(CurrentExecutor));
+
+                if (CurrentExecutor == null)
+                {
+                    AddErrors("Необходимо выбрать значение из списка", nameof(CurrentExecutor));
+                }
             }
         }
         public Deadlines CurrentTerm
@@ -171,6 +196,12 @@ namespace PASEDM.ViewModels
             {
                 _currentTerm = value;
                 OnPropertyChanged(nameof(CurrentTerm));
+                ClearErrors(nameof(CurrentTerm));
+
+                if (CurrentTerm == null)
+                {
+                    AddErrors("Необходимо выбрать значение из списка", nameof(CurrentTerm));
+                }
             }
         }
         public SecrecyStamps CurrentSecrecyStamp
@@ -183,6 +214,12 @@ namespace PASEDM.ViewModels
             {
                 _currentSecrecyStamp = value;
                 OnPropertyChanged(nameof(CurrentSecrecyStamp));
+                ClearErrors(nameof(CurrentSecrecyStamp));
+
+                if (CurrentSecrecyStamp == null)
+                {
+                    AddErrors("Необходимо выбрать значение из списка", nameof(CurrentSecrecyStamp));
+                }
             }
         }
         public TaskStages CurrentTaskStages
@@ -195,6 +232,12 @@ namespace PASEDM.ViewModels
             {
                 _currentTaskStages = value;
                 OnPropertyChanged(nameof(CurrentTaskStages));
+                ClearErrors(nameof(CurrentTaskStages));
+
+                if (CurrentTaskStages == null)
+                {
+                    AddErrors("Необходимо выбрать значение из списка", nameof(CurrentTaskStages));
+                }
             }
         }
         public DocStages CurrentDocStages
@@ -207,6 +250,12 @@ namespace PASEDM.ViewModels
             {
                 _currentDocStages = value;
                 OnPropertyChanged(nameof(CurrentDocStages));
+                ClearErrors(nameof(CurrentDocStages));
+
+                if (CurrentDocStages == null)
+                {
+                    AddErrors("Необходимо выбрать значение из списка", nameof(CurrentDocStages));
+                }
             }
         }
 
@@ -238,6 +287,12 @@ namespace PASEDM.ViewModels
             {
                 _docRegistrationNumber = value;
                 OnPropertyChanged(nameof(RegistrationNumber));
+                ClearErrors(nameof(RegistrationNumber));
+
+                if (RegistrationNumber == null)
+                {
+                    AddErrors("Необходимо ввести значение", nameof(RegistrationNumber));
+                }
             }
         }
         public int NumberCard
@@ -250,6 +305,12 @@ namespace PASEDM.ViewModels
             {
                 _numberCard = value;
                 OnPropertyChanged(nameof(NumberCard));
+                ClearErrors(nameof(NumberCard));
+
+                if (NumberCard == null)
+                {
+                    AddErrors("Необходимо ввести значение", nameof(NumberCard));
+                }
             }
         }
         public string NameCard
@@ -262,6 +323,12 @@ namespace PASEDM.ViewModels
             {
                 _nameCard = value;
                 OnPropertyChanged(nameof(NameCard));
+                ClearErrors(nameof(NameCard));
+
+                if (NameCard == null)
+                {
+                    AddErrors("Необходимо ввести текст", nameof(NameCard));
+                }
             }
         }
         public string Comment
@@ -298,6 +365,12 @@ namespace PASEDM.ViewModels
             {
                 _summary = value;
                 OnPropertyChanged(nameof(Summary));
+                ClearErrors(nameof(Summary));
+
+                if (Summary == null)
+                {
+                    AddErrors("Необходимо ввести текст", nameof(Summary));
+                }
             }
         }
         public string NameTask
@@ -310,6 +383,12 @@ namespace PASEDM.ViewModels
             {
                 _nameTask = value;
                 OnPropertyChanged(nameof(NameTask));
+                ClearErrors(nameof(NameTask));
+
+                if (NameTask == null)
+                {
+                    AddErrors("Необходимо ввести текст", nameof(NameTask));
+                }
             }
         }
         public string ContentTask
@@ -322,6 +401,12 @@ namespace PASEDM.ViewModels
             {
                 _contentTask = value;
                 OnPropertyChanged(nameof(ContentTask));
+                ClearErrors(nameof(ContentTask));
+
+                if (ContentTask == null)
+                {
+                    AddErrors("Необходимо ввести текст", nameof(ContentTask));
+                }
             }
         }
         public string FilePath

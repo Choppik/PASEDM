@@ -53,13 +53,15 @@ namespace PASEDM.Services.PASEDMProviders
                     return null;
                 }
 
-                return cardDTO.Select(u => ToTasksExecutor(u)).DistinctBy(u => u.TaskID);
+                return cardDTO.Select(u => ToTasksExecutor(u)).DistinctBy(u => u.Task.Id);
             }
         }
 
         private Card ToTasksExecutor(CardDTO dto)
         {
-            return new Card(dto.ID, dto.TaskID, dto.Task.NameTask, dto.Task.Contents, dto.Task.TaskStages.TaskStages);
+            TaskStages taskStage = new(dto.Task.TaskStages.ID, dto.Task.TaskStages.TaskStages, dto.Task.TaskStages.TaskStagesValue);
+            Tasks tasks = new (dto.Task.ID, dto.Task.NameTask, taskStage);
+            return new Card(dto.ID, tasks);
         }
     }
 }

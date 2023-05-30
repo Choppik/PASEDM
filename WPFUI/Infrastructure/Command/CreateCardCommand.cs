@@ -103,7 +103,6 @@ namespace PASEDM.Infrastructure.Command
                 _filePath = "...filePath";
                 _documentType = _createCardViewModel.CurrentDocTypes;
                 _term = _createCardViewModel.CurrentTerm;
-
                 _task = _createCardViewModel.CurrentTask;
                 _taskStages = _createCardViewModel.CurrentTaskStages;
                 _nameTask = _createCardViewModel.NameTask;
@@ -124,15 +123,15 @@ namespace PASEDM.Infrastructure.Command
 
                 if (_createCardViewModel.IsCheckedTask)
                 {
-                    await tasks.EditTask(new(_task.Id, _task.NameTask, _task.Contents, _taskStages));
-                    await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB.Id, _documentType.Id, _task.Id, _case.Id, _executor.Id, _createCardUser.Id, recipientDB.Id));
+                    if (_task != null) await tasks.EditTask(new(_task.Id, _task.NameTask, _task.Contents, _taskStages));
+                    await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB, _documentType, _task, _case, _executor, _createCardUser, recipientDB));
                 }
                 else
                 {
                     await tasks.AddTask(new(_nameTask, _contentTask, _taskStages));
                     var taskDB = await tasks.GetTask(new(_nameTask, _contentTask, _taskStages));
 
-                    await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB.Id, _documentType.Id, taskDB.Id, _case.Id, _executor.Id, _createCardUser.Id, recipientDB.Id));
+                    await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB, _documentType, taskDB, _case, _executor, _createCardUser, recipientDB));
                 }
 
                 var cardDB = await card.GetCard(new(_dateOfFormation));

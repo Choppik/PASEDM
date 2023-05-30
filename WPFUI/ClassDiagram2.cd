@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="PASEDM.Models.AccessRights">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACACQgAAAAEAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AccessRights.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PASEDM.Models.Card">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AEICABAEEgAKQAAEBAAAAAgEQAgACSAAAAAAABAAQAA=</HashCode>
+      <FileName>Models\Card.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PASEDM.Models.Case">
+    <Position X="8" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgIAAEEAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Case.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PASEDM.Models.Deadlines">
+    <Position X="17.75" Y="2.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAGAAAAAAAAAAAEAAAAAAAAAAAAAAAAECAAAAAgAAA=</HashCode>
+      <FileName>Models\Deadlines.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PASEDM.Models.Division">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAACAAAIEAAAAAAAQAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Division.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PASEDM.Models.DocStages">
+    <Position X="3" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AEACAAAAAAAAAAgEAAAAAACAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Models\DocStages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PASEDM.Models.Document">
+    <Position X="7.25" Y="4.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AoCCABAAAAAAAAIEAAAIAAiAAAAAAEAAEAAABAABQAA=</HashCode>
+      <FileName>Models\Document.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PASEDM.Models.DocumentTypes">
+    <Position X="18" Y="5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAIAAAAAAEAAAAAAQAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DocumentTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PASEDM.Models.Employee">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAIAEAAAAAEAAAQAAAAAAAAAAgQgABAA=</HashCode>
+      <FileName>Models\Employee.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="AccessRights" />
+      <Property Name="DivisionName" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PASEDM.Models.MoveCard">
+    <Position X="12.5" Y="1" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AgBiARAUAAQAwASAAAgAAAAEAAAAhyACAAEIEAgIAAA=</HashCode>
+      <FileName>Models\MoveCard.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Deadlines" />
+      <Property Name="DocumentTypes" />
+      <Property Name="Document" />
+      <Property Name="DocStages" />
+      <Property Name="Executor" />
+      <Property Name="Recipient" />
+      <Property Name="SecrecyStamps" />
+      <Property Name="Tasks" />
+      <Property Name="TaskStages" />
+      <Property Name="Cases" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PASEDM.Models.MoveDocument">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>gAADAAAAAAAAAACAAAAAAAAAAAAAAAACAACAAIAAAAA=</HashCode>
+      <FileName>Models\MoveDocument.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Document" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PASEDM.Models.Role">
+    <Position X="14.5" Y="6.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACEAAAAAAAAAAEAAAAAAAAAAAAAAAkAAAAgAAAAAA=</HashCode>
+      <FileName>Models\Role.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PASEDM.Models.SecrecyStamps">
+    <Position X="10.75" Y="6.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAMAAAAAAAAAAAACAAgAAAABAAAAAA=</HashCode>
+      <FileName>Models\SecrecyStamps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PASEDM.Models.Tasks">
+    <Position X="15.5" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACQDgAAAACAAAEAAAAAABAgAAACAAAAAAAAABAAAA=</HashCode>
+      <FileName>Models\Tasks.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TaskStage" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PASEDM.Models.TaskStages">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAABAAAEAAAAAAAABAAAAAAAAAgAAAAAACA=</HashCode>
+      <FileName>Models\TaskStages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PASEDM.Models.User">
+    <Position X="5" Y="6.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>CABCCAAAAAAgAQAEEAAAAYCACAAAAAAiEwAAAAEAAAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Role" />
+      <Property Name="Employee" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

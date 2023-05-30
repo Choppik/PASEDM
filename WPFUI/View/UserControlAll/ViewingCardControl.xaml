@@ -10,64 +10,80 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <Style TargetType="Button" BasedOn="{StaticResource Button_Style}"></Style>
-        <Style TargetType="TextBox" BasedOn="{StaticResource TextBox_Style}"></Style>
-        <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockDefault_Style}"></Style>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockDefault_Style}">
+            <Setter Property="Margin" Value="5"></Setter>
+        </Style>
     </UserControl.Resources>
-    
+
     <ScrollViewer>
-
-           
-
+        <StackPanel>
+            <TextBlock Style="{StaticResource TextBlockTitle_Style}"
+                       Margin="10,10,0,0"
+                   Text="Просмотр карты" 
+                   HorizontalAlignment="Left" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0">
-                <Grid>
+                <StackPanel Margin="10" Grid.Column="0">
                     <TextBlock Text="Название регистрационной карты: " />
-                <TextBlock Text="Номер регистрационной карты: " />
-                <TextBlock Text="Документ:" />
-                <TextBlock Text="Регистрационный номер документа:"/>
-                <TextBlock Text="Дата создания документа:"/>
-                <TextBlock  Text="Состояние исполнения документа:" />
-                <TextBlock  Text="Срок исполнения документа:" />
-                <TextBlock Text="Краткое содержание документа" />
-                <TextBlock  Text="Гриф секретности" />
-                <TextBlock Text="Вид документа" />
-                <TextBlock Text="Задача" />
-                <TextBlock Text="Состояние задачи" />
-                <TextBlock  Text="Исполнитель задачи" />
-                <TextBlock  Text="Дело N" />
-                <TextBlock  Text="Получатель" />
-                <TextBlock Text="Комментарий" />
-                <TextBlock   Text="Карту формирует: " />
-                <TextBlock  Text="Создана: " />
-                </Grid>
-            </StackPanel>
+                    <TextBlock Text="Номер регистрационной карты: " />
+                    <TextBlock Text="Регистрационный номер документа: "/>
+                    <TextBlock Text="Дата создания документа: "/>
+                    <TextBlock Text="Состояние исполнения документа: "/>
+                    <TextBlock Text="Срок исполнения документа: "/>
+                    <TextBlock Text="Краткое содержание документа: "/>
+                    <TextBlock Text="Гриф секретности: "/>
+                    <TextBlock Text="Вид документа: "/>
+                    <TextBlock Text="Задача: "/>
+                    <TextBlock Text="Состояние задачи: "/>
+                    <TextBlock Text="Описание задачи: "/>
+                    <TextBlock Text="Исполнитель задачи: "/>
+                    <TextBlock Text="Дело N: "/>
+                    <TextBlock Text="Описание дела: "/>
+                    <TextBlock Text="Комментарий: "/>
+                    <TextBlock Text="Карту прислал: "/>
+                    <TextBlock Text="Создана: "/>
+                    <TextBlock Text="Документ: "/>
+                </StackPanel>
 
-            <StackPanel Grid.Column="1">
-                <Grid>
-                    <TextBlock Text="{Binding CurrentSecrecyStamp.NameSecrecyStamp}" />
-                <TextBlock Text="{Binding NameCard}"/>
-                <TextBlock Text="{Binding NumberCard}"/>
-                <TextBlock Text="{Binding Summary}"/>
+                <StackPanel Margin="10" Grid.Column="1">
+                    <TextBlock Text="{Binding NameCard}"/>
+                    <TextBlock Text="{Binding NumberCard}"/>
+                    <TextBlock Text="{Binding RegistrationNumber}"/>
+                    <TextBlock Text="{Binding DateOfFormationDocument}"/>
+                    <TextBlock Text="{Binding CurrentDocStages}" />
                     <TextBlock Text="{Binding CurrentTerm.Term}" />
-                <TextBlock Text="{Binding Document}" />
-                <TextBlock Text="{Binding CurrentTask.NameTask}" />
-                <TextBlock Text="{Binding CurrentDocTypes.Name}" />
-                <TextBlock  Text="{Binding CurrentDocStages}" />
-                <TextBlock Text="{Binding DateOfFormationDocument}"/>
-            <TextBlock Text="{Binding CurrentCase.NumberCase}" />
-            <TextBlock Text="{Binding CurrentExecutor.FullName}" />
-            <TextBlock Text="{Binding CurrentTaskStages.NameTaskStage}" />
-            <TextBlock Text="{Binding CurrentRecipient.UserName}" />
-                <TextBlock Text="{Binding Comment}"/>
-                <TextBlock Text="{Binding RegistrationNumber}"/>
-                <TextBlock  Text="{Binding UserCreateCard}" />
-                <TextBlock Text="{Binding DateOfFormation, Mode=OneWay}"/>
-                </Grid>
-            </StackPanel>
+                    <TextBlock Text="{Binding Summary}"/>
+                    <TextBlock Text="{Binding CurrentSecrecyStamp.NameSecrecyStamp}" />
+                    <TextBlock Text="{Binding CurrentDocTypes.Name}" />
+                    <TextBlock Text="{Binding CurrentTask.NameTask}" />
+                    <TextBlock Text="{Binding CurrentTaskStages.NameTaskStage}" />
+                    <TextBlock Text="{Binding CurrentTask.Contents}" />
+                    <TextBlock Text="{Binding CurrentExecutor.FullName}" />
+                    <TextBlock Text="{Binding CurrentCase.NumberCase}" />
+                    <TextBlock Text="{Binding CurrentCase.Description}" />
+                    <TextBlock Text="{Binding Comment}"/>
+                    <TextBlock Text="{Binding UserCreateCard}" />
+                    <TextBlock Text="{Binding DateOfFormation}"/>
+                    <TextBlock Text="{Binding Document}"/>
+                </StackPanel>
             </Grid>
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                       HorizontalAlignment="Center"
+                       Command="{Binding DownloadFileCommand}"
+                       Content="Скачать документ" />
+                <Button Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       Command="{Binding NavigateRefundCommand}"
+                       Content="Отмена" />
+            </Grid>
+        </StackPanel>
     </ScrollViewer>
 </UserControl>

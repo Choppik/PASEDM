@@ -39,12 +39,12 @@ namespace PASEDM.Services.PASEDMCreator
                 NameCard = card.NameCard,
                 Comment = card.Comment,
                 DateOfFormation = card.DateOfFormation,
-                DocumentID = card.DocumentID,
-                TaskID = card.TaskID,
-                CaseID = card.CaseID,
-                EmployeeID = card.EmployeeID,
-                UserID = card.UserID,
-                RecipientID = card.RecipientID
+                DocumentID = card.Document.Id,
+                TaskID = card.Task.Id,
+                CaseID = card.Case.Id,
+                EmployeeID = card.Employee.Id,
+                UserID = card.User.Id,
+                RecipientID = card.Recipient.Id,
             };
         }
     }

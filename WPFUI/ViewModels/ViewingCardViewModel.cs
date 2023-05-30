@@ -5,6 +5,8 @@ using PASEDM.Store;
 using PASEDM.ViewModels.Base;
 using System.Xml.Linq;
 using System;
+using PASEDM.Infrastructure.Command;
+using System.Windows.Input;
 
 namespace PASEDM.ViewModels
 {
@@ -37,6 +39,7 @@ namespace PASEDM.ViewModels
         private string _docName = "text";
         private string _nameTask;
         private string _contentTask;
+        private string _userCreateCard;
         public Tasks CurrentTask
         {
             get
@@ -168,7 +171,18 @@ namespace PASEDM.ViewModels
 
         public User CurrentUser => _userStore.CurrentUser;
 
-        public string UserCreateCard => CurrentUser.UserName;
+        public string UserCreateCard
+        {
+            get
+            {
+                return _userCreateCard;
+            }
+            set
+            {
+                _userCreateCard = value;
+                OnPropertyChanged(nameof(UserCreateCard));
+            }
+        }
 
         public int RegistrationNumber
         {
@@ -278,6 +292,8 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(FilePath));
             }
         }
+        public ICommand NavigateRefundCommand { get; }
+
         public ViewingCardViewModel(
             IncomingViewModel incomingViewModel,
             INavigationService navigationService,
@@ -287,6 +303,30 @@ namespace PASEDM.ViewModels
             _contextFactory = deferredContextFactory;
             _userStore = userStore;
             _navigationService = navigationService;
+
+            if (incomingViewModel.CurrentMoveUser.CardID != null)
+            {
+                _nameCard = incomingViewModel.CurrentMoveUser.NameCard;
+                _docRegistrationNumber = incomingViewModel.CurrentMoveUser.Document.RegistrationNumber;
+                _numberCard = incomingViewModel.CurrentMoveUser.NumberCard;
+                _summary = incomingViewModel.CurrentMoveUser.Document.Summary;
+                _comment = incomingViewModel.CurrentMoveUser.Comment;
+                _filePath = incomingViewModel.CurrentMoveUser.Document.Path;
+                _docName = incomingViewModel.CurrentMoveUser.Document.NameDoc;
+                _dateOfFormation = incomingViewModel.CurrentMoveUser.DateOfFormation;
+                _dateOfFormationDocument = incomingViewModel.CurrentMoveUser.Document.DateCreateDoc;
+                CurrentTask = incomingViewModel.CurrentMoveUser.Tasks;
+                CurrentTaskStages = incomingViewModel.CurrentMoveUser.TaskStages;
+                CurrentCase = incomingViewModel.CurrentMoveUser.Cases;
+                CurrentDocStages = incomingViewModel.CurrentMoveUser.DocStages;
+                CurrentDocTypes = incomingViewModel.CurrentMoveUser.DocumentTypes;
+                CurrentExecutor = incomingViewModel.CurrentMoveUser.Executor;
+                CurrentSecrecyStamp = incomingViewModel.CurrentMoveUser.SecrecyStamps;
+                CurrentTerm = incomingViewModel.CurrentMoveUser.Deadlines;
+                CurrentRecipient = incomingViewModel.CurrentMoveUser.Recipient;
+                UserCreateCard = incomingViewModel.CurrentMoveUser.Sender;
+            }
+            NavigateRefundCommand = new NavigateCommand(navigationService);
         }
     }
 }
