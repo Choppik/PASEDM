@@ -22,9 +22,9 @@
         <ListView Grid.Row="1" ItemsSource="{Binding Card}" SelectedItem="{Binding CurrentCard}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Задача" DisplayMemberBinding="{Binding NameTask}"/>
-                    <GridViewColumn Header="Содержание" DisplayMemberBinding="{Binding Content}"/>
-                    <GridViewColumn Header="Стадия исполнения" DisplayMemberBinding="{Binding TaskStage}"/>
+                    <GridViewColumn Header="Задача" DisplayMemberBinding="{Binding Task.NameTask}"/>
+                    <GridViewColumn Header="Содержание" DisplayMemberBinding="{Binding Task.Contents}"/>
+                    <GridViewColumn Header="Стадия исполнения" DisplayMemberBinding="{Binding Task.TaskStage.NameTaskStage}"/>
                 </GridView>
             </ListView.View>
         </ListView>

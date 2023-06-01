@@ -20,7 +20,7 @@ namespace PASEDM.Infrastructure.Command
 
         private int _docRegistrationNumber;
         private string _summary;
-        private string _filePath;
+        private byte[] _file;
         private string _docName;
 
         private Deadlines _term;
@@ -58,12 +58,12 @@ namespace PASEDM.Infrastructure.Command
             _summary = _addDocViewModel.Summary;
             _docStages = _addDocViewModel.CurrentDocStages;
             _secrecyStamps = _addDocViewModel.CurrentSecrecyStamp;
-            _filePath = "...filePath";
+            //_file = ;
             _documentType = _addDocViewModel.CurrentDocTypes;
             _term = _addDocViewModel.CurrentTerm;
 
-            await document.AddDoc(new(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _filePath, _term, _secrecyStamps, _docStages, _documentType));
-            var docDB = await document.GetDoc(new(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _filePath, _term, _secrecyStamps, _docStages, _documentType));
+            await document.AddDoc(new(_docName, _docRegistrationNumber, _summary, _file, _term, _secrecyStamps, _docStages, _documentType));
+            var docDB = await document.GetDoc(new(_docName, _docRegistrationNumber, _summary, _file, _term, _secrecyStamps, _docStages, _documentType));
             await moveDocument.AddMoveDocument(new(_addDocViewModel.CurrentUser, docDB));
 
             _navigationService.Navigate();

@@ -38,18 +38,17 @@ namespace PASEDM.Services.PASEDMProviders
             DocStages docStages = new(dto.DocStagesID, dto.DocStages.NameDocStage, dto.DocStages.DocStagesValue);
             Deadlines deadlines = new(dto.Term.ID, dto.Term.NameTerm, dto.Term.Term);
 
-            return new Document(dto.ID, dto.NameDoc, dto.RegistrationNumber, dto.DateCreateDoc, dto.Summary, dto.Path, deadlines, secrecyStamps, docStages, documentTypes);
+            return new Document(dto.ID, dto.NameDoc, dto.RegistrationNumber, dto.Summary, dto.File, deadlines, secrecyStamps, docStages, documentTypes);
         }
         public async Task<Document> GetDoc(Document document)
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
                 DocumentDTO docDTO = await context.Documents
-                    .Where(u => u.DateCreateDoc == document.DateCreateDoc
-                    && u.NameDoc == document.NameDoc
+                    .Where(u => u.NameDoc == document.NameDoc
                     && u.RegistrationNumber == document.RegistrationNumber
                     && u.Summary == document.Summary
-                    && u.Path == document.Path
+                    && u.File == document.File
                     && u.TermID == document.Term.Id
                     && u.SecrecyStampsID == document.SecrecyStamp.Id
                     && u.DocStagesID == document.DocStages.Id

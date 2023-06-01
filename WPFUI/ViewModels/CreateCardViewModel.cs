@@ -470,10 +470,9 @@ namespace PASEDM.ViewModels
                 _numberCard = outgoingViewModel.CurrentMoveUser.NumberCard;
                 _summary = outgoingViewModel.CurrentMoveUser.Document.Summary;
                 _comment = outgoingViewModel.CurrentMoveUser.Comment;
-                _filePath = outgoingViewModel.CurrentMoveUser.Document.Path;
+                //_filePath = outgoingViewModel.CurrentMoveUser.Document.File;
                 _docName = outgoingViewModel.CurrentMoveUser.Document.NameDoc;
                 _dateOfFormation = outgoingViewModel.CurrentMoveUser.DateOfFormation;
-                _dateOfFormationDocument = outgoingViewModel.CurrentMoveUser.Document.DateCreateDoc;
                 CurrentTask = outgoingViewModel.CurrentMoveUser.Tasks;
                 CurrentTaskStages = outgoingViewModel.CurrentMoveUser.TaskStages;
                 CurrentCase = outgoingViewModel.CurrentMoveUser.Cases;
@@ -491,10 +490,9 @@ namespace PASEDM.ViewModels
                 _numberCard = incomingViewModel.CurrentMoveUser.NumberCard;
                 _summary = incomingViewModel.CurrentMoveUser.Document.Summary;
                 _comment = incomingViewModel.CurrentMoveUser.Comment;
-                _filePath = incomingViewModel.CurrentMoveUser.Document.Path;
+                //_filePath = incomingViewModel.CurrentMoveUser.Document.File;
                 _docName = incomingViewModel.CurrentMoveUser.Document.NameDoc;
                 _dateOfFormation = incomingViewModel.CurrentMoveUser.DateOfFormation;
-                _dateOfFormationDocument = incomingViewModel.CurrentMoveUser.Document.DateCreateDoc;
                 CurrentTask = incomingViewModel.CurrentMoveUser.Tasks;
                 CurrentTaskStages = incomingViewModel.CurrentMoveUser.TaskStages;
                 CurrentCase = incomingViewModel.CurrentMoveUser.Cases;
@@ -508,7 +506,7 @@ namespace PASEDM.ViewModels
 
             NavigateRefundCommand = new NavigateCommand(navigationService); 
             CreateCardCommand = new CreateCardCommand(this, deferredContextFactory, navigationService);
-            AddDocCommand = new CommandAdd(OpenFile);
+            AddDocCommand = new CommandAdd();
         }
         private async void GetExecutors()
         {

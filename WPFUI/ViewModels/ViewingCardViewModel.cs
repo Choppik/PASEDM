@@ -311,10 +311,9 @@ namespace PASEDM.ViewModels
                 _numberCard = incomingViewModel.CurrentMoveUser.NumberCard;
                 _summary = incomingViewModel.CurrentMoveUser.Document.Summary;
                 _comment = incomingViewModel.CurrentMoveUser.Comment;
-                _filePath = incomingViewModel.CurrentMoveUser.Document.Path;
+                //_filePath = incomingViewModel.CurrentMoveUser.Document.File;
                 _docName = incomingViewModel.CurrentMoveUser.Document.NameDoc;
                 _dateOfFormation = incomingViewModel.CurrentMoveUser.DateOfFormation;
-                _dateOfFormationDocument = incomingViewModel.CurrentMoveUser.Document.DateCreateDoc;
                 CurrentTask = incomingViewModel.CurrentMoveUser.Tasks;
                 CurrentTaskStages = incomingViewModel.CurrentMoveUser.TaskStages;
                 CurrentCase = incomingViewModel.CurrentMoveUser.Cases;

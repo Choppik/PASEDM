@@ -1,121 +1,121 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="PASEDM.ViewModels.Base.BaseViewModels" Collapsed="true">
-    <Position X="39" Y="0.5" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.Base.BaseViewModels">
+    <Position X="41" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAABAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\Base\BaseViewModels.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="PASEDM.ViewModels.AccountConfirmationViewModel" Collapsed="true">
-    <Position X="38.25" Y="1.75" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.AccountConfirmationViewModel">
+    <Position X="39.75" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAACAAAIiAAAAAMMCAAQAIAAAAAIAgAAAAAAAAAAI=</HashCode>
       <FileName>ViewModels\AccountConfirmationViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PASEDM.ViewModels.AddDocViewModel" Collapsed="true">
-    <Position X="41.75" Y="1.75" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.AddDocViewModel">
+    <Position X="44" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gECEAQAAIIAEYUEBQAQCIAmIQggAiEliABFAAAABEEU=</HashCode>
       <FileName>ViewModels\AddDocViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PASEDM.ViewModels.CreateCardViewModel" Collapsed="true">
-    <Position X="45.5" Y="1.75" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.CreateCardViewModel">
+    <Position X="50" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gGiEUVgVEIANYUUpUAw3KAmIw0iAiWlqEBFIIUkhsGU=</HashCode>
       <FileName>ViewModels\CreateCardViewModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="PASEDM.ViewModels.IncomingViewModel" Collapsed="true">
-    <Position X="37.25" Y="3.25" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.IncomingViewModel">
+    <Position X="40.25" Y="10.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAACAIACAQCEAMIAAQBELAoCAAAEoCAAAAAACAAI=</HashCode>
       <FileName>ViewModels\IncomingViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PASEDM.ViewModels.JournalViewModel" Collapsed="true">
-    <Position X="39.25" Y="3.25" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.JournalViewModel">
+    <Position X="42" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AEAAAAEAAACAACCAAAABABAJAgAAAABABAAAAAAAAAI=</HashCode>
       <FileName>ViewModels\JournalViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PASEDM.ViewModels.LayoutViewModel" Collapsed="true">
-    <Position X="41.25" Y="3.25" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.LayoutViewModel">
+    <Position X="48.25" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EBAAEAEAACAAAIMBAECAABAACgAAAAAgCEAYAAAAACA=</HashCode>
       <FileName>ViewModels\LayoutViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PASEDM.ViewModels.MainWindowViewModel" Collapsed="true">
-    <Position X="43.25" Y="3.25" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.MainWindowViewModel">
+    <Position X="45.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAACAAIIAgEAAAAAAAAAAAABAAAAAAAAAAEAAAAA=</HashCode>
       <FileName>ViewModels\MainWindowViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PASEDM.ViewModels.MyDocumentsViewModel" Collapsed="true">
-    <Position X="35.25" Y="3.25" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.MyDocumentsViewModel">
+    <Position X="37.75" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAQAAgMAAACAAAABcIAAAAAIAgGAAAAgBIAAAAAAAAI=</HashCode>
+      <HashCode>gAQAAgMAAACAQAEBcIAAAAAIAgGAAAAgBIAAAAAAAAI=</HashCode>
       <FileName>ViewModels\MyDocumentsViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PASEDM.ViewModels.MyTasksViewModel" Collapsed="true">
-    <Position X="33.5" Y="3.25" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.MyTasksViewModel">
+    <Position X="33.75" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEBAAAAAAAABAAAAAAAAgABYAgAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\MyTasksViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PASEDM.ViewModels.NavigationBarViewModel" Collapsed="true">
-    <Position X="31.75" Y="3.25" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.NavigationBarViewModel">
+    <Position X="31.5" Y="10.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ADAABAAAACAAAIIBAECAAAQAAgAAAAAACEgAAAAAAKA=</HashCode>
       <FileName>ViewModels\NavigationBarViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PASEDM.ViewModels.NotificationsViewModel" Collapsed="true">
-    <Position X="31" Y="1.75" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.NotificationsViewModel">
+    <Position X="31.25" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAACAECAAAAAAABAIAgAAAAAEABAAIAASAAA=</HashCode>
       <FileName>ViewModels\NotificationsViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PASEDM.ViewModels.OutgoingViewModel" Collapsed="true">
-    <Position X="32.75" Y="1.75" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.OutgoingViewModel">
+    <Position X="33.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAgAgCAQAGAMIAAQAEJAgCAAAAoCAAAAAACAAI=</HashCode>
       <FileName>ViewModels\OutgoingViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PASEDM.ViewModels.ReferencesViewModel" Collapsed="true">
-    <Position X="34.5" Y="1.75" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.ReferencesViewModel">
+    <Position X="35.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>oEREUVEjBAAF4QEAMIAUAEsdSxCQCQkCCFFBCWlEEGE=</HashCode>
       <FileName>ViewModels\ReferencesViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PASEDM.ViewModels.SettingsViewModel" Collapsed="true">
-    <Position X="36.5" Y="1.75" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.SettingsViewModel">
+    <Position X="37.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AASAAAAACAAAAAAAABAAAAAIAAAAAIACAAAAAAAAAIA=</HashCode>
       <FileName>ViewModels\SettingsViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PASEDM.ViewModels.UserCreateViewModel" Collapsed="true">
-    <Position X="40" Y="1.75" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.UserCreateViewModel">
+    <Position X="46" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AASAAAAAACCBAQIAAAAAAAAICSAAAAACAQIAAAAAoIo=</HashCode>
       <FileName>ViewModels\UserCreateViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PASEDM.ViewModels.UserEntryViewModel" Collapsed="true">
-    <Position X="43.75" Y="1.75" Width="1.5" />
+  <Class Name="PASEDM.ViewModels.UserEntryViewModel">
+    <Position X="47.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAABAAAAAAAAAAAAAAAAQAAAAAAAACAQIAAAAAAAA=</HashCode>
       <FileName>ViewModels\UserEntryViewModel.cs</FileName>

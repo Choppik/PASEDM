@@ -25,7 +25,7 @@ namespace PASEDM.Infrastructure.Command
         private string _nameCard;
         private string _summary;
         private string _comment;
-        private string _filePath;
+        private byte[] _file;
         private string _docName;
         private string _nameTask;
         private string _contentTask;
@@ -100,7 +100,7 @@ namespace PASEDM.Infrastructure.Command
                 _summary = _createCardViewModel.Summary;
                 _docStages = _createCardViewModel.CurrentDocStages;
                 _secrecyStamps = _createCardViewModel.CurrentSecrecyStamp;
-                _filePath = "...filePath";
+                //_file = "...filePath";
                 _documentType = _createCardViewModel.CurrentDocTypes;
                 _term = _createCardViewModel.CurrentTerm;
                 _task = _createCardViewModel.CurrentTask;
@@ -115,8 +115,8 @@ namespace PASEDM.Infrastructure.Command
 
                 var _viewed = 0;
 
-                await document.AddDoc(new(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _filePath, _term, _secrecyStamps, _docStages, _documentType));
-                var docDB = await document.GetDoc(new(_docName, _docRegistrationNumber, _dateOfFormationDocument, _summary, _filePath, _term, _secrecyStamps, _docStages, _documentType));
+                await document.AddDoc(new(_docName, _docRegistrationNumber, _summary, _file, _term, _secrecyStamps, _docStages, _documentType));
+                var docDB = await document.GetDoc(new(_docName, _docRegistrationNumber, _summary, _file, _term, _secrecyStamps, _docStages, _documentType));
 
                 await recipient.AddRecipient(new(_recipient.Id));
                 var recipientDB = await recipient.GetRecipient(new(_recipient.Id));

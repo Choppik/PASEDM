@@ -10,5 +10,6 @@ namespace PASEDM.Services.PASEDMProviders.InterfaceProviders
         Task<IEnumerable<MoveCard>> GetAllMoveUserRecipient(MoveCard moveUser, User user);
         Task DeleteMoveCard(MoveCard moveUser);
         int GetCountViewedMoveCard(User user);
+        Task<IEnumerable<MoveCard>> GetAllMoveUser(MoveCard moveCard);
     }
 }

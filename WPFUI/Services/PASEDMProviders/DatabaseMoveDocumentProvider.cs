@@ -47,7 +47,7 @@ namespace PASEDM.Services.PASEDMProviders
             DocStages docStages = new(dto.Document.DocStagesID, dto.Document.DocStages.NameDocStage, dto.Document.DocStages.DocStagesValue);
             Deadlines deadlines = new(dto.Document.Term.ID, dto.Document.Term.NameTerm, dto.Document.Term.Term);
             DocumentTypes documentTypes = new(dto.Document.DocumentTypes.ID, dto.Document.DocumentTypes.Name);
-            Document document = new(dto.Document.ID, dto.Document.NameDoc, dto.Document.RegistrationNumber, dto.Document.DateCreateDoc, dto.Document.Summary, dto.Document.Path, deadlines, secrecyStamps, docStages, documentTypes);
+            Document document = new(dto.Document.ID, dto.Document.NameDoc, dto.Document.RegistrationNumber, dto.Document.Summary, dto.Document.File, deadlines, secrecyStamps, docStages, documentTypes);
             User user = new(dto.User.ID, dto.User.UserName);
 
             return new MoveDocument(

@@ -12,7 +12,7 @@ namespace PASEDM.Data.DTOs
         public int RegistrationNumber { get; set; }
         public DateTime DateCreateDoc { get; set; }
         public string Summary { get; set; }
-        public string Path { get; set; }
+        public byte[] File { get; set; }
         public int? TermID { get; set; }
         public TermDTO Term { get; set; }
         public int? SecrecyStampsID { get; set; }

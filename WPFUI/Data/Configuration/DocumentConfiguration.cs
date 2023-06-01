@@ -12,7 +12,6 @@ namespace PASEDM.Data.Configuration
             builder.Property(x => x.NameDoc).HasMaxLength(100);
             builder.Property(x => x.RegistrationNumber).HasMaxLength(20);
             builder.Property(x => x.Summary).HasMaxLength(200);
-            builder.Property(x => x.Path).HasMaxLength(200);
         }
     }
 }

@@ -28,66 +28,67 @@ namespace PASEDM
 
             _host = Host.CreateDefaultBuilder().ConfigureServices(services =>
             {
-            services.AddSingleton<NavigationStore>();
-            services.AddSingleton<ModalNavigationStore>();
-            services.AddSingleton<UserStore>();
-            services.AddSingleton<OpenFileDialog>();
+                services.AddSingleton<NavigationStore>();
+                services.AddSingleton<ModalNavigationStore>();
+                services.AddSingleton<UserStore>();
+                services.AddSingleton<OpenFileDialog>();
 
-            services.AddSingleton<CloseModalNavigationService>();
+                services.AddSingleton<CloseModalNavigationService>();
 
-            services.AddSingleton(s => new FtpClient(CONNECTION_FTP_SERVER, USER_FTP_SERVER, PASSWORD_FTP_SERVER));
+                services.AddSingleton(s => new FtpClient(CONNECTION_FTP_SERVER, USER_FTP_SERVER, PASSWORD_FTP_SERVER));
 
-            services.AddSingleton(s => new PASEDMDbContextFactory(CONNECTION_STRING));
+                services.AddSingleton(s => new PASEDMDbContextFactory(CONNECTION_STRING));
 
-            services.AddSingleton(s => CreateEntryUserNavigationService(s));
+                services.AddSingleton(s => CreateEntryUserNavigationService(s));
 
-            services.AddTransient(s => new UserEntryViewModel(
-                s.GetRequiredService<UserStore>(),
-                CreateNotificationsNavigationService(s),
-                CreateUserNewNavigationService(s),
-                s.GetRequiredService<PASEDMDbContextFactory>()));
+                services.AddTransient(s => new UserEntryViewModel(
+                    s.GetRequiredService<UserStore>(),
+                    CreateNotificationsNavigationService(s),
+                    CreateUserNewNavigationService(s),
+                    s.GetRequiredService<PASEDMDbContextFactory>()));
 
-            services.AddTransient(s => new UserCreateViewModel(
-                CreateEntryUserNavigationService(s),
-                s.GetRequiredService<PASEDMDbContextFactory>()));
+                services.AddTransient(s => new UserCreateViewModel(
+                    CreateEntryUserNavigationService(s),
+                    s.GetRequiredService<PASEDMDbContextFactory>()));
 
-            services.AddTransient(s => new NotificationsViewModel(
-                s.GetRequiredService<PASEDMDbContextFactory>(),
-                CreateIncomingNavigationService(s),
-                s.GetRequiredService<UserStore>()));
+                services.AddTransient(s => new NotificationsViewModel(
+                    s.GetRequiredService<PASEDMDbContextFactory>(),
+                    CreateIncomingNavigationService(s),
+                    s.GetRequiredService<UserStore>()));
 
-            services.AddTransient(s => new JournalViewModel(
-                s.GetRequiredService<UserStore>()));
+                services.AddTransient(s => new JournalViewModel(
+                    s.GetRequiredService<PASEDMDbContextFactory>(),
+                    s.GetRequiredService<UserStore>()));
 
-            services.AddTransient(s => new MyTasksViewModel(
-                s.GetRequiredService<PASEDMDbContextFactory>(),
-                s.GetRequiredService<UserStore>()));
+                services.AddTransient(s => new MyTasksViewModel(
+                    s.GetRequiredService<PASEDMDbContextFactory>(),
+                    s.GetRequiredService<UserStore>()));
 
-            services.AddTransient(s => new ReferencesViewModel(
-                s.GetRequiredService<PASEDMDbContextFactory>(),
-                s.GetRequiredService<UserStore>()));
+                services.AddTransient(s => new ReferencesViewModel(
+                    s.GetRequiredService<PASEDMDbContextFactory>(),
+                    s.GetRequiredService<UserStore>()));
 
-            services.AddTransient(s => new SettingsViewModel(
-                s.GetRequiredService<UserStore>()));
+                services.AddTransient(s => new SettingsViewModel(
+                    s.GetRequiredService<UserStore>()));
 
-            services.AddTransient(s => new AccountConfirmationViewModel(
-                s.GetRequiredService<PASEDMDbContextFactory>(),
-                CreateAccountConfirmationNavigationService(s)));
+                services.AddTransient(s => new AccountConfirmationViewModel(
+                    s.GetRequiredService<PASEDMDbContextFactory>(),
+                    CreateAccountConfirmationNavigationService(s)));
 
-            services.AddTransient(CreateCardViewModelMet);
-            services.AddTransient(AddDocViewModelMet);
-            services.AddTransient(ViewingCardViewModelMet);
-            services.AddTransient(OutgoingViewModelMet);
-            services.AddTransient(IncomingViewModelMet);
-            services.AddTransient(MyDocumentsViewModelMet);
-            services.AddTransient(CreateNavigationBarViewModel);
+                services.AddTransient(CreateCardViewModelMet);
+                services.AddTransient(AddDocViewModelMet);
+                services.AddTransient(ViewingCardViewModelMet);
+                services.AddTransient(OutgoingViewModelMet);
+                services.AddTransient(IncomingViewModelMet);
+                services.AddTransient(MyDocumentsViewModelMet);
+                services.AddTransient(CreateNavigationBarViewModel);
 
-            services.AddSingleton<MainWindowViewModel>();
+                services.AddSingleton<MainWindowViewModel>();
 
-            services.AddSingleton(s => new MainWindow()
-            {
-                DataContext = s.GetRequiredService<MainWindowViewModel>()
-            });
+                services.AddSingleton(s => new MainWindow()
+                {
+                    DataContext = s.GetRequiredService<MainWindowViewModel>()
+                });
             }).Build();
             #endregion
         }

@@ -92,6 +92,10 @@ namespace PASEDM.Models
         {
             return _moveUserProvider.GetAllMoveUserRecipient(moveUser, user);
         }
+        public Task<IEnumerable<MoveCard>> GetAllMoveUser(MoveCard moveUser)
+        {
+            return _moveUserProvider.GetAllMoveUser(moveUser);
+        }
         public async Task DeleteMoveUser(MoveCard moveUser)
         {
             await _moveUserProvider.DeleteMoveCard(moveUser);

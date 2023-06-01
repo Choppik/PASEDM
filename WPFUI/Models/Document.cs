@@ -13,25 +13,21 @@ namespace PASEDM.Models
         private readonly IDocProvider _docProvider;
 
         public Document() { }
-        public Document(string nameDoc, int registrationNumber, DateTime dateCreateDoc, string summary, string path, Deadlines term, SecrecyStamps secrecyStamp, DocStages docStages, DocumentTypes documentTypes)
-            : this(default, nameDoc, registrationNumber, dateCreateDoc, summary, path, term, secrecyStamp, docStages, documentTypes)
+        public Document(string nameDoc, int registrationNumber, string summary, byte[] file, Deadlines term, SecrecyStamps secrecyStamp, DocStages docStages, DocumentTypes documentTypes)
+            : this(default, nameDoc, registrationNumber, summary, file, term, secrecyStamp, docStages, documentTypes)
         { }
 
         public Document(int id, string nameDoc) 
-            : this(id, nameDoc, default, default, "", "", default, default, default, default)
-        { }
-        public Document(DateTime dateCreateDoc)
-            : this(default, default, default, dateCreateDoc, "", "", default, default, default, default)
+            : this(id, nameDoc, default, "", default, default, default, default, default)
         { }
 
-        public Document(int id, string nameDoc, int registrationNumber, DateTime dateCreateDoc, string summary, string path, Deadlines term, SecrecyStamps secrecyStamp, DocStages docStages, DocumentTypes documentTypes)
+        public Document(int id, string nameDoc, int registrationNumber, string summary, byte[] file, Deadlines term, SecrecyStamps secrecyStamp, DocStages docStages, DocumentTypes documentTypes)
         {
             Id = id;
             NameDoc = nameDoc;
             RegistrationNumber = registrationNumber;
-            DateCreateDoc = dateCreateDoc;
             Summary = summary;
-            Path = path;
+            File = file;
             Term = term;
             SecrecyStamp = secrecyStamp;
             DocStages = docStages;
@@ -47,9 +43,8 @@ namespace PASEDM.Models
         public int Id { get; }
         public string NameDoc { get; set; }
         public int RegistrationNumber { get; }
-        public DateTime DateCreateDoc { get; }
         public string Summary { get; }
-        public string Path { get; }
+        public byte[] File { get; }
         public Deadlines Term { get; }
         public SecrecyStamps SecrecyStamp { get; }
         public DocStages DocStages { get; }

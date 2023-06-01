@@ -199,13 +199,12 @@ namespace PASEDM.ViewModels
             GetDocStages();
             GetSecrecyStamps();
 
-            if (myDocumentsViewModel.CurrentMoveDocument.Id != null)
+            if (myDocumentsViewModel.CurrentMoveDocument.Id != 0)
             {
                 _docRegistrationNumber = myDocumentsViewModel.CurrentMoveDocument.Document.RegistrationNumber;
                 _summary = myDocumentsViewModel.CurrentMoveDocument.Document.Summary;
-                _filePath = myDocumentsViewModel.CurrentMoveDocument.Document.Path;
+               // _filePath = myDocumentsViewModel.CurrentMoveDocument.Document.File;
                 _docName = myDocumentsViewModel.CurrentMoveDocument.Document.NameDoc;
-                _dateOfFormationDocument = myDocumentsViewModel.CurrentMoveDocument.Document.DateCreateDoc;
                 CurrentDocStages = myDocumentsViewModel.CurrentMoveDocument.Document.DocStages;
                 CurrentDocTypes = myDocumentsViewModel.CurrentMoveDocument.Document.DocumentTypes;
                 CurrentSecrecyStamp = myDocumentsViewModel.CurrentMoveDocument.Document.SecrecyStamp;

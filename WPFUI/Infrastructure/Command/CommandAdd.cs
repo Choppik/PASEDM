@@ -1,10 +1,6 @@
 ﻿using Microsoft.Win32;
 using PASEDM.Infrastructure.Command.Base;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PASEDM.Infrastructure.Command
 {
@@ -12,16 +8,14 @@ namespace PASEDM.Infrastructure.Command
     {
         private Action value;
 
-        public CommandAdd(Action value)
+        public CommandAdd()
         {
-            this.value = value;
         }
 
         public override void Execute(object? parameter)
         {
-            /*OpenFileDialog openFile = new OpenFileDialog();
-            openFile.ShowDialog();*/
-            int r = 1;
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.ShowDialog();
         }
     }
 }
