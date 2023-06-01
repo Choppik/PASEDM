@@ -39,7 +39,7 @@ namespace PASEDM.Services.PASEDMCreator
                 NameDoc = document.NameDoc,
                 RegistrationNumber = document.RegistrationNumber,
                 Summary = document.Summary,
-                File = document.File,
+                FileDoc = document.FileDoc,
                 TermID = document.Term.Id,
                 SecrecyStampsID = document.SecrecyStamp.Id,
                 DocStagesID = document.DocStages.Id,

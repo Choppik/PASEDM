@@ -53,7 +53,7 @@ namespace PASEDM.Services.PASEDMProviders
                     return null;
                 }
 
-                return cardDTO.Select(u => ToTasksExecutor(u)).DistinctBy(u => u.Task.Id);
+                return cardDTO.Select(u => ToTasksExecutor(u)).DistinctBy(u => u.Tasks.Id);
             }
         }
 

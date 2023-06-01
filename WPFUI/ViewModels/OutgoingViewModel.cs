@@ -28,18 +28,18 @@ namespace PASEDM.ViewModels
         private ICommand _navigateOutEditCardCommand;
         private ICommand _deleteCardCommand;
         private ObservableCollection<MoveCard> _moveCard;
-        private IMoveCardProvider _moveUserProvider;
-        private MoveCard _currentMoveUser;
+        private IMoveCardProvider _moveCardProvider;
+        private MoveCard _currentMoveCard;
         public IEnumerable<MoveCard> MoveCards => _moveCard;
         public MoveCard CurrentMoveUser
         {
             get
             {
-                return _currentMoveUser;
+                return _currentMoveCard;
             }
             set
             {
-                _currentMoveUser = value;
+                _currentMoveCard = value;
                 OnPropertyChanged(nameof(CurrentMoveUser));
                 EditCommand();
                 DeleteCommand();
@@ -109,11 +109,11 @@ namespace PASEDM.ViewModels
             try
             {
                 IsLoading = true;
-                _moveUserProvider = new DatabaseMoveCardProvider(_contextFactory);
+                _moveCardProvider = new DatabaseMoveCardProvider(_contextFactory);
                 _moveCard = new ObservableCollection<MoveCard>();
-                _currentMoveUser = new MoveCard(_moveUserProvider);
+                TypeCard typeCard = new(2, "получатель", 1);
 
-                foreach (var item in await _currentMoveUser.GetAllMoveUserSender(new(1), _userStore.CurrentUser))
+                foreach (var item in await _currentMoveCard.GetAllMoveCardUniq(new(typeCard, _userStore.CurrentUser)))
                 {
                     _moveCard.Add(item);
                 }
@@ -125,6 +125,6 @@ namespace PASEDM.ViewModels
             IsLoading = false;
         }
         private ICommand EditCommand() => NavigateOutEditCardCommand = new NavigateOutEditCardCommand(this, _parameterNavigationService);
-        private ICommand DeleteCommand() => DeleteCardCommand = new DeleteCardCommand(_currentMoveUser, _contextFactory, _navigationServiceBack);
+        private ICommand DeleteCommand() => DeleteCardCommand = new DeleteCardCommand(_currentMoveCard, _contextFactory, _navigationServiceBack);
     }
 }

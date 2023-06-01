@@ -4,13 +4,13 @@ using PASEDM.Data.DTOs;
 
 namespace PASEDM.Data.Configuration
 {
-    internal class TypeUserConfiguration : IEntityTypeConfiguration<TypeUserDTO>
+    internal class TypeUserConfiguration : IEntityTypeConfiguration<TypeCardDTO>
     {
-        public void Configure(EntityTypeBuilder<TypeUserDTO> builder)
+        public void Configure(EntityTypeBuilder<TypeCardDTO> builder)
         {
             builder.Property(x => x.ID).ValueGeneratedOnAdd();
-            builder.Property(x => x.TypeUser).HasMaxLength(50);
-            builder.Property(x => x.TypeUserValue).HasMaxLength(2);
+            builder.Property(x => x.TypeCard).HasMaxLength(50);
+            builder.Property(x => x.TypeCardValue).HasMaxLength(2);
         }
     }
 }

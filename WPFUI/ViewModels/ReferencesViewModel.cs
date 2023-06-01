@@ -26,7 +26,7 @@ namespace PASEDM.ViewModels
         private IDocStagesProvider _docStagesProvider;
         private IDivisionProvider _divisionProvider;
         private IAccessRightsProvider _accessRightsProvider;
-        private ITypeUserProvider _typeUserProvider;
+        private ITypeCardProvider _typeUserProvider;
         private IRoleProvider _roleProvider;
 
         private bool _isActive;
@@ -41,7 +41,7 @@ namespace PASEDM.ViewModels
         private ObservableCollection<Division> _divisions;
         private ObservableCollection<AccessRights> _accessRights;
         private ObservableCollection<Role> _role;
-        private ObservableCollection<TypeUser> _typeUser;
+        private ObservableCollection<TypeCard> _typeUser;
 
         private SecrecyStamps _currentSecrecyStamp;
         private Case _currentCase;
@@ -53,7 +53,7 @@ namespace PASEDM.ViewModels
         private Division _currentDivisions;
         private AccessRights _currentAccessRights;
         private Role _currentRole;
-        private TypeUser _currentTypeUser;
+        private TypeCard _currentTypeUser;
 
         private ICommand _saveCommand;
         private ICommand _deleteCommand;
@@ -147,7 +147,7 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(Role));
             }
         }
-        public ObservableCollection<TypeUser> TypeUser
+        public ObservableCollection<TypeCard> TypeUser
         {
             get => _typeUser;
             set
@@ -288,7 +288,7 @@ namespace PASEDM.ViewModels
                 OnPropertyChanged(nameof(Role));
             }
         }
-        public TypeUser CurrentTypeUser
+        public TypeCard CurrentTypeUser
         {
             get
             {
@@ -534,8 +534,8 @@ namespace PASEDM.ViewModels
             try
             {
                 _typeUserProvider = new DatabaseTypeUserProvider(_contextFactory);
-                _typeUser = new ObservableCollection<TypeUser>();
-                _currentTypeUser = new TypeUser(_typeUserProvider);
+                _typeUser = new ObservableCollection<TypeCard>();
+                _currentTypeUser = new TypeCard(_typeUserProvider);
 
                 foreach (var item in await _currentTypeUser.GetAllTypeUsers())
                 {

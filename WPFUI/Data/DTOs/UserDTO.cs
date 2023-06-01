@@ -17,7 +17,7 @@ namespace PASEDM.Data.DTOs
         public RoleDTO Role { get; set; }
         public int? EmployeeID { get; set; }
         public EmployeeDTO Employee { get; set; }
-        public ICollection<CardDTO> Cards { get; set; }
         public ICollection<MoveDocumentDTO> MoveDocuments { get; set; }
+        public ICollection<MoveCardDTO> MoveCards { get; set; }
     }
 }

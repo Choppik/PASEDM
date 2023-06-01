@@ -35,9 +35,9 @@ namespace PASEDM.Services.PASEDMCreator
         {
             return new MoveCardDTO()
             {
-                TypeUserID = moveCard.TypeUserID,
+                TypeCardID = moveCard.TypeCard.Id,
                 Viewed = moveCard.Viewed,
-                CardID = moveCard.CardID
+                CardID = moveCard.Card.Id,
             };
         }
     }

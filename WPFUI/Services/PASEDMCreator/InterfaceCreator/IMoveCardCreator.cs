@@ -5,6 +5,6 @@ namespace PASEDM.Services.PASEDMCreator.InterfaceCreator
 {
     public interface IMoveCardCreator
     {
-        Task AddMoveCard(MoveCard moveUser);
+        Task AddMoveCard(MoveCard moveCard);
     }
 }

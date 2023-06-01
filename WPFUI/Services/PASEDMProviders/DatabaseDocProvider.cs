@@ -38,7 +38,7 @@ namespace PASEDM.Services.PASEDMProviders
             DocStages docStages = new(dto.DocStagesID, dto.DocStages.NameDocStage, dto.DocStages.DocStagesValue);
             Deadlines deadlines = new(dto.Term.ID, dto.Term.NameTerm, dto.Term.Term);
 
-            return new Document(dto.ID, dto.NameDoc, dto.RegistrationNumber, dto.Summary, dto.File, deadlines, secrecyStamps, docStages, documentTypes);
+            return new Document(dto.ID, dto.NameDoc, dto.RegistrationNumber, dto.Summary, dto.FileDoc, deadlines, secrecyStamps, docStages, documentTypes);
         }
         public async Task<Document> GetDoc(Document document)
         {
@@ -48,7 +48,7 @@ namespace PASEDM.Services.PASEDMProviders
                     .Where(u => u.NameDoc == document.NameDoc
                     && u.RegistrationNumber == document.RegistrationNumber
                     && u.Summary == document.Summary
-                    && u.File == document.File
+                    && u.FileDoc == document.FileDoc
                     && u.TermID == document.Term.Id
                     && u.SecrecyStampsID == document.SecrecyStamp.Id
                     && u.DocStagesID == document.DocStages.Id

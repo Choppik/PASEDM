@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace PASEDM.Services.PASEDMProviders.InterfaceProviders
 {
-    public interface ITypeUserProvider
+    public interface ITypeCardProvider
     {
-        Task<IEnumerable<TypeUser>> GetAllTypeUsers();
+        Task<IEnumerable<TypeCard>> GetAllTypeUsers();
     }
 }

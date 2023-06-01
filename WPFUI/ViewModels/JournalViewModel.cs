@@ -62,14 +62,15 @@ namespace PASEDM.ViewModels
                 _moveCardProvider = new DatabaseMoveCardProvider(_contextFactory);
                 _moveCardStrList = new ObservableCollection<string>();
                 _currentMoveCard = new MoveCard(_moveCardProvider);
+                TypeCard typeCard = new(2, "получатель", 1);
 
-                foreach (var item in await _currentMoveCard.GetAllMoveUser(new(1)))
+                foreach (var item in await _currentMoveCard.GetAllMoveCardUniq(new(typeCard, _userStore.CurrentUser)))
                 {
                     if (item != null)
                     {
 
-                        _moveCardStr = $"Пользователь ({item.Sender}) отправил документ ({item.Document.NameDoc}) с грифом секретности ({item.SecrecyStamps.NameSecrecyStamp}) пользователю ({item.Recipient.UserName}). Дата: {item.DateOfFormation}";
-                        _moveCardStrList.Add(_moveCardStr);
+                        //_moveCardStr = $"Пользователь ({item.Sender}) отправил документ ({item.Document.NameDoc}) с грифом секретности ({item.SecrecyStamps.NameSecrecyStamp}) пользователю ({item.Recipient.UserName}). Дата: {item.DateOfFormation}";
+                        //_moveCardStrList.Add(_moveCardStr);
                     }
                 }
             }

@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PASEDM.Data.DTOs
 {
-    public class TypeUserDTO
+    public class TypeCardDTO
     {
         [Key]
         public int ID { get; set; }
-        public string TypeUser { get; set; }
-        public int TypeUserValue { get; set; }
+        public string TypeCard { get; set; }
+        public int TypeCardValue { get; set; }
         public ICollection<MoveCardDTO> MoveCards { get; set; }
     }
 }

@@ -31,17 +31,17 @@ namespace PASEDM.ViewModels
         private ICommand _navigateViewingCardCommand;
         private ICommand _deleteCardCommand;
         private IMoveCardProvider _moveCardProvider;
-        private MoveCard _currentMoveUser;
+        private MoveCard _currentMoveCard;
         public IEnumerable<MoveCard> MoveCards => _moveCard;
         public MoveCard CurrentMoveUser
         {
             get
             {
-                return _currentMoveUser;
+                return _currentMoveCard;
             }
             set
             {
-                _currentMoveUser = value;
+                _currentMoveCard = value;
                 OnPropertyChanged(nameof(CurrentMoveUser));
                 EditCommand();
                 ViewingCommand();
@@ -122,7 +122,7 @@ namespace PASEDM.ViewModels
         }
         private ICommand EditCommand() => NavigateIncEditCardCommand = new NavigateIncEditCardCommand(this, _parameterNavigationService);
         private ICommand ViewingCommand() => NavigateViewingCardCommand = new NavigateViewingCardCommand(this, _parameterNavigationService2);
-        private ICommand DeleteCommand() => DeleteCardCommand = new DeleteCardCommand(_currentMoveUser, _contextFactory, _navigationService);
+        private ICommand DeleteCommand() => DeleteCardCommand = new DeleteCardCommand(_currentMoveCard, _contextFactory, _navigationService);
         private async void GetMoveUser()
         {
             try
@@ -130,9 +130,10 @@ namespace PASEDM.ViewModels
                 IsLoading = true;
                 _moveCardProvider = new DatabaseMoveCardProvider(_contextFactory);
                 _moveCard = new ObservableCollection<MoveCard>();
-                _currentMoveUser = new MoveCard(_moveCardProvider);
+                _currentMoveCard = new MoveCard(_moveCardProvider);
+                TypeCard typeCard = new (1, "отправитель", 0);
 
-                foreach (var item in await _currentMoveUser.GetAllMoveUserRecipient(new(2), _userStore.CurrentUser))
+                foreach (var item in await _currentMoveCard.GetAllMoveCardUniq(new(typeCard, _userStore.CurrentUser)))
                 {
                     _moveCard.Add(item);
                 }
@@ -146,9 +147,9 @@ namespace PASEDM.ViewModels
         private void GetAccessRights()
         {
             IsPrivilege = true;
-            if(_currentMoveUser.Id != null)
+            if(_currentMoveCard.Id != null)
             {
-                if(_userStore.CurrentUser.Employee.AccessRights.AccessRightsValue < _currentMoveUser.Document.SecrecyStamp.SecrecyStampValue)
+                if(_userStore.CurrentUser.Employee.AccessRights.AccessRightsValue < _currentMoveCard.Card.Documents.SecrecyStamp.SecrecyStampValue)
                 {
                     IsPrivilege = false;
                     MessageBox.Show("Недостаточно прав доступа", "Права доступа", MessageBoxButton.OK, MessageBoxImage.Error);

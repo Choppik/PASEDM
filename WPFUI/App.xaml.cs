@@ -7,7 +7,6 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using PASEDM.Data;
-using PASEDM.Services.FTPClient;
 using Microsoft.Win32;
 using Microsoft.Extensions.Hosting;
 
@@ -16,9 +15,7 @@ namespace PASEDM
     public partial class App : Application
     {
         private const string CONNECTION_STRING = "Server=localhost;Database=AppPASEDM;User Id=user1;Password=sa;TrustServerCertificate=True";
-        private const string CONNECTION_FTP_SERVER = "ftp://192.168.1.1/";
-        private const string USER_FTP_SERVER = "us";
-        private const string PASSWORD_FTP_SERVER = "1";
+
         private readonly IHost _host;
 
 
@@ -34,8 +31,6 @@ namespace PASEDM
                 services.AddSingleton<OpenFileDialog>();
 
                 services.AddSingleton<CloseModalNavigationService>();
-
-                services.AddSingleton(s => new FtpClient(CONNECTION_FTP_SERVER, USER_FTP_SERVER, PASSWORD_FTP_SERVER));
 
                 services.AddSingleton(s => new PASEDMDbContextFactory(CONNECTION_STRING));
 

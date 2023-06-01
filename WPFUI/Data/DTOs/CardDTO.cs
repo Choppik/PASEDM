@@ -20,10 +20,6 @@ namespace PASEDM.Data.DTOs
         public CaseDTO Case { get; set; }
         public int? EmployeeID { get; set; }
         public EmployeeDTO Employee { get; set; }
-        public int? UserID { get; set; }
-        public UserDTO User { get; set; }
-        public int? RecipientID { get; set; }
-        public RecipientDTO Recipient { get; set; }
         public ICollection<MoveCardDTO> MoveCards { get; set; }
     }
 }

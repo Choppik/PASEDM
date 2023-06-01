@@ -304,26 +304,23 @@ namespace PASEDM.ViewModels
             _userStore = userStore;
             _navigationService = navigationService;
 
-            if (incomingViewModel.CurrentMoveUser.CardID != null)
+            if (incomingViewModel.CurrentMoveUser.Card.Id != 0)
             {
-                _nameCard = incomingViewModel.CurrentMoveUser.NameCard;
-                _docRegistrationNumber = incomingViewModel.CurrentMoveUser.Document.RegistrationNumber;
-                _numberCard = incomingViewModel.CurrentMoveUser.NumberCard;
-                _summary = incomingViewModel.CurrentMoveUser.Document.Summary;
-                _comment = incomingViewModel.CurrentMoveUser.Comment;
+                _nameCard = incomingViewModel.CurrentMoveUser.Card.NameCard;
+                _docRegistrationNumber = incomingViewModel.CurrentMoveUser.Card.Documents.RegistrationNumber;
+                _numberCard = incomingViewModel.CurrentMoveUser.Card.NumberCard;
+                _summary = incomingViewModel.CurrentMoveUser.Card.Documents.Summary;
+                _comment = incomingViewModel.CurrentMoveUser.Card.Comment;
                 //_filePath = incomingViewModel.CurrentMoveUser.Document.File;
-                _docName = incomingViewModel.CurrentMoveUser.Document.NameDoc;
-                _dateOfFormation = incomingViewModel.CurrentMoveUser.DateOfFormation;
-                CurrentTask = incomingViewModel.CurrentMoveUser.Tasks;
-                CurrentTaskStages = incomingViewModel.CurrentMoveUser.TaskStages;
-                CurrentCase = incomingViewModel.CurrentMoveUser.Cases;
-                CurrentDocStages = incomingViewModel.CurrentMoveUser.DocStages;
-                CurrentDocTypes = incomingViewModel.CurrentMoveUser.DocumentTypes;
-                CurrentExecutor = incomingViewModel.CurrentMoveUser.Executor;
-                CurrentSecrecyStamp = incomingViewModel.CurrentMoveUser.SecrecyStamps;
-                CurrentTerm = incomingViewModel.CurrentMoveUser.Deadlines;
-                CurrentRecipient = incomingViewModel.CurrentMoveUser.Recipient;
-                UserCreateCard = incomingViewModel.CurrentMoveUser.Sender;
+                _docName = incomingViewModel.CurrentMoveUser.Card.Documents.NameDoc;
+                _dateOfFormation = incomingViewModel.CurrentMoveUser.Card.DateOfFormation;
+                CurrentTask = incomingViewModel.CurrentMoveUser.Card.Tasks;
+                CurrentTaskStages = incomingViewModel.CurrentMoveUser.Card.Tasks.TaskStage;
+                CurrentCase = incomingViewModel.CurrentMoveUser.Card.Cases;
+                CurrentDocTypes = incomingViewModel.CurrentMoveUser.Card.Documents.DocumentTypes;
+                CurrentExecutor = incomingViewModel.CurrentMoveUser.Card.Employee;
+                CurrentSecrecyStamp = incomingViewModel.CurrentMoveUser.Card.Documents.SecrecyStamp;
+                CurrentTerm = incomingViewModel.CurrentMoveUser.Card.Documents.Term;
             }
             NavigateRefundCommand = new NavigateCommand(navigationService);
         }

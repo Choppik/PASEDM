@@ -47,15 +47,13 @@ namespace PASEDM.Infrastructure.Command
         private readonly INavigationService _navigationService;
 
         private IDocumentCreator _documentCreator;
-        private IRecipientCreator _recipientCreator;
         private IMoveCardCreator _moveUserCreator;
         private ICardCreator _cardCreator;
         private ITaskCreator _taskCreator;
 
         private IDocProvider _docProvider;
-        private IRecipientProvider _recipientProvider;
         private ICardProvider _cardProvider;
-        private ITypeUserProvider _typeUserProvider;
+        private ITypeCardProvider _typeCardProvider;
         private ITasksProvider _tasksProvider;
         #endregion
 
@@ -72,22 +70,19 @@ namespace PASEDM.Infrastructure.Command
             if (!_createCardViewModel.HasErrors)
             {
                 _documentCreator = new DatabaseDocumentCreator(_deferredContextFactory);
-                _recipientCreator = new DatabaseRecipientCreator(_deferredContextFactory);
                 _moveUserCreator = new DatabaseMoveCardCreator(_deferredContextFactory);
                 _cardCreator = new DatabaseCardCreator(_deferredContextFactory);
                 _taskCreator = new DatabaseTaskCreator(_deferredContextFactory);
 
                 _docProvider = new DatabaseDocProvider(_deferredContextFactory);
-                _recipientProvider = new DatabaseRecipientProvider(_deferredContextFactory);
                 _cardProvider = new DatabaseCardProvider(_deferredContextFactory);
-                _typeUserProvider = new DatabaseTypeUserProvider(_deferredContextFactory);
+                _typeCardProvider = new DatabaseTypeUserProvider(_deferredContextFactory);
                 _tasksProvider = new DatabaseTasksProvider(_deferredContextFactory);
 
                 Document document = new(_documentCreator, _docProvider);
-                Recipient recipient = new(_recipientCreator, _recipientProvider);
-                TypeUser typeUser = new(_typeUserProvider);
+                TypeCard typeCard = new(_typeCardProvider);
                 Card card = new(_cardCreator, _cardProvider);
-                MoveCard moveUser = new(_moveUserCreator);
+                MoveCard moveCard = new(_moveUserCreator);
                 Tasks tasks = new(_taskCreator, _tasksProvider);
 
                 _numberCard = _createCardViewModel.NumberCard;
@@ -118,27 +113,32 @@ namespace PASEDM.Infrastructure.Command
                 await document.AddDoc(new(_docName, _docRegistrationNumber, _summary, _file, _term, _secrecyStamps, _docStages, _documentType));
                 var docDB = await document.GetDoc(new(_docName, _docRegistrationNumber, _summary, _file, _term, _secrecyStamps, _docStages, _documentType));
 
-                await recipient.AddRecipient(new(_recipient.Id));
-                var recipientDB = await recipient.GetRecipient(new(_recipient.Id));
-
                 if (_createCardViewModel.IsCheckedTask)
                 {
                     if (_task != null) await tasks.EditTask(new(_task.Id, _task.NameTask, _task.Contents, _taskStages));
-                    await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB, _documentType, _task, _case, _executor, _createCardUser, recipientDB));
+                    await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB, _task, _case, _executor));
                 }
                 else
                 {
                     await tasks.AddTask(new(_nameTask, _contentTask, _taskStages));
                     var taskDB = await tasks.GetTask(new(_nameTask, _contentTask, _taskStages));
 
-                    await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB, _documentType, taskDB, _case, _executor, _createCardUser, recipientDB));
+                    await card.CreateCard(new(_numberCard, _nameCard, _comment, _dateOfFormation, docDB, taskDB, _case, _executor));
                 }
 
                 var cardDB = await card.GetCard(new(_dateOfFormation));
 
-                foreach (var item in await typeUser.GetAllTypeUsers())
+                foreach (var item in await typeCard.GetAllTypeUsers())
                 {
-                    await moveUser.AddMoveUser(new(item.Id, _viewed, cardDB.Id));
+                    switch (item.TypeCardValue)
+                    {
+                        case 0:
+                            await moveCard.AddMoveCard(new(_viewed, cardDB, item, _createCardUser));
+                            break;
+                        case 1:
+                            await moveCard.AddMoveCard(new(_viewed, cardDB, item, _recipient));
+                            break;
+                    }
                 }
 
                 _navigationService.Navigate();

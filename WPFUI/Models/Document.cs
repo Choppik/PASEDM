@@ -27,7 +27,7 @@ namespace PASEDM.Models
             NameDoc = nameDoc;
             RegistrationNumber = registrationNumber;
             Summary = summary;
-            File = file;
+            FileDoc = file;
             Term = term;
             SecrecyStamp = secrecyStamp;
             DocStages = docStages;
@@ -44,7 +44,7 @@ namespace PASEDM.Models
         public string NameDoc { get; set; }
         public int RegistrationNumber { get; }
         public string Summary { get; }
-        public byte[] File { get; }
+        public byte[] FileDoc { get; }
         public Deadlines Term { get; }
         public SecrecyStamps SecrecyStamp { get; }
         public DocStages DocStages { get; }

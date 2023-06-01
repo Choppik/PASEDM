@@ -17,93 +17,73 @@ namespace PASEDM.Services.PASEDMProviders
         {
             _dbContextFactory = dbContextFactory;
         }
-        public async Task<IEnumerable<MoveCard>> GetAllMoveUserSender(MoveCard moveCard, User user)
+        public async Task<IEnumerable<MoveCard>> GetAllMoveCard(MoveCard moveCard, User user)
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
-                IEnumerable<MoveCardDTO> moveCardDTO = await context.MoveCards
-                    .Include(u => u.Card).ThenInclude(u => u.User)
-                    .Where(p => p.TypeUserID == moveCard.TypeUserID && p.Card.User.ID == user.Id)
-                    .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.DocStages)
-                    .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.SecrecyStamps)
-                    .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.Term)
-                    .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.DocumentTypes)
-                    .Include(u => u.Card).ThenInclude(u => u.Employee).ThenInclude(u => u.AccessRights)
-                    .Include(u => u.Card).ThenInclude(u => u.Employee).ThenInclude(u => u.Division)
-                    .Include(u => u.Card).ThenInclude(u => u.Task).ThenInclude(u => u.TaskStages)
-                    .Include(u => u.Card).ThenInclude(u => u.Case)
-                    .Include(u => u.Card).ThenInclude(u => u.Recipient).ThenInclude(u => u.User)
-                    .ToListAsync();
-
-                if (moveCardDTO == null)
+                IEnumerable<MoveCardDTO> moveCardDTO;
+                if (moveCard.TypeCard.TypeCardValue > 0)
                 {
-                    return null;
+                        moveCardDTO = await context.MoveCards
+                        .Where(p => p.TypeCard.TypeCardValue > 0 && p.User.ID == user.Id)
+                        .Include(u => u.User)
+                        .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.DocStages)
+                        .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.SecrecyStamps)
+                        .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.Term)
+                        .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.DocumentTypes)
+                        .Include(u => u.Card).ThenInclude(u => u.Employee).ThenInclude(u => u.AccessRights)
+                        .Include(u => u.Card).ThenInclude(u => u.Employee).ThenInclude(u => u.Division)
+                        .Include(u => u.Card).ThenInclude(u => u.Task).ThenInclude(u => u.TaskStages)
+                        .Include(u => u.Card).ThenInclude(u => u.Case)
+                        .ToListAsync();
+                }
+                else
+                {
+                        moveCardDTO = await context.MoveCards
+                        .Where(p => p.TypeCard.TypeCardValue == 0 && p.User.ID == user.Id)
+                        .Include(u => u.User)
+                        .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.DocStages)
+                        .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.SecrecyStamps)
+                        .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.Term)
+                        .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.DocumentTypes)
+                        .Include(u => u.Card).ThenInclude(u => u.Employee).ThenInclude(u => u.AccessRights)
+                        .Include(u => u.Card).ThenInclude(u => u.Employee).ThenInclude(u => u.Division)
+                        .Include(u => u.Card).ThenInclude(u => u.Task).ThenInclude(u => u.TaskStages)
+                        .Include(u => u.Card).ThenInclude(u => u.Case)
+                        .ToListAsync();
                 }
 
-                return moveCardDTO.Select(u => ToMoveCardEdit(u));
+                    if (moveCardDTO == null)
+                    {
+                        return null;
+                    }
+
+                    return moveCardDTO.Select(u => ToMoveCard(u));
             }
         }
-        public async Task<IEnumerable<MoveCard>> GetAllMoveUserRecipient(MoveCard moveCard, User user)
-        {
-            using (PASEDMContext context = _dbContextFactory.CreateDbContext())
-            {
-                IEnumerable<MoveCardDTO> moveCardDTO = await context.MoveCards
-                    .Include(u => u.Card).ThenInclude(u => u.Recipient).ThenInclude(u => u.User)
-                    .Where(p => p.TypeUserID == moveCard.TypeUserID && p.Card.Recipient.UserID == user.Id)
-                    .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.DocStages)
-                    .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.SecrecyStamps)
-                    .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.Term)
-                    .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.DocumentTypes)
-                    .Include(u => u.Card).ThenInclude(u => u.Employee).ThenInclude(u => u.AccessRights)
-                    .Include(u => u.Card).ThenInclude(u => u.Employee).ThenInclude(u => u.Division)
-                    .Include(u => u.Card).ThenInclude(u => u.Task).ThenInclude(u => u.TaskStages)
-                    .Include(u => u.Card).ThenInclude(u => u.Case)
-                    .Include(u => u.Card).ThenInclude(u => u.User)
-                    .OrderBy(u => u.CardID)
-                    .ToListAsync();
-
-                if (moveCardDTO == null)
-                {
-                    return null;
-                }
-
-                return moveCardDTO.Select(u => ToMoveCardEdit(u));
-            }
-        }
-        private static MoveCard ToMoveCardEdit(MoveCardDTO dto)
+        private static MoveCard ToMoveCard(MoveCardDTO dto)
         {
             SecrecyStamps secrecyStamps = new(dto.Card.Document.SecrecyStamps.ID, dto.Card.Document.SecrecyStamps.SecrecyStamp, dto.Card.Document.SecrecyStamps.SecrecyStampValue);
             DocumentTypes documentTypes = new(dto.Card.Document.DocumentTypes.ID, dto.Card.Document.DocumentTypes.Name);
             DocStages docStages = new(dto.Card.Document.DocStagesID, dto.Card.Document.DocStages.NameDocStage, dto.Card.Document.DocStages.DocStagesValue);
             Deadlines deadlines = new(dto.Card.Document.Term.ID, dto.Card.Document.Term.NameTerm, dto.Card.Document.Term.Term);
-            Document document = new(dto.Card.Document.ID, dto.Card.Document.NameDoc, dto.Card.Document.RegistrationNumber, dto.Card.Document.Summary, dto.Card.Document.File, deadlines, secrecyStamps, docStages, documentTypes);
+            Document document = new(dto.Card.Document.ID, dto.Card.Document.NameDoc, dto.Card.Document.RegistrationNumber, dto.Card.Document.Summary, dto.Card.Document.FileDoc, deadlines, secrecyStamps, docStages, documentTypes);
             TaskStages taskStages = new(dto.Card.Task.TaskStages.ID, dto.Card.Task.TaskStages.TaskStages, dto.Card.Task.TaskStages.TaskStagesValue);
             Tasks tasks = new(dto.Card.TaskID, dto.Card.Task.NameTask, dto.Card.Task.Contents, taskStages);
             Case cases = new(dto.Card.Case.ID, dto.Card.Case.NumberCase, dto.Card.Case.Desription);
             AccessRights accessRights = new(dto.Card.Employee.AccessRights.ID, dto.Card.Employee.AccessRights.AccessRights, dto.Card.Employee.AccessRights.AccessRightsValue);
             Division division = new (dto.Card.Employee.Division.ID, dto.Card.Employee.Division.NumberDivision, dto.Card.Employee.Division.Division);
             Employee employee = new(dto.Card.EmployeeID, dto.Card.Employee.NumberEmployee, dto.Card.Employee.FullName, dto.Card.Employee.Mail, accessRights, division);
-            User user = new(dto.Card.Recipient.User.ID, dto.Card.Recipient.User.UserName);
+            User user = new(dto.User.ID, dto.User.UserName);
+            Card card = new(dto.Card.ID, dto.Card.NumberCard, dto.Card.NameCard, dto.Card.Comment, dto.Card.DateOfFormation, document, tasks, cases, employee);
+            TypeCard typeCard = new(dto.TypeCard.ID, dto.TypeCard.TypeCard, dto.TypeCard.TypeCardValue);
 
             return new MoveCard(
                 dto.ID,
                 dto.Viewed,
-                dto.CardID,
-                dto.Card.NumberCard,
-                dto.Card.NameCard,
-                document,
-                deadlines,
-                docStages,
-                secrecyStamps,
-                documentTypes,
-                tasks,
-                taskStages,
-                cases,
-                employee,
-                dto.Card.DateOfFormation,
-                dto.Card.Comment,
-                user,
-                dto.Card.User.UserName
+                card,
+                typeCard,
+                user
                 );
         }
         public async Task DeleteMoveCard(MoveCard moveCard)
@@ -129,21 +109,24 @@ namespace PASEDM.Services.PASEDMProviders
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
                 int moveCardDTO = context.MoveCards
-                    .Include(x => x.Card).ThenInclude(x => x.Recipient).ThenInclude(x => x.User)
-                    .Include(x => x.TypeUser)
-                    .Where(u => u.Viewed == 0 && u.TypeUser.TypeUserValue == 1 && u.Card.Recipient.User.ID == user.Id)
+                    .Include(x => x.Card)
+                    .Include(x => x.User)
+                    .Include(x => x.TypeCard)
+                    .Where(u => u.Viewed == 0 && u.TypeCard.TypeCardValue == 1 && u.User.ID == user.Id)
                     .Count();
 
                 return moveCardDTO;
             }
         }
-        public async Task<IEnumerable<MoveCard>> GetAllMoveUser(MoveCard moveCard)
+        public async Task<IEnumerable<MoveCard>> GetAllMoveCard(MoveCard moveCard)
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
                 IEnumerable<MoveCardDTO> moveCardDTO = await context.MoveCards
-                    .Include(u => u.Card).ThenInclude(u => u.Recipient).ThenInclude(u => u.User)
-                    .Where(p => p.TypeUserID == moveCard.TypeUserID)
+                    .Include(u => u.Card)
+                    .Include(u => u.User)
+                    .Include(u => u.TypeCard)
+                    .Where(p => p.TypeCard.ID == moveCard.TypeCard.Id)
                     .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.DocStages)
                     .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.SecrecyStamps)
                     .Include(u => u.Card).ThenInclude(u => u.Document).ThenInclude(u => u.Term)
@@ -152,7 +135,6 @@ namespace PASEDM.Services.PASEDMProviders
                     .Include(u => u.Card).ThenInclude(u => u.Employee).ThenInclude(u => u.Division)
                     .Include(u => u.Card).ThenInclude(u => u.Task).ThenInclude(u => u.TaskStages)
                     .Include(u => u.Card).ThenInclude(u => u.Case)
-                    .Include(u => u.Card).ThenInclude(u => u.User)
                     .OrderBy(u => u.CardID)
                     .ToListAsync();
 
@@ -161,7 +143,7 @@ namespace PASEDM.Services.PASEDMProviders
                     return null;
                 }
 
-                return moveCardDTO.Select(u => ToMoveCardEdit(u));
+                return moveCardDTO.Select(u => ToMoveCard(u));
             }
         }
     }

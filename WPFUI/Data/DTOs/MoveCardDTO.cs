@@ -7,9 +7,11 @@ namespace PASEDM.Data.DTOs
         [Key]
         public int ID { get; set; }
         public int Viewed { get; set; }
-        public int? TypeUserID { get; set; }
-        public TypeUserDTO TypeUser { get; set; }
+        public int? TypeCardID { get; set; }
+        public TypeCardDTO TypeCard { get; set; }
         public int? CardID { get; set; }
         public CardDTO Card { get; set; }
+        public int? UserID { get; set; }
+        public UserDTO User { get; set; }
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PASEDM.Services.PASEDMProviders
 {
-    public class DatabaseTypeUserProvider : ITypeUserProvider
+    public class DatabaseTypeUserProvider : ITypeCardProvider
     {
         private readonly PASEDMDbContextFactory _dbContextFactory;
 
@@ -17,18 +17,18 @@ namespace PASEDM.Services.PASEDMProviders
         {
             _dbContextFactory = dbContextFactory;
         }
-        public async Task<IEnumerable<TypeUser>> GetAllTypeUsers()
+        public async Task<IEnumerable<TypeCard>> GetAllTypeUsers()
         {
             using (PASEDMContext context = _dbContextFactory.CreateDbContext())
             {
-                IEnumerable<TypeUserDTO> typeUserDTOs = await context.TypeUsers.ToListAsync();
+                IEnumerable<TypeCardDTO> typeUserDTOs = await context.TypeCards.ToListAsync();
 
                 return typeUserDTOs.Select(u => ToTypeUser(u));
             }
         }
-        private static TypeUser ToTypeUser(TypeUserDTO dto)
+        private static TypeCard ToTypeUser(TypeCardDTO dto)
         {
-            return new TypeUser(dto.ID, dto.TypeUser, dto.TypeUserValue);
+            return new TypeCard(dto.ID, dto.TypeCard, dto.TypeCardValue);
         }
     }
 }

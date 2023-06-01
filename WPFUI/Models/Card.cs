@@ -13,33 +13,30 @@ namespace PASEDM.Models
 
         public Card() { }
 
-        public Card(int numberCard, string nameCard, string comment, DateTime dateOfFormation, Document document, DocumentTypes documentTypes, Tasks task, Case cases, Employee employee, User user, Recipient recipient) 
-            :this(default, numberCard, nameCard, comment, dateOfFormation, document, documentTypes, task, cases, employee, user, recipient)
+        public Card(int numberCard, string nameCard, string comment, DateTime dateOfFormation, Document document, Tasks task, Case cases, Employee employee) 
+            :this(default, numberCard, nameCard, comment, dateOfFormation, document, task, cases, employee)
         { }
         public Card(int id, string nameCard)
-            : this(id, default, nameCard, "", default, default, default, default, default, default, default, default)
+            : this(id, default, nameCard, "", default, default, default, default, default)
         { }
         public Card(DateTime dateOfFormation)
-            : this(default, default, "", "", dateOfFormation, default, default, default, default, default, default, default)
+            : this(default, default, "", "", dateOfFormation, default, default, default, default)
         { }
         public Card(int id, Tasks task)
-            : this(id, default, "", "", default, default, default, task, default, default, default, default)
+            : this(id, default, "", "", default, default, task, default, default)
         { }
 
-        public Card(int id, int numberCard, string nameCard, string comment, DateTime dateOfFormation, Document document, DocumentTypes documentTypes, Tasks task, Case cases, Employee employee, User user, Recipient recipient)
+        public Card(int id, int numberCard, string nameCard, string comment, DateTime dateOfFormation, Document document, Tasks task, Case cases, Employee employee)
         {
             Id = id;
             NumberCard = numberCard;
             NameCard = nameCard;
             Comment = comment;
             DateOfFormation = dateOfFormation;
-            Document = document;
-            DocumentTypes = documentTypes;
-            Task = task;
-            Case = cases;
+            Documents = document;
+            Tasks = task;
+            Cases = cases;
             Employee = employee;
-            User = user;
-            Recipient = recipient;
         }
         public Card(ICardCreator cardCreator, ICardProvider cardProvider)
         {
@@ -53,17 +50,14 @@ namespace PASEDM.Models
         }
 
         public int Id { get; }
-        public Tasks Task { get; }
         public int NumberCard { get; }
         public string NameCard { get; }
         public string Comment { get; }
         public DateTime DateOfFormation { get; }
-        public Document Document { get; }
-        public DocumentTypes DocumentTypes { get; }
-        public Case Case { get; }
+        public Tasks Tasks { get; }
+        public Document Documents { get; }
+        public Case Cases { get; }
         public Employee Employee { get; }
-        public User User { get; }
-        public Recipient Recipient { get; }
 
         public async Task CreateCard(Card card)
         {

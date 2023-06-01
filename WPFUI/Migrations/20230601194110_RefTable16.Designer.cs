@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PASEDM.Data;
 
@@ -11,9 +12,11 @@ using PASEDM.Data;
 namespace PASEDM.Migrations
 {
     [DbContext(typeof(PASEDMContext))]
-    partial class PASEDMContextModelSnapshot : ModelSnapshot
+    [Migration("20230601194110_RefTable16")]
+    partial class RefTable16
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -175,7 +178,7 @@ namespace PASEDM.Migrations
                     b.Property<int?>("DocumentTypesID")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("FileDoc")
+                    b.Property<byte[]>("File")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
@@ -458,7 +461,7 @@ namespace PASEDM.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("TypeCards");
+                    b.ToTable("TypeUsers");
                 });
 
             modelBuilder.Entity("PASEDM.Data.DTOs.UserDTO", b =>

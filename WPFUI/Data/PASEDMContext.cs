@@ -12,8 +12,7 @@ namespace PASEDM.Data
         public DbSet<UserDTO> Users { get; set; }
         public DbSet<EmployeeDTO> Staff { get; set; }
         public DbSet<DivisionDTO> Divisions { get; set; }
-        public DbSet<RecipientDTO> Recipients { get; set; }
-        public DbSet<TypeUserDTO> TypeUsers { get; set; }
+        public DbSet<TypeCardDTO> TypeCards { get; set; }
         public DbSet<CaseDTO> Cases { get; set; }
         public DbSet<DocumentTypesDTO> DocumentTypes { get; set; }
         public DbSet<DocumentDTO> Documents { get; set; }
@@ -33,7 +32,6 @@ namespace PASEDM.Data
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new StaffConfiguration());
             modelBuilder.ApplyConfiguration(new DivisionConfiguration());
-            modelBuilder.ApplyConfiguration(new RecipientConfiguration());
             modelBuilder.ApplyConfiguration(new TypeUserConfiguration());
             modelBuilder.ApplyConfiguration(new CaseConfiguration());
             modelBuilder.ApplyConfiguration(new DocumentTypesConfiguration());
