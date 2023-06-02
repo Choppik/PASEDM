@@ -463,7 +463,7 @@ namespace PASEDM.ViewModels
             GetDocStages();
             GetSecrecyStamps();
 
-            if (outgoingViewModel.CurrentMoveUser.Card.Id != 0)
+            if (outgoingViewModel.CurrentMoveUser.Id != null)
             {
                 _nameCard = outgoingViewModel.CurrentMoveUser.Card.NameCard;
                 _docRegistrationNumber = outgoingViewModel.CurrentMoveUser.Card.Documents.RegistrationNumber;
@@ -482,7 +482,7 @@ namespace PASEDM.ViewModels
                 CurrentSecrecyStamp = outgoingViewModel.CurrentMoveUser.Card.Documents.SecrecyStamp;
                 CurrentTerm = outgoingViewModel.CurrentMoveUser.Card.Documents.Term;
             }
-            if (incomingViewModel.CurrentMoveUser.Card.Id != 0)
+            if (incomingViewModel.CurrentMoveUser.Id != null)
             {
                 _nameCard = outgoingViewModel.CurrentMoveUser.Card.NameCard;
                 _docRegistrationNumber = outgoingViewModel.CurrentMoveUser.Card.Documents.RegistrationNumber;

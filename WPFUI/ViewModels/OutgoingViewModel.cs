@@ -30,6 +30,7 @@ namespace PASEDM.ViewModels
         private ObservableCollection<MoveCard> _moveCard;
         private IMoveCardProvider _moveCardProvider;
         private MoveCard _currentMoveCard;
+        private string _userName;
         public IEnumerable<MoveCard> MoveCards => _moveCard;
         public MoveCard CurrentMoveUser
         {
@@ -47,6 +48,18 @@ namespace PASEDM.ViewModels
             }
         }
 
+        public string UserOut
+        {
+            get
+            {
+                return _userName;
+            }
+            set
+            {
+                _userName = value;
+                OnPropertyChanged(nameof(UserOut));
+            }
+        }
         public bool IsLoading
         {
             get => _isLoading;
@@ -111,11 +124,17 @@ namespace PASEDM.ViewModels
                 IsLoading = true;
                 _moveCardProvider = new DatabaseMoveCardProvider(_contextFactory);
                 _moveCard = new ObservableCollection<MoveCard>();
+                _currentMoveCard = new MoveCard(_moveCardProvider);
                 TypeCard typeCard = new(2, "получатель", 1);
+                MoveCard moveCard = new MoveCard(typeCard);
 
-                foreach (var item in await _currentMoveCard.GetAllMoveCardUniq(new(typeCard, _userStore.CurrentUser)))
+                foreach (var item in await _currentMoveCard.GetAllMoveCard())
                 {
+                    if(item.TypeCard.TypeCardValue == typeCard.TypeCardValue && item.User.UserName != _userStore.CurrentUser.UserName)
                     _moveCard.Add(item);
+
+                    if(item.TypeCard.TypeCardValue == typeCard.TypeCardValue && item.User.UserName == _userStore.CurrentUser.UserName)
+                        _userName = item.User.UserName;
                 }
             }
             catch (Exception)

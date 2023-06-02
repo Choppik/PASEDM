@@ -23,8 +23,8 @@ namespace PASEDM.Models
         {
             _moveCardProvider = moveUserProvider;
         }
-        public MoveCard(TypeCard typeCard, User user)
-            : this(default, default, default, typeCard, user)
+        public MoveCard(TypeCard typeCard)
+            : this(default, default, default, typeCard, default)
         { }
         public MoveCard(int viewed, Card card, TypeCard typeCard, User user)
             :this(default, viewed, card, typeCard, user)
@@ -54,11 +54,11 @@ namespace PASEDM.Models
         }
         public Task<IEnumerable<MoveCard>> GetAllMoveCardUniq(MoveCard moveCard)
         {
-            return _moveCardProvider.GetAllMoveCard(moveCard);
+            return _moveCardProvider.GetAllMoveCardUniq(moveCard);
         }
-        public Task<IEnumerable<MoveCard>> GetAllMoveCard(MoveCard moveCard)
+        public Task<IEnumerable<MoveCard>> GetAllMoveCard()
         {
-            return _moveCardProvider.GetAllMoveCard(moveCard);
+            return _moveCardProvider.GetAllMoveCard();
         }
         public async Task DeleteMoveUser(MoveCard moveUser)
         {

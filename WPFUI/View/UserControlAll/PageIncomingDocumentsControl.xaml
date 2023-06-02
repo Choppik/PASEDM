@@ -75,14 +75,14 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Название карты" DisplayMemberBinding="{Binding NameCard}"/>
-                        <GridViewColumn Header="Название документа" DisplayMemberBinding="{Binding Document.NameDoc}"/>
-                        <GridViewColumn Header="Тип документа" DisplayMemberBinding="{Binding DocumentTypes.Name}"/>
-                        <GridViewColumn Header="Задача" DisplayMemberBinding="{Binding Tasks.NameTask}"/>
-                        <GridViewColumn Header="Состояние задачи" DisplayMemberBinding="{Binding TaskStages.NameTaskStage}"/>
-                        <GridViewColumn Header="Исполнитель" DisplayMemberBinding="{Binding Executor.FullName}"/>
-                        <GridViewColumn Header="Дата отправки" DisplayMemberBinding="{Binding DateOfFormation}"/>
-                        <GridViewColumn Header="Отправитель" DisplayMemberBinding="{Binding Sender}"/>
+                        <GridViewColumn Header="Название карты" DisplayMemberBinding="{Binding Card.NameCard}"/>
+                        <GridViewColumn Header="Название документа" DisplayMemberBinding="{Binding Card.Documents.NameDoc}"/>
+                        <GridViewColumn Header="Тип документа" DisplayMemberBinding="{Binding Card.Documents.DocumentTypes.Name}"/>
+                        <GridViewColumn Header="Задача" DisplayMemberBinding="{Binding Card.Tasks.NameTask}"/>
+                        <GridViewColumn Header="Состояние задачи" DisplayMemberBinding="{Binding Card.Tasks.TaskStages.NameTaskStage}"/>
+                        <GridViewColumn Header="Исполнитель" DisplayMemberBinding="{Binding Card.Employee.FullName}"/>
+                        <GridViewColumn Header="Дата отправки" DisplayMemberBinding="{Binding  Card.DateOfFormation}"/>
+                        <GridViewColumn Header="Отправитель" DisplayMemberBinding="{Binding  User.UserName}"/>
                     </GridView>
                 </ListView.View>
             </ListView>

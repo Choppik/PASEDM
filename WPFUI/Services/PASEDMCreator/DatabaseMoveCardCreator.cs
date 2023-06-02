@@ -38,6 +38,7 @@ namespace PASEDM.Services.PASEDMCreator
                 TypeCardID = moveCard.TypeCard.Id,
                 Viewed = moveCard.Viewed,
                 CardID = moveCard.Card.Id,
+                UserID = moveCard.User.Id,
             };
         }
     }

@@ -6,9 +6,9 @@ namespace PASEDM.Services.PASEDMProviders.InterfaceProviders
 {
     public interface IMoveCardProvider
     {
-        Task<IEnumerable<MoveCard>> GetAllMoveCard(MoveCard moveCard, User user);
+        Task<IEnumerable<MoveCard>> GetAllMoveCardUniq(MoveCard moveCard);
         Task DeleteMoveCard(MoveCard moveUser);
         int GetCountViewedMoveCard(User user);
-        Task<IEnumerable<MoveCard>> GetAllMoveCard(MoveCard moveCard);
+        Task<IEnumerable<MoveCard>> GetAllMoveCard();
     }
 }

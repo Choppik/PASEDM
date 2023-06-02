@@ -9,6 +9,7 @@ using PASEDM.Services.PASEDMProviders;
 using PASEDM.Services.PASEDMProviders.InterfaceProviders;
 using PASEDM.ViewModels;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -25,6 +26,7 @@ namespace PASEDM.Infrastructure.Command
         private string _nameCard;
         private string _summary;
         private string _comment;
+        private string _path;
         private byte[] _file;
         private string _docName;
         private string _nameTask;
@@ -95,7 +97,8 @@ namespace PASEDM.Infrastructure.Command
                 _summary = _createCardViewModel.Summary;
                 _docStages = _createCardViewModel.CurrentDocStages;
                 _secrecyStamps = _createCardViewModel.CurrentSecrecyStamp;
-                //_file = "...filePath";
+                _path = @"C:\\Users\\egkol\\OneDrive\\Рабочий стол\\txtPr.docx";
+                _file = ReadFile(_path);
                 _documentType = _createCardViewModel.CurrentDocTypes;
                 _term = _createCardViewModel.CurrentTerm;
                 _task = _createCardViewModel.CurrentTask;
@@ -146,6 +149,17 @@ namespace PASEDM.Infrastructure.Command
                 MessageBox.Show("Карта создана");
             }
             else MessageBox.Show("Проверьте корректность ввода данных");
+        }
+
+        private static byte[] ReadFile(string path)
+        {
+            using(FileStream fs = new(path, FileMode.Open))
+            {
+                byte[] buffer = new byte[fs.Length];
+                fs.Read(buffer, 0, (int)fs.Length);
+                fs.Close();
+                return buffer;
+            }
         }
     }
 }

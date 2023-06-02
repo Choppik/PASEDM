@@ -133,9 +133,10 @@ namespace PASEDM.ViewModels
                 _currentMoveCard = new MoveCard(_moveCardProvider);
                 TypeCard typeCard = new (1, "отправитель", 0);
 
-                foreach (var item in await _currentMoveCard.GetAllMoveCardUniq(new(typeCard, _userStore.CurrentUser)))
+                foreach (var item in await _currentMoveCard.GetAllMoveCard())
                 {
-                    _moveCard.Add(item);
+                    if (item.TypeCard.TypeCardValue == typeCard.TypeCardValue && item.User.UserName != _userStore.CurrentUser.UserName)
+                        _moveCard.Add(item);
                 }
             }
             catch (Exception)
